@@ -1,0 +1,44 @@
+<div
+  class="w-full relative lazy-youtube aspect-[16/9]"
+>
+  <noscript>
+    <!-- Provide a fallback image or link here for users with JavaScript disabled -->
+  </noscript>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var lazyYouTube = document.querySelector(".lazy-youtube");
+    var iframe;
+    var videoId = "{{ .Get 0 }}"; // Replace with your YouTube video ID
+    var iframeSrc = "https://www.youtube-nocookie.com/embed/" + videoId;
+    var options = {
+      root: null, // Use the viewport as the root
+      rootMargin: "0px", // No margin
+      threshold: 0.1, // 10% visibility required for loading
+    };
+
+    var observer = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          // Load the YouTube iframe when it becomes visible
+          if (!iframe) {
+            iframe = document.createElement("iframe");
+            iframe.setAttribute("loading", "lazy");
+            iframe.setAttribute("src", iframeSrc);
+            iframe.setAttribute("class","absolute top-0 left-0 w-full h-full")
+            iframe.setAttribute("frameborder", "0");
+            iframe.setAttribute("allowfullscreen", "");
+            lazyYouTube.appendChild(iframe);
+          }
+
+          // Stop observing once loaded
+          observer.unobserve(lazyYouTube);
+        }
+      });
+    }, options);
+
+    // Start observing when the shortcode element is on the screen
+    observer.observe(lazyYouTube);
+  });
+</script>
+

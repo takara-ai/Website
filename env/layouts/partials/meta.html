@@ -1,0 +1,94 @@
+{{- $article := . -}}
+<!-- Page title -->
+<title itemprop="name">{{ partial "meta-title.html" . }}</title>
+
+<!-- Description meta tags -->
+<meta name="description" content={{ partial "meta-desc.html" . }} /> <meta
+itemprop="description" content={{ partial "meta-desc.html" . }} />
+
+<!-- Social media meta tags -->
+<meta name="twitter:title" content={{ partial "meta-title.html" . }} /> <meta
+itemprop="name" content={{ partial "meta-title.html" . }} /> <meta
+name="application-name" content={{ partial "meta-title.html" . }} />
+
+<meta name="author" content="404MissingLink" />
+
+<!-- Schema.org microdata -->
+<meta itemprop="name" content={{ partial "meta-title.html" . }}> <meta
+itemprop="description" content={{ partial "meta-desc.html" . }}>
+<meta
+  itemprop="image"
+  content="{{ if .Params.og_image }}{{ .Params.Site.BaseURL }}{{ .Params.og_image | relURL }}{{ else }}{{ .Site.Params.og_image | absURL }}{{ end }}"
+/>
+
+<!-- Article Stuff -->
+
+{{ if .IsPage }}
+<meta property="og:type" content="article" />
+{{ else }}
+<meta property="og:type" content="website" />
+{{ end }} <meta property="og:article:published_time" content="{{
+$article.Date.Format "2006-01-02T15:04:05-07:00" }}" /> <meta
+property="og:article:modified_time" content="{{ $article.Lastmod.Format
+"2006-01-02T15:04:05-07:00" }}" />
+
+<!-- Open Graph meta tags -->
+<meta property="og:site_name" content="{{ .Site.Title }}" />
+<meta property="og:title" content={{ partial "meta-title.html" . }} /> <meta
+property="og:description" content={{ partial "meta-desc.html" . }} />
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:locale" content="en" />
+
+<!-- Pintrest -->
+<meta name="p:domain_verify" content="1741d56070de657649270c47c86830d8" />
+
+<!-- Image meta tags -->
+{{ with .Params.featured_image }} {{ with resources.Get . }} {{ $featuredimage
+:= (.Resize "1500x ").RelPermalink }} {{ $imageURL := printf "%s%s"
+$.Site.BaseURL $featuredimage }}
+<meta name="twitter:image" content="{{ $imageURL }}" />
+<meta itemprop="image" content="{{ $imageURL }}" />
+<meta property="og:image" content="{{ $imageURL }}" />
+<meta property="og:image:secure_url" content="{{ $imageURL }}" />
+{{ end }} {{ else }} {{ $ogimage := (.Site.Params.og_image | absURL) }}
+<meta name="twitter:image" content="{{ $ogimage | absURL }}" />
+<meta itemprop="image" content="{{ $ogimage | absURL }}" />
+<meta property="og:image" content="{{ $ogimage | absURL }}" />
+<meta property="og:image:secure_url" content="{{ $ogimage | absURL }}" />
+{{ end }}
+
+<!-- Yandex verification -->
+<meta name="yandex-verification" content="f88f13b976df12e7" />
+
+<!-- Twitter card meta tags -->
+<meta property="twitter:domain" content="404missing.link" />
+
+<meta name="twitter:title" content={{ partial "meta-title.html" . }} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content={{ partial "meta-desc.html" . }} />
+<meta
+  name="twitter:image:alt"
+  content="{{ if .Params.featured_image }}{{ .Title }} featured image{{ else }}{{ .Site.Title }} featured image{{ end }}"
+/>
+
+<!-- Structured data -->
+{{- $site := .Site -}}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "{{ .Site.BaseURL }}",
+    "name": {{ partial "meta-title.html" . }},
+    "description": {{ partial "meta-desc.html" . }},
+    "publisher": {
+      "@type": "Organization",
+      "name": "404MissingLink",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "/favicon/android-chrome-192x192.png",
+        "width": 192,
+        "height": 192
+      }
+    }
+  }
+</script>

@@ -1,0 +1,18 @@
+baseURL = 'https://takara.ai'
+languageCode = "en"
+DefaultContentLanguage = "en"
+title = 'My New Hugo Site'
+minify = true
+enableRobotsTXT = true
+
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = "0.104.0"
+
+
+
+[sitemap]
+  changefreq = 'daily'
+  filename = 'sitemap.xml'
+  priority = 0.5

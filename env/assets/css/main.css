@@ -1,0 +1,7 @@
+/* assets */
+@tailwind base;
+/* Custom CSS */
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS end */
