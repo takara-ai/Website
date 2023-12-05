@@ -31,12 +31,12 @@
     <link rel="manifest" href="/favicon/site.webmanifest">
 
     <!-- CSS -->
-    {{ $styles := resources.Get "/css/style.css" | postCSS | minify | fingerprint | resources.PostProcess }}
+    {{ $styles := resources.Get "/css/style.css" | fingerprint | resources.PostProcess }}
     <link rel="preload" href="{{ $styles.RelPermalink }}" as="style">
 
     <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
 
     <!-- plausible tracking -->
-    <script defer data-domain="takara.ai data-api="https://takara.ai/api/router/event" src="https://takara.ai/api/runner/script.tagged-events.outbound-links.js"></script>
+    <script defer data-domain="takara.ai" data-api="https://takara.ai/api/router/event" src="https://takara.ai/api/runner/script.tagged-events.outbound-links.js"></script>
 
 

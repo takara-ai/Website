@@ -1,7 +1,7 @@
 baseURL = 'https://takara.ai'
 languageCode = "en"
 DefaultContentLanguage = "en"
-title = 'My New Hugo Site'
+title = 'Takara.ai'
 minify = true
 enableRobotsTXT = true
 
@@ -16,3 +16,9 @@ enableRobotsTXT = true
   changefreq = 'daily'
   filename = 'sitemap.xml'
   priority = 0.5
+
+[params]
+role = "Web Developer"
+phone = "+447568151719"
+email = "jordan@takara.ai"
+linkedin = "https://www.linkedin.com/in/404missinglink"
