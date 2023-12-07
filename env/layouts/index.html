@@ -36,27 +36,68 @@
 >
 
 <section class="flex w-full min-h-screen">
-  <div class="bg-gray-800 text-white p-4 flex-none" style="width: 30%">
+  <div
+    class="bg-gray-800 text-white p-4 flex flex-col justify-between"
+    style="width: 30%"
+  >
     <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
       Understanding Your Business Problems Shouldn't be as Hard as Learning
       Japanese
     </h1>
+
+    <div class="flex-grow flex justify-center items-end">
+      <div class="mb-4">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 animate-bounce"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </div>
+    </div>
+
+    <div class="flex justify-center">
+      <label class="relative inline-flex items-center mb-5 cursor-pointer">
+        <input
+          type="checkbox"
+          id="language-toggle"
+          value=""
+          class="sr-only peer"
+          onclick="toggleLanguage()"
+        />
+        <div
+          class="w-14 h-7 bg-gray-400 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-teal-300 rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-teal-500"
+        ></div>
+      </label>
+    </div>
   </div>
-  <div class="hover-translate flex-grow p-4 bg-white" style="width: 70%">
-    <p class="text-gray-900"
-      >人工知能（AI）は、成長と効率性の前例のない機会を提供することにより、ビジネス界を革命的に変えています。機械学習やデータ分析などのAI技術により、企業は自社の運営、顧客行動、市場動向に関するより深い洞察を得ることができます。これにより、意思決定の改善、顧客体験の向上、プロセスの効率化が実現します。さらに、AI駆動の自動化により手作業が減少し、従業員はより戦略的な活動に集中できるようになります。その結果、AIを取り入れる企業は競争環境で先を行くことができます。</p
-    >
-    <p class="text-gray-900"
-      >Artificial Intelligence (AI) is revolutionizing the business world by
-      offering unprecedented opportunities for growth and efficiency. AI
-      technologies, such as machine learning and data analytics, enable
-      businesses to gain deeper insights into their operations, customer
-      behavior, and market trends. This leads to improved decision-making,
-      enhanced customer experiences, and streamlined processes. Moreover,
-      AI-driven automation reduces manual tasks, allowing employees to focus on
-      more strategic activities. As a result, companies that embrace AI are
-      well-positioned to stay ahead in the competitive landscape.</p
-    >
+
+  <div
+    class="flex flex-grow items-center justify-center p-4 text-3xl text-center bg-white"
+    style="width: 70%"
+  >
+    <div class="w-full">
+      <p id="japanese-text" class="text-gray-900">
+        人工知能（AI）は、成長と効率性の前例のない機会を提供することにより、ビジネス界を革命的に変えています。機械学習やデータ分析などのAI技術により、企業は自社の運営、顧客行動、市場動向に関するより深い洞察を得ることができます。これにより、意思決定の改善、顧客体験の向上、プロセスの効率化が実現します。さらに、AI駆動の自動化により手作業が減少し、従業員はより戦略的な活動に集中できるようになります。その結果、AIを取り入れる企業は競争環境で先を行くことができます。
+      </p>
+      <p id="english-text" class="text-gray-900" style="display: none">
+        Imagine this: your toughest business challenges, unraveled with a simple
+        flip of a switch. That's the power we harness at Takara.AI. With
+        cutting-edge language models and innovative F Model-style architecture,
+        we transform complexity into clarity—without moving your data an inch.
+        Unlock actionable insights and make decisions with confidence, all at
+        the slide of a toggle. Welcome to a new era of simplicity and insight
+        with Takara.AI
+      </p>
+    </div>
   </div>
 </section>
 
@@ -88,16 +129,9 @@
       border-color: black;
     }
   }
-  .hover-translate p {
+  #english-text,
+  #toggle-switch {
     display: none;
-  }
-
-  .hover-translate:hover p:first-child {
-    display: none;
-  }
-
-  .hover-translate:hover p:last-child {
-    display: block;
   }
 </style>
 
@@ -135,6 +169,25 @@
     const typingDuration = currentText.length * typingSpeed;
     typewriterText.style.animation = `blink-caret .75s step-end infinite, typing ${typingDuration}ms steps(${currentText.length}, end)`;
   })();
+  document.addEventListener("DOMContentLoaded", function () {
+    document
+      .getElementById("language-toggle")
+      .addEventListener("change", toggleLanguage);
+  });
+
+  function toggleLanguage() {
+    var japaneseText = document.getElementById("japanese-text");
+    var englishText = document.getElementById("english-text");
+    var isChecked = document.getElementById("language-toggle").checked;
+
+    if (isChecked) {
+      japaneseText.style.display = "none";
+      englishText.style.display = "block";
+    } else {
+      japaneseText.style.display = "block";
+      englishText.style.display = "none";
+    }
+  }
 </script>
 
 {{ end }}
