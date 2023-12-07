@@ -1,0 +1,86 @@
+<section class="min-h-screen text-black grid grid-cols-2">
+  <!-- Terminal Window in the middle -->
+  <div class="w-full h-auto ml-4 rounded-lg mx-auto my-6 border-gray-500">
+    <div class="mt-4 text-xl 0 p-4 rounded">
+      <form action="https://formspree.io/f/meqbygwj" method="POST">
+        <div id="name-section" class="mb-4">
+          <input
+            type="text"
+            name="first-name"
+            placeholder="First Name"
+            class="text-black placeholder-gray-800 text-teal-400 border-teal-400 w-full focus:outline-none mb-4"
+            required
+          />
+          <input
+            type="text"
+            name="last-name"
+            placeholder="Last Name"
+            class="text-black placeholder-gray-800 text-teal-400 border-teal-400 w-full focus:outline-none mb-4"
+            required
+          />
+          <button type="button" onclick="showSection('email-section')"
+            >Next</button
+          >
+        </div>
+
+        <div id="email-section" class="mb-4 hidden">
+          <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            class="text-black placeholder-gray-800 text-teal-400 border-teal-400 w-full focus:outline-none mb-4"
+            required
+          />
+          <button type="button" onclick="showSection('name-section')"
+            >Back</button
+          >
+          <button type="button" onclick="showSection('submit-section')"
+            >Next</button
+          >
+        </div>
+
+        <div id="submit-section" class="hidden">
+          <button
+            type="submit"
+            class="bg-teal-400 text-black px-4 py-2 rounded hover:bg-teal-500"
+            >Send</button
+          >
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- "Start Now" in the right container -->
+  <div class="text-right pr-4">
+    <h1 class="text-9xl text-gray-800">Start Now</h1>
+  </div>
+</section>
+
+<style>
+  @keyframes blink {
+    from,
+    to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: teal;
+    }
+  }
+
+  #terminal-input::after {
+    animation: blink 0.5s step-end infinite;
+  }
+</style>
+<script>
+  function showSection(sectionId) {
+    const allSections = ["name-section", "email-section", "submit-section"];
+    allSections.forEach((id) => {
+      const section = document.getElementById(id);
+      if (id === sectionId) {
+        section.classList.remove("hidden");
+      } else {
+        section.classList.add("hidden");
+      }
+    });
+  }
+</script>
