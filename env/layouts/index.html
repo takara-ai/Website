@@ -92,18 +92,22 @@
 <section
   class="min-h-screen bg-gradient-to-tr from-pink-400 via-white via-20% to-green-400 flex"
 >
-  <div class="flex-1 flex flex-col items-center justify-center">
-    <span
-      id="japanese-char"
-      class="text-7xl md:text-9xl font-bold blur-sm"
-    ></span>
-    <p
-      id="english-char"
-      class="mt-8 text-center p-4 text-base sm:text-lg md:text-xl"
-    >
-      <!-- Added margin-top for spacing -->
-      <!-- English text will appear here -->
-    </p>
+  <div
+    class="w-full flex items-center bg-gradient-to-br from-orange-200 via-transparent to-blue-100"
+  >
+    <div class="flex-1 flex flex-col items-center justify-center">
+      <span
+        id="japanese-char"
+        class="text-7xl md:text-9xl font-bold blur-sm"
+      ></span>
+      <p
+        id="english-char"
+        class="mt-8 text-center p-4 text-base sm:text-lg md:text-xl"
+      >
+        <!-- Added margin-top for spacing -->
+        <!-- English text will appear here -->
+      </p>
+    </div>
   </div>
 </section>
 {{ partial "home/contact" . }}
