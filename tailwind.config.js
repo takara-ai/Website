@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         typewriter: "monospace",
+        whisper: "'Caveat', cursive",
       },
     },
   },
