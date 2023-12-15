@@ -2,7 +2,12 @@
 module.exports = {
   content: ["./env/layouts/**/*.html", "./env/content/**/*.md"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        typewriter: "monospace",
+        whisper: "'Caveat', cursive",
+      },
+    },
   },
   plugins: [require("@tailwindcss/typography")],
 };

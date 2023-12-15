@@ -1,42 +1,62 @@
-
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <!-- CSP -->
-  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: ; script-src 'self' 'unsafe-inline' 'unsafe-eval' challenges.cloudflare.com  ; frame-src 'self' www.youtube-nocookie.com challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; "> -->
+<!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: ; script-src 'self' 'unsafe-inline' 'unsafe-eval' challenges.cloudflare.com  ; frame-src 'self' www.youtube-nocookie.com challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; "> -->
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#111827">
-    
-    {{- if .IsPage }}
-      {{- if isset .Params "lastmod" -}}
-        <meta name="last-modified" content="{{ .Params.lastmod }}">
-      {{- else -}}
-        {{- with .Lastmod -}}
-          <meta name="last-modified" content="{{ .Format "2006-01-02T15:04:05-07:00" }}">
-        {{- end -}}
-      {{- end -}}
-    {{- end -}}
-    {{ partial "meta" . }}
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
+/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    
-    
-    <link rel="canonical" href="{{ .Permalink }}" />
-    <!-- ICONS -->
-    <link rel="icon" href="/favicon/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/favicon/site.webmanifest">
+<meta name="msapplication-TileColor" content="#da532c" />
+<meta name="theme-color" content="#111827" />
 
-    <!-- CSS -->
-    {{ $styles := resources.Get "/css/style.css" | fingerprint | resources.PostProcess }}
-    <link rel="preload" href="{{ $styles.RelPermalink }}" as="style">
+{{- if .IsPage }} {{- if isset .Params "lastmod" -}}
+<meta name="last-modified" content="{{ .Params.lastmod }}" />
+{{- else -}} {{- with .Lastmod -}} <meta name="last-modified" content="{{
+.Format "2006-01-02T15:04:05-07:00" }}"> {{- end -}} {{- end -}} {{- end -}} {{
+partial "meta" . }}
 
-    <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
+<link rel="canonical" href="{{ .Permalink }}" />
+<!-- ICONS -->
+<link rel="icon" href="/favicon/favicon.ico" />
+<link
+  rel="apple-touch-icon"
+  sizes="180x180"
+  href="/favicon/apple-touch-icon.png"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="32x32"
+  href="/favicon/favicon-32x32.png"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="16x16"
+  href="/favicon/favicon-16x16.png"
+/>
+<link rel="manifest" href="/favicon/site.webmanifest" />
 
-    <!-- plausible tracking -->
-    <script defer data-domain="takara.ai" data-api="https://takara.ai/api/router/event" src="https://takara.ai/api/runner/script.tagged-events.outbound-links.js"></script>
+<!-- CSS -->
+{{ $styles := resources.Get "/css/style.css" | fingerprint |
+resources.PostProcess }}
+<link rel="preload" href="{{ $styles.RelPermalink }}" as="style" />
 
+<link rel="stylesheet" href="{{ $styles.RelPermalink }}" />
 
+<!-- plausible tracking -->
+<script
+  defer
+  data-domain="takara.ai"
+  data-api="https://takara.ai/api/router/event"
+  src="https://takara.ai/api/runner/script.tagged-events.outbound-links.js"
+></script>
+{{/* fonts */}}
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Caveat&display=swap"
+  rel="stylesheet"
+/>

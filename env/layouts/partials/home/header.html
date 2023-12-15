@@ -1,0 +1,82 @@
+<section
+  class="mx-auto w-full min-h-screen bg-gradient-to-br from-teal-400 via-white to-pink-400"
+  id="hero"
+  ><div
+    class="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8"
+  >
+    <div class="w-full max-w-3xl mx-auto py-12 sm:py-24 lg:py-32 bg-gradi">
+      <div class="text-center">
+        <h1
+          class="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-gray-900"
+          >Empower Your Data with Artificial Intelligence</h1
+        >
+        <div class="typewriter mt-4 sm:mt-6 flex justify-center">
+          <h2
+            id="typewriter-text"
+            class="text-base sm:text-lg md:text-xl uppercase whitespace-nowrap tracking-widest border-r-2 border-black font-mono"
+          >
+            <!-- Typewriter text will be inserted here -->
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .typewriter h2 {
+    animation: blink-caret 0.75s step-end infinite;
+  }
+
+  @keyframes blink-caret {
+    from,
+    to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: black;
+    }
+  }
+
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const texts = ["タカラ マシンラーニング", "TAKARA Artificial Intelligence"];
+    const typewriterText = document.getElementById("typewriter-text");
+
+    let count = 0;
+    let index = 0;
+    let currentText = "";
+    let typingSpeed = 100;
+
+    function type() {
+      if (count === texts.length) {
+        count = 0;
+      }
+
+      currentText = texts[count];
+      let letter = currentText.slice(0, ++index);
+
+      typewriterText.textContent = letter;
+
+      if (letter.length === currentText.length) {
+        count++;
+        index = 0;
+        setTimeout(type, 3000); // Wait between switching texts
+      } else {
+        setTimeout(type, typingSpeed);
+      }
+    }
+
+    type(); // Start the typewriter effect
+  });
+</script>
