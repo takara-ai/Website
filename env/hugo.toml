@@ -1,7 +1,7 @@
 baseURL = 'https://takara.ai'
 languageCode = "en"
 DefaultContentLanguage = "en"
-title = 'Takara.ai'
+title = 'takara.ai'
 minify = true
 enableRobotsTXT = true
 
