@@ -1254,6 +1254,10 @@ video {
   height: 30vh;
 }
 
+.h-svh {
+  height: 100svh;
+}
+
 .min-h-dvh {
   min-height: 100dvh;
 }
@@ -1309,6 +1313,11 @@ video {
 
 .-translate-y-16 {
   --tw-translate-y: -4rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.-translate-y-12 {
+  --tw-translate-y: -3rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -2284,6 +2293,10 @@ video {
 
   .md\:h-\[20vh\] {
     height: 20vh;
+  }
+
+  .md\:h-\[30vh\] {
+    height: 30vh;
   }
 
   .md\:w-1\/2 {
