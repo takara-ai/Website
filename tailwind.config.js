@@ -6,6 +6,8 @@ module.exports = {
       fontFamily: {
         typewriter: "monospace",
         whisper: "'Caveat', cursive",
+        japaneseBold: "Hiragino Kaku Gothic Std",
+        japanese: "Hiragino Kaku Gothic ProN",
       },
     },
   },
