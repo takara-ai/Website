@@ -1,14 +1,8 @@
 {{define "main"}}
 <article class="bg-blue-gray-50">
-  <div class="relative border-b-2 border-black border-dashed h-svh">
+  <div class="relative border-b-2 border-black border-dashed h-dvh">
     <div class="">
-      <div class="h-52 md:h-96 grid place-items-center bg-red-700 sm:p-4 p-2">
-        {{/*
-        <h1 class="md:text-9xl text-7xl text-white drop-shadow-sm" tabindex="0">
-          Think <span class="text-base">Small</span>
-          <span class="text-base font-japanese">小さい</span>
-        </h1>
-        */}}
+      <div class="h-[13rem] md:h-[24rem] grid place-items-center bg-red-700">
       </div>
 
       <!-- Adjusted image positioning to accurately overlap between the two divs -->
@@ -18,7 +12,7 @@
       >
         <source srcset="{{ $svg.RelPermalink }}" type="image/svg+xml" />
         <img
-          class="drop-shadow-lg"
+          class="filter drop-shadow-md"
           src="{{ $svg.RelPermalink }}"
           alt="takara.ai logo"
         />
@@ -27,113 +21,164 @@
       <div
         class="flex flex-col justify-center h-screen sm:p-4 p-2 mx-auto text-right lg:flex-none lg:justify-normal"
       >
-        <h1 class="text-3xl md:text-6xl font-bold"> Empower Your Data </h1>
+        <h1 class="text-3xl md:text-6xl font-bold">Empower Your Data</h1>
         <h1 class="text-3xl md:text-6xl font-japaneseBold">
           データを強化する
         </h1>
-        <h2 class="text-base md:text-xl"> Faster With Micro AI Deployments </h2>
+        <h2 class="text-base md:text-xl">Faster With Micro AI Deployments</h2>
         <h2 class="font-japanese text-base md:text-xl">
           マイクロAIデプロイメントでより速く
         </h2>
       </div>
     </div>
-    <i class="fa-solid fa-scissors scissors-icon sm:pl-4 pl-2"></i>
+    <i class="fa-solid fa-scissors absolute pl-2 sm:pl-4 -bottom-2"></i>
   </div>
 
-  <div class="relative min-h-screen diagonal-slice">
-    <h1
-      class="text-3xl md:text-6xl font-bold mb-10 sm:p-4 p-2 text-center md:text-left"
-      >How Does It Work?</h1
-    >
+  <div
+    class="relative min-h-dvh lg:min-h-[150vh] diagonal-slice flex flex-col justify-evenly"
+  >
+    <div>
+      <!-- Section Heading -->
+      <h1
+        class="text-3xl md:text-6xl font-bold my-14 sm:pl-4 pl-2 text-center md:text-left"
+      >
+        How Does It Work?
+      </h1>
 
-    <section class="text-white sm:p-4 p-2">
-      <div>
-        <div class="grid md:grid-cols-2 gap-10">
-          <!-- Traditional AI -->
-          <div
-            class="bg-white border border-black rounded-xl shadow-xl overflow-hidden"
-          >
-            <h2 class="text-2xl font-bold bg-black text-white p-4"
-              >Standard AI: Bulky & Resource-Heavy</h2
+      <!-- Content Section -->
+      <section class="text-white sm:px-4 px-2">
+        <div>
+          <div class="grid md:grid-cols-2 gap-10">
+            <!-- Traditional AI -->
+            <div
+              class="bg-white border border-black rounded-xl shadow-xl overflow-hidden"
             >
-            <ul class="p-4 space-y-4 text-black">
-              <li class="flex items-center">
-                <i class="fas fa-server fa-lg mr-2"></i>
-                <span>High operational costs and energy consumption</span>
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-sitemap fa-lg mr-2"></i>
-                <span>Complex, bloated design</span>
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-scale-balanced fa-lg mr-2"></i>
-                <span>Difficult to scale</span>
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-wrench fa-lg mr-2"></i>
-                <span>Frequent maintenance and updates required</span>
-              </li>
-            </ul>
-          </div>
+              <h2 class="text-2xl font-bold bg-black text-white p-4"
+                >Standard AI: Bulky & Resource-Heavy</h2
+              >
+              <ul class="p-4 space-y-4 text-black">
+                <li class="flex items-center">
+                  <i class="fas fa-server fa-lg mr-2"></i>
+                  <span>High operational costs and energy consumption</span>
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-sitemap fa-lg mr-2"></i>
+                  <span>Complex, bloated design</span>
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-scale-balanced fa-lg mr-2"></i>
+                  <span>Difficult to scale</span>
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-wrench fa-lg mr-2"></i>
+                  <span>Frequent maintenance and updates required</span>
+                </li>
+              </ul>
+            </div>
 
-          <!-- Micro AI Services -->
-          <div
-            class="bg-white border border-black rounded-xl shadow-xl overflow-hidden drop-shadow-xl"
-          >
-            <h2 class="text-2xl font-bold bg-black text-white p-4"
-              >Micro AI: Agile & Efficient</h2
+            <!-- Micro AI Services -->
+            <div
+              class="bg-white border border-black rounded-xl shadow-xl overflow-hidden drop-shadow-xl"
             >
-            <ul class="p-4 space-y-4 text-black">
-              <li class="flex items-center">
-                <i class="fas fa-cloud fa-lg mr-2"></i>
-                <span
-                  >Serverless architectures reduce costs and complexity</span
-                >
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-rocket fa-lg mr-2"></i>
-                <span>Optimized for efficiency</span>
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-arrows-up-down-left-right fa-lg mr-2"></i>
-                <span>Easy to scale</span>
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-leaf fa-lg mr-2"></i>
-                <span>Eco-friendly with lower energy consumption</span>
-              </li>
-            </ul>
+              <h2 class="text-2xl font-bold bg-black text-white p-4"
+                >Micro AI: Agile & Efficient</h2
+              >
+              <ul class="p-4 space-y-4 text-black">
+                <li class="flex items-center">
+                  <i class="fas fa-cloud fa-lg mr-2"></i>
+                  <span
+                    >Serverless architectures reduce costs and complexity</span
+                  >
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-rocket fa-lg mr-2"></i>
+                  <span>Optimized for efficiency</span>
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-arrows-alt-h fa-lg mr-2"></i>
+                  <span>Easy to scale</span>
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-leaf fa-lg mr-2"></i>
+                  <span>Eco-friendly with lower energy consumption</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
+      </section>
+      <section class="sm:px-4 px-2 my-14">
+        <div class="grid md:grid-cols-2 gap-10">
+          <div class="hidden md:block"></div>
+          <!-- Traditional AI -->
+          <div
+            class="bg-white border border-black rounded-xl drop-shadow-xl shadow-xl overflow-hidden flex"
+          >
+            <!-- Left Section for Text -->
+            <div class="flex-1 bg-white p-4">
+              <!-- Your text goes here -->
+              <p class=""> Book your free 2 hour workshop now -> </p>
+            </div>
+
+            <!-- Right Section for Button -->
+            <div class="w-1/5 bg-black p-4 flex justify-center items-center">
+              <!-- Your button goes here -->
+              <button class="text-white">Button</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="border-b-2 border-black border-dashed relative my-12">
+      <i class="fa-solid fa-scissors absolute pl-2 sm:pl-4 -top-2"></i>
+    </div>
+
+    <div class="hidden md:block">
+      <div
+        class="py-24 2xl:py-48 backdrop-invert bg-transparent grid md:grid-cols-2"
+      >
+        <div class="sm:px-4 px-2 text-white">
+          <h2 class="text-base md:text-xl sm:px-4 px-2"
+            >Humanity Once Thought</h2
+          >
+          <h1 class="text-3xl sm:px-4 px-2 md:text-6xl font-bold"
+            >It Was Impossible</h1
+          >
+          <h1 class="text-3xl sm:px-4 px-2 md:text-6xl font-japaneseBold"
+            >それは不可能でした</h1
+          >
+        </div>
+        <div class="text-right">
+          <h2 class="text-base md:text-xl sm:px-4 px-2">AI Makes You</h2>
+          <h1 class="text-3xl sm:px-4 px-2 md:text-6xl font-bold"
+            >Invert Your Thinking</h1
+          >
+          <h1 class="text-3xl sm:px-4 px-2 md:text-6xl font-japaneseBold"
+            >考えを逆転させてください</h1
+          >
+        </div>
       </div>
-    </section>
+    </div>
   </div>
 </article>
 <style>
   .diagonal-slice {
-    position: relative; /* This makes the div a reference point for the absolute positioning */
+    position: relative;
     overflow: hidden;
-    /* Ensures the pseudo-element does not extend outside this div */
   }
 
   .diagonal-slice::before {
     content: "";
-    position: absolute; /* Ensures the pseudo-element is positioned relative to its nearest positioned ancestor */
-    top: 0;
-    left: 0; /* Aligns the pseudo-element to the left edge of the container */
-    width: 105%; /* Ensures the pseudo-element spans the full width of the container */
-    height: 160%; /* Ensures the pseudo-element spans the full height of the container */
-    clip-path: polygon(
-      100% 100%,
-      0 130%,
-      100% 0
-    ); /* Adjusted to create a slice from top right to bottom left */
-    background-color: #b91c1c; /* The color of the diagonal slice */
-    z-index: -1;
-  }
-  .scissors-icon {
     position: absolute;
-    bottom: -0.5rem; /* Adjusts the icon to be above the top border */
+    top: 0;
+    left: 0;
+    width: 105%;
+    height: 160%;
+    clip-path: polygon(100% 100%, 0 130%, 100% 0);
+    background-color: #b91c1c;
+    z-index: -2;
   }
+  /* Target the new id 'text-section' and create a pseudo-element for the 'Invert Your Thinking' text */
 </style>
+
 {{end}}
