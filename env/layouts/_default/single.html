@@ -1,13 +1,8 @@
 {{ define "main" }}
-    <article class="prose lg:prose-xl mx-auto p-4">
-        <header>
-            <h1>{{ .Title }}</h1>
-            {{ if .Date }}
-                <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
-            {{ end }}
-        </header>
-        <section>
-            {{ .Content }}
-        </section>
-    </article>
+<article class="pt-16 prose lg:prose-xl xl:prose-2xl mx-auto p-4 min-h-svh">
+  <header>
+    <h1>{{ .Title }}</h1>
+  </header>
+  <section> {{ .Content }} </section>
+</article>
 {{ end }}
