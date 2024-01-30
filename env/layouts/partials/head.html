@@ -42,10 +42,11 @@ resources.PostProcess }}
 ></script>
 */}}
 <script defer
-  data-domain="{{ getenv "TRACKING_DOMAIN" }}"
-  data-api="{{ getenv "TRACKING_API" }}"
-  src="{{ getenv "TRACKING_SCRIPT_SRC" }}">
+  data-domain="{{ getenv "HUGO_TRACKING_DOMAIN" }}"
+  data-api="{{ getenv "HUGO_TRACKING_API" }}"
+  src="{{ getenv "HUGO_TRACKING_SCRIPT_SRC" }}">
 </script>
+
 
 {{/* fonts */}}
 <link rel="preconnect" href="https://fonts.googleapis.com" />
