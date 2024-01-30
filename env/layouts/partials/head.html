@@ -33,12 +33,21 @@ resources.PostProcess }}
 <link rel="stylesheet" href="{{ $styles.RelPermalink }}" />
 
 <!-- plausible tracking -->
+{{/*
 <script
   defer
   data-domain="takara.ai"
   data-api="https://takara.ai/api/router/event"
   src="https://takara.ai/api/runner/script.tagged-events.outbound-links.js"
 ></script>
+*/}}
+<script
+  defer
+  data-domain="${process.env.TRACKING_DOMAIN}"
+  data-api="${process.env.TRACKING_API}"
+  src="${process.env.TRACKING_SCRIPT_SRC}"
+></script>
+
 {{/* fonts */}}
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
