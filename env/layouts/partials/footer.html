@@ -1,17 +1,38 @@
 <section>
-  <!-- Adjusted to match navbar's padding and margin -->
   <div class="px-4 sm:px-6 lg:px-8 mx-auto">
-    <div class="flex flex-wrap justify-between items-center">
-      <!-- Footer content -->
+    <!-- Footer container -->
+    <div class="flex flex-col sm:flex-row justify-between items-center">
+      <!-- Left side: Footer content -->
       <div
-        class="w-full md:w-auto mb-4 md:mb-0 grid grid-cols-1 gap-1 font-semibold"
+        class="mb-4 md:mb-0 grid gap-1 font-semibold text-center sm:text-left"
       >
         <a href="/" class="text-xl">takara.ai</a>
         <a href="/ethics/" class="underline">Ethics</a>
       </div>
-      <!-- Other footer elements (if any) -->
+
+      <!-- Right side: GitHub Link and attribution -->
+      <div
+        class="flex flex-col sm:flex-row items-center text-center sm:text-right"
+      >
+        <p class="text-sm mr-4 mb-2 sm:mb-0"
+          >Made over alot of late nights by Jordan Legg</p
+        >
+        <a
+          href="https://github.com/takara-ai/Website"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center justify-center"
+        >
+          <img
+            src="https://img.shields.io/badge/GitHub-View%20Repository-blue?style=flat-square&logo=github"
+            alt="View Repository on GitHub"
+            class="h-6 mb-4 sm:mb-0"
+          />
+        </a>
+      </div>
     </div>
-    <div class="mt-6 md:mt-8">
+
+    <div class="mt-6 md:mt-8 text-center sm:text-left">
       <!-- Company information and copyright -->
       <p>Company No. 15404713</p>
       <p>Registered in England and Wales</p>
