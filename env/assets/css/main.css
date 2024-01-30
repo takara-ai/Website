@@ -5,5 +5,7 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Caveat&display=swap");
+/* In your main.css or similar file */
+@import "~@fortawesome/fontawesome-free/css/fontawesome.css";
 
 /* Custom CSS end */

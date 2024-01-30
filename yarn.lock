@@ -21,6 +21,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fortawesome/fontawesome-free@npm:^6.5.1":
+  version: 6.5.1
+  resolution: "@fortawesome/fontawesome-free@npm:6.5.1"
+  checksum: dc359ede1ddfc6d91915345143008420001c56b164a6fe95d81bcca631eecca41009bfacf794d55bdb9d927c112119ce90a11cb4f576a815ed69ec681e5eb824
+  languageName: node
+  linkType: hard
+
 "@isaacs/cliui@npm:^8.0.2":
   version: 8.0.2
   resolution: "@isaacs/cliui@npm:8.0.2"
@@ -2518,6 +2525,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "takara@workspace:."
   dependencies:
+    "@fortawesome/fontawesome-free": "npm:^6.5.1"
     "@tailwindcss/typography": "npm:^0.5.10"
     autoprefixer: "npm:^10.4.16"
     concurrently: "npm:^8.2.2"
