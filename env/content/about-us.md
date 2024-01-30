@@ -6,7 +6,7 @@ description = ''
 layout = 'about-us'
 +++
 
-**takara means treasure.**
+> **takara means treasure.**
 
 Welcome to Takara.ai, where we believe in the power of artificial intelligence not just as a technological marvel but as a transformative force for businesses and humanity alike. Established in 2024, our consultancy is dedicated to harnessing AI's potential to empower individuals and organizations, helping them to shine brilliantly in a competitive world.
 
