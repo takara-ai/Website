@@ -1,3 +1,5 @@
 /node_modules/*
 .DS_Store
 env/assets/css/style.css
+.yarn/install-state.gz
+*.gz
