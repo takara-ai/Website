@@ -1,6 +1,6 @@
 {{ define "main" }} {{ partial "home/header" .}}
 
-<section class="flex w-full min-h-screen">
+<section class="flex w-full min-h-svh">
   <div
     class="bg-gray-800 text-white sm:p-4 p-2 flex flex-col w-1/3 shadow-2xl shadow-black flex-grow justify-center"
   >
@@ -46,7 +46,7 @@
   </div>
 </section>
 <section
-  class="min-h-screen bg-gradient-to-tr from-pink-300 to-green-300 to-80% flex"
+  class="min-h-svh bg-gradient-to-tr from-pink-300 to-green-300 to-80% flex"
 >
   <div
     class="w-full flex items-center bg-gradient-to-br from-orange-200 from-20% via-transparent to-blue-100"
@@ -67,51 +67,20 @@
     </div>
   </div>
 </section>
-{{ partial "home/contact" . }}
 
-<style>
-  #english-text,
-  #toggle-switch {
-    display: none;
-  }
-  @keyframes blink {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0;
-    }
-  }
-  #japanese-char {
-    animation: blink 0.1s step-end infinite; /* Rapid blinking effect */
-  }
-</style>
-
-<script>
-  function toggleLanguage() {
-    var japaneseText = document.getElementById("japanese-text");
-    var englishText = document.getElementById("english-text");
-    var isChecked = document.getElementById("language-toggle").checked;
-
-    if (isChecked) {
-      japaneseText.style.display = "none";
-      englishText.style.display = "block";
-    } else {
-      japaneseText.style.display = "block";
-      englishText.style.display = "none";
-    }
-  }
-
-  const japaneseCharacters = ["仕事", "壮大", "木", "切磋琢磨", "侘寂", "和"]; // Example characters
-
-  function changeJapaneseText() {
-    const randomIndex = Math.floor(Math.random() * japaneseCharacters.length);
-    document.getElementById("japanese-char").textContent =
-      japaneseCharacters[randomIndex];
-  }
-
-  setInterval(changeJapaneseText, 100); // Adjust speed of changing Japanese characters
-</script>
+{{ partial "home/contact" . }} {{/* CSS Injection */}} {{ $css := resources.Get
+"css/pages/index.css" | resources.Minify | resources.Fingerprint |
+resources.PostProcess}}
+<link
+  rel="stylesheet"
+  href="{{ $css.RelPermalink }}"
+  integrity="{{ $css.Data.Integrity }}"
+/>
+{{/* JS Injection */}} {{ $js := resources.Get "js/pages/index.js" |
+resources.Minify | resources.Fingerprint }}
+<script
+  src="{{ $js.RelPermalink }}"
+  integrity="{{ $js.Data.Integrity }}"
+></script>
 
 {{ end }}

@@ -20,23 +20,9 @@ partial "meta" . }}
 <link rel="canonical" href="{{ .Permalink }}" />
 <!-- ICONS -->
 <link rel="icon" href="/favicon.ico" />
-<link
-  rel="apple-touch-icon"
-  sizes="180x180"
-  href="/apple-touch-icon.png"
-/>
-<link
-  rel="icon"
-  type="image/png"
-  sizes="32x32"
-  href="/favicon-32x32.png"
-/>
-<link
-  rel="icon"
-  type="image/png"
-  sizes="16x16"
-  href="/favicon-16x16.png"
-/>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 <link rel="manifest" href="/site.webmanifest" />
 
 <!-- CSS -->
@@ -47,16 +33,23 @@ resources.PostProcess }}
 <link rel="stylesheet" href="{{ $styles.RelPermalink }}" />
 
 <!-- plausible tracking -->
-<script
-  defer
-  data-domain="takara.ai"
-  data-api="https://takara.ai/api/router/event"
-  src="https://takara.ai/api/runner/script.tagged-events.outbound-links.js"
-></script>
+
+<script defer
+  data-domain="{{ getenv "HUGO_TRACKING_DOMAIN" }}"
+  data-api="{{ getenv "HUGO_TRACKING_API" }}"
+  src="{{ getenv "HUGO_TRACKING_SCRIPT_SRC" }}">
+</script>
+
+
 {{/* fonts */}}
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
   href="https://fonts.googleapis.com/css2?family=Caveat&display=swap"
   rel="stylesheet"
+/>
+{{/*  FontAwesome  */}}
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 />

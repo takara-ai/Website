@@ -145,47 +145,17 @@
   </div>
 </section>
 
-<style>
-  @keyframes blink {
-    from,
-    to {
-      border-color: transparent;
-    }
-    50% {
-      border-color: black;
-    }
-  }
+{{/* CSS Injection */}} {{ $css := resources.Get "css/components/contact.css" |
+resources.Minify | resources.Fingerprint | resources.PostProcess}}
+<link
+  rel="stylesheet"
+  href="{{ $css.RelPermalink }}"
+  integrity="{{ $css.Data.Integrity }}"
+/>
 
-  #terminal-input::after {
-    animation: blink 0.5s step-end infinite;
-  }
-</style>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    adjustNotebookLines();
-    window.addEventListener("resize", adjustNotebookLines); // Adjust lines on window resize
-  });
-
-  function adjustNotebookLines() {
-    const notebookLeft = document.querySelector(".notebook-left");
-    const notebookRight = document.querySelector(".notebook-right");
-    const lineHeight = 24; // Adjust as per the actual line height
-    const viewportHeight = window.innerHeight;
-    const numberOfLines = Math.floor(viewportHeight / lineHeight);
-
-    // Function to clear and add lines
-    const addLinesToNotebook = (notebook) => {
-      notebook.innerHTML = ""; // Clear existing lines
-
-      for (let i = 0; i < numberOfLines; i++) {
-        const line = document.createElement("div");
-        line.classList.add("border-b", "border-black", "border-dotted", "h-6");
-        notebook.appendChild(line);
-      }
-    };
-
-    // Add lines to both left and right notebook divs
-    addLinesToNotebook(notebookLeft);
-    addLinesToNotebook(notebookRight);
-  }
-</script>
+{{ $js := resources.Get "js/components/notebookCalc.js" | resources.Minify |
+resources.Fingerprint }}
+<script
+  src="{{ $js.RelPermalink }}"
+  integrity="{{ $js.Data.Integrity }}"
+></script>
