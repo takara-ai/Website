@@ -2,7 +2,7 @@
 title = 'About Us'
 date = '2024-01-30T20:14:10Z'
 draft = false
-description = ''
+description = 'Meet Takara.ai: Pioneers in AI-driven business transformation since 2024. We blend advanced AI with human creativity to unlock potential and streamline processes. Our team of experts guides businesses through the AI landscape, delivering custom solutions for a competitive edge. Join us in harnessing the power of AI for a smarter, more innovative future.'
 layout = 'about-us'
 +++
 
