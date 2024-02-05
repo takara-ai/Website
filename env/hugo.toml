@@ -18,8 +18,4 @@ enableRobotsTXT = true
   priority = 0.5
 
 [params]
-role = "Web Developer"
-phone = "+447568151719"
-email = "jordan@takara.ai"
-linkedin = "https://www.linkedin.com/in/404missinglink"
 description = "Transforming Humanity"
