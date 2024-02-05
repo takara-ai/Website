@@ -2,8 +2,8 @@
   "name": "takara",
   "version": "1.0.0",
   "main": "index.html",
-  "repository": "https://github.com/404missinglink/takaraAiStatic.git",
-  "author": "jordan-ia <jordan@i-a.cloud>",
+  "repository": "https://github.com/takara-ai/Website",
+  "author": "takara.ai",
   "license": "MIT",
   "scripts": {
     "start": "concurrently \"npm run watch:tw\" \"npm run watch:hugo\"",
