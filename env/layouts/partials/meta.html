@@ -39,9 +39,6 @@ property="og:description" content={{ partial "meta-desc.html" . }} />
 <meta property="og:url" content="{{ .Permalink }}" />
 <meta property="og:locale" content="en" />
 
-<!-- Pintrest -->
-<meta name="p:domain_verify" content="1741d56070de657649270c47c86830d8" />
-
 <!-- Image meta tags -->
 {{ with .Params.featured_image }} {{ with resources.Get . }} {{ $featuredimage
 := (.Resize "1500x ").RelPermalink }} {{ $imageURL := printf "%s%s"
