@@ -1,0 +1,7 @@
+{{ range .Site.RegularPages }} {{ if .IsHome }}
+<!-- Skip the home page -->
+{{ continue }} {{ end }} {{ if not (strings.HasPrefix .RelPermalink "/legal") }}
+<li>
+  <a href="{{ .RelPermalink }}" class="underline-gradient">{{ .Title }}</a>
+</li>
+{{ end }} {{ end }}
