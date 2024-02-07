@@ -24,4 +24,14 @@ These questions were the sparks that ignited our mission. We realized that busin
 
 We are a collective of sharp minds and passionate hearts, a team that lives and breathes AI. Our focus is laser-precise: to drive forward the innovations that AI, machine learning, and large language models (LLMs) bring to the table. Our singular dedication to this field means we're not swayed by passing fads or fleeting tech trends. Our commitment is to deliver tangible, measurable change, crafting bespoke AI solutions that are as unique as the businesses we serve.
 
+---
+
+## Jordan Legg
+
+{{< headshot src="images/team/ee7fd47e-484f-49bf-8532-be7cbc1d443d.JPG" alt="Team Photo" >}}
+
+> I'm a self taught programmer with a vicious appetite for new technologies and pushing the boundaries of what's possible with AI. I cut my teeth at 14 in web design, at 19 I started my first company
+
+---
+
 At Takara.ai, we don't just offer services — we forge partnerships that unearth the treasures within your organization, revealing new opportunities for growth and success. Let's embark on this transformative journey together.
