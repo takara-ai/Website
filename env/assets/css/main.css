@@ -3,7 +3,12 @@
 /* Custom CSS */
 @tailwind components;
 @tailwind utilities;
-
+h1 {
+  @apply text-3xl md:text-6xl font-bold;
+}
+h5 {
+  @apply text-base md:text-xl;
+}
 @import url("https://fonts.googleapis.com/css2?family=Caveat&display=swap");
 /* In your main.css or similar file */
 @import "~@fortawesome/fontawesome-free/css/fontawesome.css";
