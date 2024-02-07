@@ -6,8 +6,6 @@ description = ''
 layout = 'about-us'
 +++
 
-# Privacy Policy for Takara.ai
-
 Welcome to Takara.ai ("we", "us", "our"), an AI consultancy dedicated to showcasing our services through our website. Your privacy is critically important to us, and this Privacy Policy outlines the types of personal information we collect and record, how it's used, and how we safeguard your data.
 
 ## 1. Information Collection and Use
