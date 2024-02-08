@@ -5,9 +5,11 @@
   </head>
 
   <body class="">
-    <nav>{{ partial "nav" . }}</nav>
+    <nav>{{ partial "mobile-menu" . }}</nav>
     <main>{{ block "main" . }}{{ end }}</main>
 
-    <footer class="bg-gray-800 text-white py-6 shadow-2xl shadow-black">{{ partial "footer" . }}</footer>
+    <footer class="bg-gray-800 text-white py-6 shadow-2xl shadow-black"
+      >{{ partial "footer" . }}</footer
+    >
   </body>
 </html>
