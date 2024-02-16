@@ -9,7 +9,7 @@
     </h1>
     <div class="">
       <form
-        id="contact"
+        id="myForm"
         class="grid grid-cols-1 font-whisper placeholder-font-mono text-xl sm:text-2xl lg:text-4xl"
       >
         <input
@@ -26,6 +26,7 @@
           class="placeholder-black w-full focus:outline-none pl-2 sm:pl-4 border-b border-black border-dotted pt-3 lg:pt-2 hover:bg-gray-400 h-10"
           required
         />
+
         <input
           type="email"
           name="email"
@@ -145,93 +146,18 @@ resources.Minify | resources.Fingerprint | resources.PostProcess}}
   href="{{ $css.RelPermalink }}"
   integrity="{{ $css.Data.Integrity }}"
 />
-
-{{ $js := resources.Get "js/components/notebookCalc.js" | resources.Minify |
-resources.Fingerprint }}
+{{/* Notebook line calculations */}} {{ $js := resources.Get
+"js/components/notebookCalc.js" | resources.Minify | resources.Fingerprint }}
 <script
   src="{{ $js.RelPermalink }}"
   integrity="{{ $js.Data.Integrity }}"
 ></script>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    var form = document.querySelector("form");
+{{ $hubspotForm := resources.Get "js/components/hubspotForm.js" |
+resources.Minify | resources.Fingerprint }}
 
-    form.addEventListener("submit", function (e) {
-      e.preventDefault(); // Prevent the default form submission
-
-      // Construct the form data payload
-      var formData = {
-        fields: [
-          {
-            name: "firstname",
-            value: form.querySelector("[name='first-name']").value,
-          },
-          {
-            name: "lastname",
-            value: form.querySelector("[name='last-name']").value,
-          },
-          {
-            name: "email",
-            value: form.querySelector("[name='email']").value,
-          },
-          // Add any additional form fields here
-        ],
-        context: {
-          hutk: document.cookie.match(/hubspotutk=(.*?);/)?.[1], // Capture the HubSpot tracking cookie if it exists
-          pageUri: window.location.href,
-          pageName: document.title,
-        },
-        legalConsentOptions: {
-          // This section is necessary only if GDPR applies
-          consent: {
-            consentToProcess: true,
-            text: "I agree to allow Example Company to store and process my personal data.",
-            communications: [
-              {
-                value: true,
-                subscriptionTypeId: 999, // Subscription Type ID needs to be replaced with your actual ID
-                text: "I agree to receive marketing communications from Example Company.",
-              },
-            ],
-          },
-        },
-      };
-
-      // Submit the form data to HubSpot
-      var xhr = new XMLHttpRequest();
-      xhr.open(
-        "POST",
-        "https://api.hsforms.com/submissions/v3/integration/submit/143915428/def51f2a-fe53-4a00-a791-1d1a62e907c7",
-        true
-      );
-      xhr.setRequestHeader("Content-Type", "application/json");
-
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-          var status = xhr.status;
-          if (status === 0 || (status >= 200 && status < 400)) {
-            // The request has been completed successfully
-            console.log("Form submission successful");
-            // Here you can redirect the user to a thank you page or display a success message
-          } else {
-            // Handle any errors that occurred during the submission
-            console.log("Form submission error");
-          }
-        }
-      };
-
-      xhr.send(JSON.stringify(formData));
-    });
-  });
-</script>
-
-<!-- Start of HubSpot Embed Code -->
 <script
-  type="text/javascript"
-  id="hs-script-loader"
-  async
-  defer
-  src="//js-eu1.hs-scripts.com/143915428.js"
+  src="{{ $hubspotForm.RelPermalink }}"
+  integrity="{{ $hubspotForm.Data.Integrity }}"
+  crossorigin="anonymous"
 ></script>
-<!-- End of HubSpot Embed Code -->
