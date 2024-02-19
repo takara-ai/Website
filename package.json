@@ -24,7 +24,7 @@
     "cssnano": "^6.0.3",
     "cssnano-preset-advanced": "^6.0.3",
     "postcss-cli": "^11.0.0",
-    "terser": "^5.27.0"
+    "terser": "^5.27.2"
   },
   "packageManager": "yarn@4.0.2"
 }
