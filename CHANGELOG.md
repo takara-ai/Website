@@ -2,8 +2,6 @@
 
 ## [1.2.0](https://github.com/takara-ai/Website/compare/v1.1.1...v1.2.0) (2024-02-08)
 
-### Features
-
 - **about-us:** add CEO profile ([2260f48](https://github.com/takara-ai/Website/commit/2260f48b6176be10820a2d53da1034fed857fe4e))
 - added conventional commits specification ([295c9bc](https://github.com/takara-ai/Website/commit/295c9bcaa6b5d9de412b5eeb2d843136ae66b08d))
 - Added how we follow through on ethics ([20c868d](https://github.com/takara-ai/Website/commit/20c868d9f13f34fcf90cb099a9c32f83c0073a64))
