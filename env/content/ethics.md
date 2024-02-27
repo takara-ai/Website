@@ -13,5 +13,5 @@ At takara.ai, we are committed to developing AI with integrity. We believe that 
 - **Explainable AI (XAI)**: Develop AI systems that are explainable and understandable to users, providing clear insights into how and why decisions are made.
 - **Data Protection Measures**: Implement strong data encryption, anonymization techniques, and secure data storage solutions to protect user privacy.
 - **Privacy by Design**: Incorporate privacy considerations into the design phase of AI development, ensuring that data collection and processing minimize privacy risks.
-- **Training and Education**: Invest in continuous learning opportunities for your team to stay updated on ethical AI practices and emerging issues.
+- **Training and Education**: Invest in continuous learning opportunities for the team to stay updated on ethical AI practices and emerging issues.
 - **Iterative Feedback Loop**: Establish mechanisms for receiving and incorporating feedback from users, communities, and stakeholders to continuously improve AI technologies.
