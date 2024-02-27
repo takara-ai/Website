@@ -1,7 +1,7 @@
 {{define "main"}}
 <article class="bg-blue-gray-50">
   <div class="relative border-b-2 border-black border-dashed h-svh">
-    <div class="">
+    <div>
       <div
         class="h-[20vh] md:h-[30vh] grid place-items-center bg-red-700"
       ></div>
@@ -22,12 +22,10 @@
       <div
         class="flex flex-col justify-center h-screen sm:p-4 p-2 mx-auto text-right lg:flex-none lg:justify-normal"
       >
-        <h1 class="text-3xl md:text-6xl font-bold">Empower Your Data</h1>
-        <h1 class="text-3xl md:text-6xl font-japaneseBold">データを強化する</h1>
-        <h2 class="text-base md:text-xl">Faster With Micro AI Deployments</h2>
-        <h2 class="font-japanese text-base md:text-xl">
-          マイクロAIデプロイメントでより速く
-        </h2>
+        <h1>Empower Your Data</h1>
+        <h1 class="font-japaneseBold">データを強化する</h1>
+        <h5 class="">Faster With Micro AI Deployments</h5>
+        <h5 class="font-japanese"> マイクロAIデプロイメントでより速く </h5>
       </div>
     </div>
     <i class="fa-solid fa-scissors absolute pl-2 sm:pl-4 -bottom-2"></i>
@@ -36,14 +34,8 @@
   <div
     class="relative min-h-screen lg:min-h-[150vh] diagonal-slice flex flex-col justify-evenly"
   >
+    <h1 class="sm:px-4 px-2">AI Methodologies Compared</h1>
     <div>
-      <!-- Section Heading -->
-      <h1
-        class="text-3xl md:text-6xl font-bold my-14 sm:pl-4 pl-2 text-center md:text-left"
-      >
-        How Does It Work?
-      </h1>
-
       <!-- Content Section -->
       <section class="text-white sm:px-4 px-2">
         <div>
@@ -137,25 +129,25 @@
         class="py-24 2xl:py-48 backdrop-invert bg-transparent grid md:grid-cols-2"
       >
         <div class="sm:pl-4 pl-2 text-white">
-          <h2 class="text-base md:text-xl">Humanity Once Thought</h2>
-          <h2 class="text-base md:text-xl">人類はかつて思った"</h2>
-          <h1 class="text-3xl md:text-4xl lg:text-4xl 2xl:text-6xl font-bold">
+          <h5>Humanity Once Thought</h5>
+          <h5>人類はかつて思った"</h5>
+          <h1 class="text-3xl md:text-4xl lg:text-4xl 2xl:text-5xl font-bold">
             It Was Impossible
           </h1>
           <h1
-            class="text-3xl md:text-4xl lg:text-4xl 2xl:text-6xl font-japaneseBold"
+            class="text-3xl md:text-4xl lg:text-4xl 2xl:text-5xl font-japaneseBold"
           >
             それは不可能でした
           </h1>
         </div>
         <div class="text-right pr-2 sm:pr-4">
-          <h2 class="text-base md:text-xl">AI Makes You</h2>
-          <h2 class="text-base md:text-xl">AIがあなたを作ります</h2>
-          <h1 class="text-3xl md:text-4xl lg:text-4xl 2xl:text-6xl font-bold">
+          <h5>AI Makes You</h5>
+          <h5>AIがあなたを作ります</h5>
+          <h1 class="text-3xl md:text-4xl lg:text-4xl 2xl:text-5xl font-bold">
             Invert Your Thinking
           </h1>
           <h1
-            class="text-3xl md:text-4xl lg:text-4xl 2xl:text-6xl font-japaneseBold"
+            class="text-3xl md:text-4xl lg:text-4xl 2xl:text-5xl font-japaneseBold"
           >
             考えを逆転させてください
           </h1>
@@ -164,24 +156,12 @@
     </div>
   </div>
 </article>
-<style>
-  .diagonal-slice {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .diagonal-slice::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 105%;
-    height: 160%;
-    clip-path: polygon(100% 100%, 0 130%, 100% 0);
-    background-color: #b91c1c;
-    z-index: -2;
-  }
-  /* Target the new id 'text-section' and create a pseudo-element for the 'Invert Your Thinking' text */
-</style>
+{{/* CSS Injection */}} {{ $css := resources.Get "css/pages/micro-ai.css" |
+resources.Minify | resources.Fingerprint | resources.PostProcess}}
+<link
+  rel="stylesheet"
+  href="{{ $css.RelPermalink }}"
+  integrity="{{ $css.Data.Integrity }}"
+/>
 
 {{end}}

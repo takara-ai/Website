@@ -1,0 +1,15 @@
+{{ $originalImage := resources.Get (.Get "src") }}
+{{/* Convert the image to WebP format with specific quality and hint for a "picture" */}}
+{{ $webpImage := $originalImage.Fill "600x600 webp q80 picture" | resources.Fingerprint }}
+
+{{/* Create a fallback JPEG version of the image with high quality */}}
+{{ $jpegImage := $originalImage.Fill "600x600 jpg q80" | resources.Fingerprint }}
+
+{{ $radius := .Get "radius" | default "rounded-full" }}
+{{/* Create a picture element with a WebP source and a JPEG fallback */}}
+<picture>
+    <source srcset="{{ $webpImage.RelPermalink }}" type="image/webp">
+    <source srcset="{{ $jpegImage.RelPermalink }}" type="image/jpeg">
+    <img src="{{ $jpegImage.RelPermalink }}" width="300" height="300" alt="{{ .Get "alt" }}" class="object-cover {{ $radius }}">
+</picture>
+
