@@ -32,6 +32,8 @@ Our team embodies a blend of sharp intellect and passion for AI. With a laser-fo
 
 > As the founder and visionary behind takara.ai, I've journeyed from a self-taught programmer with a profound interest in emerging technologies to an entrepreneur shaping the future of AI. My path began with web design at 14, entrepreneurial ventures at 19, and a deep dive into AI and ML that generated over £100m in sales for public cloud providers. My ambition for starting takara.ai was to provide businesses with the guidance I once sought, championing AI as a transformative force for good. I'm committed to unlocking human potential alongside AI, steering us towards a future where technology and creativity converge.
 
+[LinkedIn](https://www.linkedin.com/in/404missinglink/)
+
 ---
 
 Join us at [takara.ai](/) as we forge ahead, not just as service providers, but as partners in unveiling the hidden treasures within your organization, catalyzing growth and success. Together, let's navigate the transformative journey of AI.
