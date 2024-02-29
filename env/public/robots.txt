@@ -1,3 +1,0 @@
-User-agent: *
-Disallow:
-Sitemap: https://takara.ai/sitemap.xml
