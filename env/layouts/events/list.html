@@ -1,51 +1,56 @@
-{{ define "main" }}
-{{ $imagePath := "images/events/1.jpg" }}
-{{ $image := resources.Get $imagePath }}
-{{ if $image }}
-  {{ $processedImage := $image.Fit "2000x2000" }}
-  {{ $backgroundImage := $processedImage | resources.Fingerprint }}
+{{ define "main" }} {{ $imagePath := "images/events/1.jpg" }} {{ $image :=
+resources.Get $imagePath }} {{ if $image }} {{ $processedImage := $image.Fit
+"2000x2000" }} {{ $backgroundImage := $processedImage | resources.Fingerprint }}
 
- <section class="h-svh flex flex-col  ">
-
-  <div class="flex-1 bg-cover bg-center" style="background-image: url('{{ $image.Permalink }}'); ">
-    <div class=" w-full h-full flex items-center justify-center flex-col ">
-      <div class=" border-y border-dashed border-white w-full  flex items-center justify-center backdrop-invert">
-      <div class="w-fit h-fit backdrop-brightness-200  text-center py-8 px-4 ">
-        <h1 class="text-7xl font-bold bg-white" >Events</h1>
-   
+<section class="min-h-screen flex flex-col">
+  <div
+    class="bg-cover bg-center"
+    style="background-image: url('{{ $backgroundImage.Permalink }}'); height: 50vh;"
+  >
+    <div class="w-full h-full flex items-center justify-center flex-col">
+      <div
+        class="border-y border-dashed border-white w-full flex items-center justify-center backdrop-invert"
+      >
+        <div class="w-fit h-fit backdrop-brightness-200 text-center py-8 px-4">
+          <h1 class="text-7xl font-bold bg-white">Events</h1>
+        </div>
       </div>
-      </div>
-   
     </div>
   </div>
   <div class="flex-1 bg-black border-t border-dashed border-white">
-
     <section id="events-list">
-  <div class="mt-2 p-2 border-x border-dashed border-white">
-    {{ range where .Site.Pages "Section" "events" }}
-  {{ if ne .Kind "section" }} <!-- Assuming 'Kind' can be used to distinguish the index page -->
-    <article class="event border-dashed border-t border-white">
-      {{ if .Params.image }}
-        <img src="{{ .Params.image | absURL }}" alt="{{ .Title }}">
-      {{ end }}
-      <h2 class="text-pink-400 capitalize border-b border-dashed border-pink-400 w-fit"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-      <time class="text-teal-400" datetime="{{ .Date.Format "2006-01-02" }}"> {{ .Date.Format "2006-01-02" }}</time>
-      <p>{{ .Summary }}</p>
-    </article>
-  {{ end }}
-{{ end }}
+      <div class="mt-2 p-2 border-x border-dashed border-white">
+        {{ range where .Site.Pages "Section" "events" }} {{ if ne (lower
+        .Params.display) "no" }}
+        <!-- Check if the display parameter is not set to "no" -->
+        <article class="event border-dashed border-t border-white">
+          {{ with .Params.image }}
+          <!-- Fetch the image from the assets folder and resize it -->
+          {{ $imageResource := resources.Get . }} {{ if $imageResource }} {{
+          $resizedImage := $imageResource.Resize "600x" }}
+          <img src="{{ $resizedImage.RelPermalink }}" alt="Event Image" />
+          {{ else }}
+          <!-- If no image is found, you can either display a default image or no image at all -->
+          {{ end }} {{ end }}
 
+          <h2
+            class="text-pink-400 capitalize border-b border-dashed border-pink-400 w-fit"
+            ><a href="{{ .Permalink }}">{{ .Title }}</a></h2
+          >
+          <div class="text-teal-400">
+            <time datetime="{{ .Params.dateEvent }}"
+              >{{ .Params.dateEvent }} at {{ .Params.timeEvent }}</time
+            >
+            <p
+              >{{ .Params.location.venue }}, {{ .Params.location.city }}, {{
+              .Params.location.country }}</p
+            >
+          </div>
+        </article>
+        {{ end }} {{ end }}
+      </div>
+    </section>
   </div>
 </section>
-  </div>
-</section>
 
-
-{{ end }}
-
-
-
-
-
-
-{{ end }}
+{{ end }} {{ end }}

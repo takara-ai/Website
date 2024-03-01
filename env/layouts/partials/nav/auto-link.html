@@ -1,6 +1,14 @@
 {{ range .Site.RegularPages }} {{ if .IsHome }}
 <!-- Skip the home page -->
-{{ continue }} {{ end }} {{ if not (strings.HasPrefix .RelPermalink "/legal") }}
+{{ continue }} {{ else if strings.HasPrefix .RelPermalink "/events/" }} {{ if eq
+.RelPermalink "/events/" }}
+<!-- Include the index page of the events section -->
+<li>
+  <a href="{{ .RelPermalink }}" class="underline-gradient">{{ .Title }}</a>
+</li>
+{{ end }}
+<!-- Exclude all non-index pages under /events -->
+{{ continue }} {{ else if not (strings.HasPrefix .RelPermalink "/legal") }}
 <li>
   <a href="{{ .RelPermalink }}" class="underline-gradient">{{ .Title }}</a>
 </li>
