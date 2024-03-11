@@ -22,7 +22,7 @@
     "@tailwindcss/typography": "^0.5.10",
     "concurrently": "^8.2.2",
     "cssnano": "^6.0.3",
-    "cssnano-preset-advanced": "^6.0.3",
+    "cssnano-preset-advanced": "^6.1.0",
     "postcss-cli": "^11.0.0",
     "terser": "^5.27.0"
   },
