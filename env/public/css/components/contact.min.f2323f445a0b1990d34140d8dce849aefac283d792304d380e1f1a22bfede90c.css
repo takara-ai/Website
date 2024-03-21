@@ -1,0 +1,1 @@
+@keyframes blink{from,to{border-color:transparent}50%{border-color:#000}}#terminal-input::after{animation:blink .5s step-end infinite}
