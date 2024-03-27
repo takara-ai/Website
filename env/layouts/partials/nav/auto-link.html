@@ -1,7 +1,7 @@
-{{ range .Site.Pages }} {{ if .IsNode }} {{ if .IsHome }}
+{{ range .Site.Pages }}{{ if .IsHome }}
 <!-- Skip the home page -->
 {{ continue }} {{ end }} {{ if not (strings.HasPrefix .RelPermalink "/legal") }}
 <li>
   <a href="{{ .RelPermalink }}" class="underline-gradient">{{ .Title }}</a>
 </li>
-{{ end }} {{ end }} {{ end }}
+{{ end }} {{ end }}

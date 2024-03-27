@@ -4,7 +4,6 @@ date: "2024-03-21T15:02:10Z"
 draft: false
 description: ""
 layout: ""
-tags: GPT4
 ---
 
 ## Effective Prompting Guide for ChatGPT-4 in Marketing

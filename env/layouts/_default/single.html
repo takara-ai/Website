@@ -1,7 +1,8 @@
 {{ define "main" }}
 <div class="relative">
-  {{ if eq .Section "prompts" }} {{ partial "prompts/JapPromptText" . }} {{ end
-  }}
+  {{ if eq .Section "prompts" }} {{ partial "prompts/JapPromptText" . }} 
+  
+  {{ end }}
   <article class="pt-16 prose lg:prose-xl xl:prose-2xl mx-auto p-4 min-h-svh">
     <header>
       <h1>{{ .Title }}</h1>
