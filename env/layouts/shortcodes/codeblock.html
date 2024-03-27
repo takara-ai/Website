@@ -1,0 +1,59 @@
+{{ $code := .Inner }} {{ $highlight := .Get "highlight" | default "highlight" }}
+{{ if eq $highlight "highlight" }} {{ $code = highlight $code }} {{ else }} {{
+warnf "Unsupported highlight mode: %s" $highlight }} {{ end }}
+
+<div class="code-block">
+  <div class="code-header">
+    <button class="copy-code-button" aria-label="Copy Code">Copy</button>
+  </div>
+  <pre>{{ $code | safeHTML }}</pre>
+</div>
+
+<style>
+  .code-block {
+    position: relative;
+  }
+  .code-header {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.25rem;
+    background-color: #f4f4f4;
+    border-bottom-left-radius: 0.25rem;
+  }
+  .copy-code-button {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .copy-code-button:hover {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  const copyCodeButtons = document.querySelectorAll(".copy-code-button");
+
+  copyCodeButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const code = button.parentElement.nextElementSibling.innerText;
+      navigator.clipboard
+        .writeText(code)
+        .then(() => {
+          button.textContent = "Copied!";
+          setTimeout(() => {
+            button.textContent = "Copy";
+          }, 2000);
+        })
+        .catch((err) => {
+          console.error("Failed to copy code: ", err);
+        });
+    });
+  });
+</script>

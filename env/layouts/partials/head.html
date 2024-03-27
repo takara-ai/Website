@@ -53,3 +53,19 @@ resources.PostProcess }}
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 />
+
+{{/*  Codeblocks  */}}
+
+{{ if (findRE "<pre" .Content 1) }}
+{{/* JS Injection */}}
+{{ $js := resources.Get "/js/copy-code-button.js" | resources.Minify | resources.Fingerprint }}
+<script
+  src="{{ $js.RelPermalink | safeHTMLAttr }}"
+  integrity="{{ $js.Data.Integrity | safeHTMLAttr }}"
+  crossorigin="anonymous">
+</script>
+
+
+{{ end }}
+
+

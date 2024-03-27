@@ -1110,10 +1110,6 @@ video {
   position: relative;
 }
 
-.sticky {
-  position: sticky;
-}
-
 .inset-0 {
   inset: 0px;
 }
@@ -1140,14 +1136,6 @@ video {
 
 .top-1\/2 {
   top: 50%;
-}
-
-.top-20 {
-  top: 5rem;
-}
-
-.left-2 {
-  left: 0.5rem;
 }
 
 .z-10 {
@@ -1324,10 +1312,6 @@ video {
   width: 100%;
 }
 
-.w-2 {
-  width: 0.5rem;
-}
-
 .max-w-3xl {
   max-width: 48rem;
 }
@@ -1338,18 +1322,6 @@ video {
 
 .max-w-sm {
   max-width: 24rem;
-}
-
-.max-w-2xl {
-  max-width: 42rem;
-}
-
-.max-w-xl {
-  max-width: 36rem;
-}
-
-.max-w-80 {
-  max-width: 20rem;
 }
 
 .flex-1 {
@@ -1462,14 +1434,6 @@ video {
   overflow: hidden;
 }
 
-.overflow-clip {
-  overflow: clip;
-}
-
-.overflow-scroll {
-  overflow: scroll;
-}
-
 .overflow-y-auto {
   overflow-y: auto;
 }
@@ -1512,10 +1476,6 @@ video {
 
 .border-r-2 {
   border-right-width: 2px;
-}
-
-.border-dashed {
-  border-style: dashed;
 }
 
 .border-dotted {
@@ -1763,10 +1723,6 @@ video {
   padding-top: 0.75rem;
 }
 
-.pb-2 {
-  padding-bottom: 0.5rem;
-}
-
 .text-left {
   text-align: left;
 }
@@ -1898,11 +1854,6 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-red-700 {
-  --tw-text-opacity: 1;
-  color: rgb(185 28 28 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -2592,11 +2543,6 @@ h5 {
   background-color: rgb(156 163 175 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-blue-700:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(29 78 216 / var(--tw-bg-opacity));
-}
-
 .hover\:text-blue-700:hover {
   --tw-text-opacity: 1;
   color: rgb(29 78 216 / var(--tw-text-opacity));
@@ -2725,10 +2671,6 @@ h5 {
     padding-left: 1rem;
   }
 
-  .sm\:pb-4 {
-    padding-bottom: 1rem;
-  }
-
   .sm\:text-left {
     text-align: left;
   }
@@ -2764,10 +2706,6 @@ h5 {
 }
 
 @media (min-width: 768px) {
-  .md\:left-4 {
-    left: 1rem;
-  }
-
   .md\:mb-0 {
     margin-bottom: 0px;
   }
@@ -2786,10 +2724,6 @@ h5 {
 
   .md\:h-8 {
     height: 2rem;
-  }
-
-  .md\:max-w-4xl {
-    max-width: 56rem;
   }
 
   .md\:text-5xl {

@@ -1763,10 +1763,6 @@ video {
   padding-top: 0.75rem;
 }
 
-.pb-2 {
-  padding-bottom: 0.5rem;
-}
-
 .text-left {
   text-align: left;
 }
@@ -2723,10 +2719,6 @@ h5 {
 
   .sm\:pl-4 {
     padding-left: 1rem;
-  }
-
-  .sm\:pb-4 {
-    padding-bottom: 1rem;
   }
 
   .sm\:text-left {
