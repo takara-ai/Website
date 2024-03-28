@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.3.0](https://github.com/takara-ai/Website/compare/v1.2.0...v1.3.0) (2024-03-28)
+
+
+### Features
+
+* **menu:** add z-index and backdrop blur ([34cc56b](https://github.com/takara-ai/Website/commit/34cc56b3dfe701a340e5aefc7366c161223aa716))
+* **prompt-engineering:** add single.html for specific layouts ([2a6c27a](https://github.com/takara-ai/Website/commit/2a6c27ad93dbc02491dacbcf525fb38583418668))
+* **prompt-engineering:** complete Japanese sidebar translation in JapPromptText.html partial ([72cb962](https://github.com/takara-ai/Website/commit/72cb9626b5a01171eb0b5500e20104209096fe0c))
+* **prompt-engineering:** finalize section and add marketing tutorial ([71d42b3](https://github.com/takara-ai/Website/commit/71d42b3d6af60d915e6789d39a11a7d87fe68514))
+* **prompt-engineering:** update single.html layout ([31c2ae1](https://github.com/takara-ai/Website/commit/31c2ae1c279951de4c826f8d8f15f1e5bc679227))
+* **prompt-guide:** add guide and link to the page ([424fd24](https://github.com/takara-ai/Website/commit/424fd24e4d7e873eec7c8996a5aa45deb5f3965b))
+
+
+### Bug Fixes
+
+* **prompt-engineering:** adjust top spacing on single.html ([a2633ea](https://github.com/takara-ai/Website/commit/a2633eaa087d1831e05ebc74738630a5472500bf))
+
 ## [1.2.0](https://github.com/takara-ai/Website/compare/v1.1.1...v1.2.0) (2024-02-08)
 
 - **about-us:** add CEO profile ([2260f48](https://github.com/takara-ai/Website/commit/2260f48b6176be10820a2d53da1034fed857fe4e))
