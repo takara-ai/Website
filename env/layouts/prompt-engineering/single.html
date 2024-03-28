@@ -7,16 +7,22 @@
   >
     <header>
       <h1>{{ .Title }}</h1>
-      {{ $currentPage := trim .RelPermalink "/" }} {{ $targetPage := trim
-      (relURL "/prompt-engineering/prompt-guide/") "/" }} {{ if ne $currentPage
-      $targetPage }}
-      <a href="{{ $targetPage | absURL }}"
-        >Visit here first if you are confused.</a
-      >
-      {{ else }}
-      <!-- Optionally, provide feedback or alternative content here -->
-      <!-- <span>You are already on the guide page.</span> -->
-      {{ end }}
+{{ $currentPage := trim .RelPermalink "/" }}
+{{ $targetPage := trim (relURL "/prompt-engineering/prompt-guide/") "/" }}
+
+<!-- Link to go back to the section page -->
+<a class="font-japanese no-underline rounded text-red-700  hover:shadow-inner pl-0 p-3 mb-4 transition-colors duration-200 ease-in-out" href="{{ "/prompt-engineering/" | relURL }}"><i class="fa-solid fa-hand-point-left mr-2"></i>戻る</a>
+
+{{ if ne $currentPage $targetPage }}
+  <!-- Conditional link to the specific guide, only if not on that page -->
+  <a class="block mt-2 max-w-fit" href="{{ $targetPage | absURL }}">Visit here first if you need help.</a>
+{{ else }}
+  <!-- Optionally, indicate the user is currently viewing the guide -->
+  <!-- <span>You are already on the guide page.</span> -->
+{{ end }}
+
+
+
     </header>
     <section>{{ .Content }}</section>
   </article>
