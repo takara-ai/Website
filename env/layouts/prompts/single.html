@@ -1,0 +1,15 @@
+{{ define "main" }}
+<div class="relative flex flex-row items-start justify-between">
+  {{ partial "prompts/JapPromptText" . }}
+
+  <article
+    class="pt-16 prose lg:prose-xl xl:prose-2xl mx-auto p-4 min-h-svh overflow-hidden"
+  >
+    <header>
+      <h1>{{ .Title }}</h1>
+    </header>
+    <section>{{ .Content }}</section>
+  </article>
+</div>
+
+{{ end }}
