@@ -7,6 +7,16 @@
   >
     <header>
       <h1>{{ .Title }}</h1>
+      {{ $currentPage := trim .RelPermalink "/" }} {{ $targetPage := trim
+      (relURL "/prompt-engineering/prompt-guide/") "/" }} {{ if ne $currentPage
+      $targetPage }}
+      <a href="{{ $targetPage | absURL }}"
+        >Visit here first if you are confused.</a
+      >
+      {{ else }}
+      <!-- Optionally, provide feedback or alternative content here -->
+      <!-- <span>You are already on the guide page.</span> -->
+      {{ end }}
     </header>
     <section>{{ .Content }}</section>
   </article>
