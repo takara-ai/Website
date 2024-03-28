@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Create the copy button
     const button = document.createElement("button");
     button.className =
-      "copy-code-button text-red-700 py-1 px-2 rounded absolute top-0 right-0 -mt-8 text-sm";
+      "copy-code-button text-red-700 py-1 px-2 absolute top-0 right-0 -mt-8 text-sm";
     button.textContent = "Copy Code";
     button.addEventListener("click", () => {
       navigator.clipboard
