@@ -8,11 +8,6 @@ enableRobotsTXT = true
 [module]
   [module.hugoVersion]
     extended = true
-    min = "0.104.0"
-
-[taxonomies]
-  tag = ""
-  category = ""
 
 
 [sitemap]

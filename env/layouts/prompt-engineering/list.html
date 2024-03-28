@@ -1,0 +1,35 @@
+{{ define "main" }}
+<div class="relative flex flex-row items-start justify-between">
+  {{ partial "prompts/JapPromptText" . }}
+  <div
+    class="pt-16 max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto p-4 min-h-svh"
+  >
+    <header class="mb-8">
+      <h1 class="font-bold">{{ .Title }}</h1>
+    </header>
+
+    <section>
+      <div class="space-y-4">
+        {{ $prompts := where (where .Site.RegularPages "Section"
+        "prompt-engineering") ".Kind" "!=" "section" }} {{ range $prompts }}
+        <article class="border-b border-gray-200 pb-4">
+          <h2 class="text-2xl font-semibold">
+            <a
+              href="{{ .RelPermalink }}"
+              class="text-blue-600 hover:text-blue-800"
+              >{{ .Title }}</a
+            >
+          </h2>
+          <p class="mt-2 text-gray-600">{{ .Summary | truncate 80 " ..." }}</p>
+          <div class="mt-2">
+            <a href="{{ .RelPermalink }}" class="text-blue-600 hover:underline"
+              >Read more &rarr;</a
+            >
+          </div>
+        </article>
+        {{ end }}
+      </div>
+    </section>
+  </div>
+</div>
+{{ end }}

@@ -2,3 +2,4 @@
 .DS_Store
 .yarn/install-state.gz
 *.gz
+env/public
