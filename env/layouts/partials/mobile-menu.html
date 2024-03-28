@@ -1,5 +1,5 @@
-<div class="top-0 left-0 w-full z-50 fixed backdrop-blur">
-  <nav class="relative px-4 py-4 flex justify-between items-center">
+<div class="top-0 left-0 w-full z-20 fixed backdrop-blur">
+  <nav class="relative px-1 md:px-4 py-4 flex justify-between items-center">
     <a class="text-3xl font-bold leading-none" href="/">
       {{ $svg := resources.Get "images/logo-24/TakaraAi.svg" }}
       <img
@@ -11,9 +11,9 @@
     <a class="font-semibold text-xl" href="/">takara.ai</a>
 
     <div class="lg:hidden">
-      <button class="navbar-burger flex items-center p-3">
+      <button class="navbar-burger flex items-center">
         <svg
-          class="block h-4 w-4 fill-current"
+          class="block h-4 md:h-6 fill-current"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -31,7 +31,7 @@
   <div class="navbar-menu relative z-50 hidden">
     <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
     <nav
-      class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-r overflow-y-auto"
+      class="fixed top-0 left-0 bottom-0 flex flex-col w-svw py-4 px-2 sm:px-4 backdrop-blur-lg border-r min-h-svh"
     >
       <div class="flex items-center mb-8">
         <a class="mr-auto text-3xl font-bold leading-none" href="#">
@@ -44,7 +44,7 @@
         </a>
         <button class="navbar-close">
           <svg
-            class="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500"
+            class="h-4 md:h-6 text-black cursor-pointer hover:text-gray-500"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
