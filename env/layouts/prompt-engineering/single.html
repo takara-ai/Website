@@ -1,10 +1,10 @@
 {{ define "main" }}
-<div class="flex flex-col md:flex-row items-start justify-between">
+<div class="flex flex-row items-start justify-between">
   
   {{ partial "prompts/JapPromptText" . }}
 
   <!-- Main content -->
-  <article class="pt-20 prose lg:prose-xl xl:prose-2xl mx-auto py-4 px-2 min-h-svh overflow-hidden">
+  <article class="pt-20 prose lg:prose-xl xl:prose-2xl mx-auto py-4 px-2 min-h-svh overflow-hidden text-wrap">
     <header>
       <h1>{{ .Title }}</h1>
       {{ $currentPage := trim .RelPermalink "/" }}
@@ -26,6 +26,7 @@
     
     <section>{{ .Content }}</section>
   </article>
+
 
   <!-- Sidebar Navigation -->
   <aside class="hidden lg:block lg:w-1/4 sticky top-20 z-10">
