@@ -2,7 +2,9 @@
 <div class="relative flex flex-row items-start justify-between">
   {{ partial "prompts/JapPromptText" . }}
   <div class="my-16 p-4 sm:px-8 min-h-svh flex-grow">
-    <header class="mb-16 border-y border-red-700 border-dashed text-right">
+    <header
+      class="mb-16 border-y border-red-700 border-dashed text-center sm:text-right"
+    >
       <h1
         class="font-bold text-3xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
       >
@@ -16,23 +18,24 @@
         "prompt-engineering") ".Kind" "!=" "section" }} {{ range $prompts }}
         <a
           href="{{ .RelPermalink }}"
-          class="rounded-lg shadow-xl aspect-square p-4 flex flex-col items-center justify-center overflow-hidden bg-black space-y-4"
+          class="rounded-lg shadow-xl sm:aspect-square p-4 flex flex-col items-left justify-between overflow-hidden bg-black space-y-4"
         >
-          <article>
+          <div>
             <h2
               class="font-bold text-white mb-2 w-fit text-3xl shadow-inner border-b border-white"
             >
               {{ .Title | truncate 50 "..." }}
             </h2>
-            <p class="text-gray-600 text-xs ml-1">
+            <p class="text-gray-600 text-xs lg:text-base ml-1">
               {{ .Summary | truncate 120 "..." }}
             </p>
-            <span
-              class="text-red-700 hover:underline text-xs ml-1 mt-2 border-b border-red-700"
-            >
-              Learn now &rarr;
-            </span>
-          </article>
+          </div>
+
+          <span
+            class="text-red-700 hover:underline text-xs ml-1 mt-2 border-b border-red-700 w-fit"
+          >
+            Learn now &rarr;
+          </span>
         </a>
         {{ end }}
       </div>
