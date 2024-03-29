@@ -1,32 +1,42 @@
 {{ define "main" }}
 <div class="relative flex flex-row items-start justify-between">
   {{ partial "prompts/JapPromptText" . }}
-  <div
-    class="pt-16 max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto p-4 min-h-svh"
-  >
-    <header class="mb-8">
-      <h1 class="font-bold">{{ .Title }}</h1>
+  <div class="my-16 p-4 sm:px-8 min-h-svh flex-grow">
+    <header
+      class="mb-16 border-b border-red-700 border-dashed text-center sm:text-right"
+    >
+      <h1
+        class="font-bold text-3xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
+      >
+        {{ .Title }}
+      </h1>
     </header>
 
     <section>
-      <div class="space-y-4">
+      <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         {{ $prompts := where (where .Site.RegularPages "Section"
         "prompt-engineering") ".Kind" "!=" "section" }} {{ range $prompts }}
-        <article class="border-b border-gray-200 pb-4">
-          <h2 class="text-2xl font-semibold">
-            <a
-              href="{{ .RelPermalink }}"
-              class="text-blue-600 hover:text-blue-800"
-              >{{ .Title }}</a
+        <a
+          href="{{ .RelPermalink }}"
+          class="rounded-lg shadow-xl sm:aspect-square p-4 flex flex-col items-left justify-between overflow-hidden bg-black space-y-4"
+        >
+          <div>
+            <h2
+              class="font-bold text-white mb-2 w-fit text-3xl shadow-inner border-b border-white"
             >
-          </h2>
-          <p class="mt-2 text-gray-600">{{ .Summary | truncate 80 " ..." }}</p>
-          <div class="mt-2">
-            <a href="{{ .RelPermalink }}" class="text-blue-600 hover:underline"
-              >Read more &rarr;</a
-            >
+              {{ .Title | truncate 50 "..." }}
+            </h2>
+            <p class="text-gray-600 text-xs lg:text-base ml-1">
+              {{ .Summary | truncate 120 "..." }}
+            </p>
           </div>
-        </article>
+
+          <span
+            class="text-red-700 hover:underline text-xs ml-1 mt-2 border-b border-red-700 w-fit"
+          >
+            Learn now &rarr;
+          </span>
+        </a>
         {{ end }}
       </div>
     </section>
