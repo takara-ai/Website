@@ -1,29 +1,22 @@
-{{/* Define variables */}}
 {{ $defaultImage := "android-chrome-512x512.png" }}
 {{ $isPromptEngineeringSection := in .RelPermalink "prompt-engineering/" }}
 {{ $baseUrl := trim $.Site.BaseURL "/" }}
 
-{{/* Check for page's featured image */}}
+{{ $imageURL := "" }}
 {{ if .Params.featured_image }}
-  {{/* Fetch and process the featured image */}}
   {{ with resources.Get .Params.featured_image }}
-    {{/* Ensure the base URL and path are correctly concatenated */}}
-    {{ $featuredImageURL := print $baseUrl "/" (.Resize "1500x").RelPermalink }}
-    {{ partial "meta/images.html" (dict "ImageURL" $featuredImageURL) }}
+    {{ $imageURL = print $baseUrl "/" (.Resize "1500x").RelPermalink }}
   {{ end }}
-
 {{ else if $isPromptEngineeringSection }}
-  {{/* Fetch and process the prompt-engineering image */}}
   {{ with resources.Get "images/prompt-engineering/prompt-engineering.jpg" }}
-    {{/* Ensure the base URL and path are correctly concatenated */}}
-    {{ $promptEngineeringImageURL := print $baseUrl "/" (.Resize "1500x").RelPermalink }}
-    {{ partial "meta/images.html" (dict "ImageURL" $promptEngineeringImageURL) }}
+    {{ $imageURL = print $baseUrl "/" (.Resize "1500x").RelPermalink }}
   {{ end }}
-
 {{ else }}
-  {{/* Directly use the default site-wide image URL */}}
-  {{ $defaultImageURL := print $baseUrl "/" $defaultImage }}
-  {{ partial "meta/images.html" (dict "ImageURL" $defaultImageURL) }}
+  {{ $imageURL = print $baseUrl "/" $defaultImage }}
+{{ end }}
+
+{{ if $imageURL }}
+  {{ partial "meta/images.html" (dict "ImageURL" $imageURL) }}
 {{ end }}
 
 
