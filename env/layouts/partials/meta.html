@@ -39,20 +39,7 @@ property="og:description" content={{ partial "meta-desc.html" . }} />
 <meta property="og:url" content="{{ .Permalink }}" />
 <meta property="og:locale" content="en" />
 
-<!-- Image meta tags -->
-{{ with .Params.featured_image }} {{ with resources.Get . }} {{ $featuredimage
-:= (.Resize "1500x ").RelPermalink }} {{ $imageURL := printf "%s%s"
-$.Site.BaseURL $featuredimage }}
-<meta name="twitter:image" content="{{ $imageURL }}" />
-<meta itemprop="image" content="{{ $imageURL }}" />
-<meta property="og:image" content="{{ $imageURL }}" />
-<meta property="og:image:secure_url" content="{{ $imageURL }}" />
-{{ end }} {{ else }} {{ $ogimage := (.Site.Params.og_image | absURL) }}
-<meta name="twitter:image" content="{{ $ogimage | absURL }}" />
-<meta itemprop="image" content="{{ $ogimage | absURL }}" />
-<meta property="og:image" content="{{ $ogimage | absURL }}" />
-<meta property="og:image:secure_url" content="{{ $ogimage | absURL }}" />
-{{ end }}
+{{ partial "ogImage" . }}
 
 <!-- Yandex verification -->
 <meta name="yandex-verification" content="f88f13b976df12e7" />

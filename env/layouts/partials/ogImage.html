@@ -1,0 +1,13 @@
+{{ $defaultImage := "android-chrome-512x512.png" }}
+{{ $isPromptEngineeringSection := in .RelPermalink "prompt-engineering/" }}
+
+{{ $ogImage := cond (.Params.featured_image) (printf "%s%s" $.Site.BaseURL (resources.Get .Params.featured_image).Resize.RelPermalink) (cond ($isPromptEngineeringSection) (printf "%s%s" $.Site.BaseURL (resources.Get "prompt-engineering/prompt-engineering.jpg").Resize.RelPermalink) (printf "%s%s" $.Site.BaseURL (resources.Get $defaultImage).Resize.RelPermalink)) }}
+
+{{ if $ogImage }}
+  {{ partialCached "meta/images.html" (dict "ImageURL" $ogImage) }}
+{{ end }}
+
+
+
+
+
