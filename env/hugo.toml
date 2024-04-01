@@ -4,6 +4,7 @@ DefaultContentLanguage = "en"
 title = 'takara.ai'
 minify = true
 enableRobotsTXT = true
+enableGitInfo = true
 
 [module]
   [module.hugoVersion]

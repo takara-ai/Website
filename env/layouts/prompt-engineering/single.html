@@ -1,40 +1,36 @@
 {{ define "main" }}
 <div class="flex flex-row items-start justify-between">
-  
-  {{ partial "prompts/JapPromptText" . }}
+    {{ partial "prompts/JapPromptText" . }}
 
-  <!-- Main content -->
-  <article class="pt-20 prose lg:prose-xl xl:prose-2xl mx-auto py-4 px-2 min-h-svh overflow-hidden text-wrap">
-    <header>
-      <h1>{{ .Title }}</h1>
-      {{ $currentPage := trim .RelPermalink "/" }}
-      {{ $targetPage := trim (relURL "/prompt-engineering/prompt-guide/") "/" }}
+    <article id="main-content" class="pt-20 prose lg:prose-xl xl:prose-2xl mx-auto py-4 px-2 min-h-svh overflow-hidden text-wrap" tabindex="-1">
+        <header>
+            <h1>{{ .Title }}</h1>
+            
 
-      <!-- Link to go back to the section page -->
-      <a class="block font-japanese no-underline rounded text-red-700 p-3 mb-4 transition-colors duration-200 ease-in-out" href="{{ "/prompt-engineering/" | relURL }}">
-        <i class="fa-solid fa-hand-point-left mr-2"></i>戻る
-      </a>
+            {{ $currentPage := trim .RelPermalink "/" }}
+            {{ $promptGuideURL := "/prompt-engineering/prompt-guide/" | relURL }}
+            {{ $promptGuideLink := printf `<a class="block mt-2 max-w-fit" href="%s">Visit here first if you need help.</a>` ($promptGuideURL | absURL) }}
 
-      {{ if ne $currentPage $targetPage }}
-        <!-- Conditional link to the specific guide, only if not on that page -->
-        <a class="block mt-2 max-w-fit" href="{{ $targetPage | absURL }}">Visit here first if you need help.</a>
-      {{ else }}
-        <!-- Optionally, indicate the user is currently viewing the guide -->
-        <!-- <span>You are already on the guide page.</span> -->
-      {{ end }}
-    </header>
-    
-    <section>{{ .Content }}</section>
-  </article>
+            <a class="block font-japanese no-underline rounded text-red-700 p-3 mb-4 transition-colors duration-200 ease-in-out" href="{{ "/prompt-engineering/" | relURL }}">
+                <i class="fa-solid fa-hand-point-left mr-2" aria-hidden="true"></i>戻る
+            </a>
 
+            {{ if ne $currentPage (trim $promptGuideURL "/") }}
+                {{ $promptGuideLink | safeHTML }}
+            {{ end }}
+        </header>
 
-  <!-- Sidebar Navigation -->
-  <aside class="hidden lg:block lg:w-1/4 sticky top-20 z-10">
-    <div class=" font-extralight text-sm  prose-ul:list-decimal prose-ul:list-inside prose-ul:underline">
-      {{ .TableOfContents }}
-    </div>
-  </aside>
+        <section>{{ .Content }}</section>
+        <p class="text-sm font-extralight">Last modified: {{ .Lastmod.Format "January 2, 2006" }}</p>
+    </article>
+
+    <aside class="hidden lg:block lg:w-1/4 sticky top-20 z-10">
+        <div class="font-extralight text-sm prose-ul:list-decimal prose-ul:list-inside prose-ul:underline">
+            {{ .TableOfContents }}
+        </div>
+    </aside>
 </div>
+
 {{ end }}
 
 

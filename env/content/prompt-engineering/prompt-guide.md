@@ -6,40 +6,82 @@ description: "Explore AI learning methods: zero-shot to many-shot, chain of thou
 layout: ""
 ---
 
-You've arrived here seeking clarity on the why, when, and how of prompt engineering. This guide is your key to unlocking the full potential of our tutorials. Dive in to navigate the exciting world of AI communication with confidence and creativity. Happy exploring!
+Welcome to the world of prompt engineering! This guide is designed to help you navigate the exciting landscape of AI communication with confidence and creativity. By understanding the different learning methods, utilizing placeholders effectively, and following the prompt guide format, you'll be well-equipped to unlock the full potential of our tutorials and achieve your goals more efficiently. These guides were handcrafted by our team here at takara.ai (although the structure of these is assisted by AI) completely for free in our spare time and we hope you enjoy them.
 
-## Zero-Shot Learning
+## Understanding Learning Methods
 
-- **Concept**: Relying solely on pre-existing knowledge and descriptions to perform tasks without any prior examples.
+Prompt engineering involves various learning methods, each suited to different scenarios based on the availability of examples and the complexity of the task at hand. Let's explore these methods in detail:
+
+### 1. Zero-Shot Learning
+
+> Jordan here! &#128075; I find the larger models like Gemini, GPT4 and Claude 3 are usually the best performers with zero shot. Smaller models just don't have enough knowledge to rely on so just keep this in mind.
+
+- **Concept**: Relying solely on pre-existing knowledge to perform tasks without prior examples.
 - **Analogy**: Teaching someone to recognize a banana by describing it, rather than showing it.
-- **Application**: Effective when detailed instructions or descriptions are available, allowing the AI to infer and act without prior specific examples.
+- **Application**: Effective when detailed instructions are available, allowing the AI to infer and act without specific examples.
 
-## One-Shot Learning
+### 2. One-Shot Learning
 
 - **Concept**: Learning from a single example to generalize and apply knowledge to new tasks.
 - **Analogy**: Showing someone a single picture of an apple, then expecting them to recognize apples henceforth.
-- **Application**: Useful for tasks where minimal data is available but the AI needs to quickly adapt and understand new concepts.
+- **Application**: Useful when minimal data is available, but the AI needs to quickly adapt and understand new concepts.
 
-## Few-Shot Learning
+### 3. Few-Shot Learning
 
 - **Concept**: Using a handful of examples to guide the AI in understanding the desired output.
 - **Analogy**: Demonstrating with a few pictures of different fruits what each is and how to recognize others.
-- **Application**: Ideal for scenarios where gathering a large dataset is challenging, but more than one example can be provided to assist learning.
+- **Application**: Ideal when gathering a large dataset is challenging, but more than one example can be provided.
 
-## Many-Shot Learning
+### 4. Many-Shot Learning
 
 - **Concept**: Learning from an extensive collection of examples, enhancing accuracy and generalization.
-- **Analogy**: Teaching through hundreds of pictures of various fruits, ensuring comprehensive understanding and recognition.
-- **Application**: Best for situations where there's ample data to train the AI, resulting in highly accurate and nuanced understanding.
+- **Analogy**: Teaching through hundreds of pictures of various fruits, ensuring comprehensive understanding.
+- **Application**: Best when there's ample data to train the AI, resulting in highly accurate and nuanced understanding.
 
-## Chain of Thought Prompting
+### 5. Chain of Thought Prompting
 
 - **Concept**: Guiding the AI through a logical, step-by-step reasoning process to solve complex problems.
 - **Analogy**: Similar to teaching problem-solving by explaining how to approach and analyze each step.
-- **Application**: Useful for complex tasks requiring detailed explanations of the thought process, enhancing transparency and trust in AI decisions.
+- **Application**: Useful for complex tasks requiring detailed explanations of the thought process, enhancing transparency and trust.
 
-## Instruction Following Prompts
+### 6. Instruction Following Prompts
+
+> Jordan here! &#128075; It's important to note that certain models are better at following instructions than others, you may find specialised versions like GPT3.5-instruct for example, these models are specifically fine tuned for this purpose and if you have access to these then you'll always get better answers.
 
 - **Concept**: Directly instructing the AI on the process to follow or information to consider for completing tasks.
 - **Analogy**: Like providing step-by-step instructions to someone on how to make a sandwich.
 - **Application**: Effective for tasks that benefit from clear, unambiguous instructions, ensuring the AI performs exactly as intended.
+
+## Utilizing Placeholders in Prompts
+
+The prompt guides include placeholders, denoted by square brackets and all-caps text (e.g., [PRODUCT_DESCRIPTION]). These placeholders serve as variables that you should replace with information specific to your use case. When copying and pasting a prompt from the code block, make sure to:
+
+1. Replace all placeholders with relevant information, such as your product name, target audience, or specific metrics.
+2. Avoid removing the square brackets, as they indicate where you should input your specific information. Replace only the placeholder text within the brackets, ensuring that the rest of the prompt remains intact.
+
+## Following the Prompt Guide Format
+
+Each prompt guide is structured with a specific learning method in mind and presented in a consistent format:
+
+1. The learning method is clearly stated.
+2. A description of the prompt's purpose and expected output is provided.
+3. The prompts themselves are presented in code blocks for easy copying and pasting.
+
+By following these guides, you can ensure that your prompts are well-organized, easy to understand, and more likely to generate high-quality, relevant outputs from the AI. Adhering to the prompt guide format can save you time and effort in crafting effective prompts from scratch, as you can simply copy, paste, and modify the provided templates to suit your needs.
+
+## Matching Learning Methods with AI Models
+
+Different AI models may perform better with certain learning methods, depending on their architecture and training data:
+
+- Large language models, such as GPT-4, often perform well with Zero-Shot and Few-Shot learning, as they can draw upon their vast pre-existing knowledge.
+- Specialized models, trained on specific domains or tasks, may benefit from Many-Shot learning, as they can leverage large numbers of examples to fine-tune their performance.
+
+Experimentation is key to determining which learning method and AI model combination works best for your specific use case.
+
+## The Importance of Following the Prompt Guides
+
+Consistently using these prompt guides across your projects can lead to significant productivity gains, as you'll be able to generate high-quality AI outputs more efficiently and with less trial and error. By understanding the format of the prompt guides, effectively utilizing placeholders, choosing the right learning method, matching learning methods with AI models, and recognizing the importance of following these guides, you'll be well-equipped to leverage the power of AI and prompt engineering to achieve your goals more efficiently and effectively.
+
+**Happy prompting from team takara!**
+
+**チームタカラからのハッピープロンプティング!**
