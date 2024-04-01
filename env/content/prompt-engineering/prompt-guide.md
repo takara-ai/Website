@@ -57,7 +57,7 @@ Prompt engineering involves various learning methods, each suited to different s
 The prompt guides include placeholders, denoted by square brackets and all-caps text (e.g., [PRODUCT_DESCRIPTION]). These placeholders serve as variables that you should replace with information specific to your use case. When copying and pasting a prompt from the code block, make sure to:
 
 1. Replace all placeholders with relevant information, such as your product name, target audience, or specific metrics.
-2. Avoid removing the square brackets or altering the placeholder text itself, as this may impact the prompt's structure and effectiveness.
+2. Avoid removing the square brackets, as they indicate where you should input your specific information. Replace only the placeholder text within the brackets, ensuring that the rest of the prompt remains intact.
 
 ## Following the Prompt Guide Format
 
