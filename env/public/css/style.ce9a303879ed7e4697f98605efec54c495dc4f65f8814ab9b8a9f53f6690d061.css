@@ -1679,10 +1679,6 @@ video {
   padding-left: 1rem;
 }
 
-.pr-2 {
-  padding-right: 0.5rem;
-}
-
 .pr-4 {
   padding-right: 1rem;
 }
@@ -2604,6 +2600,22 @@ h5 {
   --tw-ring-color: rgb(94 234 212 / var(--tw-ring-opacity));
 }
 
+.prose-ul\:list-inside :is(:where(ul):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
+  list-style-position: inside;
+}
+
+.prose-ul\:list-decimal :is(:where(ul):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
+  list-style-type: decimal;
+}
+
+.prose-ul\:pl-0 :is(:where(ul):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
+  padding-left: 0px;
+}
+
+.prose-ul\:underline :is(:where(ul):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
+  text-decoration-line: underline;
+}
+
 @media (min-width: 640px) {
   .sm\:mb-0 {
     margin-bottom: 0px;
@@ -2842,4 +2854,12 @@ h5 {
   content: var(--tw-content);
   --tw-translate-x: -100%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.\[\&\>ul\>li\>ul\]\:ml-6>ul>li>ul {
+  margin-left: 1.5rem;
+}
+
+.\[\&\>ul\>li\>ul\]\:list-\[lower-alpha\]>ul>li>ul {
+  list-style-type: lower-alpha;
 }
