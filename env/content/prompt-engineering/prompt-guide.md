@@ -12,7 +12,7 @@ Welcome to the world of prompt engineering! This guide is designed to help you n
 
 Prompt engineering involves various learning methods, each suited to different scenarios based on the availability of examples and the complexity of the task at hand. Let's explore these methods in detail:
 
-### 1. Zero-Shot Learning
+### Zero-Shot Learning
 
 > Jordan here! &#128075; I find the larger models like Gemini, GPT4 and Claude 3 are usually the best performers with zero shot. Smaller models just don't have enough knowledge to rely on so just keep this in mind.
 
@@ -20,31 +20,31 @@ Prompt engineering involves various learning methods, each suited to different s
 - **Analogy**: Teaching someone to recognize a banana by describing it, rather than showing it.
 - **Application**: Effective when detailed instructions are available, allowing the AI to infer and act without specific examples.
 
-### 2. One-Shot Learning
+### One-Shot Learning
 
 - **Concept**: Learning from a single example to generalize and apply knowledge to new tasks.
 - **Analogy**: Showing someone a single picture of an apple, then expecting them to recognize apples henceforth.
 - **Application**: Useful when minimal data is available, but the AI needs to quickly adapt and understand new concepts.
 
-### 3. Few-Shot Learning
+### Few-Shot Learning
 
 - **Concept**: Using a handful of examples to guide the AI in understanding the desired output.
 - **Analogy**: Demonstrating with a few pictures of different fruits what each is and how to recognize others.
 - **Application**: Ideal when gathering a large dataset is challenging, but more than one example can be provided.
 
-### 4. Many-Shot Learning
+### Many-Shot Learning
 
 - **Concept**: Learning from an extensive collection of examples, enhancing accuracy and generalization.
 - **Analogy**: Teaching through hundreds of pictures of various fruits, ensuring comprehensive understanding.
 - **Application**: Best when there's ample data to train the AI, resulting in highly accurate and nuanced understanding.
 
-### 5. Chain of Thought Prompting
+### Chain of Thought Prompting
 
 - **Concept**: Guiding the AI through a logical, step-by-step reasoning process to solve complex problems.
 - **Analogy**: Similar to teaching problem-solving by explaining how to approach and analyze each step.
 - **Application**: Useful for complex tasks requiring detailed explanations of the thought process, enhancing transparency and trust.
 
-### 6. Instruction Following Prompts
+### Instruction Following Prompts
 
 > Jordan here! &#128075; It's important to note that certain models are better at following instructions than others, you may find specialised versions like GPT3.5-instruct for example, these models are specifically fine tuned for this purpose and if you have access to these then you'll always get better answers.
 

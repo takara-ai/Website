@@ -24,11 +24,9 @@
         <p class="text-sm font-extralight">Last modified: {{ .Lastmod.Format "January 2, 2006" }}</p>
     </article>
 
-    <aside class="hidden lg:block lg:w-1/4 sticky top-20 z-10">
-        <div class="font-extralight text-sm prose-ul:list-decimal prose-ul:list-inside prose-ul:underline">
-            {{ .TableOfContents }}
-        </div>
-    </aside>
+   <aside class="hidden lg:block lg:w-1/4 sticky top-20 z-10 font-extralight text-sm prose pl-4 pr-2">
+  {{ .TableOfContents }}
+</aside>
 </div>
 
 {{ end }}
