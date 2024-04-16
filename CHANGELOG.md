@@ -1,5 +1,36 @@
 # Changelog
 
+## [1.3.0](https://github.com/takara-ai/Website/compare/v1.2.0...v1.3.0) (2024-04-05)
+
+
+### Features
+
+* **header:** update text to reflect company focus instead of data ([3f88af5](https://github.com/takara-ai/Website/commit/3f88af54122d1a023eaf1161c16c119f8b1b96a7))
+* **html:** update lang attribute to enable smooth scrolling ([7a5bf2e](https://github.com/takara-ai/Website/commit/7a5bf2e66d04c0192c92e7d4febf615349f99339))
+* **hugo:** add enableGitInfo flag to config ([fdb7138](https://github.com/takara-ai/Website/commit/fdb7138679db35f3092876c6e03b298d3900c22f))
+* **marketing:** update title in marketing.md ([7fea7b5](https://github.com/takara-ai/Website/commit/7fea7b5993c189538b187e2ceef75e96cb0ddef7))
+* **menu:** add z-index and backdrop blur ([34cc56b](https://github.com/takara-ai/Website/commit/34cc56b3dfe701a340e5aefc7366c161223aa716))
+* **prompt-engineering:** add last modified date to single.html ([99d9f26](https://github.com/takara-ai/Website/commit/99d9f263f4011a3bd6f462ddb6d62beac24f8316))
+* **prompt-engineering:** add product prototype section ([9f55707](https://github.com/takara-ai/Website/commit/9f557074de48c99a740bf37bf69947b920596019))
+* **prompt-engineering:** add responsive card design to list.html ([0cc7fb0](https://github.com/takara-ai/Website/commit/0cc7fb0b6ce9b06e1f29e4f8fa1b869e99e3ed96))
+* **prompt-engineering:** add sidebar to single.html ([e4f1b0c](https://github.com/takara-ai/Website/commit/e4f1b0c9ca61c28a4a7330d0480fa13a03f8e1d4))
+* **prompt-engineering:** add single.html for specific layouts ([2a6c27a](https://github.com/takara-ai/Website/commit/2a6c27ad93dbc02491dacbcf525fb38583418668))
+* **prompt-engineering:** add startups page ([f00264c](https://github.com/takara-ai/Website/commit/f00264c51699f3df5068e474d6fc716b2fd65dee))
+* **prompt-engineering:** complete Japanese sidebar translation in JapPromptText.html partial ([72cb962](https://github.com/takara-ai/Website/commit/72cb9626b5a01171eb0b5500e20104209096fe0c))
+* **prompt-engineering:** finalize section and add marketing tutorial ([71d42b3](https://github.com/takara-ai/Website/commit/71d42b3d6af60d915e6789d39a11a7d87fe68514))
+* **prompt-engineering:** update marketing page with more examples ([5357d82](https://github.com/takara-ai/Website/commit/5357d82f8ef53a237a042c9c828ad024f46f0397))
+* **prompt-engineering:** update single.html layout ([31c2ae1](https://github.com/takara-ai/Website/commit/31c2ae1c279951de4c826f8d8f15f1e5bc679227))
+* **prompt-guide:** add guide and link to the page ([424fd24](https://github.com/takara-ai/Website/commit/424fd24e4d7e873eec7c8996a5aa45deb5f3965b))
+* **prompt-guide:** update with additional information and instructions ([d48386a](https://github.com/takara-ai/Website/commit/d48386ac9f638a97a82a48093ab001c61d9620d4))
+
+
+### Bug Fixes
+
+* **meta:** correct meta image logic ([6a3c290](https://github.com/takara-ai/Website/commit/6a3c290741b5053ec86ee4da3c83740f2d728e06))
+* **meta:** correct ogImage partial reference ([d6e7772](https://github.com/takara-ai/Website/commit/d6e7772e89da5e6b3798a08c8ea42c5d4d0f8ff1))
+* **prompt-engineering:** adjust top spacing on single.html ([a2633ea](https://github.com/takara-ai/Website/commit/a2633eaa087d1831e05ebc74738630a5472500bf))
+* **prompt-engineering:** change flex column to row in single.html ([6488fff](https://github.com/takara-ai/Website/commit/6488fff56f80f5fa8c79eec77ec829d9ae2617a6))
+
 ## [1.2.0](https://github.com/takara-ai/Website/compare/v1.1.1...v1.2.0) (2024-02-08)
 
 - **about-us:** add CEO profile ([2260f48](https://github.com/takara-ai/Website/commit/2260f48b6176be10820a2d53da1034fed857fe4e))
