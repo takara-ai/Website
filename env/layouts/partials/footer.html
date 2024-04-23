@@ -36,4 +36,27 @@
       <p>&copy; TAKARA.AI Ltd {{ now.Format "2006" }}. All rights reserved.</p>
     </div>
   </div>
+  <div
+    class="mt-6 md:mt-8 px-1 md:px-4 py-4 border-t border-dashed border-white"
+  >
+    {{ $svg := resources.Get "images/logo-24/TakaraAi.svg" }}
+    <div class="flex justify-between">
+      <img
+        class="h-10 sm:h-12 md:h-16 lg:h-24 xl:h-32 invert"
+        src="{{ $svg.RelPermalink }}"
+        alt="Takara AI Logo"
+      />
+      <div class="text-right">
+        <h1
+          class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-japaneseBold"
+        >
+          タカラの
+          <span class="text-red-700 m-0 p-0">機械学習</span>
+        </h1>
+        {{/*
+        <h1 class="lg:text-9xl text-red-700 invert">takara.ai</h1>
+        */}}
+      </div>
+    </div>
+  </div>
 </div>

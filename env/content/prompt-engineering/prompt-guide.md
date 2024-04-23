@@ -8,6 +8,18 @@ layout: ""
 
 Welcome to the world of prompt engineering! This guide is designed to help you navigate the exciting landscape of AI communication with confidence and creativity. By understanding the different learning methods, utilizing placeholders effectively, and following the prompt guide format, you'll be well-equipped to unlock the full potential of our tutorials and achieve your goals more efficiently. These guides were handcrafted by our team here at takara.ai (although the structure of these is assisted by AI) completely for free in our spare time and we hope you enjoy them.
 
+## Free Models and Playgrounds
+
+Our prompt guides are designed to work well with many LLM's and Multimodal models. Below is a list of links to various models where you can get started straight away for free.
+
+- [OpenAI](https://chat.openai.com/) | ChatGPT 3.5 Instruct
+- [Anthropic](https://claude.ai/) | Claude 3 Sonnet
+- [Groq](https://groq.com/) | LLaMA 3, Mixtral 8x7B, Gemma 7B
+- [Mistral AI](https://chat.mistral.ai/chat) | Small, Next, Large
+- [NVIDIA](https://build.nvidia.com/) | Playground for many models
+- [LLAVA](https://llava-vl.github.io/) | LLAVA 7B (Small model that can chat and understand images)
+- [Perplexity](https://www.perplexity.ai/) | Multimodal AI search engine
+
 ## Understanding Learning Methods
 
 Prompt engineering involves various learning methods, each suited to different scenarios based on the availability of examples and the complexity of the task at hand. Let's explore these methods in detail:
@@ -40,13 +52,15 @@ Prompt engineering involves various learning methods, each suited to different s
 
 ### Chain of Thought Prompting
 
+> Jordan here! &#128075; I find that chain of thought massively increases math and reasoning accuracy so I would definitely try this if you find regular prompting isn't working.
+
 - **Concept**: Guiding the AI through a logical, step-by-step reasoning process to solve complex problems.
 - **Analogy**: Similar to teaching problem-solving by explaining how to approach and analyze each step.
 - **Application**: Useful for complex tasks requiring detailed explanations of the thought process, enhancing transparency and trust.
 
 ### Instruction Following Prompts
 
-> Jordan here! &#128075; It's important to note that certain models are better at following instructions than others, you may find specialised versions like GPT3.5-instruct for example, these models are specifically fine tuned for this purpose and if you have access to these then you'll always get better answers.
+> Jordan here! &#128075; It's important to note that only certain models are designed for following instructions, most public models are already running a finetuned **instruct** version, but in the open source world or with lesser known models you may have to specifically select the **instruct** version to get the best results.
 
 - **Concept**: Directly instructing the AI on the process to follow or information to consider for completing tasks.
 - **Analogy**: Like providing step-by-step instructions to someone on how to make a sandwich.
