@@ -268,6 +268,7 @@ __metadata:
   linkType: hard
 
 "autoprefixer@npm:^10.4.17":
+
   version: 10.4.17
   resolution: "autoprefixer@npm:10.4.17"
   dependencies:
@@ -2670,7 +2671,7 @@ __metadata:
   dependencies:
     "@fortawesome/fontawesome-free": "npm:^6.5.1"
     "@tailwindcss/typography": "npm:^0.5.10"
-    autoprefixer: "npm:^10.4.17"
+    autoprefixer: "npm:^10.4.19"
     concurrently: "npm:^8.2.2"
     cssnano: "npm:^6.1.2"
     cssnano-preset-advanced: "npm:^6.1.2"
