@@ -20,9 +20,14 @@
             {{ if ne $currentPage (trim $promptGuideURL "/") }}
                 {{ $promptGuideLink | safeHTML }}
             {{ end }}
+            <aside class="lg:hidden block lg:w-1/4 sticky top-20 z-10 font-extralight text-sm prose mb-8">
+            {{ .TableOfContents }}
+            </aside>
         </header>
 
-        <section>{{ .Content }}</section>
+        <section class="border-t border-dashed border-red-700">
+            
+            {{ .Content }}</section>
         <p class="text-sm font-extralight">Last modified: {{ .Lastmod.Format "January 2, 2006" }}</p>
     </article>
 
