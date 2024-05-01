@@ -21,7 +21,7 @@
     "@fortawesome/fontawesome-free": "^6.5.1",
     "@tailwindcss/typography": "^0.5.13",
     "concurrently": "^8.2.2",
-    "cssnano": "^6.1.2",
+    "cssnano": "^7.0.1",
     "cssnano-preset-advanced": "^6.1.2",
     "postcss-cli": "^11.0.0",
     "terser": "^5.30.4"
