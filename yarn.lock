@@ -2631,7 +2631,7 @@ __metadata:
     postcss: "npm:^8.4.38"
     postcss-cli: "npm:^11.0.0"
     tailwindcss: "npm:^3.4.3"
-    terser: "npm:^5.30.4"
+    terser: "npm:^5.31.0"
   languageName: unknown
   linkType: soft
 
@@ -2649,9 +2649,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"terser@npm:^5.30.4":
-  version: 5.30.4
-  resolution: "terser@npm:5.30.4"
+"terser@npm:^5.31.0":
+  version: 5.31.0
+  resolution: "terser@npm:5.31.0"
   dependencies:
     "@jridgewell/source-map": "npm:^0.3.3"
     acorn: "npm:^8.8.2"
@@ -2659,7 +2659,7 @@ __metadata:
     source-map-support: "npm:~0.5.20"
   bin:
     terser: bin/terser
-  checksum: c18b7d7cf01e079e96fd95e267ea1c2e22a098965c847d32c507a2f79f8d06f8107333184a3a9371693e072ab9dbc53a0a03e7d089044f9e3eae64589b360e4f
+  checksum: cb127a579b03fb9dcee0d293ff24814deedcd430f447933b618e8593b7454f615b5c8493c68e86a4b0188769d5ea2af5251b5d507edb208114f7e8aebdc7c850
   languageName: node
   linkType: hard
 
