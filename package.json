@@ -13,18 +13,18 @@
     "test": "cd env && hugo"
   },
   "devDependencies": {
-    "postcss-cli": "^11.0.0",
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "postcss-cli": "^11.0.0"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.13",
     "autoprefixer": "^10.4.19",
-    "postcss": "^8.4.38",
-    "tailwindcss": "^3.4.3",
     "concurrently": "^8.2.2",
     "cssnano": "^7.0.1",
     "cssnano-preset-advanced": "^7.0.1",
+    "postcss": "^8.4.38",
     "postcss-cli": "^11.0.0",
+    "tailwindcss": "^3.4.3",
     "terser": "^5.31.0"
   },
   "packageManager": "yarn@4.0.2"
