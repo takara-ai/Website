@@ -10,4 +10,13 @@ h5 {
   @apply text-base md:text-xl;
 }
 
+@layer base {
+  @font-face {
+    font-family: "Caveat";
+    src: url(/fonts/caveat/Caveat-VariableFont_wght.woff2) format(woff2);
+    font-weight: 100;
+    font-display: swap;
+  }
+}
+
 /* Custom CSS end */
