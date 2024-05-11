@@ -8,6 +8,7 @@ on:
 permissions:
   contents: read
   pages: write
+  id-token: write
 
 concurrency:
   group: "pages"
@@ -47,6 +48,7 @@ jobs:
         run: yarn build
         env:
           HUGO_ENVIRONMENT: production
+          HUGO_ENV: production
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -56,12 +58,10 @@ jobs:
   deploy:
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-      - name: Setup Deployment URL
-        run: echo "Deployment URL: ${{ steps.deployment.outputs.page_url }}"
