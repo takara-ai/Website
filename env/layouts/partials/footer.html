@@ -22,7 +22,7 @@
           class="flex items-center justify-center plausible-event-name=Repository"
         >
           <img
-            src="badges/github.svg"
+            src="{{ "badges/github.svg" | absURL }}"
             alt="View Repository on GitHub"
             class="h-6 mb-4 sm:mb-0"
           />
@@ -44,7 +44,7 @@
     <div class="flex justify-between">
       <img
         class="h-10 sm:h-12 md:h-16 lg:h-24 xl:h-32 invert"
-        src="{{ $svg.RelPermalink }}"
+        src="{{ $svg.RelPermalink | absURL }}"
         alt="Takara AI Logo"
       />
       <div class="text-right">
