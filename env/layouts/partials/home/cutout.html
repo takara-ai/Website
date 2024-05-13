@@ -1,0 +1,46 @@
+<section class="bg-black h-svh">
+  <div class="ripped w-full">
+    <h1
+      class="text-2xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl pt-20 px-2 sm:px4 pb-8"
+    >
+      Transforming Humanity
+    </h1>
+  </div>
+
+  <div class="flex flex-col items-center justify-start w-full">
+    <pre class="text-xs text-gray-500 text-wrap break-all w-full">
+        <code>
+import numpy as np; def add_noise(x, nl): return x + nl * np.random.randn(*x.shape); def denoise_step(x, s, ts, ns): return x - ns[s] * np.random.randn(*x.shape) + (1 - ns[s]) * (np.random.randn(*x.shape) * 0.1); def model_reverse(ts, ns): x = np.random.randn(100); [print(f"After step {ts - s}/{ts}, x_mean: {np.mean(x)}") or (x := denoise_step(x, s, ts, ns)) for s in range(ts - 1, -1, -1)]; return x; ts = 50; ns = np.linspace(1, 0.01, ts); final_data = model_reverse(ts, ns); def generate_data(size, scale): return np.random.normal(loc=0, scale=scale, size=size); data_sample = generate_data(100, 0.5); def analyze_data(data): return {'mean': np.mean(data), 'std': np.std(data)}; data_analysis = analyze_data(data_sample); print(data_analysis); more_data = generate_data(200, 0.1); more_analysis = analyze_data(more_data); print(more_analysis);
+        </code>
+    </pre>
+    <h1
+      class="text-3xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-white text-right w-full px-2 sm:px-4"
+    >
+      Enterprise Engineering Underneath
+    </h1>
+    <pre class="text-xs text-gray-500 break-all text-wrap w-full">
+        <code>
+import numpy as np; import matplotlib.pyplot as plt; def create_noise_data(length, noise_level): return np.linspace(0, 1, length) + np.random.normal(0, noise_level, length); def simple_filter(data, alpha=0.1): return np.array([alpha * data[i] + (1 - alpha) * data[i-1] if i > 0 else data[0] for i in range(len(data))]); length = 100; noise_level = 0.1; raw_data = create_noise_data(length, noise_level); filtered_data = simple_filter(raw_data); plt.figure(figsize=(10,5)); plt.plot(raw_data, label='Raw Data'); plt.plot(filtered_data, label='Filtered Data', linestyle='--'); plt.title('Noise Reduction Using Simple Filter'); plt.xlabel('Time'); plt.ylabel('Value'); plt.legend(); plt.show();
+        </code>
+    </pre>
+  </div>
+</section>
+
+<style>
+  .ripped {
+    background: white;
+    position: relative;
+  }
+
+  .ripped::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    height: 20px;
+    width: 100%;
+    left: 0;
+    background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/23618/rip.svg)
+      bottom;
+    background-size: 40%;
+  }
+</style>
