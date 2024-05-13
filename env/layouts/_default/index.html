@@ -1,29 +1,24 @@
-{{ define "main" }} {{ partial "home/header" .}}
+{{ define "main" }} {{/* {{ partial "home/header" .}} */}} {{ partial
+"home/cutout" .}}
 
 <section class="japgrid">
   <div class="flex justify-between backdrop-blur-sm">
     <div
       class="blur-xl hover:blur-sm text-red-700 min-h-svh text-3xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold flex flex-col justify-around w-fill"
-    >
-      <h2 class="px-2 sm:px-4">F<span class="text-black">EAR</span></h2>
-      <h2 class="px-2 sm:px-4">O<span class="text-black">F</span></h2>
-      <h2 class="px-2 sm:px-4">M<span class="text-black">issing</span></h2>
-      <h2 class="px-2 sm:px-4">O<span class="text-black">ut</span></h2>
-    </div>
+    ></div>
     <div
       class="text-right pr-2 sm-pr-4 max-w-xs flex flex-col justify-between py-2 sm:py-4"
     >
-      <p
-        >There's a Japanese proverb, <br />
+      <p>
+        There's a Japanese proverb, <br />
         "<span class="font-japaneseBold text-red-700"
           >井の中の蛙大海を知らず</span
-        >"<br />"A frog in a well does not know the great sea."</p
-      >
+        >"<br />"A frog in a well does not know the great sea."
+      </p>
       <p>
         AI is a hot topic but we know it's not a fleeting trend, businesses rely
-        on takara to unlock productivity and create long lasting
-        transformation.</p
-      >
+        on takara to unlock productivity and create long lasting transformation.
+      </p>
     </div>
   </div>
 </section>
