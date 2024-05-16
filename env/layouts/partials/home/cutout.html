@@ -1,54 +1,40 @@
-<section class="bg-black h-svh flex flex-col justify-between">
+<section
+  class="h-svh flex flex-col justify-between border-b border-dashed border-black"
+>
   <div class="ripped w-full">
     <h1
-      class="text-2xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl pt-20 px-2 sm:px4 pb-8"
+      class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl pt-20 px-2 sm:px4 sm:pb-8"
     >
-      Transforming Humanity
+      Transforming Humanity<br />
+      <span class="text-red-700 font-japanese">人類を変革する</span>
     </h1>
   </div>
-
-  <div class="flex flex-col justify-start w-full">
-    <p class="text-gray-800 text-wrap px-2 sm:px-4 text-xs">
-      <code class="">
-        import numpy as np; def add_noise(x, nl): return x + nl *
-        np.random.randn(*x.shape); def denoise_step(x, s, ts, ns): return x -
-        ns[s] * np.random.randn(*x.shape) + (1 - ns[s]) *
-        (np.random.randn(*x.shape) * 0.1); def model_reverse(ts, ns): x =
-        np.random.randn(100); [print(f"After step {ts - s}/{ts}, x_mean:
-        {np.mean(x)}") or (x := denoise_step(x, s, ts, ns)) for s in range(ts -
-        1, -1, -1)]; return x; ts = 50; ns = np.linspace(1, 0.01, ts);
-        final_data = model_reverse(ts, ns); def generate_data(size, scale):
-        return np.random.normal(loc=0, scale=scale, size=size); data_sample =
-        generate_data(100, 0.5); def analyze_data(data): return {'mean':
-        np.mean(data), 'std': np.std(data)}; data_analysis =
-        analyze_data(data_sample); print(data_analysis); more_data =
-        generate_data(200, 0.1); more_analysis = analyze_data(more_data);
-        print(more_analysis);
-
-        <span class="text-white font-bold text-xl font-sans"
-          >Together, we can harness AI to transform your business and uplift
-          humanity. We guide you through AI's complexities, driving ethical
-          innovation and enhancing productivity, lifespan, and quality of life.
-          Lead the AI revolution today.</span
-        >
-        import numpy as np; import matplotlib.pyplot as plt; def
-        create_noise_data(length, noise_level): return np.linspace(0, 1, length)
-        + np.random.normal(0, noise_level, length); def simple_filter(data,
-        alpha=0.1): return np.array([alpha * data[i] + (1 - alpha) * data[i-1]
-        if i > 0 else data[0] for i in range(len(data))]); length = 100;
-        noise_level = 0.1; raw_data = create_noise_data(length, noise_level);
-        filtered_data = simple_filter(raw_data); plt.figure(figsize=(10,5));
-        plt.plot(raw_data, label='Raw Data'); plt.plot(filtered_data,
-        label='Filtered Data', linestyle='--'); plt.title('Noise Reduction Using
-        Simple Filter'); plt.xlabel('Time'); plt.ylabel('Value'); plt.legend();
-        plt.show();
-      </code>
-    </p>
+  <div
+    class="japgrid flex-grow bg-black xl:bg-white xl:hover:bg-black duration-1000 transition ease-in-out flex items-center"
+  >
+    <div class="flex w-full">
+      <div class="flex-1"></div>
+      <p class="text-white text-sm max-w-sm sm:max-w-md px-2 sm:px-4">
+        Together, we can harness AI to transform your business and uplift
+        humanity. We guide you through AI's complexities, driving ethical
+        innovation and enhancing productivity, lifespan, and quality of life.
+      </p>
+    </div>
   </div>
-  <div class="ripped rotate-180 h-10"></div>
+
+  <div class="ripped rotate-180 h-[10vh]"></div>
 </section>
 
 <style>
+  .japgrid {
+    background-image: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.043) 1px,
+        transparent 1px
+      ),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.043) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
   .ripped {
     background: white;
     position: relative;
@@ -62,6 +48,6 @@
     width: 100%;
     left: 0;
     background: url({{"svg/rip.svg"|absURL}}) bottom;
-    background-size: 40%;
+    background-size: auto;
   }
 </style>
