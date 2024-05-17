@@ -1811,10 +1811,6 @@ video {
   padding-top: 1.25rem;
 }
 
-.pb-1 {
-  padding-bottom: 0.25rem;
-}
-
 .text-left {
   text-align: left;
 }
@@ -2884,10 +2880,6 @@ h5 {
     padding-bottom: 2rem;
   }
 
-  .sm\:pb-1 {
-    padding-bottom: 0.25rem;
-  }
-
   .sm\:text-left {
     text-align: left;
   }
@@ -3122,11 +3114,6 @@ h5 {
   .xl\:text-9xl {
     font-size: 8rem;
     line-height: 1;
-  }
-
-  .xl\:text-4xl {
-    font-size: 2.25rem;
-    line-height: 2.5rem;
   }
 
   .xl\:hover\:bg-black:hover {
