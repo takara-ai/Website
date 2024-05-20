@@ -3,14 +3,14 @@
 >
   <div class="ripped w-full">
     <h1
-      class="font-bold text-3xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl pt-20 px-2 sm:px4 pb-1"
+      class="font-bold text-3xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl mt-20 px-2 sm:px4 mb-1 typewriter w-fit h-fit border-r-2 border-black"
     >
       Transforming Humanity
     </h1>
     <h1
-      class="text-red-700 font-japanese font-bold text-3xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl px-2 sm:px4 sm:pb-8"
+      class="text-red-700 font-japanese font-bold text-3xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl px-2 sm:px4 sm:mb-8 typewriter w-fit h-fit border-r-2 border-red-700"
     >
-      人類を変革する<
+      人類を変革する
     </h1>
   </div>
   <div
@@ -53,5 +53,19 @@
     left: 0;
     background: url({{"svg/rip.svg"|absURL}}) bottom;
     background-size: auto;
+  }
+
+  .typewriter {
+    animation: blink-caret 0.75s step-end infinite;
+  }
+
+  @keyframes blink-caret {
+    from,
+    to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: initial;
+    }
   }
 </style>
