@@ -4,11 +4,11 @@
     {{ partial "head.html" . }}
   </head>
 
-  <body>
+  <body class="dark:invert bg-white">
     <nav>{{ partial "mobile-menu" . }}</nav>
-    <main>{{ block "main" . }}{{ end }}</main>
+    <main class="bg-white">{{ block "main" . }}{{ end }}</main>
 
-    <footer class="bg-black text-white py-6 shadow-2xl shadow-black"></footer>
+    <footer class="bg-black text-white py-6 border-dashed border-white border-t"></footer>
       {{ partial "footer" . }}
     </footer>
   </body>

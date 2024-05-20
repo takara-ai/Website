@@ -1,8 +1,8 @@
-{{ define "main" }} {{ partial "home/header" .}}
+{{ define "main" }} {{ partial "home/cutout" .}}
 
-<section class="flex w-full min-h-svh">
+<section class="flex w-full min-h-svh border-b border-black border-dashed">
   <div
-    class="bg-gray-800 text-white sm:p-4 p-2 flex flex-col w-1/3 shadow-2xl shadow-black flex-grow justify-center"
+    class="bg-black text-white sm:p-4 p-2 flex flex-col w-1/3 flex-grow justify-center border-r border-white border-dashed"
   >
     <h1 class="text-base sm:text-2xl md:text-5xl">
       Understanding when to use AI should be simpler than learning Japanese.
@@ -20,14 +20,14 @@
           onclick="toggleLanguage()"
         />
         <div
-          class="shadow-inner shadow-gray-800 w-14 h-7 bg-gray-400 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-teal-300 rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-teal-500"
+          class="w-14 h-7 bg-gray-400 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-teal-300 rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-teal-500"
         ></div>
       </label>
     </div>
   </div>
 
   <div
-    class="flex flex-grow items-center justify-center text-base sm:text-3xl text-center shadow-inner shadow-gray-400"
+    class="flex flex-grow items-center justify-center text-base sm:text-3xl text-center"
   >
     <div class="">
       <p id="japanese-text" class="text-gray-800 px-2 sm:px-4 font-mono">
@@ -45,16 +45,12 @@
     </div>
   </div>
 </section>
-<section
-  class="min-h-svh bg-gradient-to-tr from-pink-300 to-green-300 to-80% flex"
->
-  <div
-    class="w-full flex items-center bg-gradient-to-br from-orange-200 from-20% via-transparent to-blue-100"
-  >
+<section class="min-h-svh flex">
+  <div class="w-full flex items-center">
     <div class="flex-1 flex flex-col items-center justify-center">
       <span
         id="japanese-char"
-        class="text-7xl md:text-9xl font-bold blur-sm"
+        class="text-7xl md:text-9xl font-bold blur-sm text-red-700"
       ></span>
       <p
         id="english-char"
