@@ -1,13 +1,14 @@
 {{define "main"}}
-<article class="bg-white">
-  <div class="min-h-svh pt-16">
-    <div class="bg-black font-bold text-white pl-4 sm:pl-2 py-2 drop-shadow-lg">
-      <h1 class="text-center sm:text-left">{{ .Title }}</h1>
-      <h1 class="font-japaneseBold text-center sm:text-left">私たちについて</h1>
-    </div>
-    <section class="prose lg:prose-xl xl:prose-2xl px-8 sm:px-4 py-8">
-      {{ .Content }}
-    </section>
-  </div>
+<article
+  class="pt-20 prose lg:prose-xl xl:prose-2xl mx-auto py-4 px-2 min-h-svh overflow-hidden text-wrap bg-white"
+>
+  <h1>{{ .Title }}</h1>
+
+  <section class="border-t border-dashed border-red-700">
+    {{ .Content }}
+  </section>
+  <p class="text-sm font-extralight"
+    >Last modified: {{ .Lastmod.Format "January 2, 2006" }}</p
+  >
 </article>
 {{ end }}
