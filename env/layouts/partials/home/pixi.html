@@ -4,7 +4,8 @@
 >
   <!-- PIXI will attach the canvas here -->
 </div>
-<script src="/js/pixi.js"></script>
+<div id="runPIXI" style="display: none">1</div>
+<!-- Added missing element -->
 
 {{/* JS Injection */}} {{ $PixiJs := resources.Get "/js/pixi.js" |
 resources.Minify | resources.Fingerprint }}
@@ -12,3 +13,148 @@ resources.Minify | resources.Fingerprint }}
   src="{{ $PixiJs.RelPermalink }}"
   integrity="{{ $PixiJs.Data.Integrity }}"
 ></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", async function () {
+    // Node class for creating and managing node properties
+    class Node {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.radius = Math.random() * 20 + 5; // Variable radius
+        this.velX = Math.random() * 2 - 1; // Random velocity X
+        this.velY = Math.random() * 2 - 1; // Random velocity Y
+        this.graphics = new PIXI.Graphics();
+        this.updateGraphics();
+      }
+
+      updatePosition(screenWidth, screenHeight) {
+        this.x += this.velX;
+        this.y += this.velY;
+        if (this.x - this.radius < 0 || this.x + this.radius > screenWidth) {
+          this.velX *= -1;
+          this.x =
+            this.x - this.radius < 0 ? this.radius : screenWidth - this.radius;
+        }
+        if (this.y - this.radius < 0 || this.y + this.radius > screenHeight) {
+          this.velY *= -1;
+          this.y =
+            this.y - this.radius < 0 ? this.radius : screenHeight - this.radius;
+        }
+        this.graphics.x = this.x;
+        this.graphics.y = this.y;
+      }
+
+      updateGraphics() {
+        this.graphics.clear();
+        this.graphics.circle(0, 0, this.radius);
+        this.graphics.fill(0xffffff);
+      }
+    }
+
+    // Edge class for drawing lines between nodes
+    class Edge {
+      constructor(node1, node2) {
+        this.node1 = node1;
+        this.node2 = node2;
+        this.graphics = new PIXI.Graphics();
+        app.stage.addChild(this.graphics); // Add to stage immediately upon creation
+        this.updateGraphics();
+      }
+
+      updateGraphics() {
+        this.graphics.clear();
+        // Correct usage of setStrokeStyle with an object containing style properties
+        this.graphics.setStrokeStyle({
+          width: 1, // Line width
+          color: 0xffffff, // Line color, white
+          alpha: 1, // Line opacity (fully opaque)
+        });
+        this.graphics.moveTo(this.node1.x, this.node1.y);
+        this.graphics.lineTo(this.node2.x, this.node2.y);
+        // No need for endFill if you're only drawing lines
+        this.graphics.stroke(); // Explicitly call stroke to draw the lines
+      }
+    }
+
+    // Collision class for handling node interactions
+    class Collision {
+      constructor(node1, node2) {
+        this.node1 = node1;
+        this.node2 = node2;
+      }
+
+      resolve() {
+        let tempVelX = this.node1.velX;
+        let tempVelY = this.node1.velY;
+        this.node1.velX = this.node2.velX;
+        this.node1.velY = this.node2.velY;
+        this.node2.velX = tempVelX;
+        this.node2.velY = tempVelY;
+      }
+    }
+
+    // Function to check for node collisions
+    function checkForCollisions(nodes) {
+      let collisions = [];
+      nodes.forEach((node1, i) => {
+        nodes.slice(i + 1).forEach((node2) => {
+          let dx = node1.x - node2.x;
+          let dy = node1.y - node2.y;
+          let distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < node1.radius + node2.radius) {
+            collisions.push(new Collision(node1, node2));
+          }
+        });
+      });
+      return collisions;
+    }
+
+    // Initialize Pixi Application asynchronously
+    const app = new PIXI.Application();
+    await app.init({
+      width: window.innerWidth,
+      height: window.innerHeight,
+      backgroundColor: 0x000000,
+      resolution: window.devicePixelRatio,
+      autoDensity: true,
+      antialias: true,
+    });
+    document.getElementById("pixi-container").appendChild(app.canvas);
+
+    let nodes = [];
+    let edges = [];
+
+    for (let i = 0; i < 20; i++) {
+      let node = new Node(
+        Math.random() * app.screen.width,
+        Math.random() * app.screen.height
+      );
+      nodes.push(node);
+      app.stage.addChild(node.graphics);
+    }
+
+    nodes.forEach((node1, i) => {
+      nodes.slice(i + 1).forEach((node2) => {
+        let graphics = new PIXI.Graphics();
+        let edge = new Edge(node1, node2, graphics);
+        edges.push(edge);
+        app.stage.addChild(graphics);
+      });
+    });
+
+    // Animation loop to update node positions and edges
+    function animationLoop() {
+      nodes.forEach((node) => {
+        node.updatePosition(app.screen.width, app.screen.height);
+      });
+      edges.forEach((edge) => {
+        edge.updateGraphics();
+      });
+      app.renderer.render(app.stage);
+      requestAnimationFrame(animationLoop);
+    }
+
+    requestAnimationFrame(animationLoop);
+  });
+</script>
