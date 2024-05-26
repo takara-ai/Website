@@ -11,21 +11,10 @@
   for a new neural network.
 </p>
 
-{{/* Include PIXI.js */}} {{ if hugo.IsServer }} {{ $PixiJs := resources.Get
-"/js/pixi.js" | resources.Fingerprint }}
-<script
-  src="{{ $PixiJs.RelPermalink }}"
-  integrity="{{ $PixiJs.Data.Integrity }}"
-></script>
-{{ else }} {{ $PixiJs := resources.Get "/js/pixi.min.js" | resources.Minify |
-resources.Fingerprint }}
-<script
-  src="{{ $PixiJs.RelPermalink }}"
-  integrity="{{ $PixiJs.Data.Integrity }}"
-></script>
-{{ end }} {{/* Include Neural Network JS */}} {{ $NeuralNetworkJs :=
-resources.Get "/js/components/neuralNetwork.js" | resources.Minify |
-resources.Fingerprint }}
+{{/* Include PIXI.js */}} {{ partialCached "pixi-script.html" .
+"pixi-script-cache-key" }} {{/* Include Neural Network JS */}} {{
+$NeuralNetworkJs := resources.Get "/js/components/neuralNetwork.js" |
+resources.Minify | resources.Fingerprint }}
 <script
   src="{{ $NeuralNetworkJs.RelPermalink }}"
   integrity="{{ $NeuralNetworkJs.Data.Integrity }}"
