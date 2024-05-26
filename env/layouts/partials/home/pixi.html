@@ -1,9 +1,3 @@
-<div id="pixi-container" class="min-h-svh mx-auto bg-white">
-  <!-- PIXI will attach the canvas here -->
-</div>
-<div id="runPIXI" style="display: none">1</div>
-<!-- Added missing element -->
-
 {{/* JS Injection */}} {{ $PixiJs := resources.Get "/js/pixi.js" |
 resources.Minify | resources.Fingerprint }}
 <script
@@ -24,7 +18,7 @@ resources.Minify | resources.Fingerprint }}
         this.graphics = new PIXI.Graphics(); // Graphics object for drawing the node
         this.text = new PIXI.Text(label, {
           fontSize: 12,
-          fill: 0x000000, // Black color for text
+          fill: 0xffffff, // Black color for text
           align: "center",
         });
         this.updateGraphics(); // Initial graphics setup for the node
@@ -50,7 +44,7 @@ resources.Minify | resources.Fingerprint }}
 
       updateGraphics() {
         this.graphics.clear();
-        const color = this.activated ? 0xff0000 : 0x000000; // Red if activated, black if not
+        const color = this.activated ? 0xcc3333 : 0x000000; // Red if activated, black if not
         this.graphics.circle(0, 0, this.radius); // Draw the circle at updated position
         this.graphics.fill(color); // Start filling the circle with color based on activation state
       }
@@ -91,25 +85,57 @@ resources.Minify | resources.Fingerprint }}
     // Initialize Pixi Application asynchronously with performance optimizations
     const app = new PIXI.Application();
     await app.init({
-      width: window.innerWidth,
-      height: window.innerHeight,
+      resizeTo: document.getElementById("pixi-container"), // Automatically resize to the container
       backgroundAlpha: 0, // Set background to transparent
       resolution: window.devicePixelRatio, // Adjust for device resolution
       autoDensity: true,
-      antialias: false, // Disable antialiasing for performance
-      useContextAlpha: false, // Disable context alpha for performance on older devices
+      antialias: true, // Disable antialiasing for performance
+      powerPreference: "high-performance", // Use GPU for rendering
     });
     document.getElementById("pixi-container").appendChild(app.canvas);
+
+    document.getElementById("pixi-container").appendChild(app.view);
+
+    // Other code...
+
+    // Handle window resize
+    window.addEventListener("resize", () => {
+      app.renderer.resize(
+        document.getElementById("pixi-container").clientWidth,
+        document.getElementById("pixi-container").clientHeight
+      );
+    });
+
+    // Initial resize to fit the container
+    app.renderer.resize(
+      document.getElementById("pixi-container").clientWidth,
+      document.getElementById("pixi-container").clientHeight
+    );
 
     let nodes = [];
     let edges = [];
 
-    // Define the number of nodes in each layer (80 layers with 5 to 10 nodes each)
-    const layerSizes = Array.from(
-      { length: 20 },
-      () => Math.floor(Math.random() * 6) + 1
-    );
+    function calculateLayers() {
+      const windowWidth = window.innerWidth;
+      let numLayers;
 
+      if (windowWidth < 640) {
+        // Mobile screens
+        numLayers = 6;
+      } else {
+        // Larger screens
+        numLayers = Math.min(20, Math.floor((windowWidth - 640) / 64) + 6);
+      }
+
+      return numLayers;
+    }
+
+    // Define the number of nodes in each layer (80 layers with 5 to 10 nodes each)
+    const numLayers = calculateLayers();
+    const layerSizes = Array.from(
+      { length: numLayers },
+      () => Math.floor(Math.random() * 10) + 2
+    );
     // Generate labels for each node in each layer
     const labels = layerSizes.map((size, layerIndex) =>
       Array.from({ length: size }, (_, i) => `L${layerIndex + 1}N${i + 1}`)
@@ -208,6 +234,16 @@ resources.Minify | resources.Fingerprint }}
     function loopActivation() {
       let layerIndex = 0;
       function loop() {
+        // Deactivate the last layer's nodes and edges before restarting
+        if (layerIndex === 0 && layers.length > 0) {
+          layers[layers.length - 1].forEach((node) => node.deactivate());
+          edges.forEach((edge) => {
+            if (layers[layers.length - 1].includes(edge.node1)) {
+              edge.deactivate();
+            }
+          });
+        }
+
         if (layerIndex >= layers.length) {
           layerIndex = 0;
           setTimeout(loop, 2000); // Wait a bit before restarting the loop
