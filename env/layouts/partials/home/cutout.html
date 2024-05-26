@@ -13,17 +13,8 @@
       人類を変革する
     </h1>
   </div>
-  <div id="pixi-container" class="flex-grow w-full bg-white">
-    <!-- PIXI will attach the canvas here -->
-  </div>
-  <p class="text-sm h-fit pl-2 sm:pl-4 mb-2 sm:mb-4">
-    <button
-      onclick="location.reload()"
-      class="px-2 py-1 rounded bg-red-700 text-white mr-2"
-      >Refresh</button
-    >
-    for a new neural network.
-  </p>
+
+  {{/* add the neural network */}} {{ partial "home/neuralNetwork" . }}
 </section>
 
 {{/*
