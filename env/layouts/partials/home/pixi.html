@@ -1,0 +1,14 @@
+<div
+  id="pixi-container"
+  style="width: 100%; height: 100vh; background-color: black"
+>
+  <!-- PIXI will attach the canvas here -->
+</div>
+<script src="/js/pixi.js"></script>
+
+{{/* JS Injection */}} {{ $PixiJs := resources.Get "/js/pixi.js" |
+resources.Minify | resources.Fingerprint }}
+<script
+  src="{{ $PixiJs.RelPermalink }}"
+  integrity="{{ $PixiJs.Data.Integrity }}"
+></script>
