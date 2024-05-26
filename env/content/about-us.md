@@ -35,3 +35,4 @@ Our team embodies a blend of sharp intellect and passion for AI. With a laser-fo
 --- -->
 
 Join us at [takara.ai](/) as we forge ahead, not just as service providers, but as partners in unveiling the hidden treasures within your organization, catalyzing growth and success. Together, let's navigate the transformative journey of AI.
+
