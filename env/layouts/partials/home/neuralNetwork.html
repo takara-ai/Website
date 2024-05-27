@@ -17,10 +17,9 @@
   }
 </style>
 
-{{/* Include PIXI.js */}} {{ partialCached "pixi-script.html" .
-"pixi-script-cache-key" }} {{/* Include Neural Network JS */}} {{
-$NeuralNetworkJs := resources.Get "/js/components/neuralNetwork.js" |
-resources.Minify | resources.Fingerprint }}
+{{/* Include PIXI.js */}} {{ partial "pixi-script.html" . }} {{/* Include Neural
+Network JS */}} {{ $NeuralNetworkJs := resources.Get
+"/js/components/neuralNetwork.js" | resources.Minify | resources.Fingerprint }}
 <script
   src="{{ $NeuralNetworkJs.RelPermalink }}"
   integrity="{{ $NeuralNetworkJs.Data.Integrity }}"
