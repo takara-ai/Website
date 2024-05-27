@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           align: "center",
         },
       });
+      this.graphics.zIndex = 2;
       this.updateGraphics();
     }
 
