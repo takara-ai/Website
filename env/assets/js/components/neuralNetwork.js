@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async function () {
   // Constants
-  const ACTIVATION_DELAY = 50;
+  const ACTIVATION_DELAY = 150;
   const RESTART_DELAY = 2000;
 
   // Node class for creating and managing node properties
