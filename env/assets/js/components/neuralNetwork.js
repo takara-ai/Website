@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       const width = this.activated ? 2 : 1;
       this.graphics.moveTo(this.node1.x, this.node1.y);
       this.graphics.lineTo(this.node2.x, this.node2.y);
-      this.graphics.setStrokeStyle({ width: width, color: color, alpha: 1 });
+      this.graphics.setStrokeStyle({ width: width, color: color });
       this.graphics.stroke();
     }
   }
@@ -103,8 +103,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   window.addEventListener("resize", () => {
     app.renderer.resize(pixiContainer.clientWidth, pixiContainer.clientHeight);
   });
-
-  app.renderer.resize(pixiContainer.clientWidth, pixiContainer.clientHeight);
 
   let nodes = [];
   let edges = [];
