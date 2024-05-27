@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     await app.init({
       resizeTo: document.getElementById("pixi-container"),
       backgroundAlpha: 0,
-      resolution: window.devicePixelRatio,
+      resolution: 1,
       autoDensity: true,
       antialias: true,
       powerPreference: "high-performance",
