@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     updateGraphics() {
       this.graphics.clear();
-      const color = this.activated ? 0xcc3333 : 0x000000;
+      const color = this.activated ? 0xb91c1c : 0x000000;
       this.graphics.circle(0, 0, this.radius);
       this.graphics.fill(color);
     }
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     updateGraphics() {
       this.graphics.clear();
-      const color = this.activated ? 0xff0000 : 0x000000;
+      const color = this.activated ? 0xb91c1c : 0x000000;
       const width = this.activated ? 2 : 1;
       this.graphics.moveTo(this.node1.x, this.node1.y);
       this.graphics.lineTo(this.node2.x, this.node2.y);
