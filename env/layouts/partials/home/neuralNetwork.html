@@ -1,5 +1,5 @@
 {{/* Section Inserting The Neural Network */}}
-<div id="pixi-container" class="flex-grow w-full bg-white">
+<div id="pixi-container" class="flex-grow w-full">
   <!-- PIXI will attach the canvas here -->
 </div>
 <p class="text-sm h-fit pl-2 sm:pl-4 mb-2 sm:mb-4">
@@ -10,6 +10,12 @@
   >
   for a new neural network.
 </p>
+{{/* Override for the broken scroll on touch screens */}}
+<style>
+  #pixi-container canvas {
+    touch-action: auto !important;
+  }
+</style>
 
 {{/* Include PIXI.js */}} {{ partialCached "pixi-script.html" .
 "pixi-script-cache-key" }} {{/* Include Neural Network JS */}} {{

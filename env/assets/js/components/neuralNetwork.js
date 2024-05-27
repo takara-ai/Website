@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     if (windowWidth < 640) {
       // Mobile screens
-      numLayers = 6;
+      numLayers = 5;
     } else {
       // Larger screens
       numLayers = Math.min(20, Math.floor((windowWidth - 640) / 64) + 6);
