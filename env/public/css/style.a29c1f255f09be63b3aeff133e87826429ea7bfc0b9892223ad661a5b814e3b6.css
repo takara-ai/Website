@@ -446,16 +446,6 @@ video {
   display: none;
 }
 
-@font-face {
-  font-family: "Caveat";
-
-  src: url(/fonts/caveat/Caveat-VariableFont_wght.woff2) format(woff2);
-
-  font-weight: 100;
-
-  font-display: swap;
-}
-
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -1142,6 +1132,14 @@ video {
   visibility: visible;
 }
 
+.\!visible {
+  visibility: visible !important;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
 .collapse {
   visibility: collapse;
 }
@@ -1160,6 +1158,10 @@ video {
 
 .relative {
   position: relative;
+}
+
+.\!relative {
+  position: relative !important;
 }
 
 .sticky {
@@ -1233,6 +1235,10 @@ video {
   margin-top: -2rem;
 }
 
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
 .mb-10 {
   margin-bottom: 2.5rem;
 }
@@ -1289,10 +1295,6 @@ video {
   margin-top: 2rem;
 }
 
-.mr-1 {
-  margin-right: 0.25rem;
-}
-
 .block {
   display: block;
 }
@@ -1321,6 +1323,10 @@ video {
   display: grid;
 }
 
+.contents {
+  display: contents;
+}
+
 .hidden {
   display: none;
 }
@@ -1329,20 +1335,8 @@ video {
   aspect-ratio: 16/9;
 }
 
-.h-1 {
-  height: 0.25rem;
-}
-
 .h-10 {
   height: 2.5rem;
-}
-
-.h-2 {
-  height: 0.5rem;
-}
-
-.h-3 {
-  height: 0.75rem;
 }
 
 .h-4 {
@@ -1465,10 +1459,6 @@ video {
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-.touch-auto {
-  touch-action: auto;
 }
 
 .resize {
@@ -1654,11 +1644,6 @@ video {
 
 .bg-inherit {
   background-color: inherit;
-}
-
-.bg-red-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(185 28 28 / var(--tw-bg-opacity));
 }
 
 .bg-white {
@@ -1885,6 +1870,10 @@ video {
   text-transform: uppercase;
 }
 
+.lowercase {
+  text-transform: lowercase;
+}
+
 .italic {
   font-style: italic;
 }
@@ -2029,6 +2018,10 @@ video {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
+.\!filter {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow) !important;
+}
+
 .backdrop-blur {
   --tw-backdrop-blur: blur(8px);
   -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
@@ -2095,6 +2088,8 @@ h5 {
     line-height: 1.75rem;
   }
 }
+
+/* In your main.css or similar file */
 
 /* Custom CSS end */
 
@@ -2737,12 +2732,12 @@ h5 {
     margin-bottom: 0px;
   }
 
-  .sm\:mb-4 {
-    margin-bottom: 1rem;
-  }
-
   .sm\:mb-5 {
     margin-bottom: 1.25rem;
+  }
+
+  .sm\:mb-8 {
+    margin-bottom: 2rem;
   }
 
   .sm\:block {

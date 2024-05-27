@@ -1,0 +1,15 @@
+{{ if hugo.IsServer }} {{ $PixiJs := resources.Get "/js/pixi.js" |
+resources.Fingerprint }}
+<script
+  src="{{ $PixiJs.RelPermalink }}"
+  integrity="{{ $PixiJs.Data.Integrity }}"
+  defer
+></script>
+{{ else }} {{ $PixiJs := resources.Get "/js/pixi.min.js" | resources.Minify |
+resources.Fingerprint }}
+<script
+  src="{{ $PixiJs.RelPermalink }}"
+  integrity="{{ $PixiJs.Data.Integrity }}"
+  defer
+></script>
+{{ end }} {{/* This Partial Handles the Dev and Prod Pixi.js files */}}

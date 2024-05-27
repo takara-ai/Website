@@ -446,16 +446,6 @@ video {
   display: none;
 }
 
-@font-face {
-  font-family: "Caveat";
-
-  src: url(/fonts/caveat/Caveat-VariableFont_wght.woff2) format(woff2);
-
-  font-weight: 100;
-
-  font-display: swap;
-}
-
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -2095,6 +2085,8 @@ h5 {
     line-height: 1.75rem;
   }
 }
+
+/* In your main.css or similar file */
 
 /* Custom CSS end */
 

@@ -1,0 +1,27 @@
+{{/* Section Inserting The Neural Network */}}
+<div id="pixi-container" class="flex-grow w-full">
+  <!-- PIXI will attach the canvas here -->
+</div>
+<p class="text-sm h-fit pl-2 sm:pl-4 mb-2 sm:mb-4">
+  <button
+    onclick="location.reload()"
+    class="px-2 py-1 rounded bg-red-700 text-white mr-2"
+    >Refresh</button
+  >
+  for a new neural network.
+</p>
+{{/* Override for the broken scroll on touch screens */}}
+<style>
+  #pixi-container canvas {
+    touch-action: auto !important;
+  }
+</style>
+
+{{/* Include PIXI.js */}} {{ partial "pixi-script.html" . }} {{/* Include Neural
+Network JS */}} {{ $NeuralNetworkJs := resources.Get
+"/js/components/neuralNetwork.js" | resources.Minify | resources.Fingerprint }}
+<script
+  src="{{ $NeuralNetworkJs.RelPermalink }}"
+  integrity="{{ $NeuralNetworkJs.Data.Integrity }}"
+  defer
+></script>
