@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async function () {
   // Constants
-  const ACTIVATION_DELAY = 50;
+  const ACTIVATION_DELAY = 150;
   const RESTART_DELAY = 2000;
 
   // Node class for creating and managing node properties
@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           align: "center",
         },
       });
+      this.graphics.zIndex = 2;
       this.updateGraphics();
     }
 
@@ -42,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     updateGraphics() {
       this.graphics.clear();
-      const color = this.activated ? 0xcc3333 : 0x000000;
+      const color = this.activated ? 0xb91c1c : 0x000000;
       this.graphics.circle(0, 0, this.radius);
       this.graphics.fill(color);
     }
@@ -71,11 +72,11 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     updateGraphics() {
       this.graphics.clear();
-      const color = this.activated ? 0xff0000 : 0x000000;
+      const color = this.activated ? 0xb91c1c : 0x000000;
       const width = this.activated ? 2 : 1;
       this.graphics.moveTo(this.node1.x, this.node1.y);
       this.graphics.lineTo(this.node2.x, this.node2.y);
-      this.graphics.setStrokeStyle({ width: width, color: color, alpha: 1 });
+      this.graphics.setStrokeStyle({ width: width, color: color });
       this.graphics.stroke();
     }
   }
@@ -86,7 +87,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     await app.init({
       resizeTo: document.getElementById("pixi-container"),
       backgroundAlpha: 0,
-      resolution: window.devicePixelRatio,
+      resolution: 1,
       autoDensity: true,
       antialias: true,
       powerPreference: "high-performance",
@@ -102,8 +103,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   window.addEventListener("resize", () => {
     app.renderer.resize(pixiContainer.clientWidth, pixiContainer.clientHeight);
   });
-
-  app.renderer.resize(pixiContainer.clientWidth, pixiContainer.clientHeight);
 
   let nodes = [];
   let edges = [];
