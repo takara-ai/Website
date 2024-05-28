@@ -4,6 +4,10 @@
 "/about-us/") (eq .RelPermalink "/ethics/") }}
 <!-- Render list item for pages that are not in 'legal', 'categories', or 'tags' sections and are not the home page or the '/services/' page, or the specific pages -->
 <li>
-  <a href="{{ .RelPermalink }}" class="underline-gradient">{{ .Title }}</a>
+  <a
+    href="{{ .RelPermalink }}"
+    class="hover:invert bg-white transition ease-in-out p-1"
+    >{{ .Title }}</a
+  >
 </li>
 {{ end }} {{ end }}

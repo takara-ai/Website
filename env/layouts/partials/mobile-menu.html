@@ -1,72 +1,89 @@
-<div class="top-0 left-0 w-full z-20 absolute backdrop-blur border-b border-black border-dashed">
+<div
+  class="top-0 left-0 w-full z-20 absolute backdrop-blur border-b border-black border-dashed"
+>
   {{/* Fetch the SVG logo once and use it for both desktop and mobile nav */}}
   {{ $svg := resources.Get "images/logo-24/TakaraAi.svg" }}
 
   <nav class="relative px-1 md:px-4 py-4 flex justify-between items-center">
     <a class="text-3xl font-bold leading-none" href="/">
-      <img class="h-6 md:h-8" src="{{ $svg.RelPermalink }}" alt="Takara AI Logo" />
+      <img
+        class="h-6 md:h-8"
+        src="{{ $svg.RelPermalink }}"
+        alt="Takara AI Logo"
+      />
     </a>
     <a class="font-semibold text-xl" href="/">takara.ai</a>
     <div class="lg:hidden">
       <button class="navbar-burger flex items-center p-3">
         <!-- Simplified SVG for the burger icon -->
-        <svg class="block h-4 md:h-6 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Mobile menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path></svg>
+        <svg
+          class="block h-4 md:h-6 fill-current"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <title>Mobile menu</title>
+          <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+        </svg>
       </button>
     </div>
-    <ul class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:items-center lg:w-auto lg:space-x-6">
+    <ul
+      class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:items-center lg:w-auto lg:space-x-6"
+    >
       {{ partial "nav/auto-link" . }}
     </ul>
   </nav>
 
   <div class="navbar-menu relative z-50 hidden">
     <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
-    <nav class="fixed top-0 left-0 bottom-0 flex flex-col w-svw py-4 px-2 sm:px-4 backdrop-blur-lg border-r min-h-svh">
+    <nav
+      class="fixed top-0 left-0 bottom-0 flex flex-col w-svw py-4 px-2 sm:px-4 backdrop-blur-lg border-r min-h-svh"
+    >
       <div class="flex items-center mb-8">
         <a class="mr-auto text-3xl font-bold leading-none" href="#">
-          <img class="h-6 md:h-8" src="{{ $svg.RelPermalink }}" alt="Takara AI Logo" />
+          <img
+            class="h-6 md:h-8"
+            src="{{ $svg.RelPermalink }}"
+            alt="Takara AI Logo"
+          />
         </a>
         <button class="navbar-close">
           <!-- Simplified SVG for the close icon -->
-          <svg class="h-4 md:h-6 text-black cursor-pointer hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          <svg
+            class="h-4 md:h-6 text-black cursor-pointer hover:text-gray-500"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
         </button>
       </div>
       <div>
-        <ul>{{ partial "nav/auto-link" . }}</ul>
+        <ul>
+          {{ partial "nav/auto-link" . }}
+        </ul>
       </div>
     </nav>
   </div>
 </div>
 
-
 <script>
-// Simplified and optimized JavaScript for the menu toggle
-document.addEventListener("DOMContentLoaded", function () {
-  const toggleMenu = () => {
-    document.querySelectorAll(".navbar-menu").forEach(menu => menu.classList.toggle("hidden"));
-  };
+  // Simplified and optimized JavaScript for the menu toggle
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggleMenu = () => {
+      document
+        .querySelectorAll(".navbar-menu")
+        .forEach((menu) => menu.classList.toggle("hidden"));
+    };
 
-  document.querySelectorAll(".navbar-burger, .navbar-close, .navbar-backdrop").forEach(el => el.addEventListener("click", toggleMenu));
-});
-
+    document
+      .querySelectorAll(".navbar-burger, .navbar-close, .navbar-backdrop")
+      .forEach((el) => el.addEventListener("click", toggleMenu));
+  });
 </script>
-
-<style>
-  .underline-gradient {
-    position: relative;
-  }
-
-  .underline-gradient::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -2px;
-    left: 0;
-    background-image: linear-gradient(to right, teal, purple);
-    transition: width 0.3s;
-  }
-
-  .underline-gradient:hover::after {
-    width: 100%;
-  }
-</style>
