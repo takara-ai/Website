@@ -32,6 +32,14 @@ resources.PostProcess }}
 
 <link rel="stylesheet" href="{{ $styles.RelPermalink }}" />
 
+{{/* GoatCounter Analytics */}}
+
+<script
+  data-goatcounter="https://takara.goatcounter.com/count"
+  async
+  src="//gc.zgo.at/count.js"
+></script>
+
 {{/* Codeblocks */}} {{ if (findRE "<pre" .Content 1) }} {{/* JS Injection */}}
 {{ $js := resources.Get "/js/copy-code-button.js" | resources.Minify |
 resources.Fingerprint }}
