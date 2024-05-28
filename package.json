@@ -8,7 +8,7 @@
   "scripts": {
     "start": "concurrently \"npm run watch:tw\" \"npm run watch:hugo\"",
     "watch:tw": "tailwindcss -i ./env/assets/css/main.css -o ./env/assets/css/style.css --watch",
-    "watch:hugo": "cd env && hugo server --disableFastRender",
+    "watch:hugo": "cd env && hugo server",
     "build": "cd env && hugo --minify",
     "test": "cd env && hugo"
   },
