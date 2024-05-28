@@ -32,10 +32,6 @@ resources.PostProcess }}
 
 <link rel="stylesheet" href="{{ $styles.RelPermalink }}" />
 
-{{/* fonts */}}
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
 {{/* Codeblocks */}} {{ if (findRE "<pre" .Content 1) }} {{/* JS Injection */}}
 {{ $js := resources.Get "/js/copy-code-button.js" | resources.Minify |
 resources.Fingerprint }}
