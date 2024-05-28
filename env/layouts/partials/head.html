@@ -32,37 +32,17 @@ resources.PostProcess }}
 
 <link rel="stylesheet" href="{{ $styles.RelPermalink }}" />
 
-<!-- plausible tracking -->
-
-{{/*  <script defer
-  data-domain="{{ getenv "HUGO_TRACKING_DOMAIN" }}"
-  data-api="{{ getenv "HUGO_TRACKING_API" }}"
-  src="{{ getenv "HUGO_TRACKING_SCRIPT_SRC" }}">
-</script>  */}}
-
-<script defer
-  data-domain="{{ getenv "HUGO_TRACKING_DOMAIN" }}"
-  data-api="{{ getenv "HUGO_TRACKING_API" }}"
-  src="{{ getenv "HUGO_TRACKING_SCRIPT_SRC" }}">
-</script>
-
 {{/* fonts */}}
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-
-{{/*  Codeblocks  */}}
-
-{{ if (findRE "<pre" .Content 1) }}
-{{/* JS Injection */}}
-{{ $js := resources.Get "/js/copy-code-button.js" | resources.Minify | resources.Fingerprint }}
+{{/* Codeblocks */}} {{ if (findRE "<pre" .Content 1) }} {{/* JS Injection */}}
+{{ $js := resources.Get "/js/copy-code-button.js" | resources.Minify |
+resources.Fingerprint }}
 <script
   src="{{ $js.RelPermalink | safeHTMLAttr }}"
   integrity="{{ $js.Data.Integrity | safeHTMLAttr }}"
-  crossorigin="anonymous">
-</script>
-
+  crossorigin="anonymous"
+></script>
 
 {{ end }}
-
-
