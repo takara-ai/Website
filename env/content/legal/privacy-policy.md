@@ -16,13 +16,13 @@ We collect personal data through our contact form, such as your name and email a
 
 ### Analytics and Tracking Data
 
-We use Plausible for analytics and tracking to understand how our website is used and to improve our marketing efforts. Plausible is designed to be privacy-friendly, collecting data without personally identifying individual users.
+We use GoatCounter for analytics and tracking to understand how our website is used and to improve our marketing efforts. GoatCounter is designed to be privacy-friendly, collecting data without personally identifying individual users.
 
 ## 2. Data Handling
 
 ### Third-Party Services
 
-The personal data collected through our contact form is processed by Formspree and then sent to our ProtonMail account. Analytics data is handled by Plausible. Both services are selected for their commitment to privacy and security.
+The personal data collected through our contact form is processed by Formspree and then sent to our ProtonMail account. Analytics data is handled by GoatCounter. Both services are selected for their commitment to privacy and security.
 
 ### Data Storage and Security
 
