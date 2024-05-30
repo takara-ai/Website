@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", async function () {
+window.addEventListener("load", async function () {
   // Constants
   const ACTIVATION_DELAY = 150;
   const RESTART_DELAY = 2000;
