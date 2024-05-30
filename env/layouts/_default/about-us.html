@@ -2,13 +2,11 @@
 <article
   class="pt-20 prose lg:prose-xl xl:prose-2xl mx-auto py-4 px-2 min-h-svh overflow-hidden text-wrap bg-white"
 >
-  <h1>{{ .Title }}</h1>
+  {{ partial "headerTitle" . }}
 
   <section class="border-t border-dashed border-red-700">
     {{ .Content }}
   </section>
-  <p class="text-sm font-extralight"
-    >Last modified: {{ .Lastmod.Format "January 2, 2006" }}</p
-  >
+  {{ partial "lastMod" . }}
 </article>
 {{ end }}
