@@ -1,5 +1,5 @@
 import { Application, Graphics, Text } from "pixi.js";
-
+// test
 window.addEventListener("load", async function () {
   // Constants
   const ACTIVATION_DELAY = 150;
