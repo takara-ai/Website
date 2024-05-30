@@ -14,19 +14,19 @@
         "prompt-engineering") ".Kind" "!=" "section" }} {{ range $prompts }}
         <a
           href="{{ .RelPermalink }}"
-          class="rounded-lg sm:aspect-square p-4 flex flex-col items-left justify-between overflow-hidden bg-white space-y-4 hover:invert border border-dashed border-red-700"
+          class="rounded-lg p-4 flex flex-col items-left justify-between overflow-hidden bg-white space-y-4 hover:invert border border-dashed border-red-700"
         >
           <div>
             <h2 class="font-bold mb-2 w-fit text-3xl border-b border-black">
               {{ .Title | truncate 50 "..." }}
             </h2>
-            <p class="text-gray-400 text-xs lg:text-base ml-1">
+            <p class="text-gray-600 text-xs lg:text-base ml-1">
               {{ .Summary | truncate 120 "..." }}
             </p>
           </div>
 
           <span
-            class="text-red-700 hover:underline text-xs ml-1 mt-2 border-b border-red-700 w-fit"
+            class="text-red-700 font-semibold hover:underline text-xs ml-1 mt-2 border-b border-red-700 w-fit"
           >
             Learn now &rarr;
           </span>
