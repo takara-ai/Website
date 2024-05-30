@@ -9,7 +9,9 @@
     "watch:tw": "tailwindcss -i ./env/assets/css/main.css -o ./env/assets/css/style.css --watch",
     "watch:hugo": "cd env && hugo server",
     "watch:parcel": "parcel watch ./assets/js/components/neuralNetwork.js --dist-dir ./static/js",
-    "build": "cd env && hugo --minify && NODE_OPTIONS='--max-old-space-size=4096' parcel build ./assets/js/components/neuralNetwork.js --dist-dir ./static/js",
+    "build:hugo": "cd env && hugo --minify",
+    "build:parcel": "NODE_OPTIONS='--max-old-space-size=4096' parcel build ./env/assets/js/components/neuralNetwork.js --dist-dir ./env/static/js",
+    "build": "npm run build:hugo && npm run build:parcel",
     "test": "cd env && hugo"
   },
   "devDependencies": {
