@@ -12,13 +12,14 @@ Welcome to the world of prompt engineering! This guide is designed to help you n
 
 Our prompt guides are designed to work well with many LLM's and Multimodal models. Below is a list of links to various models where you can get started straight away for free.
 
-- [OpenAI](https://chat.openai.com/) | ChatGPT 3.5 Instruct
+- [OpenAI](https://chat.openai.com/) | ChatGPT 3.5 Instruct | GPT4o
 - [Anthropic](https://claude.ai/) | Claude 3 Sonnet
 - [Groq](https://groq.com/) | LLaMA 3, Mixtral 8x7B, Gemma 7B
 - [Mistral AI](https://chat.mistral.ai/chat) | Small, Next, Large
 - [NVIDIA](https://build.nvidia.com/) | Playground for many models
 - [LLAVA](https://llava-vl.github.io/) | LLAVA 7B (Small model that can chat and understand images)
 - [Perplexity](https://www.perplexity.ai/) | Multimodal AI search engine
+- [Databricks](https://huggingface.co/spaces/databricks/dbrx-instruct) | DBRX-Instruct
 
 ## Understanding Learning Methods
 
