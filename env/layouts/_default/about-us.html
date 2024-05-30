@@ -1,11 +1,11 @@
 {{define "main"}}
 <article
   class="pt-20 prose lg:prose-xl xl:prose-2xl mx-auto py-4 px-2 min-h-svh overflow-hidden text-wrap bg-white"
-  ><header>{{ partial "headerTitle" . }}</header>
+  ><header class="border-b border-dashed border-red-700"
+    >{{ partial "headerTitle" . }}</header
+  >
 
-  <section class="border-t border-dashed border-red-700">
-    {{ .Content }}
-  </section>
+  <section> {{ .Content }} </section>
   {{ partial "lastMod" . }}
 </article>
 {{ end }}

@@ -1,7 +1,6 @@
 {
   "name": "takara",
   "version": "1.0.0",
-  "main": "index.html",
   "repository": "https://github.com/takara-ai/Website",
   "author": "takara.ai",
   "license": "MIT",
@@ -9,7 +8,8 @@
     "start": "concurrently \"npm run watch:tw\" \"npm run watch:hugo\"",
     "watch:tw": "tailwindcss -i ./env/assets/css/main.css -o ./env/assets/css/style.css --watch",
     "watch:hugo": "cd env && hugo server",
-    "build": "cd env && hugo --minify",
+    "watch:parcel": "parcel watch ./assets/js/components/neuralNetwork.js --dist-dir ./static/js",
+    "build": "cd env && hugo --minify && parcel build ./assets/js/components/neuralNetwork.js --dist-dir ./static/js",
     "test": "cd env && hugo"
   },
   "devDependencies": {
@@ -22,6 +22,8 @@
     "concurrently": "^8.2.2",
     "cssnano": "^7.0.1",
     "cssnano-preset-advanced": "^7.0.1",
+    "parcel": "^2.12.0",
+    "pixi.js": "^8.1.5",
     "postcss": "^8.4.38",
     "postcss-cli": "^11.0.0",
     "tailwindcss": "^3.4.3",

@@ -1,3 +1,5 @@
+import { Application, Graphics, Text } from "pixi.js";
+
 window.addEventListener("load", async function () {
   // Constants
   const ACTIVATION_DELAY = 150;
@@ -11,8 +13,8 @@ window.addEventListener("load", async function () {
       this.radius = 10;
       this.activated = false;
       this.label = label;
-      this.graphics = new PIXI.Graphics();
-      this.text = new PIXI.Text({
+      this.graphics = new Graphics();
+      this.text = new Text({
         text: label,
         style: {
           fontSize: 12,
@@ -55,7 +57,7 @@ window.addEventListener("load", async function () {
       this.node1 = node1;
       this.node2 = node2;
       this.activated = false;
-      this.graphics = new PIXI.Graphics();
+      this.graphics = new Graphics();
       app.stage.addChild(this.graphics);
       this.updateGraphics();
     }
@@ -82,7 +84,7 @@ window.addEventListener("load", async function () {
   }
 
   // Initialize Pixi Application asynchronously with performance optimizations
-  const app = new PIXI.Application();
+  const app = new Application();
   try {
     await app.init({
       resizeTo: document.getElementById("pixi-container"),
