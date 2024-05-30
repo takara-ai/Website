@@ -4,7 +4,7 @@
 
     <article id="main-content" class="pt-20 prose lg:prose-xl xl:prose-2xl mx-auto py-4 px-2 min-h-svh overflow-hidden text-wrap" tabindex="-1">
         <header>
-            <h1>{{ .Title }}</h1>
+            {{ partial "headerTitle" . }}
             
 
             {{ $currentPage := trim .RelPermalink "/" }}

@@ -1,11 +1,10 @@
 {{ define "main" }}
 <div class="relative bg-white">
   <article
+    id="main-content"
     class="pt-16 prose lg:prose-xl xl:prose-2xl mx-auto p-4 min-h-svh bg-inherit"
   >
-    <header>
-      <h1>{{ .Title }}</h1>
-    </header>
+    <header> {{ partial "headerTitle" . }} </header>
     <section>{{ .Content }}</section>
     {{ partial "lastMod" . }}
   </article>
