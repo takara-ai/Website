@@ -8,9 +8,9 @@
     "start": "concurrently \"npm run watch:tw\" \"npm run watch:hugo\"",
     "watch:tw": "tailwindcss -i ./env/assets/css/main.css -o ./env/assets/css/style.css --watch",
     "watch:hugo": "cd env && hugo server",
-    "watch:parcel": "parcel watch ./assets/js/components/neuralNetwork.js --dist-dir ./static/js",
+    "watch:parcel": "parcel watch ./env/assets/js/**/*.js --dist-dir ./env/static/js",
     "build:hugo": "cd env && hugo --minify",
-    "build:parcel": "parcel build ./env/assets/js/components/neuralNetwork.js --dist-dir ./env/static/js",
+    "build:parcel": "parcel build ./env/assets/js/**/*.js --dist-dir ./env/static/js",
     "build": "npm run build:hugo && npm run build:parcel",
     "test": "cd env && hugo"
   },

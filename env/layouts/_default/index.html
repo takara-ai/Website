@@ -72,11 +72,13 @@ resources.PostProcess}}
   href="{{ $css.RelPermalink }}"
   integrity="{{ $css.Data.Integrity }}"
 />
-{{/* JS Injection */}} {{ $js := resources.Get "js/pages/index.js" |
+{{/* JS Injection */}} {{/* {{ $js := resources.Get "js/pages/index.js" |
 resources.Minify | resources.Fingerprint }}
 <script
   src="{{ $js.RelPermalink }}"
   integrity="{{ $js.Data.Integrity }}"
 ></script>
+*/}}
+<script type="module" src="js/pages/index.js"></script>
 
 {{ end }}
