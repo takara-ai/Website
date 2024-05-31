@@ -3,3 +3,4 @@
 .yarn/install-state.gz
 *.gz
 env/public
+.parcel-cache

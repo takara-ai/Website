@@ -5,11 +5,7 @@
     <header
       class="mb-16 border-b border-red-700 border-dashed text-center sm:text-right"
     >
-      <h1
-        class="font-bold text-3xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
-      >
-        {{ .Title }}
-      </h1>
+      {{ partial "headerTitle" . }}
     </header>
 
     <section>
@@ -18,12 +14,10 @@
         "prompt-engineering") ".Kind" "!=" "section" }} {{ range $prompts }}
         <a
           href="{{ .RelPermalink }}"
-          class="rounded-lg shadow-xl sm:aspect-square p-4 flex flex-col items-left justify-between overflow-hidden bg-black space-y-4"
+          class="rounded-lg p-4 flex flex-col items-left justify-between overflow-hidden bg-white space-y-4 hover:invert border border-dashed border-red-700"
         >
           <div>
-            <h2
-              class="font-bold text-white mb-2 w-fit text-3xl shadow-inner border-b border-white"
-            >
+            <h2 class="font-bold mb-2 w-fit text-3xl border-b border-black">
               {{ .Title | truncate 50 "..." }}
             </h2>
             <p class="text-gray-600 text-xs lg:text-base ml-1">
@@ -32,7 +26,7 @@
           </div>
 
           <span
-            class="text-red-700 hover:underline text-xs ml-1 mt-2 border-b border-red-700 w-fit"
+            class="text-red-700 font-semibold hover:underline text-xs ml-1 mt-2 border-b border-red-700 w-fit"
           >
             Learn now &rarr;
           </span>
