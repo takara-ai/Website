@@ -14,7 +14,7 @@ function toggleLanguage() {
 
 // Assign toggleLanguage to the global window object
 window.toggleLanguage = toggleLanguage;
-
+// Maybe this can fix it
 const japaneseCharacters = ["仕事", "壮大", "木", "切磋琢磨", "侘寂", "和"]; // Example characters
 
 function changeJapaneseText() {
