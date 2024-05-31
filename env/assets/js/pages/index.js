@@ -12,6 +12,9 @@ function toggleLanguage() {
   }
 }
 
+// Assign toggleLanguage to the global window object
+window.toggleLanguage = toggleLanguage;
+
 const japaneseCharacters = ["仕事", "壮大", "木", "切磋琢磨", "侘寂", "和"]; // Example characters
 
 function changeJapaneseText() {

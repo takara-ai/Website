@@ -1,0 +1,2 @@
+(()=>{window.toggleLanguage=function(){var e=document.getElementById("japanese-text"),t=document.getElementById("english-text");document.getElementById("language-toggle").checked?(e.style.display="none",t.style.display="block"):(e.style.display="block",t.style.display="none")};let e=["仕事","壮大","木","切磋琢磨","侘寂","和"];setInterval(function(){let t=Math.floor(Math.random()*e.length);document.getElementById("japanese-char").textContent=e[t]},100)})();
+//# sourceMappingURL=index.js.map
