@@ -12,9 +12,9 @@ Welcome to the public repository of the Takara.ai website, handcrafted with ‚ù§Ô
 
 This repository hosts the source code for the official website of Takara.ai Ltd. It showcases our commitment to cutting-edge web technologies and innovative design.
 
-## Handcrafted by Our CEO
+## Handcrafted by Our CAIO
 
-This project is not just a representation of our company's technical capabilities, but also a personal endeavor of our CEO, Jordan Legg. His hands-on approach and dedication to excellence are reflected in every aspect of this website.
+This project is not just a representation of our company's technical capabilities, but also a personal endeavor of our CAIO, Jordan Legg. His hands-on approach and dedication to excellence are reflected in every aspect of this website.
 
 ## Ownership and License
 

@@ -4,7 +4,7 @@
 
     <article id="main-content" class="pt-20 prose lg:prose-xl xl:prose-2xl mx-auto py-4 px-2 min-h-svh overflow-hidden text-wrap" tabindex="-1">
         <header>
-            <h1>{{ .Title }}</h1>
+            {{ partial "headerTitle" . }}
             
 
             {{ $currentPage := trim .RelPermalink "/" }}
@@ -28,7 +28,7 @@
         <section class="border-t border-dashed border-red-700">
             
             {{ .Content }}</section>
-        <p class="text-sm font-extralight">Last modified: {{ .Lastmod.Format "January 2, 2006" }}</p>
+       {{ partial "lastMod" . }}
     </article>
 
    <aside class="hidden lg:block lg:w-1/4 sticky top-20 z-10 font-extralight text-sm prose pl-4 pr-2">

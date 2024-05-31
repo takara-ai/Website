@@ -55,7 +55,7 @@
   <!-- "Visions" in the right container -->
   <div class="border-gray-400 border-l pl-0 text-left sm:text-right">
     <h1
-      class=" text-3xl pl-2 sm:pl-0 sm:text-6xl md:text-7xl 2xl:text-9xl border-b border-gray-800 font-semibold pr-4"
+      class="text-3xl pl-2 sm:pl-0 sm:text-6xl md:text-7xl 2xl:text-9xl border-b border-gray-800 font-semibold pr-4"
     >
       Innovations
     </h1>
@@ -151,9 +151,4 @@ resources.Minify | resources.Fingerprint | resources.PostProcess}}
   integrity="{{ $css.Data.Integrity }}"
 />
 
-{{ $js := resources.Get "js/components/notebookCalc.js" | resources.Minify |
-resources.Fingerprint }}
-<script
-  src="{{ $js.RelPermalink }}"
-  integrity="{{ $js.Data.Integrity }}"
-></script>
+<script type="module" src="js/components/notebookCalc.js"></script>
