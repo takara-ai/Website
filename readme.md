@@ -6,8 +6,6 @@
 ![Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen)
 ![License](https://img.shields.io/badge/license-proprietary-orange)
 
-Welcome to the public repository of the Takara.ai website, handcrafted with ❤️ by Jordan Legg, CEO of Takara.ai Ltd.
-
 ## Overview
 
 This repository hosts the source code for the official website of Takara.ai Ltd. It showcases our commitment to cutting-edge web technologies and innovative design.
