@@ -1,35 +1,40 @@
 {
-  "name": "takara",
+  "name": "takara-ai-website",
   "version": "1.0.0",
-  "repository": "https://github.com/takara-ai/Website",
-  "author": "takara.ai",
-  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/takara-ai/Website"
+  },
+  "author": "Takara AI",
+  "license": "UNLICENSED",
+  "packageManager": "yarn@4.0.2",
   "scripts": {
-    "start": "concurrently \"npm run watch:tw\" \"npm run watch:hugo\"",
+    "start": "yarn run watch:tw & yarn run watch:hugo",
     "watch:tw": "tailwindcss -i ./env/assets/css/main.css -o ./env/assets/css/style.css --watch",
     "watch:hugo": "cd env && hugo server",
     "watch:parcel": "parcel watch ./env/assets/js/**/*.js --dist-dir ./env/static/js",
+    "build": "yarn run build:hugo && yarn run build:parcel",
     "build:hugo": "cd env && hugo --minify",
     "build:parcel": "parcel build ./env/assets/js/**/*.js --dist-dir ./env/static/js",
-    "build": "npm run build:hugo && npm run build:parcel",
     "test": "cd env && hugo"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2",
+    "@parcel/config-default": "^2.12.0",
+    "parcel": "^2.12.0",
     "postcss-cli": "^11.0.0"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.13",
     "autoprefixer": "^10.4.19",
-    "concurrently": "^8.2.2",
     "cssnano": "^7.0.1",
     "cssnano-preset-advanced": "^7.0.1",
-    "parcel": "^2.12.0",
     "pixi.js": "^8.1.5",
     "postcss": "^8.4.38",
-    "postcss-cli": "^11.0.0",
     "tailwindcss": "^3.4.3",
     "terser": "^5.31.0"
   },
-  "packageManager": "yarn@4.0.2"
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }
