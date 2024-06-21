@@ -18,3 +18,37 @@ enableGitInfo = true
 
 [params]
 description = "Transforming Humanity"
+
+[menu]
+  [[menu.footer]]
+    name = "LinkedIn"
+    url = "https://www.linkedin.com/company/takara-ai/"
+    weight = 10
+    [menu.footer.params]
+      external = true
+      type = "icon"
+      icon = "M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"
+
+  [[menu.footer]]
+    name = "Privacy Policy"
+    url = "/legal/privacy-policy/"
+    weight = 20
+    [menu.footer.params]
+      textClass = "text-red-700 font-extrabold"
+
+  [[menu.footer]]
+    name = "タカラの<span class=\"text-red-700 m-0 p-0\">機械学習</span>"
+    url = "/"
+    weight = 30
+    [menu.footer.params]
+      textClass = "px-1 md:px-4 text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-10xl font-japaneseBold"
+      customTextClass = true
+
+  [[menu.footer]]
+    name = "takara.ai"
+    url = "/"
+    weight = 40
+    [menu.footer.params]
+      type = "svg"
+      imageClass = "pl-1 md:pl-4 h-10 sm:h-12 md:h-16 lg:h-24 xl:h-32 2xl:h-52 invert"
+      textClass = "pr-1 md:pr-4 text-right text-red-700 text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-10xl font-extrabold"

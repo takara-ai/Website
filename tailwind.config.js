@@ -13,6 +13,9 @@ module.exports = {
         japaneseBold: "Hiragino Kaku Gothic Std",
         japanese: "Hiragino Kaku Gothic ProN",
       },
+      fontSize: {
+        "10xl": ["12rem", { lineHeight: "1" }],
+      },
     },
   },
   plugins: [require("@tailwindcss/typography")],
