@@ -1,4 +1,5 @@
 import { Application, Graphics, Text } from "pixi.js";
+// Rest of your code...
 // test
 window.addEventListener("load", async function () {
   // Constants
