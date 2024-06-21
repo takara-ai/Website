@@ -4,6 +4,7 @@ module.exports = {
     "./env/layouts/**/*.html",
     "./env/content/**/*.md",
     "./env/assets/**/*.js",
+    "./env/hugo.toml",
   ],
   theme: {
     extend: {
