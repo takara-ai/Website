@@ -1,8 +1,8 @@
 {{ $svg := resources.Get "images/logo-24/TakaraAi.svg" }}
 <footer class="border-y border-dashed border-white">
-  <div class="flex justify-between">
-    <div class="bg-white flex-grow relative"></div>
-    <nav class="text-right border-l border-white border-dashed">
+  <div class="sm:flex justify-between">
+    <div class="bg-white flex-grow relative hidden sm:block"></div>
+    <nav class="text-right sm:border-l border-white border-dashed">
       {{ range .Site.Menus.footer }}
       <a
         href="{{ .URL }}"
