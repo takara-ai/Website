@@ -6,10 +6,19 @@ minify = true
 enableRobotsTXT = true
 enableGitInfo = true
 
+# Enable Hugo Pipes for asset processing
+disableHugoGeneratorInject = true
+enableInlineShortcodes = true
+
+[build]
+  writeStats = true
+
 [module]
   [module.hugoVersion]
     extended = true
-
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
 
 [sitemap]
   changefreq = 'daily'
@@ -17,7 +26,28 @@ enableGitInfo = true
   priority = 0.5
 
 [params]
-description = "Transforming Humanity"
+  description = "Transforming Humanity"
+  images = ["/images/og-image.jpg"]  # Default Open Graph image
+  dateFormat = "January 2, 2006"
+  
+  # Social media handles
+  twitter = "takaraAI"  # Replace with your actual Twitter handle
+  github = "takara-ai"  # Replace with your actual GitHub handle
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    style = "monokai"
+    tabWidth = 4
 
 [menu]
   [[menu.footer]]
