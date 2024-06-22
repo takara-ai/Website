@@ -142,14 +142,14 @@
       this[globalName] = mainExports;
     }
   }
-})({"ioyni":[function(require,module,exports) {
+})({"dL1qF":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = 1234;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
 var HMR_USE_SSE = false;
-module.bundle.HMR_BUNDLE_ID = "8d87547ef208c7d3";
+module.bundle.HMR_BUNDLE_ID = "74ab7acc2ad882d3";
 "use strict";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, HMR_USE_SSE, chrome, browser, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
@@ -583,51 +583,104 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
     });
 }
 
-},{}],"4Vuaa":[function(require,module,exports) {
-document.addEventListener("DOMContentLoaded", ()=>{
-    adjustNotebookLines();
-    // Throttle the resize event
-    window.addEventListener("resize", throttle(adjustNotebookLines, 250));
-});
-function adjustNotebookLines() {
-    const notebookLeft = document.querySelector(".notebook-left");
-    const notebookRight = document.querySelector(".notebook-right");
-    const lineHeight = 24;
-    const viewportHeight = window.innerHeight;
-    const numberOfLines = Math.floor(viewportHeight / lineHeight);
-    // Use DocumentFragment to minimize reflows
-    const fragmentLeft = document.createDocumentFragment();
-    const fragmentRight = document.createDocumentFragment();
-    // Create lines only if they don't exist
-    createLines(fragmentLeft, numberOfLines, notebookLeft.children.length);
-    createLines(fragmentRight, numberOfLines, notebookRight.children.length);
-    notebookLeft.appendChild(fragmentLeft);
-    notebookRight.appendChild(fragmentRight);
-}
-function createLines(fragment, numberOfLines, existingLines) {
-    for(let i = existingLines; i < numberOfLines; i++){
-        const line = document.createElement("div");
-        line.classList.add("border-b", "border-black", "border-dotted", "h-6");
-        fragment.appendChild(line);
-    }
-}
-// Throttle function to limit the number of calls to adjustNotebookLines
-function throttle(callback, limit) {
-    let waiting = false; // Initially, we're not waiting
-    return function() {
-        // We return a throttled function
-        if (!waiting) {
-            // If we're not waiting
-            callback.apply(this, arguments); // Execute users function
-            waiting = true; // Prevent future invocations
-            setTimeout(function() {
-                // After a period of time
-                waiting = false; // And allow future invocations
-            }, limit);
-        }
-    };
-}
+},{}],"UWept":[function(require,module,exports) {
+var _initMjs = require("../accessibility/init.mjs");
+var _initMjs1 = require("../app/init.mjs");
+var _initMjs2 = require("../events/init.mjs");
+var _initMjs3 = require("../spritesheet/init.mjs");
+var _initMjs4 = require("../rendering/init.mjs");
+var _initMjs5 = require("../scene/graphics/init.mjs");
+var _initMjs6 = require("../scene/mesh/init.mjs");
+var _initMjs7 = require("../scene/text/init.mjs");
+var _initMjs8 = require("../scene/text-bitmap/init.mjs");
+var _initMjs9 = require("../scene/text-html/init.mjs");
+var _initMjs10 = require("../scene/sprite-tiling/init.mjs");
+var _initMjs11 = require("../scene/sprite-nine-slice/init.mjs");
+var _initMjs12 = require("../filters/init.mjs");
+"use strict";
 
-},{}]},["ioyni","4Vuaa"], "4Vuaa", "parcelRequireedc5")
+},{"../accessibility/init.mjs":"kSjgV","../app/init.mjs":"bW0Dd","../events/init.mjs":"40Esf","../spritesheet/init.mjs":"7CauB","../rendering/init.mjs":"5LgeC","../scene/graphics/init.mjs":"5Cpu3","../scene/mesh/init.mjs":"bIrxH","../scene/text/init.mjs":"dkVx6","../scene/text-bitmap/init.mjs":"aoTmE","../scene/text-html/init.mjs":"6aLg2","../scene/sprite-tiling/init.mjs":"bseXD","../scene/sprite-nine-slice/init.mjs":"bDpgQ","../filters/init.mjs":"5Vl03"}],"kSjgV":[function(require,module,exports) {
+var _extensionsMjs = require("../extensions/Extensions.mjs");
+var _containerMjs = require("../scene/container/Container.mjs");
+var _accessibilitySystemMjs = require("./AccessibilitySystem.mjs");
+var _accessibilityTargetMjs = require("./accessibilityTarget.mjs");
+"use strict";
+(0, _extensionsMjs.extensions).add((0, _accessibilitySystemMjs.AccessibilitySystem));
+(0, _containerMjs.Container).mixin((0, _accessibilityTargetMjs.accessibilityTarget));
 
-//# sourceMappingURL=notebookCalc.js.map
+},{"../extensions/Extensions.mjs":"hIU8N","../scene/container/Container.mjs":"cCEVU","./AccessibilitySystem.mjs":"9Iu51","./accessibilityTarget.mjs":"4mtCv"}],"bW0Dd":[function(require,module,exports) {
+var _extensionsMjs = require("../extensions/Extensions.mjs");
+var _resizePluginMjs = require("./ResizePlugin.mjs");
+var _tickerPluginMjs = require("./TickerPlugin.mjs");
+"use strict";
+(0, _extensionsMjs.extensions).add((0, _resizePluginMjs.ResizePlugin));
+(0, _extensionsMjs.extensions).add((0, _tickerPluginMjs.TickerPlugin));
+
+},{"../extensions/Extensions.mjs":"hIU8N","./ResizePlugin.mjs":"319KO","./TickerPlugin.mjs":"1pOEY"}],"40Esf":[function(require,module,exports) {
+var _extensionsMjs = require("../extensions/Extensions.mjs");
+var _containerMjs = require("../scene/container/Container.mjs");
+var _eventSystemMjs = require("./EventSystem.mjs");
+var _federatedEventTargetMjs = require("./FederatedEventTarget.mjs");
+"use strict";
+(0, _extensionsMjs.extensions).add((0, _eventSystemMjs.EventSystem));
+(0, _containerMjs.Container).mixin((0, _federatedEventTargetMjs.FederatedContainer));
+
+},{"../extensions/Extensions.mjs":"hIU8N","../scene/container/Container.mjs":"cCEVU","./EventSystem.mjs":"hiC9V","./FederatedEventTarget.mjs":"k1ppD"}],"5Cpu3":[function(require,module,exports) {
+var _extensionsMjs = require("../../extensions/Extensions.mjs");
+var _graphicsContextSystemMjs = require("./shared/GraphicsContextSystem.mjs");
+var _graphicsPipeMjs = require("./shared/GraphicsPipe.mjs");
+"use strict";
+(0, _extensionsMjs.extensions).add((0, _graphicsPipeMjs.GraphicsPipe));
+(0, _extensionsMjs.extensions).add((0, _graphicsContextSystemMjs.GraphicsContextSystem));
+
+},{"../../extensions/Extensions.mjs":"hIU8N","./shared/GraphicsContextSystem.mjs":"jX3zg","./shared/GraphicsPipe.mjs":"55mVh"}],"bIrxH":[function(require,module,exports) {
+var _extensionsMjs = require("../../extensions/Extensions.mjs");
+var _meshPipeMjs = require("./shared/MeshPipe.mjs");
+"use strict";
+(0, _extensionsMjs.extensions).add((0, _meshPipeMjs.MeshPipe));
+
+},{"../../extensions/Extensions.mjs":"hIU8N","./shared/MeshPipe.mjs":"1HgaQ"}],"dkVx6":[function(require,module,exports) {
+var _extensionsMjs = require("../../extensions/Extensions.mjs");
+var _canvasTextPipeMjs = require("./canvas/CanvasTextPipe.mjs");
+var _canvasTextSystemMjs = require("./canvas/CanvasTextSystem.mjs");
+"use strict";
+(0, _extensionsMjs.extensions).add((0, _canvasTextSystemMjs.CanvasTextSystem));
+(0, _extensionsMjs.extensions).add((0, _canvasTextPipeMjs.CanvasTextPipe));
+
+},{"../../extensions/Extensions.mjs":"hIU8N","./canvas/CanvasTextPipe.mjs":"9qdOS","./canvas/CanvasTextSystem.mjs":"hTSPC"}],"aoTmE":[function(require,module,exports) {
+var _extensionsMjs = require("../../extensions/Extensions.mjs");
+var _bitmapTextPipeMjs = require("./BitmapTextPipe.mjs");
+"use strict";
+(0, _extensionsMjs.extensions).add((0, _bitmapTextPipeMjs.BitmapTextPipe));
+
+},{"../../extensions/Extensions.mjs":"hIU8N","./BitmapTextPipe.mjs":"7KkDO"}],"6aLg2":[function(require,module,exports) {
+var _extensionsMjs = require("../../extensions/Extensions.mjs");
+var _htmltextPipeMjs = require("./HTMLTextPipe.mjs");
+var _htmltextSystemMjs = require("./HTMLTextSystem.mjs");
+"use strict";
+(0, _extensionsMjs.extensions).add((0, _htmltextSystemMjs.HTMLTextSystem));
+(0, _extensionsMjs.extensions).add((0, _htmltextPipeMjs.HTMLTextPipe));
+
+},{"../../extensions/Extensions.mjs":"hIU8N","./HTMLTextPipe.mjs":"4228v","./HTMLTextSystem.mjs":"iNbsw"}],"bseXD":[function(require,module,exports) {
+var _extensionsMjs = require("../../extensions/Extensions.mjs");
+var _tilingSpritePipeMjs = require("./TilingSpritePipe.mjs");
+"use strict";
+(0, _extensionsMjs.extensions).add((0, _tilingSpritePipeMjs.TilingSpritePipe));
+
+},{"../../extensions/Extensions.mjs":"hIU8N","./TilingSpritePipe.mjs":"aLpd9"}],"bDpgQ":[function(require,module,exports) {
+var _extensionsMjs = require("../../extensions/Extensions.mjs");
+var _nineSliceSpritePipeMjs = require("./NineSliceSpritePipe.mjs");
+"use strict";
+(0, _extensionsMjs.extensions).add((0, _nineSliceSpritePipeMjs.NineSliceSpritePipe));
+
+},{"../../extensions/Extensions.mjs":"hIU8N","./NineSliceSpritePipe.mjs":"3R91L"}],"5Vl03":[function(require,module,exports) {
+var _extensionsMjs = require("../extensions/Extensions.mjs");
+var _filterPipeMjs = require("./FilterPipe.mjs");
+var _filterSystemMjs = require("./FilterSystem.mjs");
+"use strict";
+(0, _extensionsMjs.extensions).add((0, _filterSystemMjs.FilterSystem));
+(0, _extensionsMjs.extensions).add((0, _filterPipeMjs.FilterPipe));
+
+},{"../extensions/Extensions.mjs":"hIU8N","./FilterPipe.mjs":"6OIcd","./FilterSystem.mjs":"hLg2W"}]},["dL1qF"], null, "parcelRequireedc5")
+
+//# sourceMappingURL=browserAll.2ad882d3.js.map
