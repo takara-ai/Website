@@ -1,0 +1,37 @@
+<section class="md:min-h-svh md:flex md:flex-col">
+  <section
+    id="header"
+    class="border-t border-dashed border-white crane-repeat md:flex-grow h-60 md:h-auto flex items-center"
+  >
+    <h1
+      class="semibold opacity-90 text-center"
+      style="
+        width: 100%;
+        font-size: calc(220vw / var(--characters-count));
+        --characters-count: 9;
+      "
+    >
+      takara.ai
+    </h1>
+  </section>
+
+  <section
+    id="disclaimer"
+    class="border-t border-dashed border-black px-1 md:px-4 py-4 flex sm:justify-between items-center space-x-3 sm:space-x-0 bg-white"
+  >
+    <div>{{ partial "nav/crane-svg" . }}</div>
+    <div
+      class="flex space-x-3 sm:space-x-6 text-sm lg:text-base text-neutral-600"
+    >
+      <p class="text-inherit">
+        &copy;<span class="font-semibold">takara.ai</span> {{ now.Format "2006"
+        }}
+      </p>
+      <a class="text-inherit" href="/legal/privacy-policy/">Privacy</a>
+      <a href="https://github.com/takara-ai/Website" target="_blank">GitHub</a>
+      <a target="_blank" href="https://www.linkedin.com/company/takara-ai"
+        >LinkedIn</a
+      >
+    </div>
+  </section>
+</section>

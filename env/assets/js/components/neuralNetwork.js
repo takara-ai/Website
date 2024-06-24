@@ -96,7 +96,7 @@ async function initializeApplication() {
     });
     console.log(
       "%cNEURAL NETWORK LOADED | ニューラルネットワークが読み込まれました 🇯🇵",
-      "color: red; font-size: 20px; font-family: monospace;"
+      "color: #b91c1c; font-size: 20px; font-family: monospace;"
     );
   } catch (error) {
     console.error("Failed to initialize Pixi application:", error);
