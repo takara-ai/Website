@@ -1,0 +1,18 @@
+{{ $image := resources.Get "images/home/yuki-eyre-_4d1xR6Ev8c-unsplash.jpg" }}
+{{ $image := $image.Resize "1920x webp q90" }}
+<section
+  class="min-h-svh border-t border-black border-dashed bg-cover bg-center bg-no-repeat relative dark:invert"
+  style="background-image: url('{{ $image.RelPermalink }}');"
+>
+  <!-- Remove or adjust the overlay as it might interfere with the inversion -->
+  <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+  
+  <!-- Invert the content back to normal colors -->
+  <div class="p-2 sm:p-4 flex justify-between text-sm relative z-10">
+    <h3 class="font-thin text-white">Our Mission</h3>
+    <a
+      class="px-2 py-1 rounded bg-red-700 text-white hover:bg-white border hover:border-black border-red-700 border-dashed hover:text-black"
+      href="/team"
+    >See Our Team -></a>
+  </div>
+</section>

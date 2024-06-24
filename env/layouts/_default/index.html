@@ -63,10 +63,9 @@
     </div>
   </div>
 </section>
-
-{{ partial "home/contact" . }} {{/* CSS Injection */}} {{ $css := resources.Get
-"css/pages/index.css" | resources.Minify | resources.Fingerprint |
-resources.PostProcess}}
+{{ partial "home/mission" . }} {{ partial "home/contact" . }} {{/* CSS Injection
+*/}} {{ $css := resources.Get "css/pages/index.css" | resources.Minify |
+resources.Fingerprint | resources.PostProcess}}
 <link
   rel="stylesheet"
   href="{{ $css.RelPermalink }}"
