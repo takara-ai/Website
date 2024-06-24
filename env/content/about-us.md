@@ -36,3 +36,9 @@ Our team embodies a blend of sharp intellect and passion for AI. With a laser-fo
 
 Join us at [takara.ai](/) as we forge ahead, not just as service providers, but as partners in unveiling the hidden treasures within your organization, catalyzing growth and success. Together, let's navigate the transformative journey of AI.
 
+## Company Information
+
+**Company Number**: 15404713
+
+Registered in England and Wales  
+128 City Road, London, EC1V 2NX, UNITED KINGDOM
