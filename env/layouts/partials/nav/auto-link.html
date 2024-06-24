@@ -3,7 +3,9 @@
 "/services/")) (eq .RelPermalink "/services/custom-gpts/") (eq .RelPermalink
 "/about-us/") (eq .RelPermalink "/ethics/") }}
 <!-- Render list item for pages that are not in 'legal', 'categories', or 'tags' sections and are not the home page or the '/services/' page, or the specific pages -->
-<li>
+<li
+  class="hover:border border-black border-dashed rounded p-1 hover:shadow-md transition ease-in-out w-fit"
+>
   <a href="{{ .RelPermalink }}" class="underline-gradient">{{ .Title }}</a>
 </li>
 {{ end }} {{ end }}
