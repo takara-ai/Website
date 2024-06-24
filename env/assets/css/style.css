@@ -473,9 +473,10 @@ h5 {
 }
 
 :root {
-  --crane-size: 10vw;
+  --crane-color: #ff0000;
+  --crane-size: 80vw;
   --background-color: #000;
-  --animation-duration: 5s;
+  --animation-duration: 10s;
   --animation-timing: linear;
   --animation-direction: normal;
 }
@@ -1719,6 +1720,14 @@ h5 {
   top: 100%;
 }
 
+.isolate {
+  isolation: isolate;
+}
+
+.isolation-auto {
+  isolation: auto;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -2828,6 +2837,10 @@ h5 {
 
 .opacity-95 {
   opacity: 0.95;
+}
+
+.mix-blend-difference {
+  mix-blend-mode: difference;
 }
 
 .outline-none {
