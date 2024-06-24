@@ -3,7 +3,7 @@
   {{ partial "prompts/JapPromptText" . }}
   <div class="my-16 p-4 sm:px-8 min-h-svh flex-grow">
     <header
-      class="mb-16 border-b border-red-700 border-dashed text-center sm:text-right"
+      class="mb-8 sm:mb-16 border-b border-red-700 border-dashed text-center sm:text-right"
     >
       {{ partial "headerTitle" . }}
     </header>
@@ -14,13 +14,15 @@
         "prompt-engineering") ".Kind" "!=" "section" }} {{ range $prompts }}
         <a
           href="{{ .RelPermalink }}"
-          class="rounded-lg p-4 flex flex-col items-left justify-between overflow-hidden bg-white space-y-4 hover:invert border border-dashed border-red-700"
+          class="rounded-lg p-4 flex flex-col items-left justify-between overflow-hidden bg-white space-y-4 transition ease-in-out border sm:hover:shadow-md sm:hover:border border-red-700 hover:border-black border-dashed"
         >
           <div>
-            <h2 class="font-bold mb-2 w-fit text-3xl border-b border-black">
+            <h2
+              class="font-bold mb-2 w-fit text-xl sm:text-3xl border-b border-black"
+            >
               {{ .Title | truncate 50 "..." }}
             </h2>
-            <p class="text-gray-600 text-xs lg:text-base ml-1">
+            <p class="text-neutral-600 text-xs lg:text-base ml-1">
               {{ .Summary | truncate 120 "..." }}
             </p>
           </div>
