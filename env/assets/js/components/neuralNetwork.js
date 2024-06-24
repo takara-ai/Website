@@ -1,99 +1,103 @@
-import { Application, Graphics, Text } from "pixi.js";
-// test
-window.addEventListener("load", async function () {
-  // Constants
-  const ACTIVATION_DELAY = 150;
-  const RESTART_DELAY = 2000;
+import { Application, Graphics, Text, Container } from "pixi.js";
 
-  // Node class for creating and managing node properties
-  class Node {
-    constructor(x, y, label) {
-      this.x = x;
-      this.y = y;
-      this.radius = 10;
-      this.activated = false;
-      this.label = label;
-      this.graphics = new Graphics();
-      this.text = new Text({
-        text: label,
-        style: {
-          fontSize: 12,
-          fill: 0xffffff,
-          align: "center",
-        },
-      });
-      this.graphics.zIndex = 2;
-      this.updateGraphics();
-    }
+// Constants
+const ACTIVATION_DELAY = 150;
+const RESTART_DELAY = 2000;
 
-    activate() {
-      this.activated = true;
-      this.updateGraphics();
-    }
-
-    deactivate() {
-      this.activated = false;
-      this.updateGraphics();
-    }
-
-    updatePosition() {
-      this.graphics.x = this.x;
-      this.graphics.y = this.y;
-      this.text.x = this.x - this.radius;
-      this.text.y = this.y - this.radius - 15;
-    }
-
-    updateGraphics() {
-      this.graphics.clear();
-      const color = this.activated ? 0xb91c1c : 0x000000;
-      this.graphics.circle(0, 0, this.radius);
-      this.graphics.fill(color);
-    }
+// Node class for creating and managing node properties
+class Node {
+  constructor(x, y, label) {
+    this.x = x;
+    this.y = y;
+    this.radius = 10;
+    this.activated = false;
+    this.label = label;
+    this.graphics = new Graphics();
+    this.text = new Text({
+      text: label,
+      style: {
+        fontSize: 12,
+        fill: 0xffffff,
+        align: "center",
+      },
+    });
+    this.text.alpha = 0; // Make text transparent
+    this.container = new Container();
+    this.container.addChild(this.graphics, this.text);
+    this.container.position.set(x, y);
+    this.updateGraphics();
   }
 
-  // Edge class for drawing lines between nodes
-  class Edge {
-    constructor(node1, node2) {
-      this.node1 = node1;
-      this.node2 = node2;
-      this.activated = false;
-      this.graphics = new Graphics();
-      app.stage.addChild(this.graphics);
-      this.updateGraphics();
-    }
-
-    activate() {
-      this.activated = true;
-      this.updateGraphics();
-    }
-
-    deactivate() {
-      this.activated = false;
-      this.updateGraphics();
-    }
-
-    updateGraphics() {
-      this.graphics.clear();
-      const color = this.activated ? 0xb91c1c : 0x000000;
-      const width = this.activated ? 2 : 1;
-      this.graphics.moveTo(this.node1.x, this.node1.y);
-      this.graphics.lineTo(this.node2.x, this.node2.y);
-      this.graphics.setStrokeStyle({ width: width, color: color });
-      this.graphics.stroke();
-    }
+  activate() {
+    this.activated = true;
+    this.updateGraphics();
   }
 
-  // Initialize Pixi Application asynchronously with performance optimizations
+  deactivate() {
+    this.activated = false;
+    this.updateGraphics();
+  }
+
+  updatePosition() {
+    this.container.position.set(this.x, this.y);
+  }
+
+  updateGraphics() {
+    this.graphics.clear();
+    const color = this.activated ? 0xb91c1c : 0x000000;
+    this.graphics.circle(0, 0, this.radius).fill(color);
+    this.text.position.set(-this.radius, -this.radius - 15);
+  }
+}
+
+// Edge class for drawing lines between nodes
+class Edge {
+  constructor(node1, node2) {
+    this.node1 = node1;
+    this.node2 = node2;
+    this.activated = false;
+    this.graphics = new Graphics();
+    this.updateGraphics();
+  }
+
+  activate() {
+    this.activated = true;
+    this.updateGraphics();
+  }
+
+  deactivate() {
+    this.activated = false;
+    this.updateGraphics();
+  }
+
+  updateGraphics() {
+    this.graphics.clear();
+    const color = this.activated ? 0xb91c1c : 0x000000;
+    const width = this.activated ? 2 : 1;
+    this.graphics
+      .moveTo(this.node1.x, this.node1.y)
+      .lineTo(this.node2.x, this.node2.y)
+      .stroke({ width, color });
+  }
+}
+
+// Main application logic
+async function initializeApplication() {
   const app = new Application();
+
   try {
     await app.init({
       resizeTo: document.getElementById("pixi-container"),
       backgroundAlpha: 0,
-      resolution: 2,
+      resolution: window.devicePixelRatio || 1,
       autoDensity: true,
       antialias: true,
-      powerPreference: "high-performance",
+      preference: "webgpu",
     });
+    console.log(
+      "%cNEURAL NETWORK LOADED | ニューラルネットワークが読み込まれました 🇯🇵",
+      "color: #b91c1c; font-size: 20px; font-family: monospace;"
+    );
   } catch (error) {
     console.error("Failed to initialize Pixi application:", error);
     return;
@@ -102,18 +106,38 @@ window.addEventListener("load", async function () {
   const pixiContainer = document.getElementById("pixi-container");
   pixiContainer.appendChild(app.canvas);
 
-  window.addEventListener("resize", () => {
-    app.renderer.resize(pixiContainer.clientWidth, pixiContainer.clientHeight);
-  });
+  // Log renderer information
+
+  function logRendererInfo(app) {
+    console.log("Renderer Information:");
+    console.log("Type:", app.renderer.type);
+    console.log("Preference:", app.renderer.preference);
+    console.log(
+      "Context:",
+      app.renderer.gl ? "WebGL" : app.renderer.context ? "WebGPU" : "Unknown"
+    );
+    console.log("Max Textures:", app.renderer.texture.maxTextures);
+    console.log("GPU:", app.renderer.context?.adapter?.name || "Unknown");
+    console.log("Supports WebGPU:", "gpu" in navigator);
+
+    // Additional WebGPU-specific information
+    if (app.renderer.context && app.renderer.type === "WEBGPU") {
+      console.log("WebGPU Device:", app.renderer.context.device);
+      console.log("WebGPU Adapter Features:", [
+        ...app.renderer.context.adapter.features,
+      ]);
+    }
+  }
+  logRendererInfo(app);
 
   let nodes = [];
   let edges = [];
 
   function calculateLayers() {
-    const windowWidth = window.innerWidth;
-    return windowWidth < 640
+    const containerWidth = pixiContainer.clientWidth;
+    return containerWidth < 640
       ? 5
-      : Math.min(20, Math.floor((windowWidth - 640) / 64) + 6);
+      : Math.min(20, Math.floor((containerWidth - 640) / 64) + 6);
   }
 
   const numLayers = calculateLayers();
@@ -128,28 +152,33 @@ window.addEventListener("load", async function () {
   function createNode(x, y, label) {
     let node = new Node(x, y, label);
     nodes.push(node);
-    app.stage.addChild(node.graphics);
-    app.stage.addChild(node.text);
+    app.stage.addChild(node.container);
     return node;
   }
 
   function createEdge(node1, node2) {
     let edge = new Edge(node1, node2);
     edges.push(edge);
+    app.stage.addChildAt(edge.graphics, 0); // Add edges behind nodes
   }
 
-  const layerSpacing = app.screen.width / (layerSizes.length + 1);
-  const nodeSpacing = (screenHeight, layerSize) =>
-    screenHeight / (layerSize + 1);
+  function positionNodes() {
+    const containerWidth = pixiContainer.clientWidth;
+    const containerHeight = pixiContainer.clientHeight;
+    const layerSpacing = containerWidth / (layerSizes.length + 1);
+    const nodeSpacing = (layerSize) => containerHeight / (layerSize + 1);
 
-  layerSizes.forEach((layerSize, layerIndex) => {
-    const x = (layerIndex + 1) * layerSpacing;
-    const ySpacing = nodeSpacing(app.screen.height, layerSize);
-    for (let i = 0; i < layerSize; i++) {
-      const y = (i + 1) * ySpacing;
-      createNode(x, y, labels[layerIndex][i]);
-    }
-  });
+    layerSizes.forEach((layerSize, layerIndex) => {
+      const x = (layerIndex + 1) * layerSpacing;
+      const ySpacing = nodeSpacing(layerSize);
+      for (let i = 0; i < layerSize; i++) {
+        const y = (i + 1) * ySpacing;
+        createNode(x, y, labels[layerIndex][i]);
+      }
+    });
+  }
+
+  positionNodes();
 
   const layers = [];
   let nodeIndex = 0;
@@ -226,17 +255,15 @@ window.addEventListener("load", async function () {
     loop();
   }
 
-  function animationLoop() {
-    nodes.forEach((node) => {
-      node.updatePosition();
-    });
-    edges.forEach((edge) => {
-      edge.updateGraphics();
-    });
-    app.renderer.render(app.stage);
-    requestAnimationFrame(animationLoop);
-  }
+  app.ticker.add(() => {
+    nodes.forEach((node) => node.updatePosition());
+    edges.forEach((edge) => edge.updateGraphics());
+  });
 
-  requestAnimationFrame(animationLoop);
   loopActivation();
-});
+
+  return app;
+}
+
+// Start the application when the window loads
+document.addEventListener("DOMContentLoaded", initializeApplication);

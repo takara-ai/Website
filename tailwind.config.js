@@ -4,6 +4,8 @@ module.exports = {
     "./env/layouts/**/*.html",
     "./env/content/**/*.md",
     "./env/assets/**/*.js",
+    "./env/hugo.toml",
+    "./env/assets/**/*.css",
   ],
   theme: {
     extend: {
@@ -12,6 +14,9 @@ module.exports = {
         whisper: "'Caveat', cursive",
         japaneseBold: "Hiragino Kaku Gothic Std",
         japanese: "Hiragino Kaku Gothic ProN",
+      },
+      fontSize: {
+        "10xl": ["12rem", { lineHeight: "1" }],
       },
     },
   },

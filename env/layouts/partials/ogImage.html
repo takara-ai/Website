@@ -1,31 +1,10 @@
-{{ $defaultImage := "android-chrome-512x512.png" }}
-{{ $isPromptEngineeringSection := in .RelPermalink "prompt-engineering/" }}
-{{ $baseUrl := trim $.Site.BaseURL "/" }}
-
-{{ $imageURL := "" }}
-{{ if .Params.featured_image }}
-  {{ with resources.Get .Params.featured_image }}
-    {{ $imageURL = print $baseUrl "/" (.Resize "1500x").RelPermalink }}
-  {{ end }}
-{{ else if $isPromptEngineeringSection }}
-  {{ with resources.Get "images/prompt-engineering/prompt-engineering.jpg" }}
-    {{ $imageURL = print $baseUrl "/" (.Resize "1500x").RelPermalink }}
-  {{ end }}
-{{ else }}
-  {{ $imageURL = print $baseUrl "/" $defaultImage }}
-{{ end }}
-
-{{ if $imageURL }}
-  {{ partial "meta/images.html" (dict "ImageURL" $imageURL) }}
-{{ end }}
-
-
-
-
-
-
-
-
-
-
-
+{{ $defaultImage := "og-image.jpg" }} {{ $isPromptEngineeringSection := in
+.RelPermalink "prompt-engineering/" }} {{ $baseUrl := trim $.Site.BaseURL "/" }}
+{{ $imageURL := "" }} {{ if .Params.featured_image }} {{ with resources.Get
+.Params.featured_image }} {{ $imageURL = print $baseUrl "/" (.Resize
+"1500x").RelPermalink }} {{ end }} {{ else if $isPromptEngineeringSection }} {{
+with resources.Get "images/prompt-engineering/prompt-engineering.jpg" }} {{
+$imageURL = print $baseUrl "/" (.Resize "1500x").RelPermalink }} {{ end }} {{
+else }} {{ $imageURL = print $baseUrl "/" $defaultImage }} {{ end }} {{ if
+$imageURL }} {{ partial "meta/images.html" (dict "ImageURL" $imageURL) }} {{ end
+}}
