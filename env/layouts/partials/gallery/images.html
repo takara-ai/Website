@@ -5,11 +5,17 @@
     {{ range $index, $image := $galleryImages }}
       {{ $alt := $image.Name }}
       {{ $isFeatured := eq (mod $index 7) 0 }}
-      <div class="{{ if $isFeatured }}col-span-2 row-span-2{{ end }} relative overflow-hidden" style="padding-bottom: 100%;">
+      {{ $width := $image.Width }}
+      {{ $height := $image.Height }}
+      {{ $aspectRatio := div (float $width) (float $height) }}
+      
+      <div class="{{ if $isFeatured }}col-span-2 row-span-2{{ end }} relative overflow-hidden" style="padding-bottom: {{ mul (div 1 $aspectRatio) 100 }}%;">
+        {{ $resizedImage := $image.Resize "800x" }}
         <img
-          src="{{ $image.RelPermalink }}"
+          src="{{ $resizedImage.RelPermalink }}"
           alt="{{ $alt }}"
           class="absolute inset-0 w-full h-full object-cover rounded-lg border border-dashed border-black transition-all duration-300 ease-in-out hover:brightness-75"
+          loading="lazy"
         >
       </div>
     {{ end }}
