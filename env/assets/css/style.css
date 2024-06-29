@@ -3771,6 +3771,10 @@ h5 {
     padding-left: 1rem;
   }
 
+  .sm\:pb-4 {
+    padding-bottom: 1rem;
+  }
+
   .sm\:text-right {
     text-align: right;
   }
