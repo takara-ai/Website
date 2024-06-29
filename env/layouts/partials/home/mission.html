@@ -1,0 +1,130 @@
+{{ $image := resources.Get "images/home/yuki-eyre-_4d1xR6Ev8c-unsplash.jpg" }}
+{{ $image := $image.Resize "1920x webp q90" }}
+<section
+  class="min-h-svh border-t border-black border-dashed bg-cover bg-center bg-no-repeat relative dark:invert"
+  style="background-image: url('{{ $image.RelPermalink }}');"
+>
+  <!-- Remove or adjust the overlay as it might interfere with the inversion -->
+  <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+  
+  <!-- Invert the content back to normal colors -->
+  <div class="p-2 sm:p-4 flex justify-between text-sm relative z-10">
+    <h3 class="font-thin text-white">Our Mission</h3>
+    <a
+      class="px-2 py-1 rounded bg-red-700 text-white hover:bg-white border hover:border-black border-red-700 border-dashed hover:text-black"
+      href="/team"
+    >See Our Team -></a>
+  </div>
+</section>
+
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 20px;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .member-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            width: 250px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .member-card:hover {
+            transform: scale(1.05);
+        }
+        .member-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 20px auto;
+            border: 5px solid #4a90e2;
+        }
+        .member-info {
+            padding: 0 20px 20px;
+        }
+        h2 {
+            color: #4a90e2;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #333;
+            line-height: 1.6;
+            height: 100px;
+            overflow: hidden;
+        }
+        .work-info, .personal-info {
+            transition: opacity 0.3s ease;
+        }
+        .member-card:hover .work-info {
+            display: none;
+        }
+        .personal-info {
+            display: none;
+        }
+        .member-card:hover .personal-info {
+            display: block;
+        }
+    </style>
+    <div class="gallery" id="teamGallery"></div>
+
+    <script>
+        const teamMembers = [
+            {
+                name: "Alice Johnson",
+                workInfo: "Lead developer with 10 years of experience in web technologies. Specializes in creating scalable and efficient solutions.",
+                personalInfo: "Avid hiker and nature photographer. Loves to spend weekends exploring new trails and capturing landscapes.",
+                photo: "/api/placeholder/150/150?text=Alice"
+            },
+            {
+                name: "Bob Smith",
+                workInfo: "UX designer who ensures our products are not only functional but also user-friendly. Has a keen eye for detail and aesthetics.",
+                personalInfo: "Amateur chef who enjoys experimenting with fusion cuisines. Hosts monthly dinner parties for friends and colleagues.",
+                photo: "/api/placeholder/150/150?text=Bob"
+            },
+            {
+                name: "Charlie Brown",
+                workInfo: "Project manager who keeps everything running smoothly. Excellent communication skills, bridging the gap between technical and non-technical team members.",
+                personalInfo: "Volunteer at local animal shelter. Passionate about animal welfare and has fostered several rescue dogs.",
+                photo: "/api/placeholder/150/150?text=Charlie"
+            },
+            {
+                name: "Diana Lee",
+                workInfo: "Data scientist who turns complex data into actionable insights. Analytical skills have been crucial in driving our data-driven decisions.",
+                personalInfo: "Yoga enthusiast and meditation practitioner. Leads a weekly mindfulness session for the team to promote work-life balance.",
+                photo: "/api/placeholder/150/150?text=Diana"
+            },
+            {
+                name: "Ethan Davis",
+                workInfo: "DevOps engineer who ensures our infrastructure is always up and running. Passionate about automation and continuous improvement.",
+                personalInfo: "Indie game developer in spare time. Has published two mobile games and is working on a VR project.",
+                photo: "/api/placeholder/150/150?text=Ethan"
+            }
+        ];
+
+        const gallery = document.getElementById('teamGallery');
+
+        teamMembers.forEach(member => {
+            const memberCard = document.createElement('div');
+            memberCard.className = 'member-card';
+            memberCard.innerHTML = `
+                <img class="member-photo" src="${member.photo}" alt="${member.name}">
+                <div class="member-info">
+                    <h2>${member.name}</h2>
+                    <p class="work-info">${member.workInfo}</p>
+                    <p class="personal-info">${member.personalInfo}</p>
+                </div>
+            `;
+            gallery.appendChild(memberCard);
+        });
+    </script>
