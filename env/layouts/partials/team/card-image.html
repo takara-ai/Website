@@ -1,0 +1,23 @@
+{{ if .Params.image }}
+<div class="w-24 h-24 mb-4 mx-auto">
+  {{ $imagePath := printf "images/team/%s" .Params.image }}
+  {{ $originalImage := resources.Get $imagePath }}
+  {{ if $originalImage }}
+    {{ $imageWidth := $originalImage.Width }}
+    {{ $imageHeight := $originalImage.Height }}
+    {{ $webpImage := $originalImage.Fill (printf "%dx%d webp q80 picture" $imageWidth $imageHeight) | resources.Fingerprint }}
+    {{ $jpegImage := $originalImage.Fill (printf "%dx%d jpg q80" $imageWidth $imageHeight) | resources.Fingerprint }}
+    <picture class="dark:invert">
+      <source srcset="{{ $webpImage.RelPermalink }}" type="image/webp">
+      <source srcset="{{ $jpegImage.RelPermalink }}" type="image/jpeg">
+      <img
+        src="{{ $jpegImage.RelPermalink }}"
+        width="{{ $imageWidth }}"
+        height="{{ $imageHeight }}"
+        alt="{{ $.Title }}"
+        class="object-cover rounded-full w-24 h-24"
+      >
+    </picture>
+  {{ end }}
+</div>
+{{ end }}
