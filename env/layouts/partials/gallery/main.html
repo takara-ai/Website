@@ -1,0 +1,14 @@
+
+  {{ $galleryImages := resources.Match "images/gallery/*" }}
+
+  <div class="container mx-auto px-2 sm:px-4">
+    {{ partial "gallery/heading.html" . }}
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      {{ range $index, $resource := $galleryImages }}
+        {{ if and (ne $resource.Name ".DS_Store") (eq $resource.MediaType.MainType "image") }}
+          {{ partial "gallery/image.html" (dict "resource" $resource "index" $index) }}
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+
