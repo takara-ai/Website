@@ -9,6 +9,11 @@ content:
     path: env/content/team
     format: yaml-frontmatter
     type: collection
+    fields: 
+      - name: Headshot
+        type: image
+      - name: Action Image
+        type: image
     
 
 media: env/assets/images
