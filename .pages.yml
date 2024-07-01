@@ -3,3 +3,5 @@ content:
     label: Guides
     path: env/content/prompt-engineering
     type: collection
+    
+media: env/assets/images
