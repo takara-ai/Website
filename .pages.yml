@@ -54,4 +54,5 @@ content:
         type: number
         default: 100
 
-media: env/assets/images
+media_folder: "env/assets/images"
+public_folder: "/images"
