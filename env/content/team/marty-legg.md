@@ -2,7 +2,7 @@
 title: "Marty Legg"
 date: 2024-06-30T14:35:11+01:00
 draft: true
-position: "Job Title"
+position: "CEO"
 email: "email@example.com"
 linkedin: "https://www.linkedin.com/in/username"
 github: "https://github.com/username"
