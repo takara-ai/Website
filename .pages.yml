@@ -10,10 +10,39 @@ content:
     format: yaml-frontmatter
     type: collection
     fields: 
+      - name: title
+        label: Title
+        type: string
+      - name: date
+        label: Publish Date
+        type: datetime
+      - name: draft
+        label: Draft
+        type: boolean
+        default: true
+      - name: position
+        label: Position
+        type: string
       - name: department
+        label: Department
         type: select
         options:
           values: [founders]
+      - name: email
+        label: Email
+        type: string
+      - name: linkedin
+        label: LinkedIn
+        type: string
+        required: false
+      - name: github
+        label: GitHub
+        type: string
+        required: false
+      - name: twitter
+        label: Twitter
+        type: string
+        required: false
       - name: image
         label: Headshot
         type: image
@@ -21,7 +50,8 @@ content:
         label: Action Image
         type: image
       - name: weight
+        label: Weight
         type: number
-    
+        default: 100
 
 media: env/assets/images
