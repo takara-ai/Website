@@ -8,5 +8,42 @@ content:
     label: Team
     path: env/content/team
     type: collection
+    fields:
+      - name: title
+        label: Title
+        widget: string
+      - name: date
+        label: Date
+        widget: datetime
+      - name: draft
+        label: Draft
+        widget: boolean
+      - name: position
+        label: Job Title
+        widget: string
+      - name: department
+        label: Department
+        widget: string
+      - name: email
+        label: Email
+        widget: string
+      - name: linkedin
+        label: LinkedIn
+        widget: string
+      - name: github
+        label: GitHub
+        widget: string
+      - name: twitter
+        label: Twitter
+        widget: string
+      - name: image
+        label: Image URL
+        widget: string
+      - name: action
+        label: Action
+        widget: string
+      - name: weight
+        label: Weight
+        widget: number
 
 media: env/assets/images
