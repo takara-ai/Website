@@ -47,7 +47,7 @@ content:
         label: Headshot
         type: image
         options:
-          output: images/team
+          output: /
       - name: action
         label: Action Image
         type: image
