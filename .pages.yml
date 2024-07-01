@@ -10,6 +10,9 @@ content:
     format: yaml-frontmatter
     type: collection
     fields: 
+      - name: Department
+        type: select
+        values: ['founders']
       - name: Headshot
         type: image
       - name: Action Image
