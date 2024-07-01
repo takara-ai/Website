@@ -15,9 +15,13 @@ content:
         options:
           values: [founders]
       - name: image
+        label: Headshot
         type: image
-      - name: Action Image
+      - name: action
+        label: Action Image
         type: image
+      - name: weight
+        type: number
     
 
 media: env/assets/images
