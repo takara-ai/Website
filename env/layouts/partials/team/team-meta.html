@@ -1,15 +1,14 @@
 
 <div>
-  {{ with .Params.image }}
+<div>
 {{ $quality := 80 }}
-{{ $imagePath := path.Join "images/team" . }}
+{{ $imagePath := printf .Params.image }}
 {{ with resources.Get $imagePath }}
   {{ $image700 := .Fill (printf "700x700 webp picture q%d" $quality) }}
   {{ $image600 := .Fill (printf "600x600 webp picture q%d" $quality) }}
   {{ $image500 := .Fill (printf "500x500 webp picture q%d" $quality) }}
   {{ $image400 := .Fill (printf "400x400 webp picture q%d" $quality) }}
   {{ $image300 := .Fill (printf "300x300 webp picture q%d" $quality) }}
-
   <picture>
     <source media="(min-width: 1536px)" srcset="{{ $image700.RelPermalink }}">
     <source media="(min-width: 1280px)" srcset="{{ $image600.RelPermalink }}">
@@ -29,9 +28,8 @@
 {{ else }}
   <p>Image not found: {{ $imagePath }}</p>
 {{ end }}
-  {{ else }}
-    <p class="text-xs text-red-500">No image parameter for {{ .Title }}</p>
-  {{ end }}
+</div>
+
   <p class="uppercase font-body mt-6">
     <span>{{ .Title }}</span><br />
   </p>
