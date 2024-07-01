@@ -1,0 +1,36 @@
+
+<div>
+  {{ with .Params.image }}
+    {{ $imagePath := path.Join "images/team" . }}
+    {{ with resources.Get $imagePath }}
+      {{ $image := .Fill "1920x1920 webp q75 picture center" }}
+      {{ $imgSizes := slice 640 750 828 1080 1200 1920 }}
+      <a href="">
+      <img
+        alt="{{ $.Title }} - {{ $.Params.position }}"
+        loading="lazy"
+        width="1920"
+        height="1920"
+        decoding="async"
+        class="dark:invert h-auto w-full object-cover aspect-square rounded-3xl transition-all duration-300 ease-in-out hover:brightness-75"
+        sizes="(min-width: 1536px) 20vw, (min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+        srcset="{{ range $size := $imgSizes }}
+          {{ ($image.Resize (printf "%dx%d" $size $size)).RelPermalink }} {{ $size }}w,
+        {{ end }}"
+        src="{{ $image.RelPermalink }}"
+      />
+      </a>
+    {{ else }}
+      <p class="text-xs text-red-500">Image not found - {{ $imagePath }}</p>
+    {{ end }}
+  {{ else }}
+    <p class="text-xs text-red-500">No image parameter for {{ .Title }}</p>
+  {{ end }}
+  <p class="text-3xs uppercase font-body mt-6">
+    <span>{{ .Title }}</span><br />
+  </p>
+  <p class="text-3xs uppercase font-body pb-2">
+    <span>{{ .Params.position }}</span><br />
+  </p>
+</div>
+
