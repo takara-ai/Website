@@ -3,11 +3,27 @@
 <div class="flex bg-white">
   <div class="flex-grow my-16 p-4 sm:px-8 min-h-svh">
     {{ partial "headerTitle" . }}
-
     {{ $pages := .Pages.ByWeight }}
-    {{ $grouped := $pages.GroupByParam "department" }}
+    {{ $groupedTemp := $pages.GroupByParam "department" }}
+    
+    {{/* Create a new slice to store sorted departments */}}
+    {{ $sortedGroups := slice }}
+    
+    {{/* Find and extract the Founders group */}}
+    {{ $foundersGroup := index (where $groupedTemp "Key" "==" "founders") 0 }}
+    {{ $otherGroups := where $groupedTemp "Key" "!=" "founders" }}
+    
+    {{/* Add Founders group first if it exists */}}
+    {{ if $foundersGroup }}
+      {{ $sortedGroups = $sortedGroups | append $foundersGroup }}
+    {{ end }}
+    
+    {{/* Sort other groups alphabetically (case insensitive) and append them */}}
+    {{ range sort $otherGroups "Key" }}
+      {{ $sortedGroups = $sortedGroups | append . }}
+    {{ end }}
 
-    {{ range $index, $group := $grouped }}
+    {{ range $index, $group := $sortedGroups }}
       <div class="py-6 sm:py-8 px-2 sm:px-4 bg-neutral-100 rounded-3xl {{ if ne $index 0 }}mt-6{{ end }}">
         <h2 class="pb-12 sm:pb-16 text-right text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-thin text-neutral-600">
           {{ .Key | default "Team" | title }}
