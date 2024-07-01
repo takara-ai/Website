@@ -3,5 +3,10 @@ content:
     label: Guides
     path: env/content/prompt-engineering
     type: collection
-    
+
+  - name: team
+    label: Team
+    path: env/content/team
+    type: collection
+
 media: env/assets/images

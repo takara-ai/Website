@@ -8,7 +8,7 @@ email: "email@example.com"
 linkedin: "https://www.linkedin.com/in/username"
 github: "https://github.com/username"
 twitter: "https://twitter.com/username"
-image: "/images/team/{{ .Name }}.jpg"
+image: ""
 action: ""
 weight: 100
 ---
