@@ -1,24 +1,26 @@
-{{/*  team list page  */}}
+{{/* team list page */}}
 {{ define "main" }}
 <div class="flex bg-white">
   <div class="flex-grow my-16 p-4 sm:px-8 min-h-svh">
-      {{ partial "headerTitle" . }}
+    {{ partial "headerTitle" . }}
 
-    
-        <div class="py-8 sm:py-14 lg:py-20 2xl:py-14 px-2 sm:px-4 bg-neutral-100 rounded-3xl">
-          <h2 class="pb-8 sm:pb-14 lg:pb-20 2xl:pb-28 text-right text-7xl text-semibold">
-            Founders
-          </h2>
-          <div class=" grid grid-cols-2 gap-6 sm:grid-cols-5">
-            {{ range .Pages.ByWeight }}
+    {{ $pages := .Pages.ByWeight }}
+    {{ $grouped := $pages.GroupByParam "department" }}
+
+    {{ range $index, $group := $grouped }}
+      <div class="py-6 sm:py-8 px-2 sm:px-4 bg-neutral-100 rounded-3xl {{ if ne $index 0 }}mt-6{{ end }}">
+        <h2 class="pb-12 sm:pb-16 text-right text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-thin text-neutral-600">
+          {{ .Key | default "Team" | title }}
+        </h2>
+        <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
+          {{ range .Pages }}
             {{ if not .Params.draft }}
-            {{ partial "team/team-meta" . }}
+              {{ partial "team/team-meta" . }}
             {{ end }}
-        {{ end }}
-
-          </div>
-        
+          {{ end }}
         </div>
+      </div>
+    {{ end }}
 
   </div>
 </div>
