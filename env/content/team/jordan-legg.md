@@ -7,7 +7,7 @@ email: "jordan@takara.ai"
 linkedin: "https://linkedin.com/in/404missinglink"
 github: "https://github.com/404missinglink"
 twitter: "https://twitter.com/username"
-image: "/ee7fd47e-484f-49bf-8532-be7cbc1d443d.JPG"
+image: "ee7fd47e-484f-49bf-8532-be7cbc1d443d.JPG"
 weight: 100
 ---
 
