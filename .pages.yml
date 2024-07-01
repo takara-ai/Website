@@ -15,7 +15,7 @@ content:
         type: string
       - name: date
         label: Publish Date
-        type: datetime
+        type: date
       - name: draft
         label: Draft
         type: boolean
