@@ -1,12 +1,10 @@
+{{/*  gallery list page  */}}
 {{ define "main" }}
 <div class="relative flex flex-row items-start justify-between bg-white">
  
   <div class="my-16 p-4 sm:px-8 min-h-svh flex-grow">
-    <header
-      class="mb-8 sm:mb-16 border-b border-red-700 border-dashed text-center sm:text-right"
-    >
       {{ partial "headerTitle" . }}
-    </header>
+
     {{ partial "gallery/main" . }}
   </div>
 </div>
