@@ -55,4 +55,3 @@ content:
         default: 100
 
 media_folder: env/assets/images
-public_folder: /images
