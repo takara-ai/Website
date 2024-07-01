@@ -1,28 +1,34 @@
 
 <div>
   {{ with .Params.image }}
-    {{ $imagePath := path.Join "images/team" . }}
-    {{ with resources.Get $imagePath }}
-      {{ $image := .Fill "350x350 webp q75 picture center" }}
-      {{ $imgSizes := slice 150 200 300 350 }}
+{{ $quality := 80 }}
+{{ $imagePath := path.Join "images/team" . }}
+{{ with resources.Get $imagePath }}
+  {{ $image700 := .Fill (printf "700x700 webp picture q%d" $quality) }}
+  {{ $image600 := .Fill (printf "600x600 webp picture q%d" $quality) }}
+  {{ $image500 := .Fill (printf "500x500 webp picture q%d" $quality) }}
+  {{ $image400 := .Fill (printf "400x400 webp picture q%d" $quality) }}
+  {{ $image300 := .Fill (printf "300x300 webp picture q%d" $quality) }}
 
-      <img
-        alt="{{ $.Title }} - {{ $.Params.position }}"
-        loading="lazy"
-        width="350"
-        height="350"
-        decoding="async"
-        class="dark:invert h-auto w-full object-cover aspect-square rounded-3xl transition-all duration-300 ease-in-out hover:brightness-75"
-        sizes="(min-width: 1536px) 175px, (min-width: 1280px) 175px, (min-width: 1024px) 175px, (min-width: 640px) 250px, 150px"
-        srcset="{{ range $size := $imgSizes }}
-          {{ ($image.Resize (printf "%dx%d webp q75" $size $size)).RelPermalink }} {{ $size }}w,
-        {{ end }}"
-        src="{{ $image.RelPermalink }}"
-      />
-      
-    {{ else }}
-      <p class="text-xs text-red-500">Image not found - {{ $imagePath }}</p>
-    {{ end }}
+  <picture>
+    <source media="(min-width: 1536px)" srcset="{{ $image700.RelPermalink }}">
+    <source media="(min-width: 1280px)" srcset="{{ $image600.RelPermalink }}">
+    <source media="(min-width: 1024px)" srcset="{{ $image500.RelPermalink }}">
+    <source media="(min-width: 640px)" srcset="{{ $image400.RelPermalink }}">
+    <source media="(min-width: 375px)" srcset="{{ $image300.RelPermalink }}">
+    <img
+      src="{{ $image300.RelPermalink }}"
+      alt="{{ $.Title }} - {{ $.Params.position }}"
+      loading="lazy"
+      width="{{ $image700.Width }}"
+      height="{{ $image700.Height }}"
+      decoding="async"
+      class="dark:invert h-auto w-full object-cover aspect-square rounded-3xl transition-all duration-300 ease-in-out hover:brightness-75"
+    >
+  </picture>
+{{ else }}
+  <p>Image not found: {{ $imagePath }}</p>
+{{ end }}
   {{ else }}
     <p class="text-xs text-red-500">No image parameter for {{ .Title }}</p>
   {{ end }}
