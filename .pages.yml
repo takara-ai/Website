@@ -46,6 +46,8 @@ content:
       - name: image
         label: Headshot
         type: image
+        options:
+          output: images
       - name: action
         label: Action Image
         type: image
