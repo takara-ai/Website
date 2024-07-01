@@ -12,7 +12,8 @@ content:
     fields: 
       - name: Department
         type: select
-        values: ['founders']
+        options:
+          values: [founders]
       - name: Headshot
         type: image
       - name: Action Image
