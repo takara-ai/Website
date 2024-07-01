@@ -3,19 +3,19 @@
   {{ with .Params.image }}
     {{ $imagePath := path.Join "images/team" . }}
     {{ with resources.Get $imagePath }}
-      {{ $image := .Fill "1920x1920 webp q75 picture center" }}
-      {{ $imgSizes := slice 151 750 828 1080 1200 1920 }}
-    
+      {{ $image := .Fill "350x350 webp q75 picture center" }}
+      {{ $imgSizes := slice 150 200 300 350 }}
+
       <img
         alt="{{ $.Title }} - {{ $.Params.position }}"
         loading="lazy"
-        width="1920"
-        height="1920"
+        width="350"
+        height="350"
         decoding="async"
         class="dark:invert h-auto w-full object-cover aspect-square rounded-3xl transition-all duration-300 ease-in-out hover:brightness-75"
-        sizes="(min-width: 1536px) 20vw, (min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 375px) 50vw, 100vw"
+        sizes="(min-width: 1536px) 175px, (min-width: 1280px) 175px, (min-width: 1024px) 175px, (min-width: 640px) 250px, 150px"
         srcset="{{ range $size := $imgSizes }}
-          {{ ($image.Resize (printf "%dx%d" $size $size)).RelPermalink }} {{ $size }}w,
+          {{ ($image.Resize (printf "%dx%d webp q75" $size $size)).RelPermalink }} {{ $size }}w,
         {{ end }}"
         src="{{ $image.RelPermalink }}"
       />
