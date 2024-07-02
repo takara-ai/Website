@@ -56,5 +56,8 @@ content:
         label: Weight
         type: number
         default: 100
+      - name: body
+        label: Bio
+        type: rich-text
 
 media: env/assets/images
