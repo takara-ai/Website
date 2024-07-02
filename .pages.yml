@@ -3,3 +3,58 @@ content:
     label: Guides
     path: env/content/prompt-engineering
     type: collection
+
+  - name: team
+    label: Team
+    path: env/content/team
+    format: yaml-frontmatter
+    type: collection
+    fields: 
+      - name: title
+        label: Title
+        type: string
+      - name: date
+        label: Publish Date
+        type: date
+      - name: draft
+        label: Draft
+        type: boolean
+        default: true
+      - name: position
+        label: Position
+        type: string
+      - name: department
+        label: Department
+        type: select
+        options:
+          values: [founders]
+      - name: email
+        label: Email
+        type: string
+      - name: linkedin
+        label: LinkedIn
+        type: string
+        required: false
+      - name: github
+        label: GitHub
+        type: string
+        required: false
+      - name: twitter
+        label: Twitter
+        type: string
+        required: false
+      - name: image
+        label: Headshot
+        type: image
+        required: true
+        options:
+          output: images 
+      - name: action
+        label: Action Image
+        type: image
+      - name: weight
+        label: Weight
+        type: number
+        default: 100
+
+media: env/assets/images
