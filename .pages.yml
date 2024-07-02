@@ -46,6 +46,7 @@ content:
       - name: image
         label: Headshot
         type: image
+        required: true
         options:
           output: images 
       - name: action
