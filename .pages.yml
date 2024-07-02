@@ -26,6 +26,7 @@ content:
       - name: department
         label: Department
         type: select
+        required: true
         options:
           values: [founders]
       - name: email
