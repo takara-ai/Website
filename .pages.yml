@@ -13,6 +13,7 @@ content:
       - name: title
         label: Title
         type: string
+        required: true
       - name: date
         label: Publish Date
         type: date
