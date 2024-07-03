@@ -3,7 +3,6 @@ title: "GPT Models"
 date: "2024-02-08"
 draft: false
 description: "Explore our innovative Custom GPTs designed for efficiency and precision in specialized tasks. Dive into the future with takara.ai."
-layout: "about-us"
 ---
 
 At takara.ai, we've crafted a suite of custom GPT models tailored for specific applications that are reshaping industries. Discover our lineup of AI solutions and elevate your operational capabilities.
