@@ -4,6 +4,8 @@
 {{ $isFeatured := eq (mod $index 7) 0 }}
 
 {{ $quality := 80 }}
+{{ $RESAMPLER := "MitchellNetravali" }}
+{{ $encoderHint := "picture" }}
 {{ $sizes := slice 
     (dict "width" (cond $isFeatured 1000 500) "media" "(min-width: 1024px)")
     (dict "width" (cond $isFeatured 700 350) "media" "(min-width: 768px)")
@@ -20,7 +22,7 @@
 >
   <picture>
     {{ range $size := $sizes }}
-      {{ $resized := $resource.Resize (printf "%dx webp q%d lanczos picture" $size.width $quality) }}
+      {{ $resized := $resource.Resize (printf "%dx webp q%d %s %s" $size.width $quality $RESAMPLER $encoderHint) }}
       <source
         {{ with $size.media }}media="{{ . }}"{{ end }}
         srcset="{{ $resized.RelPermalink }}"
@@ -28,7 +30,7 @@
       >
     {{ end }}
     {{ $mobileImage := (index $sizes 2) }}
-    {{ $resized := $resource.Resize (printf "%dx webp q%d lanczos picture" $mobileImage.width $quality) }}
+    {{ $resized := $resource.Resize (printf "%dx webp q%d %s %s" $mobileImage.width $quality $RESAMPLER $encoderHint) }}
     <img
       src="{{ $resized.RelPermalink }}"
       alt="{{ $alt }}"
