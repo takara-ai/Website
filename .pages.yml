@@ -1,7 +1,7 @@
 content:
   - name: prompt-engineering
     label: Guides
-    path: env/content/prompt-engineering
+    path: env/content/open-source/prompt-engineering
     type: collection
 
   - name: team
