@@ -1,6 +1,6 @@
 <!-- Menu wrapper -->
 <div class="top-0 left-0 w-full z-20 absolute">
-  <nav class="relative px-1 md:px-4 flex justify-between items-start py-1">
+  <nav class="relative px-1 md:px-4 flex justify-between items-center py-1">
     <!-- Logo -->
     {{ partial "nav/crane-top-link" . }}
     
@@ -8,12 +8,12 @@
     {{ partial "nav/mobile-menu-button" . }}
 
     <!-- Desktop menu -->
-    <ul class="hidden lg:flex lg:w-auto lg:space-x-8 flex-grow justify-end" id="top-menu">
+    <ul class="hidden lg:flex lg:w-auto lg:space-x-8 flex-grow justify-end items-center" id="top-menu">
       {{ $excludedSections := slice "legal" "categories" "tags" }}
       {{ range .Site.Sections }}
         {{ if not (in $excludedSections .Section) }}
           <li class="relative group" data-section="{{ .Section }}">
-            <a href="{{ .RelPermalink }}" class="text-neutral-600 hover:text-black focus:outline-none focus:underline">{{ .Title }}</a>
+            <a href="{{ .RelPermalink }}" class="text-neutral-600 hover:text-black focus:outline-none focus:underline text-lg py-2">{{ .Title }}</a>
             <div class="hidden">
               {{ range .Pages }}
                 <a href="{{ .RelPermalink }}" class="block">{{ .Title }}</a>
@@ -26,8 +26,8 @@
   </nav>
   
   <!-- Expandable submenu -->
-  <div class="absolute right-0 w-full bg-white shadow-lg transition-all duration-300 ease-in-out overflow-hidden h-0" id="submenu">
-    <div class=" mx-auto px-4 py-6 opacity-0 transition-opacity duration-300 ease-in-out" id="submenu-content">
+  <div class="absolute right-0 w-full bg-white shadow-lg transition-all duration-200 ease-in-out overflow-hidden h-0" id="submenu">
+    <div class="px-4 py-6 opacity-0 transition-opacity duration-200 ease-in-out" id="submenu-content">
       <div class="grid grid-cols-4 gap-4 text-right" id="submenu-grid">
         <!-- Content will be dynamically populated here -->
       </div>
@@ -35,7 +35,7 @@
   </div>
   
   <!-- Dashed border -->
-  <div class="border-b border-black border-dashed w-full transition-all duration-300 ease-in-out" id="dashed-border"></div>
+  <div class="border-b border-black border-dashed w-full transition-all duration-200 ease-in-out" id="dashed-border"></div>
 </div>
 
 <script>
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       submenu.classList.add('h-0');
       dashedBorder.style.transform = 'translateY(0)';
       if (currentFocus) currentFocus.focus();
-    }, 300);
+    }, 200); // Reduced from 300ms to 200ms for faster animation
   }
   
   menuItems.forEach(item => {
