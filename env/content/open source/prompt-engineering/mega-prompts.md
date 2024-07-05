@@ -3,7 +3,7 @@ title: "Mega Prompts"
 date: "2024-05-30T12:25:23+01:00"
 draft: false
 description: "Learn to create effective Mega Prompts for Large Language Models with our detailed guide. Enhance your AI interactions with step-by-step instructions and best practices for precise, context-rich prompts."
-layout: ""
+type: "prompt-engineering"
 ---
 
 **Contributors**:
