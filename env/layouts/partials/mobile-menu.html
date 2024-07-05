@@ -1,44 +1,106 @@
-<div
-  class="top-0 left-0 w-full z-20 absolute"
->
-  {{/* Fetch the SVG logo once and use it for both desktop and mobile nav */}}
-  {{ $svg := resources.Get "images/logo-24/TakaraAi.svg" }}
+<!-- Menu wrapper -->
+<div class="top-0 left-0 w-full z-20 absolute">
+  <nav class="relative px-1 md:px-4 flex justify-between items-start py-1">
+    <!-- Logo -->
+    {{ partial "nav/crane-top-link" . }}
+    
+    <!-- Mobile menu button -->
+    {{ partial "nav/mobile-menu-button" . }}
 
-  <nav class="relative px-1 md:px-4  flex justify-between items-start py-1">
-    <a href="/
-    ">
-    <div class="flex items-center rounded">
-  
-      <svg class="h-16 w-auto fill-red-700" xmlns="http://www.w3.org/2000/svg" data-name="Layer 2" viewBox="0 0 287.95 221.8">
-        <g data-name="3">
-          <path d="m165.57 124.67-29.46-9.05L29.9 221.8l125.11-63.72 10.56-33.41zm-95.15-7.94 12.54-9.21 9.61-3.89 7.99 1.02 32.31 9.99L28.68 218.8M0 0l108.02 92.62-6.18 9.21-9.68-1.27-10.41 4.21L0 0zm126.97 69.58-22.19 33.28 30.59 9.4-8.4-42.68zm39.56 52.25-27.9-8.54-8.83-44.87 36.73 53.41zm10.27 47.26-17.61-14.56 9.45-29.6 6.99 10.08 1.17 34.08zm67.71-84.19 4.77 15.03-69.48 69.16-1.29-38.48 66-45.71zm2.86-.74 14.18 4.39 26.4 48.21-33.53-34.9-2.32-3.06-4.73-14.64zm-72.13 45.04 18.03-12.48-3.11-12.83-48.41-32.9-7.36-5.04-2.03.92 42.88 62.33zm55.39-112.26L140.7 66.63l23.91 16.3 66.02-65.99zm-40.42 83.39-23.02-15.7 65.78-65.78-23.36 65.61-19.4 15.87z" data-name="3. logo"/>
-        </g>
-      </svg>
-  
-      
-      </div>
-      </a>
-    
-    <div class="lg:hidden">
-      <button class="navbar-burger flex items-center p-3">
-        <!-- Simplified SVG for the burger icon -->
-        <svg
-          class="block h-4 md:h-6 fill-current"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <title>Mobile menu</title>
-          <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
-        </svg>
-      </button>
-    </div>
-    <ul
-      class="hidden lg:flex lg:w-auto lg:space-x-8 border-b border-black border-dashed flex-grow justify-end"
-    >
-      {{ partial "nav/auto-link" . }}
+    <!-- Desktop menu -->
+    <ul class="hidden lg:flex lg:w-auto lg:space-x-8 flex-grow justify-end" id="top-menu">
+      {{ $excludedSections := slice "legal" "categories" "tags" }}
+      {{ range .Site.Sections }}
+        {{ if not (in $excludedSections .Section) }}
+          <li class="relative group" data-section="{{ .Section }}">
+            <a href="{{ .RelPermalink }}" class="text-neutral-600 hover:text-black focus:outline-none focus:underline">{{ .Title }}</a>
+            <div class="hidden">
+              {{ range .Pages }}
+                <a href="{{ .RelPermalink }}" class="block">{{ .Title }}</a>
+              {{ end }}
+            </div>
+          </li>
+        {{ end }}
+      {{ end }}
     </ul>
-    
   </nav>
+  
+  <!-- Expandable submenu -->
+  <div class="absolute right-0 w-full bg-white shadow-lg transition-all duration-300 ease-in-out overflow-hidden h-0" id="submenu">
+    <div class=" mx-auto px-4 py-6 opacity-0 transition-opacity duration-300 ease-in-out" id="submenu-content">
+      <div class="grid grid-cols-4 gap-4 text-right" id="submenu-grid">
+        <!-- Content will be dynamically populated here -->
+      </div>
+    </div>
+  </div>
+  
+  <!-- Dashed border -->
+  <div class="border-b border-black border-dashed w-full transition-all duration-300 ease-in-out" id="dashed-border"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+  const menuItems = document.querySelectorAll('#top-menu > li');
+  const submenu = document.getElementById('submenu');
+  const submenuContent = document.getElementById('submenu-content');
+  const submenuGrid = document.getElementById('submenu-grid');
+  const dashedBorder = document.getElementById('dashed-border');
+  let timeoutId;
+  let currentFocus = null;
+  
+  function showSubmenu(event) {
+    clearTimeout(timeoutId);
+    const section = event.currentTarget.dataset.section;
+    const pages = event.currentTarget.querySelector('div').innerHTML;
+    
+    submenuGrid.innerHTML = `
+      <div class="col-start-4 col-span-1"> <!-- Position the content in the rightmost column -->
+        <h3 class="text-sm text-gray-500 mb-2">Explore ${event.currentTarget.querySelector('a').textContent}</h3>
+        <ul class="space-y-2">
+          ${pages}
+        </ul>
+      </div>
+    `;
+    
+    submenu.classList.remove('h-0');
+    submenu.classList.add('h-auto');
+    submenuContent.classList.remove('opacity-0');
+    submenuContent.classList.add('opacity-100');
+    const submenuHeight = submenu.offsetHeight;
+    dashedBorder.style.transform = `translateY(${submenuHeight}px)`;
+
+    // Ensure submenu covers full width
+    submenu.style.width = '100%';
+    submenu.style.left = '0';
+  }
+  
+  function hideSubmenu() {
+    submenuContent.classList.remove('opacity-100');
+    submenuContent.classList.add('opacity-0');
+    timeoutId = setTimeout(() => {
+      submenu.classList.remove('h-auto');
+      submenu.classList.add('h-0');
+      dashedBorder.style.transform = 'translateY(0)';
+      if (currentFocus) currentFocus.focus();
+    }, 300);
+  }
+  
+  menuItems.forEach(item => {
+    item.addEventListener('mouseenter', showSubmenu);
+    item.addEventListener('focus', showSubmenu);
+  });
+  
+  submenu.addEventListener('mouseenter', () => clearTimeout(timeoutId));
+  
+  document.querySelector('nav').addEventListener('mouseleave', hideSubmenu);
+  submenu.addEventListener('mouseleave', hideSubmenu);
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') hideSubmenu();
+  });
+});
+</script>
 
   <div class="navbar-menu relative z-50 hidden">
     <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
