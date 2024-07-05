@@ -3,7 +3,7 @@ title: "Product Prototypes"
 date: "2024-03-31T23:15:56+01:00"
 draft: false
 description: "Discover a comprehensive guide to product prototyping, featuring expert-crafted prompts for ideation, user research, wireframing, testing, and more."
-layout: ""
+type: "prompt-engineering"
 ---
 
 **Instruction Following Prompt Guide:**

@@ -3,6 +3,7 @@ title: "Startups"
 date: "2024-03-28T20:48:58Z"
 draft: false
 description: "Unlock startup success with AI: Explore financial management, customer growth, and scaling strategies in our comprehensive prompt guide."
+type: "prompt-engineering"
 ---
 
 ## Founders Agreements

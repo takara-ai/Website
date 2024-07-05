@@ -3,7 +3,7 @@ title: "Prompt Guide"
 date: "2024-03-28T15:06:55Z"
 draft: false
 description: "Explore AI learning methods: zero-shot to many-shot, chain of thought, and instruction following, to harness AI's full potential."
-layout: ""
+type: "prompt-engineering"
 ---
 
 Welcome to the world of prompt engineering! This guide is designed to help you navigate the exciting landscape of AI communication with confidence and creativity. By understanding the different learning methods, utilizing placeholders effectively, and following the prompt guide format, you'll be well-equipped to unlock the full potential of our tutorials and achieve your goals more efficiently. These guides were handcrafted by our team here at takara.ai (although the structure of these is assisted by AI) completely for free in our spare time and we hope you enjoy them.

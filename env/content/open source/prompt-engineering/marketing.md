@@ -3,6 +3,7 @@ title: "Marketing"
 date: "2024-03-21T15:02:10Z"
 draft: false
 description: "Unlock the power of ChatGPT-4 for your marketing strategies with our guide on crafting compelling prompts for pitch decks, content strategies, and more, tailored to engage your audience effectively."
+type: "prompt-engineering"
 ---
 
 ## Proposal Pitch Decks
