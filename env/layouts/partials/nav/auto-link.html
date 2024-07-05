@@ -1,11 +1,10 @@
-{{ range .Site.Pages }} {{ if or (and .IsNode (ne .Section "legal") (ne .Section
-"categories") (ne .Section "tags") (not .IsHome) (ne .RelPermalink
-"/services/")) (eq .RelPermalink "/services/custom-gpts/") (eq .RelPermalink
-"/about-us/") (eq .RelPermalink "/ethics/") }}
-<!-- Render list item for pages that are not in 'legal', 'categories', or 'tags' sections and are not the home page or the '/services/' page, or the specific pages -->
-<li
-  class="text-neutral-600 hover:text-black"
->
-  <a href="{{ .RelPermalink }}" class="">{{ .Title }}</a>
-</li>
-{{ end }} {{ end }}
+{{ $excludedSections := slice "legal" "categories" "tags" }}
+
+
+  {{ range .Site.Sections }}
+    {{ if not (in $excludedSections .Section) }}
+      <li class="text-neutral-600 hover:text-black">
+        <a href="{{ .RelPermalink }}" class="">{{ .Title }}</a>
+      </li>
+    {{ end }}
+  {{ end }}

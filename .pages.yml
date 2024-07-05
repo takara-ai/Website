@@ -1,15 +1,15 @@
 content:
   - name: prompt-engineering
     label: Guides
-    path: env/content/prompt-engineering
+    path: env/content/open-source/prompt-engineering
     type: collection
 
   - name: team
     label: Team
-    path: env/content/team
+    path: env/content/company/team
     format: yaml-frontmatter
     type: collection
-    fields: 
+    fields:
       - name: title
         label: Title
         type: string
@@ -50,7 +50,7 @@ content:
         type: image
         required: true
         options:
-          output: images 
+          output: images
       - name: action
         label: Action Image
         type: image

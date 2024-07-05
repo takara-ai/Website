@@ -1,9 +1,9 @@
 {{/* layouts/_default/list.html */}}
 {{ define "main" }}
 <div class="relative flex flex-row items-start justify-between bg-white">
-  {{ if eq .Section "prompt-engineering" }}
-    {{ partial "prompts/JapPromptText" . }}
-  {{ end }}
+  {{ if eq .CurrentSection.Type "prompt-engineering" }}
+  {{ partial "prompts/JapPromptText" . }}
+{{ end }}
   
   <div class="my-16 p-4 sm:px-8 min-h-svh flex-grow">
     
@@ -19,7 +19,7 @@
                 <h2 class="font-bold mb-2 w-fit text-xl sm:text-3xl border-b border-black">
                   {{ .Title | truncate 50 "..." }}
                 </h2>
-                <p class="text-neutral-600 text-xs lg:text-base ml-1">
+                <p class="text-neutral-600 text-xs lg:text-base ml-1 break-words">
                   {{ .Summary | truncate 120 "..." }}
                 </p>
               </div>
