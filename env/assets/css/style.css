@@ -2213,6 +2213,11 @@ h5 {
   list-style-type: none;
 }
 
+.break-before-auto {
+  -moz-column-break-before: auto;
+       break-before: auto;
+}
+
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
@@ -2369,6 +2374,14 @@ h5 {
 
 .text-wrap {
   text-wrap: wrap;
+}
+
+.break-words {
+  overflow-wrap: break-word;
+}
+
+.break-all {
+  word-break: break-all;
 }
 
 .rounded {
