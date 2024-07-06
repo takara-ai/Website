@@ -2046,6 +2046,10 @@ h5 {
   height: 100svh;
 }
 
+.max-h-0 {
+  max-height: 0px;
+}
+
 .max-h-full {
   max-height: 100%;
 }
