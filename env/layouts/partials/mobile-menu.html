@@ -1,6 +1,6 @@
 <!-- Menu wrapper -->
-<div class="top-0 left-0 w-full z-20 absolute">
-  <nav class="relative px-1 md:px-4 flex justify-between items-center py-1">
+<div class="top-0 left-0 w-full z-20 absolute" id="nav-wrapper">
+  <nav class="relative px-1 md:px-4 flex justify-between items-center py-1" aria-label="Main navigation">
     <!-- Logo -->
     {{ partial "nav/crane-top-link" . }}
     
@@ -8,15 +8,15 @@
     {{ partial "nav/mobile-menu-button" . }}
 
     <!-- Desktop menu -->
-    <ul class="hidden lg:flex lg:w-auto lg:space-x-8 flex-grow justify-end items-center" id="top-menu">
+    <ul class="hidden lg:flex lg:w-auto lg:space-x-8 flex-grow justify-end items-center" id="top-menu" role="menubar">
       {{ $excludedSections := slice "legal" "categories" "tags" }}
       {{ range .Site.Sections }}
         {{ if not (in $excludedSections .Section) }}
-          <li class="relative group" data-section="{{ .Section }}">
-            <a href="{{ .RelPermalink }}" class="text-neutral-600 hover:text-black focus:outline-none focus:underline text-lg py-2">{{ .Title }}</a>
-            <div class="hidden">
+          <li class="relative group" data-section="{{ .Section }}" role="none">
+            <a href="{{ .RelPermalink }}" class="text-neutral-600 hover:text-black focus:outline-none focus:underline text-lg py-2" role="menuitem" aria-haspopup="true" aria-expanded="false">{{ .Title }}</a>
+            <div class="hidden" role="menu" aria-label="{{ .Title }} submenu">
               {{ range .Pages }}
-                <a href="{{ .RelPermalink }}" class="block">{{ .Title }}</a>
+                <a href="{{ .RelPermalink }}" class="block" role="menuitem">{{ .Title }}</a>
               {{ end }}
             </div>
           </li>
@@ -26,7 +26,7 @@
   </nav>
   
   <!-- Expandable submenu -->
-  <div class="absolute right-0 w-full bg-white shadow-lg transition-all duration-200 ease-in-out overflow-hidden h-0" id="submenu">
+  <div class="absolute right-0 w-full bg-white shadow-lg transition-all duration-200 ease-in-out overflow-hidden h-0" id="submenu" aria-hidden="true">
     <div class="px-4 py-6 opacity-0 transition-opacity duration-200 ease-in-out" id="submenu-content">
       <div class="grid grid-cols-4 gap-4 text-right" id="submenu-grid">
         <!-- Content will be dynamically populated here -->
@@ -39,39 +39,41 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', () => {
+  const navWrapper = document.getElementById('nav-wrapper');
   const menuItems = document.querySelectorAll('#top-menu > li');
   const submenu = document.getElementById('submenu');
   const submenuContent = document.getElementById('submenu-content');
   const submenuGrid = document.getElementById('submenu-grid');
   const dashedBorder = document.getElementById('dashed-border');
   let timeoutId;
-  let currentFocus = null;
-  
+
   function showSubmenu(event) {
     clearTimeout(timeoutId);
     const section = event.currentTarget.dataset.section;
     const pages = event.currentTarget.querySelector('div').innerHTML;
+    const sectionTitle = event.currentTarget.querySelector('a').textContent;
     
     submenuGrid.innerHTML = `
-      <div class="col-start-4 col-span-1"> <!-- Position the content in the rightmost column -->
-        <h3 class="text-sm text-gray-500 mb-2">Explore ${event.currentTarget.querySelector('a').textContent}</h3>
+      <div class="col-start-4 col-span-1">
+        <h3 class="text-sm text-gray-500 mb-2">Explore ${sectionTitle}</h3>
         <ul class="space-y-2">
           ${pages}
         </ul>
       </div>
     `;
-    
+
     submenu.classList.remove('h-0');
     submenu.classList.add('h-auto');
     submenuContent.classList.remove('opacity-0');
     submenuContent.classList.add('opacity-100');
+    
     const submenuHeight = submenu.offsetHeight;
     dashedBorder.style.transform = `translateY(${submenuHeight}px)`;
 
-    // Ensure submenu covers full width
-    submenu.style.width = '100%';
-    submenu.style.left = '0';
+    // Update ARIA attributes
+    event.currentTarget.querySelector('a').setAttribute('aria-expanded', 'true');
+    submenu.setAttribute('aria-hidden', 'false');
   }
   
   function hideSubmenu() {
@@ -81,26 +83,62 @@ document.addEventListener('DOMContentLoaded', (event) => {
       submenu.classList.remove('h-auto');
       submenu.classList.add('h-0');
       dashedBorder.style.transform = 'translateY(0)';
-      if (currentFocus) currentFocus.focus();
-    }, 200); // Reduced from 300ms to 200ms for faster animation
+
+      // Update ARIA attributes
+      menuItems.forEach(item => {
+        item.querySelector('a').setAttribute('aria-expanded', 'false');
+      });
+      submenu.setAttribute('aria-hidden', 'true');
+    }, 200);
   }
   
+  function handleMenuItemInteraction(event) {
+    if (event.type === 'mouseenter' || (event.type === 'focus' && !event.target.closest('li').classList.contains('active'))) {
+      showSubmenu(event);
+    }
+  }
+
   menuItems.forEach(item => {
-    item.addEventListener('mouseenter', showSubmenu);
-    item.addEventListener('focus', showSubmenu);
+    item.addEventListener('mouseenter', handleMenuItemInteraction);
+    item.addEventListener('focus', handleMenuItemInteraction, true);
   });
   
   submenu.addEventListener('mouseenter', () => clearTimeout(timeoutId));
   
-  document.querySelector('nav').addEventListener('mouseleave', hideSubmenu);
+  navWrapper.addEventListener('mouseleave', hideSubmenu);
   submenu.addEventListener('mouseleave', hideSubmenu);
 
-  // Keyboard navigation
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') hideSubmenu();
+    if (e.key === 'Escape') {
+      hideSubmenu();
+      document.activeElement.blur();
+    }
   });
+
+  // Add resize listener for responsiveness
+  window.addEventListener('resize', () => {
+    if (window.innerWidth < 1024) { // lg breakpoint
+      hideSubmenu();
+    }
+  });
+
+  // Add touch event handling for mobile devices
+  let touchStartY;
+  submenu.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  submenu.addEventListener('touchmove', (e) => {
+    const touchEndY = e.touches[0].clientY;
+    const diff = touchStartY - touchEndY;
+    if (diff > 50) { // Swipe up
+      hideSubmenu();
+    }
+  }, { passive: true });
 });
 </script>
+
+
 
   <div class="navbar-menu relative z-50 hidden">
     <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
