@@ -40,6 +40,10 @@ resources.PostProcess }}
   src="//gc.zgo.at/count.js"
 ></script>
 
+{{/*  JS  */}}
+
+<script src="{{ "js/main.js" | relURL }}" defer></script>
+
 {{/* Codeblocks */}} {{ if (findRE "<pre" .Content 1) }} {{/* JS Injection */}}
 {{ $js := resources.Get "/js/copy-code-button.js" | resources.Minify |
 resources.Fingerprint }}
