@@ -1,6 +1,6 @@
 /**
  * @file navigation.js
- * @description Initializes and manages the navigation menu and submenu interactions
+ * @description Initializes and manages the navigation menu, submenu interactions, and section highlighting
  */
 
 /**
@@ -103,6 +103,35 @@ export function initializeNavigation() {
     requiredElements.topMenu.classList.toggle("lg:flex", isExpanded);
   }
 
+  // Intersection Observer setup
+  const observerOptions = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.5,
+  };
+
+  const observerCallback = (entries) => {
+    entries.forEach((entry) => {
+      const id = entry.target.getAttribute("id");
+      const menuItem = document.querySelector(
+        `#top-menu a[href="#${id}"]`
+      )?.parentElement;
+
+      if (entry.isIntersecting) {
+        menuItem?.classList.add("active");
+      } else {
+        menuItem?.classList.remove("active");
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+  // Observe all sections
+  document.querySelectorAll("section[id]").forEach((section) => {
+    observer.observe(section);
+  });
+
   // Event listeners
   requiredElements.menuItems.forEach((item) => {
     item.addEventListener("mouseenter", handleMenuItemInteraction);
@@ -156,5 +185,5 @@ export function initializeNavigation() {
     { passive: true }
   );
 
-  console.log("Navigation initialized successfully");
+  console.log("Navigation initialized successfully with Intersection Observer");
 }
