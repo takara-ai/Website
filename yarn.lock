@@ -3354,9 +3354,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pixi.js@npm:^8.2.0":
-  version: 8.2.0
-  resolution: "pixi.js@npm:8.2.0"
+"pixi.js@npm:^8.2.2":
+  version: 8.2.2
+  resolution: "pixi.js@npm:8.2.2"
   dependencies:
     "@pixi/colord": "npm:^2.9.6"
     "@types/css-font-loading-module": "npm:^0.0.12"
@@ -3367,7 +3367,7 @@ __metadata:
     eventemitter3: "npm:^5.0.1"
     ismobilejs: "npm:^1.1.1"
     parse-svg-path: "npm:^0.1.2"
-  checksum: 10c0/edb6ecaa7f8fc6d92a22006085fcafc7aa3fe055d1b164f3519259c0e7768bffe27206287394f6b95347ed8d36518bc22e468a67eef4b7897f382e5028a87a63
+  checksum: 10c0/86bb370471ac9dde244a7938707b4aa1416ba4e4a483f0440891a17e0b7ea4e896471b74080925dc882a0b516a9a99bca91a90daf821fd2218f9bc1faaa31153
   languageName: node
   linkType: hard
 
@@ -4352,7 +4352,7 @@ __metadata:
     cssnano: "npm:^7.0.3"
     cssnano-preset-advanced: "npm:^7.0.3"
     parcel: "npm:^2.12.0"
-    pixi.js: "npm:^8.2.0"
+    pixi.js: "npm:^8.2.2"
     postcss: "npm:^8.4.38"
     postcss-cli: "npm:^11.0.0"
     tailwindcss: "npm:^3.4.4"
