@@ -17,7 +17,7 @@ At takara.ai, we envision AI as a powerful ally to human ingenuity, not a replac
 
 The inception of takara.ai was inspired by a clear market gap: the intrigue surrounding AI's promise versus the reality of its implementation. We noticed businesses grappling with questions about AI integration: selecting the right models, integrating AI seamlessly into operations, and identifying the starting point for their AI journey.
 
-Recognizing this, takara.ai set out to be the compass that guides business leaders through the intricate landscape of artificial intelligence, offering clarity and direction in a complex field.
+Recognising this, takara.ai set out to be the compass that guides business leaders through the intricate landscape of artificial intelligence, offering clarity and direction in a complex field.
 
 ### Our Team: Devoted AI Innovators
 
