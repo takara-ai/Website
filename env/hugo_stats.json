@@ -159,6 +159,7 @@
       "lg:w-1/4",
       "lg:w-5",
       "lg:w-auto",
+      "max-h-0",
       "max-w-fit",
       "mb-10",
       "mb-12",
