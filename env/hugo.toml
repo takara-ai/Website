@@ -29,6 +29,8 @@ enableInlineShortcodes = true
   description = "Transforming Humanity"
   images = ["/images/og-image.jpg"]  # Default Open Graph image
   dateFormat = "January 2, 2006"
+  # Theme
+  themeColor = "#B91C1C"
   
   # Social media handles
   twitter = "takaraAI"  # Replace with your actual Twitter handle

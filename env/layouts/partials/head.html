@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
 <meta name="msapplication-TileColor" content="#da532c" />
-<meta name="theme-color" content="#111827" />
+<meta name="theme-color" content="{{ .Site.Params.themeColor }}" />
 
 {{- if .IsPage }} {{- if isset .Params "lastmod" -}}
 <meta name="last-modified" content="{{ .Params.lastmod }}" />
