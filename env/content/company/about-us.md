@@ -5,35 +5,33 @@ draft: false
 description: "Discover takara.ai, where advanced AI meets human creativity to transform businesses and empower humanity. With our expert guidance, unlock your organization's potential for a competitive edge in today's fast-paced world."
 ---
 
-> **Takara means treasure.**
+## **Takara means treasure.**
 
-Welcome to [takara.ai](/), where we harness artificial intelligence not merely as a technological marvel but as a transformative force for businesses and humanity. Founded in 2024, our consultancy is committed to unlocking AI's vast potential, empowering individuals and organizations to excel in an increasingly competitive landscape.
-
-### Our Vision: AI as a Catalyst for Excellence
-
-At takara.ai, we envision AI as a powerful ally to human ingenuity, not a replacement. AI is our modern-day alchemist, transforming routine processes into opportunities for innovation by enabling us to focus on creativity, strategy, and innovation. We're dedicated to enhancing human capabilities, making AI an invaluable companion in every endeavor.
+Welcome to [takara.ai](/), where we harness artificial intelligence as a transformative force for businesses and humanity. Founded in 2024, our consultancy is committed to unlocking AI's vast potential, empowering individuals and organisations to excel in an increasingly competitive landscape.
 
 ### The Challenge: Mastering AI Implementation
 
-The inception of takara.ai was inspired by a clear market gap: the intrigue surrounding AI's promise versus the reality of its implementation. We noticed businesses grappling with questions about AI integration: selecting the right models, integrating AI seamlessly into operations, and identifying the starting point for their AI journey.
+At takara.ai, we address a critical market gap: the disparity between AI's promise and its practical implementation. Businesses often struggle with:
 
-Recognizing this, takara.ai set out to be the compass that guides business leaders through the intricate landscape of artificial intelligence, offering clarity and direction in a complex field.
+- Selecting the right models.
+- Seamlessly integrating AI into operations.
+- Identifying the starting point for their AI journey.
+
+Recognising these challenges, takara.ai serves as a guiding compass for business leaders, offering clarity and direction in the complex field of artificial intelligence.
+
+### The Origami Crane: A Symbol of Peace, Longevity, and Good Fortune
+
+<img src="https://takara.ai/images/logo-24/TakaraAi.svg" width="200" height="200" alt="The red takara crane logo" />
+
+> “Logos are crucial; they must have meaning and be recognisable. The origami crane symbolises transformation, much like our mission. Working with Kiana at [IDAZA](https://www.idaza.io/), we brought this vision to life. I couldn't be happier.” - Jordan Legg
 
 ### Our Team: Devoted AI Innovators
 
-Our team embodies a blend of sharp intellect and passion for AI. With a laser-focus on AI, machine learning, and large language models (LLMs), we are not distracted by fleeting trends. Instead, we are committed to delivering substantial, impactful change through tailor-made AI solutions that reflect the uniqueness of each business we partner with.
+We employ top-tier AI and ML professionals dedicated to creating unparalleled solutions. Meet our team [here](/open-source/team).
 
-<!-- ---
+Join us at [takara.ai](/) as partners in unveiling the hidden treasures within your organisation, catalysing growth and success. Together, let's navigate the transformative journey of AI.
 
-## Meet Our CEO: Jordan Legg
-
-{{< headshot src="images/team/ee7fd47e-484f-49bf-8532-be7cbc1d443d.JPG" alt="Jordan Legg" >}}
-
-> As the founder and visionary behind takara.ai, I've journeyed from a self-taught programmer with a profound interest in emerging technologies to an entrepreneur shaping the future of AI. My path began with web design at 14, entrepreneurial ventures at 19, and a deep dive into AI and ML that generated over £100m in sales for public cloud providers. My ambition for starting takara.ai was to provide businesses with the guidance I once sought, championing AI as a transformative force for good. I'm committed to unlocking human potential alongside AI, steering us towards a future where technology and creativity converge.
-
---- -->
-
-Join us at [takara.ai](/) as we forge ahead, not just as service providers, but as partners in unveiling the hidden treasures within your organization, catalyzing growth and success. Together, let's navigate the transformative journey of AI.
+---
 
 ## Company Information
 
