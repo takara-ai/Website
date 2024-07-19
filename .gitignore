@@ -10,4 +10,4 @@ env/public
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
-/env/static/js/*
+
