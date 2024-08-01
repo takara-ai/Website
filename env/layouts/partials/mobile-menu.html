@@ -37,52 +37,22 @@
   <!-- Dashed border -->
   <div class="border-b border-black border-dashed w-full transition-all duration-100 ease-in-out" id="dashed-border"></div>
 </div>
-  <div class="navbar-menu relative z-50 hidden">
-    <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
-    <nav
-      class="fixed top-0 left-0 bottom-0 flex flex-col w-svw py-4 px-2 sm:px-4 bg-white border-r min-h-svh"
-    >
-      <div class="flex items-center mb-8">
-        <div class="mr-auto"> {{ partial "nav/crane-svg.html" . }} </div>
-
-        <button class="navbar-close">
-          <!-- Simplified SVG for the close icon -->
-          <svg
-            class="h-4 md:h-6 text-black cursor-pointer hover:text-gray-500"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            ></path>
-          </svg>
-        </button>
-      </div>
-      <div>
-        <ul
-          >{{ partial "nav/auto-link" . }}</ul
-        >
-      </div>
-    </nav>
-  </div>
+<div class="navbar-menu relative z-50 hidden">
+  <div class="navbar-backdrop fixed inset-0 bg-gray-800 bg-opacity-25"></div>
+  <nav class="fixed top-0 left-0 bottom-0 flex flex-col w-svw py-6 px-6 bg-white border-r overflow-y-auto">
+    <div class="flex items-center mb-8">
+      <div class="mr-auto">{{ partial "nav/crane-svg.html" . }}</div>
+      <button class="navbar-close">
+        <svg class="h-6 w-6 text-neutral-600 cursor-pointer hover:text-black transition-colors duration-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+    <div>
+      <ul class="space-y-0">
+        {{ partial "nav/auto-link" . }}
+      </ul>
+    </div>
+  </nav>
 </div>
-
-<script>
-  // Simplified and optimized JavaScript for the menu toggle
-  document.addEventListener("DOMContentLoaded", function () {
-    const toggleMenu = () => {
-      document
-        .querySelectorAll(".navbar-menu")
-        .forEach((menu) => menu.classList.toggle("hidden"));
-    };
-
-    document
-      .querySelectorAll(".navbar-burger, .navbar-close, .navbar-backdrop")
-      .forEach((el) => el.addEventListener("click", toggleMenu));
-  });
-</script>
+</div>

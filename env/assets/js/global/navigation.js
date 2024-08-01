@@ -1,11 +1,8 @@
 /**
  * @file navigation.js
- * @description Initializes and manages the navigation menu, submenu interactions, and section highlighting
+ * @description Initializes and manages the navigation menu, submenu interactions, and section highlighting for both desktop and mobile views
  */
 
-/**
- * Initializes the navigation functionality
- */
 export function initializeNavigation() {
   const requiredElements = {
     navWrapper: document.getElementById("nav-wrapper"),
@@ -14,10 +11,11 @@ export function initializeNavigation() {
     submenuContent: document.getElementById("submenu-content"),
     submenuGrid: document.getElementById("submenu-grid"),
     dashedBorder: document.getElementById("dashed-border"),
-    mobileMenuButton: document.querySelector(
-      "[aria-controls='top-menu'], .navbar-burger"
-    ),
+    mobileMenuButton: document.querySelector(".navbar-burger"),
     topMenu: document.getElementById("top-menu"),
+    mobileMenu: document.querySelector(".navbar-menu"),
+    mobileMenuClose: document.querySelector(".navbar-close"),
+    mobileMenuBackdrop: document.querySelector(".navbar-backdrop"),
   };
 
   // Check for missing elements and log detailed information
@@ -39,6 +37,8 @@ export function initializeNavigation() {
   let timeoutId;
 
   function showSubmenu(menuItem) {
+    if (window.innerWidth < 1024) return; // Don't show submenu on mobile
+
     clearTimeout(timeoutId);
     const submenuLinks =
       menuItem.querySelector("[role='menu']")?.innerHTML || "";
@@ -66,6 +66,8 @@ export function initializeNavigation() {
   }
 
   function hideSubmenu() {
+    if (window.innerWidth < 1024) return; // Don't hide submenu on mobile
+
     requiredElements.submenuContent.classList.remove("opacity-100");
     requiredElements.submenuContent.classList.add("opacity-0");
     timeoutId = setTimeout(() => {
@@ -81,6 +83,8 @@ export function initializeNavigation() {
   }
 
   function handleMenuItemInteraction(event) {
+    if (window.innerWidth < 1024) return; // Don't handle on mobile
+
     const menuItem = event.currentTarget;
     if (
       event.type === "mouseenter" ||
@@ -90,17 +94,46 @@ export function initializeNavigation() {
     }
   }
 
-  function toggleMobileMenu() {
-    const isExpanded =
-      requiredElements.mobileMenuButton.getAttribute("aria-expanded") ===
-      "true";
-
-    requiredElements.mobileMenuButton.setAttribute(
-      "aria-expanded",
-      (!isExpanded).toString()
+  function setupMobileMenu() {
+    const parentSections = document.querySelectorAll(
+      ".navbar-menu .parent-section"
     );
-    requiredElements.topMenu.classList.toggle("hidden", isExpanded);
-    requiredElements.topMenu.classList.toggle("lg:flex", isExpanded);
+
+    parentSections.forEach((section) => {
+      section.addEventListener("click", (e) => {
+        e.preventDefault();
+        const submenu = section.nextElementSibling;
+        if (submenu && submenu.classList.contains("submenu")) {
+          // Toggle the 'selected' class on the parent section
+          section.classList.toggle("selected");
+
+          // Toggle the submenu visibility
+          submenu.classList.toggle("hidden");
+
+          // Rotate the arrow
+          section.querySelector("svg")?.classList.toggle("rotate-180");
+
+          // Close other open submenus
+          parentSections.forEach((otherSection) => {
+            if (otherSection !== section) {
+              otherSection.classList.remove("selected");
+              const otherSubmenu = otherSection.nextElementSibling;
+              if (otherSubmenu && otherSubmenu.classList.contains("submenu")) {
+                otherSubmenu.classList.add("hidden");
+                otherSection
+                  .querySelector("svg")
+                  ?.classList.remove("rotate-180");
+              }
+            }
+          });
+        }
+      });
+    });
+  }
+
+  function toggleMobileMenu() {
+    requiredElements.mobileMenu.classList.toggle("hidden");
+    document.body.classList.toggle("overflow-hidden");
   }
 
   // Intersection Observer setup
@@ -146,22 +179,38 @@ export function initializeNavigation() {
   requiredElements.submenu.addEventListener("mouseleave", hideSubmenu);
 
   requiredElements.mobileMenuButton.addEventListener("click", toggleMobileMenu);
+  requiredElements.mobileMenuClose.addEventListener("click", toggleMobileMenu);
+  requiredElements.mobileMenuBackdrop.addEventListener(
+    "click",
+    toggleMobileMenu
+  );
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       hideSubmenu();
+      if (!requiredElements.mobileMenu.classList.contains("hidden")) {
+        toggleMobileMenu();
+      }
       document.activeElement?.blur();
     }
   });
 
-  window.addEventListener("resize", () => {
+  function handleResize() {
     if (window.innerWidth >= 1024) {
-      requiredElements.topMenu?.classList.remove("hidden");
+      requiredElements.topMenu.classList.remove("hidden");
+      requiredElements.mobileMenu.classList.add("hidden");
+      document.body.classList.remove("overflow-hidden");
     } else {
+      requiredElements.topMenu.classList.add("hidden");
       hideSubmenu();
-      requiredElements.topMenu?.classList.add("hidden");
     }
-  });
+  }
+
+  window.addEventListener("resize", handleResize);
+
+  // Initial setup
+  handleResize();
+  setupMobileMenu();
 
   // Touch events for mobile
   let touchStartY;
