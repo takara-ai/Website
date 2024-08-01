@@ -475,7 +475,7 @@ h5 {
 @font-face {
   font-family: "Lato";
 
-  src: url("/fonts/lato/Lato-Black.woff2") format("woff2");
+  src: url("/fonts/Lato/Lato-Black.woff2") format("woff2");
 
   font-weight: 900;
 
@@ -485,7 +485,7 @@ h5 {
 @font-face {
   font-family: "Lato";
 
-  src: url("/fonts/lato/Lato-BlackItalic.woff2") format("woff2");
+  src: url("/fonts/Lato/Lato-BlackItalic.woff2") format("woff2");
 
   font-weight: 900;
 
@@ -495,7 +495,7 @@ h5 {
 @font-face {
   font-family: "Lato";
 
-  src: url("/fonts/lato/Lato-Bold.woff2") format("woff2");
+  src: url("/fonts/Lato/Lato-Bold.woff2") format("woff2");
 
   font-weight: 700;
 
@@ -505,7 +505,7 @@ h5 {
 @font-face {
   font-family: "Lato";
 
-  src: url("/fonts/lato/Lato-BoldItalic.woff2") format("woff2");
+  src: url("/fonts/Lato/Lato-BoldItalic.woff2") format("woff2");
 
   font-weight: 700;
 
@@ -515,7 +515,7 @@ h5 {
 @font-face {
   font-family: "Lato";
 
-  src: url("/fonts/lato/Lato-Italic.woff2") format("woff2");
+  src: url("/fonts/Lato/Lato-Italic.woff2") format("woff2");
 
   font-weight: 400;
 
@@ -525,7 +525,7 @@ h5 {
 @font-face {
   font-family: "Lato";
 
-  src: url("/fonts/lato/Lato-Light.woff2") format("woff2");
+  src: url("/fonts/Lato/Lato-Light.woff2") format("woff2");
 
   font-weight: 300;
 
@@ -535,7 +535,7 @@ h5 {
 @font-face {
   font-family: "Lato";
 
-  src: url("/fonts/lato/Lato-LightItalic.woff2") format("woff2");
+  src: url("/fonts/Lato/Lato-LightItalic.woff2") format("woff2");
 
   font-weight: 300;
 
@@ -545,7 +545,7 @@ h5 {
 @font-face {
   font-family: "Lato";
 
-  src: url("/fonts/lato/Lato-Regular.woff2") format("woff2");
+  src: url("/fonts/Lato/Lato-Regular.woff2") format("woff2");
 
   font-weight: 400;
 
@@ -555,7 +555,7 @@ h5 {
 @font-face {
   font-family: "Lato";
 
-  src: url("/fonts/lato/Lato-Thin.woff2") format("woff2");
+  src: url("/fonts/Lato/Lato-Thin.woff2") format("woff2");
 
   font-weight: 100;
 
@@ -565,7 +565,7 @@ h5 {
 @font-face {
   font-family: "Lato";
 
-  src: url("/fonts/lato/Lato-ThinItalic.woff2") format("woff2");
+  src: url("/fonts/Lato/Lato-ThinItalic.woff2") format("woff2");
 
   font-weight: 100;
 
@@ -1959,6 +1959,14 @@ h5 {
   margin-left: 0.25rem;
 }
 
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.ml-4 {
+  margin-left: 1rem;
+}
+
 .mr-2 {
   margin-right: 0.5rem;
 }
@@ -1997,14 +2005,6 @@ h5 {
 
 .mt-auto {
   margin-top: auto;
-}
-
-.ml-4 {
-  margin-left: 1rem;
-}
-
-.ml-2 {
-  margin-left: 0.5rem;
 }
 
 .block {
@@ -2473,6 +2473,12 @@ h5 {
   margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
+.space-y-0 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0px * var(--tw-space-y-reverse));
+}
+
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
@@ -2483,12 +2489,6 @@ h5 {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
-}
-
-.space-y-0 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0px * var(--tw-space-y-reverse));
 }
 
 .overflow-hidden {
@@ -2715,12 +2715,12 @@ h5 {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-opacity-50 {
-  --tw-bg-opacity: 0.5;
-}
-
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;
+}
+
+.bg-opacity-50 {
+  --tw-bg-opacity: 0.5;
 }
 
 .bg-gradient-to-b {
@@ -2890,6 +2890,11 @@ h5 {
   padding-bottom: 3.5rem;
 }
 
+.py-16 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
 .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -2918,11 +2923,6 @@ h5 {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
-}
-
-.py-16 {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
 }
 
 .pb-12 {
@@ -4094,11 +4094,6 @@ h5 {
 .hover\:text-black:hover {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-
-.hover\:text-gray-500:hover {
-  --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
 .hover\:text-gray-900:hover {
