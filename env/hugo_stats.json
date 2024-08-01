@@ -99,6 +99,7 @@
       "flex-row",
       "focus:outline-none",
       "focus:underline",
+      "font-black",
       "font-body",
       "font-bold",
       "font-extralight",

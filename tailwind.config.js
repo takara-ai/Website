@@ -10,6 +10,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
+        sans: ["Lato", "sans-serif"],
         typewriter: "monospace",
         whisper: "'Caveat', cursive",
         japaneseBold: "Hiragino Kaku Gothic Std",
