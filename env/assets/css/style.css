@@ -3030,11 +3030,11 @@ h5 {
 }
 
 .font-japanese {
-  font-family: Hiragino Kaku Gothic ProN;
+  font-family: Hiragino Kaku Gothic Pro, Hiragino Sans, Meiryo, Yu Gothic, MS PGothic, MS Gothic, Noto Sans CJK JP, sans-serif;
 }
 
 .font-japaneseBold {
-  font-family: Hiragino Kaku Gothic Std;
+  font-family: Hiragino Kaku Gothic Pro, Hiragino Sans, Meiryo, Yu Gothic, MS PGothic, MS Gothic, Noto Sans CJK JP, sans-serif;
 }
 
 .font-mono {
