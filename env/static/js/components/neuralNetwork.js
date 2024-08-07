@@ -624,7 +624,7 @@ class Node {
     }
     updateGraphics() {
         this.graphics.clear();
-        const color = this.activated ? 0xd91009c : 0x000000;
+        const color = this.activated ? 0xd91009 : 0x000000;
         this.graphics.circle(0, 0, this.radius).fill(color);
         this.text.position.set(-this.radius, -this.radius - 15);
     }
@@ -648,7 +648,7 @@ class Edge {
     }
     updateGraphics() {
         this.graphics.clear();
-        const color = this.activated ? 0xd91009c : 0x000000;
+        const color = this.activated ? 0xd91009 : 0x000000;
         const width = this.activated ? 2 : 1;
         this.graphics.moveTo(this.node1.x, this.node1.y).lineTo(this.node2.x, this.node2.y).stroke({
             width,
@@ -668,7 +668,7 @@ async function initializeApplication() {
             antialias: true,
             preference: "webgpu"
         });
-        console.log("%cNEURAL NETWORK LOADED | \u30CB\u30E5\u30FC\u30E9\u30EB\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u304C\u8AAD\u307F\u8FBC\u307E\u308C\u307E\u3057\u305F \uD83C\uDDEF\uD83C\uDDF5", "color: #d91009c; font-size: 20px; font-family: monospace;");
+        console.log("%cNEURAL NETWORK LOADED | \u30CB\u30E5\u30FC\u30E9\u30EB\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u304C\u8AAD\u307F\u8FBC\u307E\u308C\u307E\u3057\u305F \uD83C\uDDEF\uD83C\uDDF5", "color: #d91009; font-size: 20px; font-family: monospace;");
     } catch (error) {
         console.error("Failed to initialize Pixi application:", error);
         return;
