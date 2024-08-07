@@ -9,6 +9,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        red: {
+          700: "#d91009",
+        },
+      },
       fontFamily: {
         sans: ["Lato", "sans-serif"],
         typewriter: "monospace",

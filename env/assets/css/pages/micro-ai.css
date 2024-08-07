@@ -11,7 +11,7 @@
   width: 105%;
   height: 160%;
   clip-path: polygon(100% 100%, 0 130%, 100% 0);
-  background-color: #b91c1c;
+  background-color: #d91009c;
   z-index: -2;
 }
 /* Target the new id 'text-section' and create a pseudo-element for the 'Invert Your Thinking' text */

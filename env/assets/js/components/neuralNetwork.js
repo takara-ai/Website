@@ -44,7 +44,7 @@ class Node {
 
   updateGraphics() {
     this.graphics.clear();
-    const color = this.activated ? 0xb91c1c : 0x000000;
+    const color = this.activated ? 0xd91009c : 0x000000;
     this.graphics.circle(0, 0, this.radius).fill(color);
     this.text.position.set(-this.radius, -this.radius - 15);
   }
@@ -72,7 +72,7 @@ class Edge {
 
   updateGraphics() {
     this.graphics.clear();
-    const color = this.activated ? 0xb91c1c : 0x000000;
+    const color = this.activated ? 0xd91009c : 0x000000;
     const width = this.activated ? 2 : 1;
     this.graphics
       .moveTo(this.node1.x, this.node1.y)
@@ -96,7 +96,7 @@ async function initializeApplication() {
     });
     console.log(
       "%cNEURAL NETWORK LOADED | ニューラルネットワークが読み込まれました 🇯🇵",
-      "color: #b91c1c; font-size: 20px; font-family: monospace;"
+      "color: #d91009c; font-size: 20px; font-family: monospace;"
     );
   } catch (error) {
     console.error("Failed to initialize Pixi application:", error);
