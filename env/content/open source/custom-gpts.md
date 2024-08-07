@@ -24,7 +24,7 @@ Quickly generate standardized commit messages to maintain a clean git history. I
 
 ## DAVINCI SNIPER | ダヴィンチのスナイパー
 
-{{< headshot src="/images/gpts/DALL·E 2024-02-07 00.39.04 - A logo that combines the essence of the DaVinci Resolve video editing software with the precision and focus of a sniper. The design should capture the-1.webp" alt="DAVINCI SNIPER | ダヴィンチのスナイパー" >}}
+{{< headshot src="/images/gpts/davinci-sniper.webp" alt="DAVINCI SNIPER | ダヴィンチのスナイパー" >}}
 
 **Navigate DaVinci Resolve with Confidence**  
 Find precise solutions to DaVinci Resolve queries, cutting through the complexity of its extensive user guide.
