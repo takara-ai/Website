@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300">
+  <style>
+    text {
+      font-family: Lato, sans-serif;
+      font-size: 0.875rem;
+    }
+  </style>
+  <circle cx="50" cy="50" r="20" fill="#d91009"/>
+  <circle cx="50" cy="150" r="20" fill="#d91009"/>
+  <circle cx="50" cy="250" r="20" fill="#d91009"/>
+  <text x="20" y="20">Input Layer</text>
+  <circle cx="300" cy="75" r="20" fill="#d91009"/>
+  <circle cx="300" cy="150" r="20" fill="#d91009"/>
+  <circle cx="300" cy="225" r="20" fill="#d91009"/>
+  <text x="270" y="20">Hidden Layer</text>
+  <circle cx="550" cy="100" r="20" fill="#d91009"/>
+  <circle cx="550" cy="200" r="20" fill="#d91009"/>
+  <text x="510" y="20">Output Layer</text>
+  <path stroke="#000" d="m70 50 210 25M70 50l210 100M70 50l210 175M70 150l210-75M70 150h210M70 150l210 75M70 250 280 75M70 250l210-100M70 250l210-25M320 75l210 25M320 75l210 125M320 150l210-50M320 150l210 50M320 225l210-125M320 225l210-25"/>
+</svg>
