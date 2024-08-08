@@ -52,4 +52,4 @@ Unlock the full potential of your Sony A7CII with guided assistance, making ever
 
 ---
 
-Our GPT models are just the beginning. Partner with takara.ai, and let's innovate together. [Get in touch](/contact) to discuss how our custom AI solutions can benefit your business.
+Our GPT models are just the beginning. Partner with takara.ai, and let's innovate together.
