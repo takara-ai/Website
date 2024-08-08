@@ -10,7 +10,7 @@
             
 
             {{ $currentPage := trim .RelPermalink "/" }}
-            {{ $promptGuideURL := "/prompt-engineering/prompt-guide/" | relURL }}
+            {{ $promptGuideURL := "/open-source/prompt-engineering/prompt-guide/" | relURL }}
             {{ $promptGuideLink := printf `<a class="block mt-2 max-w-fit" href="%s">Visit here first if you need help.</a>` ($promptGuideURL | absURL) }}
 
             <a class="inline-flex items-center font-japanese no-underline rounded text-red-700 mb-4 transition-colors duration-200 ease-in-out" href="{{ "/open-source/prompt-engineering/" | relURL }}">
