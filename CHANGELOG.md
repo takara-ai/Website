@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.5.0](https://github.com/takara-ai/Website/compare/v1.4.0...v1.5.0) (2024-08-08)
+
+
+### Features
+
+* new learn section and neural network explanation ([137ae44](https://github.com/takara-ai/Website/commit/137ae44b6a1dee20bd0a79098dd4ceeebbadee37))
+* new sans-serif font added Lato ([9da5062](https://github.com/takara-ai/Website/commit/9da5062981bea4b5f594200042b8eaa384c6d313))
+
+
+### Bug Fixes
+
+* added cachebusting to icon ([d9a2449](https://github.com/takara-ai/Website/commit/d9a24491e4108bb9dc32d23146767074783e1a00))
+* broken links ([919b1d6](https://github.com/takara-ai/Website/commit/919b1d63774f6eb158c701a4fd7849acea92ebcd))
+* changed to padding to avoid weird darkmode behaviour ([5792aac](https://github.com/takara-ai/Website/commit/5792aac66d609e5494263199f5681aec963651e8))
+* file name too long ([058f4d4](https://github.com/takara-ai/Website/commit/058f4d4859dcd56a16c27485e3b853f0bcafd5a6))
+* font path case changed to fix links ([da4cc59](https://github.com/takara-ai/Website/commit/da4cc5931b975ff95df212b586dfc3092a2fef1e))
+* link wrong for prompt engineering ([446e43c](https://github.com/takara-ai/Website/commit/446e43ce7aadd0dbb46d09815e986fe62eeaf751))
+* mobile menu not working correctly ([df07477](https://github.com/takara-ai/Website/commit/df0747757abcc9e3d714d558aadfd2753dbd7808))
+* moved og-image back ([6ccc5da](https://github.com/takara-ai/Website/commit/6ccc5dab9fef1c21ef8ce662a54aadc8f2f4c631))
+* removed gitignore for JS files ([56d8036](https://github.com/takara-ai/Website/commit/56d803692d7fa989f00f98fd9767a62b1aced1dd))
+* **seo:** descriptions and broken links ([2db2a91](https://github.com/takara-ai/Website/commit/2db2a914f9818ac935f81ca7fe70c5b199703e95))
+* typo in colour ([2a83462](https://github.com/takara-ai/Website/commit/2a83462249175d845d7e0bce549d3b70b19c07c3))
+
 ## 1.0.0 (2024-07-05)
 
 
