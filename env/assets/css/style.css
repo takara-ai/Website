@@ -2998,11 +2998,11 @@ h5 {
 }
 
 .font-japanese {
-  font-family: Hiragino Kaku Gothic ProN;
+  font-family: Hiragino Kaku Gothic Pro, Hiragino Sans, Meiryo, Yu Gothic, MS PGothic, MS Gothic, Noto Sans CJK JP, sans-serif;
 }
 
 .font-japaneseBold {
-  font-family: Hiragino Kaku Gothic Std;
+  font-family: Hiragino Kaku Gothic Pro, Hiragino Sans, Meiryo, Yu Gothic, MS PGothic, MS Gothic, Noto Sans CJK JP, sans-serif;
 }
 
 .font-mono {
@@ -4003,11 +4003,6 @@ h5 {
 .hover\:text-black:hover {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-
-.hover\:text-blue-800:hover {
-  --tw-text-opacity: 1;
-  color: rgb(30 64 175 / var(--tw-text-opacity));
 }
 
 .hover\:text-gray-900:hover {
