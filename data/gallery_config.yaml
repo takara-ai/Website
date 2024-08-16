@@ -9,3 +9,5 @@ datasets:
     num_images: 5
   - name: "takara-ai/shizuka_na_kaishi_serene_openings"
     num_images: 5
+  - name: "takara-ai/gaikotsu_no_yurei_skeleton_spectre"
+    num_images: 5
