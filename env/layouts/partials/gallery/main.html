@@ -1,14 +1,36 @@
+{{ $galleryPath := "images/gallery/takara-ai" }}
+{{ $directories := slice }}
+{{ range (readDir (printf "assets/%s" $galleryPath)) }}
+  {{ if .IsDir }}
+    {{ $directories = $directories | append .Name }}
+  {{ end }}
+{{ end }}
 
-  {{ $galleryImages := resources.Match "images/gallery/*" }}
+<div>
+  
 
-  <div>
-    {{ partial "gallery/heading.html" . }}
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-4">
-      {{ range $index, $resource := $galleryImages }}
-        {{ if and (ne $resource.Name ".DS_Store") (eq $resource.MediaType.MainType "image") }}
+  {{ range $directory := $directories }}
+    <h2 class="text-lg sm:text-xl md:text-2xl font-bold mt-4 mb-2 sm:mt-8 sm:mb-4 capitalize">{{ $directory | humanize }}</h2>
+    <div class="grid grid-cols-4 gap-2 sm:gap-4">
+      {{ $dirPath := printf "%s/%s" $galleryPath $directory }}
+      {{ $images := readDir (printf "assets/%s" $dirPath) }}
+      {{ range $index, $image := $images }}
+        {{ $extension := path.Ext $image.Name | lower }}
+        {{ if and (ne $image.Name ".DS_Store") (in (slice ".jpg" ".jpeg" ".png" ".gif" ".webp") $extension) }}
+          {{ $resource := resources.Get (printf "%s/%s" $dirPath $image.Name) }}
           {{ partial "gallery/image.html" (dict "resource" $resource "index" $index) }}
         {{ end }}
       {{ end }}
     </div>
+  {{ end }}
+  <div class="text-sm h-fit py-4 sm:py-8">
+    <p class="">
+      Each art collection in this gallery represents a finely crafted open source dataset, 
+      available for viewing and use on 
+      <a href="{{ .Site.Params.huggingface }}" target="_blank" rel="noopener noreferrer" 
+         class="underline">
+        Takara.ai's Hugging Face account
+      </a>.
+    </p>
   </div>
-
+</div>

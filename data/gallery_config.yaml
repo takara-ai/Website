@@ -1,0 +1,11 @@
+# datasets
+
+datasets:
+  - name: "takara-ai/Sumi-e_no_kurozuappu_ink_painting_closeups"
+    num_images: 5
+  - name: "takara-ai/sangyo_no_yume_industrial_dreams"
+    num_images: 5
+  - name: "takara-ai/nihon_gaikei_japanese_streetscapes"
+    num_images: 5
+  - name: "takara-ai/shizuka_na_kaishi_serene_openings"
+    num_images: 5

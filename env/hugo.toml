@@ -35,6 +35,7 @@ enableInlineShortcodes = true
   # Social media handles
   twitter = "takaraAI"  # Replace with your actual Twitter handle
   github = "takara-ai"  # Replace with your actual GitHub handle
+  huggingface = "https://huggingface.co/takara-ai" 
 
 [markup]
   [markup.goldmark]
