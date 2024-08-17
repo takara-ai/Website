@@ -8,9 +8,16 @@
 
 <div>
   
-
-  {{ range $directory := $directories }}
-    <h2 class="text-lg sm:text-xl md:text-2xl font-bold mt-4 mb-2 sm:mt-8 sm:mb-4 capitalize">{{ $directory | humanize }}</h2>
+  {{ range $directory := $directories }}  
+<h2 class=" font-light sm:text-xl md:text-2xl lg:text-3xl pt-8 mb-2 sm:pt-8 sm:mb-4 capitalize text-right  border-b border-dashed border-neutral-600">
+  <a href="https://huggingface.co/datasets/takara-ai/{{ $directory }}" target="_blank" rel="noopener noreferrer" class="group relative inline-block w-fit text-neutral-600 hover:text-black">
+    <span class="block">{{ $directory | humanize }}</span>
+    <span 
+      class="text-xs sm:text-sm transform rotate-6 absolute -top-1.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" 
+      aria-hidden="true"
+    >↗</span>
+  </a>
+</h2>
     <div class="grid grid-cols-4 gap-2 sm:gap-4">
       {{ $dirPath := printf "%s/%s" $galleryPath $directory }}
       {{ $images := readDir (printf "assets/%s" $dirPath) }}
@@ -23,8 +30,9 @@
       {{ end }}
     </div>
   {{ end }}
-  <div class="text-sm h-fit py-4 sm:py-8">
-    <p class="">
+  
+  <div class="text-sm h-fit pt-4 sm:pt-8">
+    <p>
       Each art collection in this gallery represents a finely crafted open source dataset, 
       available for viewing and use on 
       <a href="{{ .Site.Params.huggingface }}" target="_blank" rel="noopener noreferrer" 

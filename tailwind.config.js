@@ -13,6 +13,9 @@ module.exports = {
         red: {
           700: "#d91009",
         },
+        neutral: {
+          600: "#4a4d4e",
+        },
       },
       fontFamily: {
         sans: ["Lato", "sans-serif"],
