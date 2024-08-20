@@ -1,74 +1,84 @@
 images:
+- image_url: /assets/images/gallery/takara-ai/Sumi-e_no_kurozuappu_ink_painting_closeups/27119210999478.png
+  positive_prompt: a japanese sumi-e black ink painting of bamboo, red seal
 - image_url: /assets/images/gallery/takara-ai/Sumi-e_no_kurozuappu_ink_painting_closeups/1026337826147814.png
   positive_prompt: a japanese sumi-e black ink painting of bamboo, red seal
-- image_url: /assets/images/gallery/takara-ai/Sumi-e_no_kurozuappu_ink_painting_closeups/753525870468245.png
+- image_url: /assets/images/gallery/takara-ai/Sumi-e_no_kurozuappu_ink_painting_closeups/561969246307092.png
   positive_prompt: a closeup of a japanese Sumi-e black ink painting
-- image_url: /assets/images/gallery/takara-ai/Sumi-e_no_kurozuappu_ink_painting_closeups/706479401451815.png
+- image_url: /assets/images/gallery/takara-ai/Sumi-e_no_kurozuappu_ink_painting_closeups/836097212837443.png
   positive_prompt: a japanese sumi-e black ink painting of bamboo, red seal
-- image_url: /assets/images/gallery/takara-ai/Sumi-e_no_kurozuappu_ink_painting_closeups/646560490996342.png
+- image_url: /assets/images/gallery/takara-ai/Sumi-e_no_kurozuappu_ink_painting_closeups/353866857383361.png
   positive_prompt: a closeup of a japanese Sumi-e black ink painting
-- image_url: /assets/images/gallery/takara-ai/Sumi-e_no_kurozuappu_ink_painting_closeups/915636176451283.png
-  positive_prompt: a japanese sumi-e black ink painting of bamboo, red seal
-- image_url: /assets/images/gallery/takara-ai/sangyo_no_yume_industrial_dreams/683712962145212.png
+- image_url: /assets/images/gallery/takara-ai/sangyo_no_yume_industrial_dreams/169799106014988.png
   positive_prompt: industrial, buildings, metal
-- image_url: /assets/images/gallery/takara-ai/sangyo_no_yume_industrial_dreams/893401489434066.png
+- image_url: /assets/images/gallery/takara-ai/sangyo_no_yume_industrial_dreams/365909391091443.png
+  positive_prompt: industrial people, dreams, japan, sanyo
+- image_url: /assets/images/gallery/takara-ai/sangyo_no_yume_industrial_dreams/348712377435211.png
   positive_prompt: Surreal industrial dreamscape, ethereal pipes and towers, misty
     atmosphere, soft glowing lights, floating mechanical structures, abstract industrial
     forms, hazy skyline, dreamlike mood, blend of reality and fantasy, wide cinematic
     view, painterly style
-- image_url: /assets/images/gallery/takara-ai/sangyo_no_yume_industrial_dreams/1045692031466364.png
+- image_url: /assets/images/gallery/takara-ai/sangyo_no_yume_industrial_dreams/723191300364057.png
+  positive_prompt: industrial people, dreams, japan
+- image_url: /assets/images/gallery/takara-ai/sangyo_no_yume_industrial_dreams/546666307689815.png
   positive_prompt: industrial people, dreams, japan, sanyo
-- image_url: /assets/images/gallery/takara-ai/sangyo_no_yume_industrial_dreams/228685107111557.png
-  positive_prompt: industrial, buildings, metal
-- image_url: /assets/images/gallery/takara-ai/sangyo_no_yume_industrial_dreams/808612590733108.png
+- image_url: /assets/images/gallery/takara-ai/nihon_gaikei_japanese_streetscapes/275793383001761.png
   positive_prompt: industrial people, dreams, japan, sanyo
-- image_url: /assets/images/gallery/takara-ai/nihon_gaikei_japanese_streetscapes/159975996005032.png
-  positive_prompt: industrial people, dreams, japan, sanyo
-- image_url: /assets/images/gallery/takara-ai/nihon_gaikei_japanese_streetscapes/1073597245970848.png
-  positive_prompt: industrial people, dreams, japan, sanyo
-- image_url: /assets/images/gallery/takara-ai/nihon_gaikei_japanese_streetscapes/20290806096093.png
+- image_url: /assets/images/gallery/takara-ai/nihon_gaikei_japanese_streetscapes/314049987269601.png
   positive_prompt: daytime, people
-- image_url: /assets/images/gallery/takara-ai/nihon_gaikei_japanese_streetscapes/539361861713362.png
+- image_url: /assets/images/gallery/takara-ai/nihon_gaikei_japanese_streetscapes/757876778022307.png
   positive_prompt: industrial people, dreams, japan, sanyo
-- image_url: /assets/images/gallery/takara-ai/nihon_gaikei_japanese_streetscapes/1097774067322436.png
-  positive_prompt: industrial people, dreams, japan, sanyo
-- image_url: /assets/images/gallery/takara-ai/shizuka_na_kaishi_serene_openings/270911722227439.png
+- image_url: /assets/images/gallery/takara-ai/nihon_gaikei_japanese_streetscapes/180014436828897.png
+  positive_prompt: daytime, people
+- image_url: /assets/images/gallery/takara-ai/nihon_gaikei_japanese_streetscapes/1083924796677478.png
+  positive_prompt: daytime, people
+- image_url: /assets/images/gallery/takara-ai/shizuka_na_kaishi_serene_openings/215799147067307.png
   positive_prompt: rocks, jigsaw
-- image_url: /assets/images/gallery/takara-ai/shizuka_na_kaishi_serene_openings/955504986080536.png
+- image_url: /assets/images/gallery/takara-ai/shizuka_na_kaishi_serene_openings/1007086502598008.png
   positive_prompt: rocks, jigsaw
-- image_url: /assets/images/gallery/takara-ai/shizuka_na_kaishi_serene_openings/736151402908094.png
+- image_url: /assets/images/gallery/takara-ai/shizuka_na_kaishi_serene_openings/970118367282047.png
   positive_prompt: rocks, jigsaw
-- image_url: /assets/images/gallery/takara-ai/shizuka_na_kaishi_serene_openings/182250974791618.png
+- image_url: /assets/images/gallery/takara-ai/shizuka_na_kaishi_serene_openings/876906096689428.png
   positive_prompt: rocks, jigsaw
-- image_url: /assets/images/gallery/takara-ai/shizuka_na_kaishi_serene_openings/566731823593196.png
+- image_url: /assets/images/gallery/takara-ai/shizuka_na_kaishi_serene_openings/849167551679860.png
   positive_prompt: rocks, jigsaw
-- image_url: /assets/images/gallery/takara-ai/gaikotsu_no_yurei_skeleton_spectre/615385377122845.png
+- image_url: /assets/images/gallery/takara-ai/gaikotsu_no_yurei_skeleton_spectre/728331598859720.png
   positive_prompt: Takiyasha the Witch, depicted in the style of ukiyo-e, conjuring
     the eerie Skeleton Spectre in an ancient, moonlit forest. The scene features traditional
     Japanese attire, flowing robes, and glowing magical runes, all rendered with the
     characteristic woodblock print style of ukiyo-e, capturing the haunting beauty
     and ethereal presence of the spectral figure.
-- image_url: /assets/images/gallery/takara-ai/gaikotsu_no_yurei_skeleton_spectre/836109146832138.png
+- image_url: /assets/images/gallery/takara-ai/gaikotsu_no_yurei_skeleton_spectre/495588099986584.png
   positive_prompt: Takiyasha the Witch, depicted in the style of ukiyo-e, conjuring
     the eerie Skeleton Spectre in an ancient, moonlit forest. The scene features traditional
     Japanese attire, flowing robes, and glowing magical runes, all rendered with the
     characteristic woodblock print style of ukiyo-e, capturing the haunting beauty
     and ethereal presence of the spectral figure.
-- image_url: /assets/images/gallery/takara-ai/gaikotsu_no_yurei_skeleton_spectre/117908385573376.png
+- image_url: /assets/images/gallery/takara-ai/gaikotsu_no_yurei_skeleton_spectre/69867773740868.png
   positive_prompt: Takiyasha the Witch, depicted in the style of ukiyo-e, conjuring
     the eerie Skeleton Spectre in an ancient, moonlit forest. The scene features traditional
     Japanese attire, flowing robes, and glowing magical runes, all rendered with the
     characteristic woodblock print style of ukiyo-e, capturing the haunting beauty
     and ethereal presence of the spectral figure.
-- image_url: /assets/images/gallery/takara-ai/gaikotsu_no_yurei_skeleton_spectre/790856827130060.png
+- image_url: /assets/images/gallery/takara-ai/gaikotsu_no_yurei_skeleton_spectre/896786149243562.png
   positive_prompt: Takiyasha the Witch, depicted in the style of ukiyo-e, conjuring
     the eerie Skeleton Spectre in an ancient, moonlit forest. The scene features traditional
     Japanese attire, flowing robes, and glowing magical runes, all rendered with the
     characteristic woodblock print style of ukiyo-e, capturing the haunting beauty
     and ethereal presence of the spectral figure.
-- image_url: /assets/images/gallery/takara-ai/gaikotsu_no_yurei_skeleton_spectre/840727633643847.png
+- image_url: /assets/images/gallery/takara-ai/gaikotsu_no_yurei_skeleton_spectre/365135569575623.png
   positive_prompt: Takiyasha the Witch, depicted in the style of ukiyo-e, conjuring
     the eerie Skeleton Spectre in an ancient, moonlit forest. The scene features traditional
     Japanese attire, flowing robes, and glowing magical runes, all rendered with the
     characteristic woodblock print style of ukiyo-e, capturing the haunting beauty
     and ethereal presence of the spectral figure.
+- image_url: /assets/images/gallery/takara-ai/Genso-teki_Na_Furemu_Ethereal_Frames/489958491397740.png
+  positive_prompt: vintage japanese photograph, grain
+- image_url: /assets/images/gallery/takara-ai/Genso-teki_Na_Furemu_Ethereal_Frames/513292186580469.png
+  positive_prompt: rising sun, clouds, water, lightning
+- image_url: /assets/images/gallery/takara-ai/Genso-teki_Na_Furemu_Ethereal_Frames/581962335120989.png
+  positive_prompt: vintage japanese photograph, grain
+- image_url: /assets/images/gallery/takara-ai/Genso-teki_Na_Furemu_Ethereal_Frames/440852464900387.png
+  positive_prompt: a beautiful street with houses and paving
+- image_url: /assets/images/gallery/takara-ai/Genso-teki_Na_Furemu_Ethereal_Frames/1072872501493492.png
+  positive_prompt: a photo of realistic animals in a picture frame

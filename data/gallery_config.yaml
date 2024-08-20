@@ -11,3 +11,5 @@ datasets:
     num_images: 5
   - name: "takara-ai/gaikotsu_no_yurei_skeleton_spectre"
     num_images: 5
+  - name: "takara-ai/Genso-teki_Na_Furemu_Ethereal_Frames"
+    num_images: 5
