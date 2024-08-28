@@ -662,6 +662,7 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
     /**
    * Loads the Google Tag Manager script.
    */ function loadGTM() {
+        if (window.gtmLoaded) return; // Prevent loading GTM multiple times
         try {
             const script = document.createElement("script");
             script.textContent = `
@@ -679,6 +680,7 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
                 })(window,document,'script','dataLayer','${GTM_KEY}');
             `;
             document.head.appendChild(script);
+            window.gtmLoaded = true;
         } catch (error) {
             console.error("Error loading GTM:", error);
         }
@@ -688,7 +690,7 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
    */ function init() {
         const consent = getCookie(COOKIE_NAME);
         if (consent === "accepted") loadGTM();
-        else if (consent === null) showModal();
+        else if (consent !== "rejected") showModal();
         const acceptButton = document.getElementById("accept-cookies");
         const rejectButton = document.getElementById("reject-cookies");
         if (acceptButton) acceptButton.addEventListener("click", acceptCookies);

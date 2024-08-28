@@ -94,6 +94,8 @@
    * Loads the Google Tag Manager script.
    */
   function loadGTM() {
+    if (window.gtmLoaded) return; // Prevent loading GTM multiple times
+
     try {
       const script = document.createElement("script");
       script.textContent = `
@@ -111,6 +113,7 @@
                 })(window,document,'script','dataLayer','${GTM_KEY}');
             `;
       document.head.appendChild(script);
+      window.gtmLoaded = true;
     } catch (error) {
       console.error("Error loading GTM:", error);
     }
@@ -123,7 +126,7 @@
     const consent = getCookie(COOKIE_NAME);
     if (consent === "accepted") {
       loadGTM();
-    } else if (consent === null) {
+    } else if (consent !== "rejected") {
       showModal();
     }
 
