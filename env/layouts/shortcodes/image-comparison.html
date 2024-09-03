@@ -1,0 +1,66 @@
+{{/*  example usage  */}}
+
+{{/*  {{< image-comparison
+image1="/images/prompt-engineering/brackets-ai-prompts/sun_00001_.png"
+image2="/images/prompt-engineering/brackets-ai-prompts/cityscape brackets_00001_.png"
+caption1="A bustling cityscape with a bright sun"
+caption2="A bustling cityscape with a [bright sun]" >}}  */}}
+
+{{ $image1 := .Get "image1" }}
+{{ $image2 := .Get "image2" }}
+{{ $caption1 := .Get "caption1" | default "Image 1" }}
+{{ $caption2 := .Get "caption2" | default "Image 2" }}
+
+{{ $desktopWidth := "750x" }}
+{{ $mobileWidth := "350x" }}
+{{ $imageOptions := "webp q80 mitchell" }}
+
+{{ $webp1Desktop := "" }}
+{{ $webp1Mobile := "" }}
+{{ $webp2Desktop := "" }}
+{{ $webp2Mobile := "" }}
+
+{{ with resources.Get $image1 }}
+  {{ $webp1Desktop = .Resize (printf "%s %s" $desktopWidth $imageOptions) }}
+  {{ $webp1Mobile = .Resize (printf "%s %s" $mobileWidth $imageOptions) }}
+{{ end }}
+
+{{ with resources.Get $image2 }}
+  {{ $webp2Desktop = .Resize (printf "%s %s" $desktopWidth $imageOptions) }}
+  {{ $webp2Mobile = .Resize (printf "%s %s" $mobileWidth $imageOptions) }}
+{{ end }}
+
+<div class="image-comparison flex flex-row gap-2 my-4">
+  {{ if $webp1Desktop }}
+  <figure class="w-1/2">
+    <picture>
+      <source media="(min-width: 768px)" srcset="{{ $webp1Desktop.RelPermalink }}">
+      <img 
+        src="{{ $webp1Mobile.RelPermalink }}" 
+        alt="{{ $caption1 }}" 
+        class="w-full h-auto object-cover rounded-lg" 
+        loading="lazy" 
+        decoding="async"
+      >
+    </picture>
+    <figcaption class="text-center text-sm mt-2 break-words">{{ $caption1 }}</figcaption>
+  </figure>
+  {{ end }}
+
+  {{ if $webp2Desktop }}
+  <figure class="w-1/2">
+    <picture>
+      <source media="(min-width: 768px)" srcset="{{ $webp2Desktop.RelPermalink }}">
+      <img 
+        src="{{ $webp2Mobile.RelPermalink }}" 
+        alt="{{ $caption2 }}" 
+        class="w-full h-auto object-cover rounded-lg" 
+        loading="lazy" 
+        decoding="async"
+      >
+    </picture>
+    <figcaption class="text-center text-sm mt-2 break-words">{{ $caption2 }}</figcaption>
+  </figure>
+  {{ end }}
+</div>
+
