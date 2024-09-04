@@ -12,7 +12,7 @@ In the world of AI-generated content, particularly with **text-to-image** models
 
 ## The Core Purpose of Brackets in AI Prompts
 
-Brackets in AI prompts are a form of prompt engineering used to direct the model's attention to specific elements. This technique, commonly applied in diffusion models like **Stable Diffusion** developed by **Stability AI**[^1], helps users emphasize or de-emphasize different aspects of the generated image.
+Brackets in AI prompts are a form of prompt engineering used to direct the model's attention to specific elements. This technique, commonly applied in diffusion models like **Stable Diffusion** developed by **Stability AI**[^1], helps users emphasise or de-emphasise different aspects of the generated image.
 
 ### How It Works: The Technical Details
 
@@ -70,7 +70,7 @@ With the theory of bracket usage covered, let's see it in action. The following 
 - **Model:** SDXL-Lightning 4 Step[^6]
 - **Seed:** 141119621523812
 
-#### Example 1: Emphasizing a Single Element
+#### Example 1: Emphasising a Single Element
 
 - Without brackets: A red apple on a wooden table
 - With brackets: A ((red apple)) on a wooden table
@@ -83,7 +83,7 @@ caption2="A ((red apple)) on a wooden table" >}}
 
 In the bracketed version, the apple appears more vibrant and becomes the central focus of the image.
 
-#### Example 2: De-emphasizing an Element
+#### Example 2: De-emphasising an Element
 
 - Without brackets: A bustling cityscape with a bright sun
 - With brackets: A bustling cityscape with a [bright sun]
@@ -139,7 +139,7 @@ Recent advancements in AI models have further refined the process of prompt inte
 
 - **Stable Diffusion XL (SDXL)**: This model, introduced in the paper "SDXL: Improving Latent Diffusion Models for High-Resolution Image Synthesis"[^2], offers enhanced capabilities in generating high-quality images from prompts.
 - **Stable Diffusion 3 (SD3)**: The latest iteration, detailed in "Stable Diffusion 3: Delivering Unprecedented Performance, Quality, and Adaptability in Image Generation"[^3], introduces a novel architecture that improves prompt processing and image quality.
-- **Direct Preference Optimization (DPO)**: This fine-tuning technique, explained in "Direct Preference Optimization: Your Language Model is Secretly a Reward Model"[^4], has been applied to models like SD3 to enhance prompt understanding and image aesthetics.
+- **Direct Preference Optimisation (DPO)**: This fine-tuning technique, explained in "Direct Preference Optimisation: Your Language Model is Secretly a Reward Model"[^4], has been applied to models like SD3 to enhance prompt understanding and image aesthetics.
 - **Takara.ai Image Datasets**: We applied the bracket prompt engineering technique to create stunning artwork in our Open Source datasets, demonstrating the practical application of these techniques in large-scale image generation projects. View them in our [Art Gallery](/open-source/gallery/).
 
 Other companies are also making significant strides in this field. For example, **Black Forest Labs' Flux.1**[^5] model shows similar architectural advancements and performance to SD3[^3]. Although not a Stable Diffusion model, many prompt engineering techniques, including bracket use, might also apply to Flux.1.
