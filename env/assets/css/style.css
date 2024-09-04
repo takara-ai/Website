@@ -3871,6 +3871,10 @@ h5 {
   transition: transform 0.3s ease-in-out;
 }
 
+.\[haunted\:0\.25\] {
+  haunted: 0.25;
+}
+
 .\[writing-mode\:vertical-lr\] {
   writing-mode: vertical-lr;
 }
