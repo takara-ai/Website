@@ -90,7 +90,7 @@ In the bracketed version, the apple appears more vibrant and becomes the central
 
 {{< image-comparison
 image1="/images/prompt-engineering/brackets-ai-prompts/sun_00001_.png"
-image2="/images/prompt-engineering/brackets-ai-prompts/cityscape-brackets_00001_.png"
+image2="/images/prompt-engineering/brackets-ai-prompts/cityscape-brackets.png"
 caption1="A bustling cityscape with a bright sun"
 caption2="A bustling cityscape with a [bright sun]" >}}
 
