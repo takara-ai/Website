@@ -24,12 +24,12 @@ When you submit a prompt with brackets, here's what happens:
 
 ### Types of Brackets and Their Effects
 
-| Bracket Type    | Usage Example | Emphasis Level                    |
+<!-- | Bracket Type    | Usage Example | Emphasis Level                    |
 | --------------- | ------------- | --------------------------------- |
 | Single brackets | (word)        | Slight emphasis                   |
 | Double brackets | ((word))      | Moderate emphasis                 |
 | Triple brackets | (((word)))    | Strong emphasis                   |
-| Square brackets | [word]        | Reduced emphasis (in some models) |
+| Square brackets | [word]        | Reduced emphasis (in some models) | -->
 
 > It's worth noting that the exact interpretation can vary between different AI models and versions.
 
