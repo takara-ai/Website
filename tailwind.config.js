@@ -48,6 +48,9 @@ module.exports = {
       typography: (theme) => ({
         DEFAULT: {
           css: {
+            ".footnotes": {
+              overflowWrap: "anywhere",
+            },
             'code.language-markdown[data-lang="markdown"]': {
               whiteSpace: "pre-wrap !important",
               wordWrap: "break-word !important",
