@@ -30,7 +30,7 @@ caption2="A bustling cityscape with a [bright sun]" >}}  */}}
   {{ $webp2Mobile = .Resize (printf "%s %s" $mobileWidth $imageOptions) }}
 {{ end }}
 
-<div class="image-comparison flex flex-row gap-2 my-4">
+<div class="image-comparison flex flex-row gap-2 sm:gap-4 my-4">
   {{ if $webp1Desktop }}
   <figure class="w-1/2">
     <picture>
