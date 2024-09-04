@@ -139,8 +139,8 @@ It's worth noting that other companies are also making significant strides in th
 
 The use of brackets in AI prompts is a powerful tool that allows for fine-tuned control over image generation. By understanding the theory behind this technique and practicing with various examples, you can significantly enhance your ability to create precise, intentional AI-generated images. As AI technology continues to evolve, techniques like this will become increasingly sophisticated, offering creators unprecedented control over their content.
 
-[^1]: https://stability.ai/
+<!-- [^1]: https://stability.ai/
 [^2]: https://huggingface.co/papers/2307.01952
 [^3]: https://huggingface.co/papers/2403.03206
 [^4]: https://huggingface.co/papers/2305.18290
-[^5]: https://blackforestlabs.ai/
+[^5]: https://blackforestlabs.ai/ -->
