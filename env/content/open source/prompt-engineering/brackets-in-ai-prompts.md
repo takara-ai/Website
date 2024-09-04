@@ -62,11 +62,11 @@ Now that we understand the theory behind bracket usage, let's explore how to app
 
 - With brackets: `A ((red apple)) on a wooden table`
 
-{{< image-comparison
+<!-- {{< image-comparison
 image1="/images/prompt-engineering/brackets-ai-prompts/red-apple_00001_.png"
 image2="/images/prompt-engineering/brackets-ai-prompts/red-apple_00002_.png"
 caption1="A red apple on a wooden table"
-caption2="A ((red apple)) on a wooden table" >}}
+caption2="A ((red apple)) on a wooden table" >}} -->
 
 In the bracketed version, you should notice that the apple appears more vibrant and takes a more central focus in the image.
 
@@ -76,11 +76,11 @@ In the bracketed version, you should notice that the apple appears more vibrant 
 
 - With brackets: `A bustling cityscape with a [bright sun]`
 
-{{< image-comparison
+<!-- {{< image-comparison
 image1="/images/prompt-engineering/brackets-ai-prompts/sun_00001_.png"
 image2="/images/prompt-engineering/brackets-ai-prompts/cityscape brackets_00001_.png"
 caption1="A bustling cityscape with a bright sun"
-caption2="A bustling cityscape with a [bright sun]" >}}
+caption2="A bustling cityscape with a [bright sun]" >}} -->
 
 Here, the square brackets around "bright sun" should result in a more subdued sun, allowing the cityscape to become more prominent.
 
@@ -92,11 +92,11 @@ Here, the square brackets around "bright sun" should result in a more subdued su
 
 - With varied emphasis: `A ((forest)) with a (river) and [mountains]`
 
-{{< image-comparison
+<!-- {{< image-comparison
 image2="/images/prompt-engineering/brackets-ai-prompts/brackets-comparison00001.png"
 image1="/images/prompt-engineering/brackets-ai-prompts/brackets-comparison.png"
 caption1="A forest with a river and mountains"
-caption2="A ((forest)) with a (river) and [mountains]" >}}
+caption2="A ((forest)) with a (river) and [mountains]" >}} -->
 
 This example showcases how different levels of bracketing can create a hierarchy of focus within the image.
 
@@ -106,11 +106,11 @@ This example showcases how different levels of bracketing can create a hierarchy
 
 - With brackets: `A ((vintage car)) in front of a [modern building]`
 
-{{< image-comparison
+<!-- {{< image-comparison
 image2="/images/prompt-engineering/brackets-ai-prompts/vintage-car-modern-building_00002_.png"
 image1="/images/prompt-engineering/brackets-ai-prompts/vintage-car-modern-building_00001_.png"
 caption1="A vintage car in front of a modern building"
-caption2="A ((vintage car)) in front of a [modern building]" >}}
+caption2="A ((vintage car)) in front of a [modern building]" >}} -->
 
 This combination should result in a more prominent and detailed vintage car, while the modern building becomes a less detailed background element.
 
