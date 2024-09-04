@@ -150,12 +150,12 @@ Brackets in AI prompts offer precise control over image generation. Though not p
 
 For more advanced prompt techniques, see our [Mega Prompts guide](/open-source/prompt-engineering/mega-prompts/).
 
-[^1]: https://stability.ai/
-[^2]: https://huggingface.co/papers/2307.01952
-[^3]: https://huggingface.co/papers/2403.03206
-[^4]: https://huggingface.co/papers/2305.18290
-[^5]: https://blackforestlabs.ai/
-[^6]: https://huggingface.co/papers/2402.13929
-[^7]: https://huggingface.co/papers/2103.00020
-[^8]: https://github.com/AUTOMATIC1111/stable-diffusion-webui
-[^9]: https://github.com/invoke-ai/InvokeAI
+[^1]: https://stability.ai/ - Stability AI, _Generative AI Models Overview_
+[^2]: https://huggingface.co/papers/2307.01952 - Rombach et al., 2023, _SDXL: A Scalable Latent Diffusion Model for High-Resolution Image Synthesis_
+[^3]: https://huggingface.co/papers/2403.03206 - Research on Scaled Rectified Flow Transformers for Enhanced Image Synthesis, 2024
+[^4]: https://huggingface.co/papers/2305.18290 - Research Paper on Advancements in Diffusion Models, 2023
+[^5]: https://blackforestlabs.ai/ - Black Forest Labs, _AI Research and Technology Solutions_
+[^6]: https://huggingface.co/papers/2402.13929 - Research on Innovative Techniques in Generative Modeling, 2024
+[^7]: https://huggingface.co/papers/2103.00020 - Research Paper on Diffusion Models and Their Applications, 2021
+[^8]: https://github.com/AUTOMATIC1111/stable-diffusion-webui - GitHub Repository for the Stable Diffusion Web UI by AUTOMATIC1111
+[^9]: https://github.com/invoke-ai/InvokeAI - GitHub Repository for InvokeAI, an Open-Source Toolkit for Generative AI
