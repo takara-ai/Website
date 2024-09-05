@@ -27,7 +27,7 @@ Recognising these challenges, takara.ai serves as a guiding compass for business
 
 ### Our Team: Devoted AI Innovators
 
-We employ top-tier AI and ML professionals dedicated to creating unparalleled solutions. Meet our team [here](/company/team).
+We employ top-tier AI and ML professionals dedicated to creating unparalleled solutions. Meet our team [here](/company/team/).
 
 Join us at [takara.ai](/) as partners in unveiling the hidden treasures within your organisation, catalysing growth and success. Together, let's navigate the transformative journey of AI.
 
