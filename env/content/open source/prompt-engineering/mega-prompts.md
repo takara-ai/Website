@@ -4,8 +4,12 @@ date: "2024-05-30T12:25:23+01:00"
 draft: false
 description: "Learn to create effective Mega Prompts for Large Language Models with our detailed guide. Enhance your AI interactions with step-by-step instructions and best practices for precise, context-rich prompts."
 type: "prompt-engineering"
+industry: ["Technology", "Education"]
+modality: ["Large Language Model (LLM)", "Conversational AI"]
+difficultyLevel: ["Intermediate"]
+technique: ["Prompt Optimisation", "Contextual Prompting", "Chain-of-Thought Prompting", "Role-Based Prompting", "Multistep Prompting", "Error Analysis and Iteration"]
+specialisedTopics: ["Explainable AI (XAI)", "Bias Mitigation"]
 ---
-
 **Contributors**:
 
 - [Bailey Readings](https://www.linkedin.com/in/baileyreadings/) CEO of GrantScout.AI | Founder of AutomatedFlow.Ai

@@ -4,8 +4,12 @@ date: "2024-03-28T20:48:58Z"
 draft: false
 description: "Unlock startup success with AI: Explore financial management, customer growth, and scaling strategies in our comprehensive prompt guide."
 type: "prompt-engineering"
+industry: ["Finance", "Technology"]
+modality: ["Conversational AI", "Large Language Model (LLM)"]
+difficultyLevel: ["Intermediate"]
+technique: ["Chain-of-Thought Prompting", "Zero-Shot Learning", "Prompt Optimisation", "Few-Shot Learning", "Contextual Prompting", "Prompt Tuning", "Error Analysis and Iteration"]
+specialisedTopics: ["Bias Mitigation", "Explainable AI (XAI)"]
 ---
-
 ## Founders Agreements
 
 **Zero-Shot Prompt Guide**:

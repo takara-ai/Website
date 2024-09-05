@@ -4,8 +4,12 @@ date: "2024-03-31T23:15:56+01:00"
 draft: false
 description: "Discover a comprehensive guide to product prototyping, featuring expert-crafted prompts for ideation, user research, wireframing, testing, and more."
 type: "prompt-engineering"
+industry: ["Technology", "Manufacturing"]
+modality: ["Conversational AI", "Text Generation"]
+difficultyLevel: ["Intermediate"]
+technique: ["Chain-of-Thought Prompting", "Contextual Prompting", "Prompt Optimisation", "Few-Shot Learning", "Zero-Shot Learning", "Prompt Tuning", "Role-Based Prompting", "Multistep Prompting", "Error Analysis and Iteration"]
+specialisedTopics: ["Explainable AI (XAI)", "Bias Mitigation"]
 ---
-
 **Instruction Following Prompt Guide:**
 
 ```markdown

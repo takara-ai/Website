@@ -4,8 +4,12 @@ date: "2024-03-28T15:06:55Z"
 draft: false
 description: "Explore AI learning methods: zero-shot to many-shot, chain of thought, and instruction following, to harness AI's full potential."
 type: "prompt-engineering"
+industry: ["Technology"]
+modality: ["Large Language Model (LLM)", "Multimodal AI", "Conversational AI"]
+difficultyLevel: ["Intermediate"]
+technique: ["Prompt Optimisation", "Zero-Shot Learning", "Chain-of-Thought Prompting", "Few-Shot Learning", "Prompt Tuning", "Contextual Prompting", "Role-Based Prompting", "Multistep Prompting", "Error Analysis and Iteration"]
+specialisedTopics: ["Explainable AI (XAI)", "Bias Mitigation", "Ethical AI"]
 ---
-
 ## Welcome to the World of Prompt Engineering!
 
 This guide is designed to help you navigate the exciting landscape of AI communication with confidence and creativity. By understanding the different learning methods, utilising placeholders effectively, and following the prompt guide format, you'll be well-equipped to unlock the full potential of our tutorials and achieve your goals more efficiently. These guides were handcrafted by our team here at takara.ai (although the structure of these is assisted by AI) completely for free in our spare time, and we hope you enjoy them.

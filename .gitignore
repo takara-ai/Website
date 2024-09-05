@@ -11,3 +11,5 @@ env/public
 !.yarn/sdks
 !.yarn/versions
 
+.env
+.venv

@@ -4,8 +4,12 @@ date: "2024-03-21T15:02:10Z"
 draft: false
 description: "Unlock the power of ChatGPT-4 for your marketing strategies with our guide on crafting compelling prompts for pitch decks, content strategies, and more, tailored to engage your audience effectively."
 type: "prompt-engineering"
+industry: ["Marketing", "Technology"]
+modality: ["Large Language Model (LLM)", "Conversational AI"]
+difficultyLevel: ["Intermediate"]
+technique: ["Prompt Optimisation", "Chain-of-Thought Prompting", "Few-Shot Learning", "Zero-Shot Learning", "Prompt Tuning", "Contextual Prompting", "Role-Based Prompting", "Multistep Prompting", "Error Analysis and Iteration"]
+specialisedTopics: ["Explainable AI (XAI)", "Cultural Sensitivity", "Long-Form Text Generation", "Data Scarcity", "Interactive Storytelling", "Synthetic Data Generation"]
 ---
-
 ## Proposal Pitch Decks
 
 **Instruction Following Prompt Guide**:

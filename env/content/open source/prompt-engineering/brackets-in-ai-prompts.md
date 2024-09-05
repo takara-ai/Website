@@ -4,8 +4,12 @@ date: "2024-09-03T13:33:32+01:00"
 draft: false
 description: "Discover the purpose of brackets in AI prompts and how they enhance text-to-image models. Learn how varying bracket types affect emphasis and image generation in our latest guide."
 type: "prompt-engineering"
+industry: ["Technology"]
+modality: ["Text-to-Image", "Image Generation"]
+difficultyLevel: ["Intermediate"]
+technique: ["Prompt Optimisation", "Few-Shot Learning", "Zero-Shot Learning", "Prompt Tuning", "Contextual Prompting", "Chain-of-Thought Prompting", "Role-Based Prompting", "Multistep Prompting", "Error Analysis and Iteration"]
+specialisedTopics: ["Explainable AI (XAI)", "Bias Mitigation"]
 ---
-
 ## Introduction
 
 In the world of AI-generated content, particularly with **text-to-image** models, using _brackets_ in prompts is a powerful technique. This article explores their use, focusing specifically on **Stable Diffusion** models.
@@ -159,3 +163,10 @@ For more advanced prompt techniques, see our [Mega Prompts guide](/open-source/p
 [^7]: https://huggingface.co/papers/2103.00020 - Research Paper on Diffusion Models and Their Applications, 2021
 [^8]: https://github.com/AUTOMATIC1111/stable-diffusion-webui - GitHub Repository for the Stable Diffusion Web UI by AUTOMATIC1111
 [^9]: https://github.com/invoke-ai/InvokeAI - GitHub Repository for InvokeAI, an Open-Source Toolkit for Generative AI
+
+---
+
+Modality: Text-to-Image, Image Generation
+Technique: Prompt Engineering, Prompt Optimisation
+Specialised Topics: Explainable AI (XAI), Bias Mitigation
+Industry: Technology
