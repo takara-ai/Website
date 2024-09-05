@@ -198,7 +198,7 @@ The user is looking to gain a detailed understanding of the style, voice, and to
 - Command R+
 - DBRX
 
-See [Free Models and Playgrounds](https://takara.ai/prompt-engineering/prompt-guide/#free-models-and-playgrounds) for links to these.
+See [Free Models and Playgrounds](https://takara.ai/open-source/prompt-engineering/prompt-guide/#free-models-and-playgrounds) for links to these.
 Avoid heavily quantised models down to q4 and q2.
 
 ---
