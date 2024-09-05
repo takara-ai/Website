@@ -1,5 +1,5 @@
 {
-  "Industry": [
+  "industry": [
     "Healthcare",
     "Finance",
     "Education",
@@ -18,7 +18,7 @@
     "Technology",
     "Energy"
   ],
-  "Modality": [
+  "modality": [
     "Vision AI",
     "Text-to-Image",
     "Large Language Model (LLM)",
@@ -39,8 +39,8 @@
     "Data Augmentation",
     "Robotics"
   ],
-  "Difficulty Level": ["Beginner", "Intermediate", "Advanced"],
-  "Technique": [
+  "difficultyLevel": ["Beginner", "Intermediate", "Advanced"],
+  "technique": [
     "Prompt Optimisation",
     "Few-Shot Learning",
     "Zero-Shot Learning",
@@ -51,7 +51,7 @@
     "Multistep Prompting",
     "Error Analysis and Iteration"
   ],
-  "Specialised Topics": [
+  "specialisedTopics": [
     "Low-Resource Languages",
     "Adversarial Prompting",
     "Bias Mitigation",
