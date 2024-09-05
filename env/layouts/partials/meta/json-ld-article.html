@@ -1,0 +1,30 @@
+{{/*  get the raw prompt engineering image  */}}
+{{ $image := resources.Get "images/prompt-engineering/prompt-engineering.jpg" }}
+{{ $imageURL := $image.Permalink }}
+
+{{/*  LD COntent  */}}
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ .Title }}",
+  "description": "{{ .Params.description }}",
+  "url": "{{ .Permalink }}",
+  "author": {
+    "@type": "Organization",
+    "name": "Takara.ai"
+  },
+  "datePublished": "{{ .Date | safeHTML }}",
+  "image": "{{ $imageURL }}",
+  "keywords": {
+    "industry": {{ .Params.tags.industry | jsonify }},
+    "modality": {{ .Params.tags.modality | jsonify }},
+    "difficultyLevel": {{ .Params.tags.difficultyLevel | jsonify }},
+    "technique": {{ .Params.tags.technique | jsonify }},
+    "specialisedTopics": {{ .Params.tags.specialisedTopics | jsonify }}
+  }
+}
+
+
+
+
+
