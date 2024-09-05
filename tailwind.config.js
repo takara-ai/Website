@@ -10,6 +10,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // branding pack
+        fuji: "#156082",
+        // takara red
         red: {
           700: "#d91009",
         },
