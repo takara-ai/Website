@@ -1,6 +1,7 @@
 import os
 import json
 import re
+import yaml
 from groq import Groq
 from typing import Dict, List
 from dotenv import load_dotenv
@@ -20,43 +21,56 @@ def count_tokens(text: str) -> int:
 
 def find_relevant_tags(content: str, tags: Dict[str, List[str]]) -> Dict[str, List[str]]:
     client = Groq(api_key=os.getenv("GROQ_KEY"))
-    
+
     prompt = f"""
-    Analyze the following blog post content and assign relevant tags from the provided list.
-    You must assign tags for each category: Industry, Modality, Difficulty Level, Technique, and Specialised Topics.
+    You are tasked with analyzing blog post content to assign relevant tags from the provided list. You must ensure accuracy by selecting tags that are well-aligned with the text.
 
     Blog post content:
     {content}
 
-    Available tags for each category:
+    Available tags for each category (in JSON format):
     {json.dumps(tags, indent=2)}
 
     INSTRUCTIONS:
-    1. Assign at least one tag for each category.
-    2. For Difficulty Level, assign exactly one tag.
-    3. For Technique, be generous and assign multiple tags that are relevant or related to the content.
-    4. For other categories, assign multiple tags if relevant.
-    5. Only use tags from the provided list.
+    1. Carefully read the blog post and assign tags that accurately reflect its content for each of the following categories: 
+       - Industry
+       - Modality
+       - difficultyLevel
+       - Technique
+       - Specialised Topics
+    2. **Industry**: Assign multiple tags if applicable, but ensure they are relevant to the industry discussed in the content.
+    3. **Modality**: Assign multiple tags if the content spans more than one modality (e.g., vision, language, audio).
+    4. **difficultyLevel**: Assign exactly one difficultyLevel tag (Beginner, Intermediate, Advanced) based on the overall complexity of the blog post.
+    5. **Technique**: Be generous in assigning multiple technique-related tags, even for loosely related methods or concepts mentioned in the post.
+    6. **Specialised Topics**: Assign multiple tags only if the post delves into niche areas.
+
+    Important Notes:
+    - Ensure all tags come from the provided list.
+    - Be particularly careful with the difficultyLevel; assign only one tag based on the depth and technical difficulty of the content.
 
     Return your answer in this JSON format:
     {{
         "industry": ["Tag1", "Tag2"],
         "modality": ["Tag3", "Tag4"],
         "difficultyLevel": ["Tag5"],
-        "technique": ["Tag6", "Tag7", "Tag8", "Tag9"],
-        "specialisedTopics": ["Tag10", "Tag11"]
+        "technique": ["Tag6", "Tag7", "Tag8"],
+        "specialisedTopics": ["Tag9", "Tag10"]
     }}
     
-    Remember to be particularly generous with Technique tags, including any that are relevant or related to the content.
+    Example of how to assign tags:
+    - If the post is about AI models used in healthcare, you might assign: 
+      "industry": ["Healthcare", "Technology"]
+    - For a post discussing LLMs and image generation: 
+      "modality": ["Vision", "Image Generation", "Multimodal"]
     """
 
     completion = client.chat.completions.create(
         model="llama-3.1-8b-instant",
         messages=[
-            {"role": "system", "content": "You are an AI assistant specialized in analyzing blog posts and assigning relevant tags. You have a deep understanding of various AI techniques and can identify even loosely related techniques in the content."},
+            {"role": "system", "content": "JSON You are an AI assistant expert in analyzing content and assigning the most accurate and relevant tags based on various AI techniques, industries, and modalities."},
             {"role": "user", "content": prompt}
         ],
-        temperature=0.3,  # Slightly increased for more variety in tag selection
+        temperature=0,  # Lower for higher accuracy and reduced randomness
         max_tokens=1024,
         top_p=1,
         stream=False,
@@ -67,28 +81,31 @@ def find_relevant_tags(content: str, tags: Dict[str, List[str]]) -> Dict[str, Li
     try:
         relevant_tags = json.loads(completion.choices[0].message.content)
         print("DEBUG: Raw model response:", relevant_tags)
-        
+
         validated_tags = {}
         for category in tags.keys():
             if category in relevant_tags and relevant_tags[category]:
+                # Filter tags that are valid from the provided list
                 validated_tags[category] = [tag for tag in relevant_tags[category] if tag in tags[category]]
                 if not validated_tags[category]:
                     print(f"Warning: No valid tags assigned for category '{category}'. Model suggested: {relevant_tags[category]}")
             else:
                 print(f"Warning: No tags assigned for category '{category}'")
         
+        # Ensure only one difficultyLevel is assigned
         if "difficultyLevel" in validated_tags and len(validated_tags["difficultyLevel"]) > 1:
-            print(f"Warning: Multiple difficulty levels assigned. Using the first one: {validated_tags['difficultyLevel'][0]}")
+            print(f"Warning: Multiple difficultyLevels assigned. Using the first one: {validated_tags['difficultyLevel'][0]}")
             validated_tags["difficultyLevel"] = [validated_tags["difficultyLevel"][0]]
         elif "difficultyLevel" not in validated_tags or not validated_tags["difficultyLevel"]:
-            print("Warning: No valid difficulty level assigned. Defaulting to 'Intermediate'.")
+            print("Warning: No valid difficultyLevel assigned. Defaulting to 'Intermediate'.")
             validated_tags["difficultyLevel"] = ["Intermediate"]
-        
+
         return validated_tags
     except json.JSONDecodeError:
         print("Error: Could not parse the API response as JSON.")
         print("DEBUG: Raw API response:", completion.choices[0].message.content)
         return {}
+
        
 def update_frontmatter(file_path: str, tags: Dict[str, List[str]]) -> None:
     with open(file_path, 'r+') as f:
@@ -104,18 +121,15 @@ def update_frontmatter(file_path: str, tags: Dict[str, List[str]]) -> None:
         
         if match:
             # If frontmatter exists, update it
-            frontmatter = match.group(1)
-            for category, tag_list in relevant_tags.items():
-                frontmatter = re.sub(f"{category}:.*\n", "", frontmatter)  # Remove existing category
-                frontmatter += f"\n{category}: {json.dumps(tag_list)}"
-            new_content = f"---\n{frontmatter.strip()}\n---\n" + content[match.end():]
+            frontmatter = yaml.safe_load(match.group(1))
+            frontmatter['tags'] = relevant_tags
+            new_frontmatter = yaml.dump(frontmatter, default_flow_style=False, sort_keys=False)
+            new_content = f"---\n{new_frontmatter}---\n" + content[match.end():]
         else:
             # If no frontmatter, create a new one
-            frontmatter = "---\n"
-            for category, tag_list in relevant_tags.items():
-                frontmatter += f"{category}: {json.dumps(tag_list)}\n"
-            frontmatter += "---\n"
-            new_content = frontmatter + content
+            frontmatter = {'tags': relevant_tags}
+            new_frontmatter = yaml.dump(frontmatter, default_flow_style=False, sort_keys=False)
+            new_content = f"---\n{new_frontmatter}---\n" + content
 
         # Write the updated content back to the file
         f.seek(0)

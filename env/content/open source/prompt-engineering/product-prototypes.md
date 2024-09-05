@@ -1,14 +1,29 @@
 ---
-title: "Product Prototypes"
-date: "2024-03-31T23:15:56+01:00"
+title: Product Prototypes
+date: '2024-03-31T23:15:56+01:00'
 draft: false
-description: "Discover a comprehensive guide to product prototyping, featuring expert-crafted prompts for ideation, user research, wireframing, testing, and more."
-type: "prompt-engineering"
-industry: ["Technology", "Manufacturing"]
-modality: ["Conversational AI", "Text Generation"]
-difficultyLevel: ["Intermediate"]
-technique: ["Chain-of-Thought Prompting", "Contextual Prompting", "Prompt Optimisation", "Few-Shot Learning", "Zero-Shot Learning", "Prompt Tuning", "Role-Based Prompting", "Multistep Prompting", "Error Analysis and Iteration"]
-specialisedTopics: ["Explainable AI (XAI)", "Bias Mitigation"]
+description: Discover a comprehensive guide to product prototyping, featuring expert-crafted
+  prompts for ideation, user research, wireframing, testing, and more.
+type: prompt-engineering
+tags:
+  industry:
+  - Technology
+  modality:
+  - Text Generation
+  - Large Language Model (LLM)
+  difficultyLevel:
+  - Intermediate
+  technique:
+  - Prompt Optimisation
+  - Few-Shot Learning
+  - Zero-Shot Learning
+  - Prompt Tuning
+  - Contextual Prompting
+  - Chain-of-Thought Prompting
+  specialisedTopics:
+  - Bias Mitigation
+  - Explainable AI (XAI)
+  - Cross-Lingual Prompting
 ---
 **Instruction Following Prompt Guide:**
 

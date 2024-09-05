@@ -1,14 +1,32 @@
 ---
-title: "Prompt Guide"
-date: "2024-03-28T15:06:55Z"
+title: Prompt Guide
+date: '2024-03-28T15:06:55Z'
 draft: false
-description: "Explore AI learning methods: zero-shot to many-shot, chain of thought, and instruction following, to harness AI's full potential."
-type: "prompt-engineering"
-industry: ["Technology"]
-modality: ["Large Language Model (LLM)", "Multimodal AI", "Conversational AI"]
-difficultyLevel: ["Intermediate"]
-technique: ["Prompt Optimisation", "Zero-Shot Learning", "Chain-of-Thought Prompting", "Few-Shot Learning", "Prompt Tuning", "Contextual Prompting", "Role-Based Prompting", "Multistep Prompting", "Error Analysis and Iteration"]
-specialisedTopics: ["Explainable AI (XAI)", "Bias Mitigation", "Ethical AI"]
+description: 'Explore AI learning methods: zero-shot to many-shot, chain of thought,
+  and instruction following, to harness AI''s full potential.'
+type: prompt-engineering
+tags:
+  industry:
+  - Education
+  - Technology
+  modality:
+  - Text Generation
+  - Conversational AI
+  - Multimodal
+  - Large Language Model (LLM)
+  difficultyLevel:
+  - Intermediate
+  technique:
+  - Prompt Optimisation
+  - Few-Shot Learning
+  - Zero-Shot Learning
+  - Chain-of-Thought Prompting
+  - Prompt Tuning
+  specialisedTopics:
+  - Bias Mitigation
+  - Explainable AI (XAI)
+  - Cross-Lingual Prompting
+  - Synthetic Data Generation
 ---
 ## Welcome to the World of Prompt Engineering!
 

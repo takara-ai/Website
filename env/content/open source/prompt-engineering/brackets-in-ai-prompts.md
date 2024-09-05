@@ -1,14 +1,31 @@
 ---
-title: "Why Do AI Prompts Use Brackets?"
-date: "2024-09-03T13:33:32+01:00"
+title: Why Do AI Prompts Use Brackets?
+date: '2024-09-03T13:33:32+01:00'
 draft: false
-description: "Discover the purpose of brackets in AI prompts and how they enhance text-to-image models. Learn how varying bracket types affect emphasis and image generation in our latest guide."
-type: "prompt-engineering"
-industry: ["Technology"]
-modality: ["Text-to-Image", "Image Generation"]
-difficultyLevel: ["Intermediate"]
-technique: ["Prompt Optimisation", "Few-Shot Learning", "Zero-Shot Learning", "Prompt Tuning", "Contextual Prompting", "Chain-of-Thought Prompting", "Role-Based Prompting", "Multistep Prompting", "Error Analysis and Iteration"]
-specialisedTopics: ["Explainable AI (XAI)", "Bias Mitigation"]
+description: Discover the purpose of brackets in AI prompts and how they enhance text-to-image
+  models. Learn how varying bracket types affect emphasis and image generation in
+  our latest guide.
+type: prompt-engineering
+tags:
+  industry:
+  - Technology
+  modality:
+  - Text-to-Image
+  - Image Generation
+  - Multimodal
+  difficultyLevel:
+  - Intermediate
+  technique:
+  - Prompt Optimisation
+  - Prompt Tuning
+  - Contextual Prompting
+  - Chain-of-Thought Prompting
+  - Role-Based Prompting
+  - Multistep Prompting
+  - Error Analysis and Iteration
+  specialisedTopics:
+  - Explainable AI (XAI)
+  - Bias Mitigation
 ---
 ## Introduction
 

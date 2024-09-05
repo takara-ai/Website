@@ -1,14 +1,32 @@
 ---
-title: "Mega Prompts"
-date: "2024-05-30T12:25:23+01:00"
+title: Mega Prompts
+date: '2024-05-30T12:25:23+01:00'
 draft: false
-description: "Learn to create effective Mega Prompts for Large Language Models with our detailed guide. Enhance your AI interactions with step-by-step instructions and best practices for precise, context-rich prompts."
-type: "prompt-engineering"
-industry: ["Technology", "Education"]
-modality: ["Large Language Model (LLM)", "Conversational AI"]
-difficultyLevel: ["Intermediate"]
-technique: ["Prompt Optimisation", "Contextual Prompting", "Chain-of-Thought Prompting", "Role-Based Prompting", "Multistep Prompting", "Error Analysis and Iteration"]
-specialisedTopics: ["Explainable AI (XAI)", "Bias Mitigation"]
+description: Learn to create effective Mega Prompts for Large Language Models with
+  our detailed guide. Enhance your AI interactions with step-by-step instructions
+  and best practices for precise, context-rich prompts.
+type: prompt-engineering
+tags:
+  industry:
+  - Technology
+  - Education
+  modality:
+  - Large Language Model (LLM)
+  - Text Generation
+  - Conversational AI
+  - Natural Language Understanding (NLU)
+  difficultyLevel:
+  - Intermediate
+  technique:
+  - Prompt Optimisation
+  - Prompt Tuning
+  - Contextual Prompting
+  - Chain-of-Thought Prompting
+  - Error Analysis and Iteration
+  specialisedTopics:
+  - Explainable AI (XAI)
+  - Cross-Lingual Prompting
+  - Cultural Sensitivity
 ---
 **Contributors**:
 

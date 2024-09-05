@@ -1,14 +1,37 @@
 ---
-title: "Startups"
-date: "2024-03-28T20:48:58Z"
+title: Startups
+date: '2024-03-28T20:48:58Z'
 draft: false
-description: "Unlock startup success with AI: Explore financial management, customer growth, and scaling strategies in our comprehensive prompt guide."
-type: "prompt-engineering"
-industry: ["Finance", "Technology"]
-modality: ["Conversational AI", "Large Language Model (LLM)"]
-difficultyLevel: ["Intermediate"]
-technique: ["Chain-of-Thought Prompting", "Zero-Shot Learning", "Prompt Optimisation", "Few-Shot Learning", "Contextual Prompting", "Prompt Tuning", "Error Analysis and Iteration"]
-specialisedTopics: ["Bias Mitigation", "Explainable AI (XAI)"]
+description: 'Unlock startup success with AI: Explore financial management, customer
+  growth, and scaling strategies in our comprehensive prompt guide.'
+type: prompt-engineering
+tags:
+  industry:
+  - Technology
+  - Finance
+  - Education
+  modality:
+  - Text Generation
+  - Natural Language Understanding (NLU)
+  difficultyLevel:
+  - Intermediate
+  technique:
+  - Prompt Optimisation
+  - Few-Shot Learning
+  - Zero-Shot Learning
+  - Prompt Tuning
+  - Contextual Prompting
+  - Chain-of-Thought Prompting
+  - Role-Based Prompting
+  - Multistep Prompting
+  - Error Analysis and Iteration
+  specialisedTopics:
+  - Bias Mitigation
+  - Explainable AI (XAI)
+  - Cultural Sensitivity
+  - Data Scarcity
+  - Interactive Storytelling
+  - Synthetic Data Generation
 ---
 ## Founders Agreements
 
