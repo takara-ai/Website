@@ -2,7 +2,10 @@
 .DS_Store
 .yarn/install-state.gz
 *.gz
-env/public
+# hugo
+env/public/
+# Hugo server generated files
+env/resources/_gen/
 .parcel-cache
 .yarn/*
 !.yarn/patches
