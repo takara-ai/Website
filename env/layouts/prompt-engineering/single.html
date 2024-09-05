@@ -41,9 +41,7 @@
    <aside class="hidden lg:block lg:w-1/4 sticky top-20 z-10 font-extralight text-sm prose pl-4 pr-2">
   {{ .TableOfContents }}
 </aside>
-<script type="application/ld+json">
-{{ partial "meta/json-ld-article.html" . | safeJS }}
-</script>
+{{ partial "meta/json-ld-article.html" . }}
 </div>
 
 {{ end }}
