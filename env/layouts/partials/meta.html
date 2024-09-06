@@ -56,23 +56,22 @@ property="og:description" content={{ partial "meta-desc.html" . }} />
 />
 
 <!-- Structured data -->
-{{- $site := .Site -}}
 <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "url": "{{ .Site.BaseURL }}",
-    "name": {{ partial "meta-title.html" . }},
-    "description": {{ partial "meta-desc.html" . }},
-    "publisher": {
-      "@type": "Organization",
-      "name": "takara.ai",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "/android-chrome-192x192.png",
-        "width": 192,
-        "height": 192
-      }
-    }
-  }
+{{ dict 
+  "@context" "https://schema.org"
+  "@type" "WebSite"
+  "url" .Site.BaseURL
+  "name" (partial "meta-title.html" . | safeHTML)
+  "description" (partial "meta-desc.html" . | safeHTML)
+  "publisher" (dict
+    "@type" "Organization"
+    "name" "takara.ai"
+    "logo" (dict
+      "@type" "ImageObject"
+      "url" "/android-chrome-192x192.png"
+      "width" 192
+      "height" 192
+    )
+  )
+| jsonify | safeJS }}
 </script>
