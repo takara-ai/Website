@@ -1,5 +1,7 @@
-{{ if .Description }}
-  {{ .Description }}
-{{ else }}
-  {{ .Site.Params.description }}
-{{ end }}
+{{- $description := "" -}}
+{{- if .Description -}}
+  {{- $description = .Description -}}
+{{- else -}}
+  {{- $description = .Site.Params.description -}}
+{{- end -}}
+{{- $description | plainify | truncate 160 -}}
