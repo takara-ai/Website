@@ -35,13 +35,13 @@
        {{ partial "lastMod" . }}
             
         </div>
-        
+        {{ partial "meta/json-ld-article.html" . }}
     </article>
 
    <aside class="hidden lg:block lg:w-1/4 sticky top-20 z-10 font-extralight text-sm prose pl-4 pr-2">
   {{ .TableOfContents }}
 </aside>
-{{ partial "meta/json-ld-article.html" . }}
+
 </div>
 
 {{ end }}
