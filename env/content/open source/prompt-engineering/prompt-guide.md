@@ -1,33 +1,35 @@
 ---
 title: Prompt Guide
-date: '2024-03-28T15:06:55Z'
+date: "2024-03-28T15:06:55Z"
 draft: false
-description: 'Explore AI learning methods: zero-shot to many-shot, chain of thought,
-  and instruction following, to harness AI''s full potential.'
+description:
+  "Explore AI learning methods: zero-shot to many-shot, chain of thought,
+  and instruction following, to harness AI's full potential."
 type: prompt-engineering
 tags:
   industry:
-  - Education
-  - Technology
+    - Education
+    - Technology
   modality:
-  - Text Generation
-  - Conversational AI
-  - Multimodal
-  - Large Language Model (LLM)
+    - Text Generation
+    - Conversational AI
+    - Multimodal
+    - Large Language Model (LLM)
   difficultyLevel:
-  - Intermediate
+    - Intermediate
   technique:
-  - Prompt Optimisation
-  - Few-Shot Learning
-  - Zero-Shot Learning
-  - Chain-of-Thought Prompting
-  - Prompt Tuning
+    - Prompt Optimisation
+    - Few-Shot Learning
+    - Zero-Shot Learning
+    - Chain-of-Thought Prompting
+    - Prompt Tuning
   specialisedTopics:
-  - Bias Mitigation
-  - Explainable AI (XAI)
-  - Cross-Lingual Prompting
-  - Synthetic Data Generation
+    - Bias Mitigation
+    - Explainable AI (XAI)
+    - Cross-Lingual Prompting
+    - Synthetic Data Generation
 ---
+
 ## Welcome to the World of Prompt Engineering!
 
 This guide is designed to help you navigate the exciting landscape of AI communication with confidence and creativity. By understanding the different learning methods, utilising placeholders effectively, and following the prompt guide format, you'll be well-equipped to unlock the full potential of our tutorials and achieve your goals more efficiently. These guides were handcrafted by our team here at takara.ai (although the structure of these is assisted by AI) completely for free in our spare time, and we hope you enjoy them.
@@ -125,8 +127,8 @@ Consistently using these prompt guides across your projects can lead to signific
 
 **チームタカラからのハッピープロンプティング!**
 
-[^1]: https://huggingface.co/papers/2005.14165 - Brown et al., 2020, _Language Models are Few-Shot Learners_
-[^2]: https://www.anthropic.com/news/claude-3-family - Anthropic, _Claude 3 Family Introduction_
-[^3]: https://huggingface.co/papers/2201.11903 - Wei et al., 2022, _Chain-of-Thought Prompting Elicits Reasoning in Large Language Models_
-[^4]: https://research.google/blog/language-models-perform-reasoning-via-chain-of-thought/ - Google Research Blog, _Language Models Perform Reasoning via Chain of Thought_
-[^5]: https://huggingface.co/papers/2109.01652 - Wei et al., 2021, _Finetuned Language Models Are Zero-Shot Learners_
+[^1]: [Brown et al., 2020, _Language Models are Few-Shot Learners_](https://huggingface.co/papers/2005.14165)
+[^2]: [Anthropic, _Claude 3 Family Introduction_](https://www.anthropic.com/news/claude-3-family)
+[^3]: [Wei et al., 2022, _Chain-of-Thought Prompting Elicits Reasoning in Large Language Models_](https://huggingface.co/papers/2201.11903)
+[^4]: [Google Research Blog, _Language Models Perform Reasoning via Chain of Thought_](https://research.google/blog/language-models-perform-reasoning-via-chain-of-thought/)
+[^5]: [Wei et al., 2021, _Finetuned Language Models Are Zero-Shot Learners_](https://huggingface.co/papers/2109.01652)
