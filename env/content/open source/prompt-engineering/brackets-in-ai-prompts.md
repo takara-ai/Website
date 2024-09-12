@@ -1,32 +1,34 @@
 ---
 title: Why Do AI Prompts Use Brackets?
-date: '2024-09-03T13:33:32+01:00'
+date: "2024-09-03T13:33:32+01:00"
 draft: false
-description: Discover the purpose of brackets in AI prompts and how they enhance text-to-image
+description:
+  Discover the purpose of brackets in AI prompts and how they enhance text-to-image
   models. Learn how varying bracket types affect emphasis and image generation in
   our latest guide.
 type: prompt-engineering
 tags:
   industry:
-  - Technology
+    - Technology
   modality:
-  - Text-to-Image
-  - Image Generation
-  - Multimodal
+    - Text-to-Image
+    - Image Generation
+    - Multimodal
   difficultyLevel:
-  - Intermediate
+    - Intermediate
   technique:
-  - Prompt Optimisation
-  - Prompt Tuning
-  - Contextual Prompting
-  - Chain-of-Thought Prompting
-  - Role-Based Prompting
-  - Multistep Prompting
-  - Error Analysis and Iteration
+    - Prompt Optimisation
+    - Prompt Tuning
+    - Contextual Prompting
+    - Chain-of-Thought Prompting
+    - Role-Based Prompting
+    - Multistep Prompting
+    - Error Analysis and Iteration
   specialisedTopics:
-  - Explainable AI (XAI)
-  - Bias Mitigation
+    - Explainable AI (XAI)
+    - Bias Mitigation
 ---
+
 ## Introduction
 
 In the world of AI-generated content, particularly with **text-to-image** models, using _brackets_ in prompts is a powerful technique. This article explores their use, focusing specifically on **Stable Diffusion** models.
@@ -125,8 +127,8 @@ Here, the square brackets around "bright sun" result in a more subdued sun, allo
 - With varied emphasis: A ((forest)) with a (river) and [mountains]
 
 {{< image-comparison
-image1="/images/prompt-engineering/brackets-ai-prompts/brackets-comparison00001.png"
-image2="/images/prompt-engineering/brackets-ai-prompts/brackets-comparison.png"
+image2="/images/prompt-engineering/brackets-ai-prompts/brackets-comparison00001.png"
+image1="/images/prompt-engineering/brackets-ai-prompts/brackets-comparison.png"
 caption1="A forest with a river and mountains"
 caption2="A ((forest)) with a (river) and [mountains]" >}}
 
