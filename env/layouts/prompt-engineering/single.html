@@ -1,53 +1,62 @@
 {{ define "main" }}
-<div class="flex flex-row items-start justify-between bg-white">
+<div class="flex items-start justify-between bg-white">
     {{ partial "prompts/JapPromptText" . }}
 
-    <article id="main-content" class="py-4 px-2 pt-20"  tabindex="-1">
+    <article id="main-content" class="py-4 px-2 pt-20" tabindex="-1">
         {{ partial "headerTitle" . }}
-        
-        <div class="prose lg:prose-xl xl:prose-2xl mx-auto min-h-svh overflow-hidden text-wrap ">
-            <header class="flex-col flex gap-4 sm:gap-8">
-            {{ $currentPage := trim .RelPermalink "/" }}
-            {{ $promptGuideURL := "/open-source/prompt-engineering/prompt-guide/" | relURL }}
-            {{ $promptGuideLink := printf `<a class="block max-w-fit text-neutral-600 hover:text-black" href="%s">Visit here first if you need help.</a>` ($promptGuideURL | absURL) }}
-            <div class="flex justify-between">
-                <a class="inline-flex items-center font-japanese no-underline rounded text-neutral-600 hover:text-black hover:fill-black transition-colors duration-200 ease-in-out" href="{{ "/open-source/prompt-engineering/" | relURL }}">
-                    <svg class="w-4 h-4 lg:h-5 lg:w-5 xl:w-6 xl:h-6 fill-neutral-600 hover:fill-inherit mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
-                戻る
-            </a>
-                {{ if ne $currentPage (trim $promptGuideURL "/") }}
-                {{ $promptGuideLink | safeHTML }}
-            {{ end }}
-            </div>
-            
 
+        <div class="prose lg:prose-xl xl:prose-2xl mx-auto">
+            <header class="flex flex-col gap-4 sm:gap-8">
+                <div class="flex justify-between">
+                    <a
+                        class="inline-flex items-center font-japanese no-underline rounded text-neutral-600 hover:text-black transition-colors duration-200 ease-in-out"
+                        href="{{ "/open-source/prompt-engineering/" | relURL }}"
+                    >
+                        <svg
+                            class="w-4 h-4 lg:h-5 lg:w-5 xl:w-6 xl:h-6 fill-current mr-2"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 448 512"
+                        >
+                            <!-- Font Awesome icon -->
+                            <path
+                                d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H109.2l105.5-105.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"
+                            />
+                        </svg>
+                        戻る
+                    </a>
+                    {{ if ne .RelPermalink ( "/open-source/prompt-engineering/prompt-guide/" | relURL ) }}
+                        <a
+                            class="block max-w-fit text-neutral-600 hover:text-black"
+                            href="{{ "/open-source/prompt-engineering/prompt-guide/" | relURL }}"
+                        >
+                            Visit here first if you need help.
+                        </a>
+                    {{ end }}
+                </div>
+                {{ partial "classification/tags.html" . }}
+            </header>
 
-            
-            <aside class="lg:hidden block lg:w-1/4 sticky top-20 z-10 font-extralight text-sm prose mb-8">
-            {{ .TableOfContents }}
+            <!-- Table of Contents for small screens -->
+            <aside class="lg:hidden font-extralight text-sm prose mb-8">
+                {{ .TableOfContents }}
             </aside>
-            {{ partial "classification/tags.html" . }}
-        </header>
 
-        
+            <section>
+                {{ .Content }}
+            </section>
 
-        <section>
-            
-            {{ .Content }}
-        </section>
-       {{ partial "lastMod" . }}
-            
+            {{ partial "lastMod" . }}
         </div>
         {{ partial "meta/json-ld-article.html" . }}
     </article>
 
-   <aside class="hidden lg:block lg:w-1/4 sticky top-20 z-10 font-extralight text-sm prose pl-4 pr-2">
-  {{ .TableOfContents }}
-</aside>
-
+    <!-- Table of Contents for large screens -->
+    <aside class="hidden lg:block lg:w-1/4 sticky top-20 z-10 font-extralight text-sm prose pl-4 pr-2">
+        {{ .TableOfContents }}
+    </aside>
 </div>
-
 {{ end }}
+
 
 
 
