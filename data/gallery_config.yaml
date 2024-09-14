@@ -13,3 +13,5 @@ datasets:
     num_images: 5
   - name: "takara-ai/Genso-teki_Na_Furemu_Ethereal_Frames"
     num_images: 5
+  - name: "takara-ai/kami_no_dobutsu_paper_animals"
+    num_images: 5
