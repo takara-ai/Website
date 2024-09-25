@@ -5,6 +5,8 @@ title = 'takara.ai'
 minify = true
 enableRobotsTXT = true
 enableGitInfo = true
+timeout = "60s"
+
 
 # Enable Hugo Pipes for asset processing
 disableHugoGeneratorInject = true
