@@ -4,6 +4,7 @@ import random
 import time
 from datasets import load_dataset
 from tqdm import tqdm
+import shutil
 
 def process_dataset(dataset_config, gallery_dir, base_dir):
     dataset_name = dataset_config['name']
