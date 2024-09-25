@@ -1,37 +1,92 @@
 <div class="not-prose">
   <div class="relative">
     <input type="checkbox" id="tag-toggle" class="hidden peer">
-    <label for="tag-toggle" class="flex justify-between text-neutral-600 hover:text-black transition-colors duration-200 cursor-pointer rounded-md focus:ring-2 border border-dashed border-gray-300 px-4 py-2" aria-expanded="false" aria-controls="tag-content">
+    <label
+      for="tag-toggle"
+      class="flex items-center justify-between w-full text-neutral-600 hover:text-black transition-colors duration-200 cursor-pointer rounded-md focus:ring-2 border border-dashed border-gray-300 px-4 py-2"
+      aria-controls="tag-content"
+    >
       <div class="flex items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 lg:h-5 lg:w-5 xl:w-6 xl:h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-      </svg>
-      <span class="peer-checked:hidden">Show Tags</span>
-      <span class="hidden peer-checked:inline">Hide Tags</span>
+        <!-- Tag Icon -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-4 h-4 lg:w-5 lg:h-5 xl:w-6 xl:h-6 mr-2"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+          />
+        </svg>
+        <!-- Toggle Text -->
+        <span class="peer-checked:hidden">Show Tags</span>
+        <span class="hidden peer-checked:inline">Hide Tags</span>
       </div>
-      
+      <!-- Arrow Icons -->
       <div class="flex items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 lg:h-5 lg:w-5 xl:w-6 xl:h-6 ml-1 transform transition-transform duration-200 peer-checked:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-      </svg>
+        <!-- Down Arrow -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-4 h-4 lg:w-5 lg:h-5 xl:w-6 xl:h-6 ml-1 peer-checked:hidden"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+        <!-- Up Arrow -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="hidden peer-checked:inline w-4 h-4 lg:w-5 lg:h-5 xl:w-6 xl:h-6 ml-1"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M5 15l7-7 7 7"
+          />
+        </svg>
       </div>
     </label>
-
-    <div id="tag-content" class="hidden mt-2 p-3 border border-dashed border-neutral-300 rounded-md bg-white peer-checked:block" role="region" aria-labelledby="tag-toggle">
+    <div
+      id="tag-content"
+      class="hidden mt-2 p-3 border border-dashed border-neutral-300 rounded-md bg-white peer-checked:block"
+      role="region"
+      aria-labelledby="tag-toggle"
+    >
       {{ range $category, $tags := .Params.tags }}
-        <section class="mb-4">
-          <h2 class="font-bold text-neutral-600 mb-1 text-sm sm:text-base lg:text-lg">{{ $category | title }}:</h2>
-          <div class="flex flex-wrap gap-2">
-            {{ range $tags }}
-              <span class="inline-block px-2 py-1 text-xs sm:text-sm lg:text-base xl:text-lg rounded-lg bg-fuji bg-opacity-50 hover:bg-opacity-100 text-white">
-                {{ . }}
-              </span>
-            {{ end }}
-          </div>
-        </section>
+      <section class="mb-4">
+        <h2 class="font-bold text-neutral-600 mb-1 text-sm sm:text-base lg:text-lg">
+          {{ $category | title }}:
+        </h2>
+        <div class="flex flex-wrap gap-2">
+          {{ range $tags }}
+          <span
+            class="inline-block px-2 py-1 text-xs sm:text-sm lg:text-base xl:text-lg rounded-lg bg-fuji bg-opacity-50 hover:bg-opacity-100 text-white"
+          >
+            {{ . }}
+          </span>
+          {{ end }}
+        </div>
+      </section>
       {{ end }}
     </div>
   </div>
 </div>
+
+
 
 
