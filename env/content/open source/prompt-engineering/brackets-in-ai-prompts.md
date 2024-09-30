@@ -156,6 +156,10 @@ This combination results in a more prominent and detailed vintage car, while the
 
 Remember, the goal is to guide the AI toward your vision, not to force it. With practice, you'll develop an intuition for how to use brackets most effectively in your prompts.
 
+## ComfyUI vs Other Tools
+
+ComfyUI[^10] offers greater sensitivity in handling prompt strengths by not normalizing them. For example, a prompt like (masterpiece:1.2) (best:1.3) (quality:1.4) girl is applied exactly as specified, allowing for precise control over each element. In contrast, interfaces like a1111[^8] UI normalize prompt strengths by averaging them across all tokens, resulting in weights such as (masterpiece:0.98) (best:1.06) (quality:1.14) (girl:0.81). This normalization leads to less sensitive and more balanced weighting of each prompt component. The direct application in ComfyUI makes it ideal for users seeking detailed adjustments in their image generation.
+
 ## Advanced Models and Techniques
 
 Recent advancements in AI models have further refined the process of prompt interpretation and image generation:
@@ -171,7 +175,7 @@ Other companies are also making significant strides in this field. For example, 
 
 Brackets in AI prompts offer precise control over image generation. Though not part of the base Stable Diffusion model, they are widely used in popular interfaces. Experiment with different combinations to see their effects and stay updated with the latest model documentation.
 
-For more advanced prompt techniques, see our [Mega Prompts guide](/open-source/prompt-engineering/mega-prompts/).
+If you're interested in another advanced technique, this time for LLM's, see our [Mega Prompts guide](/open-source/prompt-engineering/mega-prompts/).
 
 [^1]: [Stability AI, _Generative AI Models Overview_](https://stability.ai/)
 [^2]: [Rombach et al., 2023, _SDXL: A Scalable Latent Diffusion Model for High-Resolution Image Synthesis_](https://huggingface.co/papers/2307.01952)
@@ -182,10 +186,4 @@ For more advanced prompt techniques, see our [Mega Prompts guide](/open-source/p
 [^7]: [Research Paper on Diffusion Models and Their Applications, 2021](https://huggingface.co/papers/2103.00020)
 [^8]: [GitHub Repository for the Stable Diffusion Web UI by AUTOMATIC1111](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
 [^9]: [GitHub Repository for InvokeAI, an Open-Source Toolkit for Generative AI](https://github.com/invoke-ai/InvokeAI)
-
----
-
-Modality: Text-to-Image, Image Generation
-Technique: Prompt Engineering, Prompt Optimisation
-Specialised Topics: Explainable AI (XAI), Bias Mitigation
-Industry: Technology
+[^10]: [Why do I get different images from the a1111 UI even when I use the same seed?](https://comfyanonymous.github.io/ComfyUI_examples/faq/#why-do-i-get-different-images-from-the-a1111-ui-even-when-i-use-the-same-seed)
