@@ -9,7 +9,7 @@ layout: ""
 
 # Takara.ai Branding Resources
 
-Welcome to the Takara.ai Branding Resources page. Here you’ll find everything you need to ensure consistent and professional use of our brand assets. Please use at your leisure.
+Welcome to the Takara.ai Branding Resources page. Here you’ll find everything you need to ensure consistent and professional use of our brand assets. Please use at your leisure now, then and often.
 
 ## Download the Branding Pack
 
