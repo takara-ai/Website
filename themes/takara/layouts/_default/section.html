@@ -1,0 +1,43 @@
+{{ define "main" }}
+{{/*}}
+<div style="background: yellow; padding: 10px; border: 2px solid red;">
+  TEST MARKER: Using _default/section.html template
+</div>
+*/}}
+<div class="relative flex flex-row items-start justify-between bg-white">
+    <div class="py-20 p-4 sm:px-8 min-h-svh flex-grow">
+        {{ partial "headerTitle" . }}
+
+        {{/*
+        <div class="container mx-auto max-w-4xl p-4 sm:px-8">
+
+          {{ partial "debug-pages" . }}
+
+        </div>
+        */}}
+
+        <div class="container mx-auto max-w-4xl py-2 sm:px-8">
+          <section>
+            {{ if .File }}
+                <div class="prose lg:prose-xl mb-4">
+                    {{ .Content | markdownify }}
+                </div>
+            {{ end }}
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {{/* Only show pages where group=true */}}
+              {{ range where .Pages "Params.group" true }}
+                <a href="{{ .RelPermalink }}" class="rounded-lg p-4 flex flex-col items-start justify-between overflow-hidden bg-white space-y-4 transition ease-in-out border sm:hover:shadow-md sm:hover:border border-red-700 hover:border-black border-dashed">
+                  <div class="w-full">
+                    <h2 class="font-bold mb-2 text-xl sm:text-2xl border-b border-black">{{ .Title | truncate 50 "..." }}</h2>
+                    {{ .Summary | truncate 120 "..." }}
+                  </div>
+                  <span class="text-red-700 font-semibold hover:underline text-sm border-b border-red-700">Learn more →</span>
+                </a>
+              {{ end }}
+            </div>
+          </section>
+        </div>
+    </div>
+</div>
+{{ end }}

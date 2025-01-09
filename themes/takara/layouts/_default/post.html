@@ -1,0 +1,67 @@
+{{ define "main" }}
+<div class="relative bg-white">
+  <article id="main-content" class="pt-20 p-4 sm:px-8">
+    <header>
+      {{ partial "headerTitle" . }}
+      
+      <!-- Featured Image -->
+      {{ with .Params.featuredImage }}
+      <div class="mb-8">
+        {{ if .url }}
+        <img
+          src="{{ .url }}"
+          alt="{{ $.Title }}"
+          loading="lazy"
+          width="{{ .width }}"
+          height="{{ .height }}"
+          decoding="async"
+          class="h-auto w-full object-cover aspect-square rounded-3xl transition-all duration-300 ease-in-out hover:brightness-75"
+        >
+        {{ end }}
+      </div>
+      {{ end }}
+
+      <!-- Post Meta -->
+      <div class="flex items-center justify-between mb-8 text-sm text-neutral-600">
+        <div class="flex items-center space-x-4">
+          {{ with .Params.author }}
+            {{ range . }}
+              <!-- Author Info -->
+              <div class="flex items-center space-x-2">
+                {{ $authorID := .id }}
+                {{ $authorPage := site.GetPage (printf "/who-we-are/team/%s" $authorID) }}
+                {{ with $authorPage }}
+                  <a href="{{ .RelPermalink }}" class="flex items-center hover:text-black">
+                    {{ with .Params.pictureProfessional }}
+                      {{ $img := resources.Get .url }}
+                      {{ with $img }}
+                        {{ $thumb := .Resize "48x48 webp q80" }}
+                        <img 
+                          src="{{ $thumb.RelPermalink }}" 
+                          alt="{{ $.Title }}"
+                          class="w-12 h-12 rounded-full mr-2"
+                        >
+                      {{ end }}
+                    {{ end }}
+                    <span class="font-semibold">{{ .Title }}</span>
+                  </a>
+                {{ end }}
+              </div>
+            {{ end }}
+          {{ end }}
+          <time datetime="{{ .Date }}" class="text-sm">
+            {{ .Date.Format "January 2, 2006" }}
+          </time>
+        </div>
+      </div>
+    </header>
+
+    <!-- Post Content -->
+    <div class="prose prose-lg lg:prose-xl mx-auto">
+      {{ .Content }}
+    </div>
+    
+    {{ partial "lastMod" . }}
+  </article>
+</div>
+{{ end }}

@@ -1,0 +1,122 @@
+/* assets */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply font-bold;
+  }
+  h5 {
+    @apply text-base md:text-xl;
+  }
+
+  @font-face {
+    font-family: "Caveat";
+    src: url(/fonts/caveat/Caveat-VariableFont_wght.woff2) format(woff2);
+    font-weight: 100;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Lato";
+    src: url("/fonts/Lato/Lato-Black.woff2") format("woff2");
+    font-weight: 900;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Lato";
+    src: url("/fonts/Lato/Lato-BlackItalic.woff2") format("woff2");
+    font-weight: 900;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: "Lato";
+    src: url("/fonts/Lato/Lato-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Lato";
+    src: url("/fonts/Lato/Lato-BoldItalic.woff2") format("woff2");
+    font-weight: 700;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: "Lato";
+    src: url("/fonts/Lato/Lato-Italic.woff2") format("woff2");
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: "Lato";
+    src: url("/fonts/Lato/Lato-Light.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Lato";
+    src: url("/fonts/Lato/Lato-LightItalic.woff2") format("woff2");
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: "Lato";
+    src: url("/fonts/Lato/Lato-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Lato";
+    src: url("/fonts/Lato/Lato-Thin.woff2") format("woff2");
+    font-weight: 100;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Lato";
+    src: url("/fonts/Lato/Lato-ThinItalic.woff2") format("woff2");
+    font-weight: 100;
+    font-style: italic;
+  }
+
+  :root {
+    --crane-size: 80vw;
+    --background-color: #000;
+    --animation-duration: 10s;
+    --animation-timing: linear;
+    --animation-direction: normal;
+  }
+}
+
+@layer utilities {
+  @keyframes float {
+    to {
+      background-position: 160vw var(--crane-size);
+    }
+  }
+
+  .crane-repeat {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23d91009' viewBox='0 0 287.95 221.8'%3E%3Cpath d='m165.57 124.67-29.46-9.05L29.9 221.8l125.11-63.72 10.56-33.41zm-95.15-7.94 12.54-9.21 9.61-3.89 7.99 1.02 32.31 9.99L28.68 218.8M0 0l108.02 92.62-6.18 9.21-9.68-1.27-10.41 4.21L0 0zm126.97 69.58-22.19 33.28 30.59 9.4-8.4-42.68zm39.56 52.25-27.9-8.54-8.83-44.87 36.73 53.41zm10.27 47.26-17.61-14.56 9.45-29.6 6.99 10.08 1.17 34.08zm67.71-84.19 4.77 15.03-69.48 69.16-1.29-38.48 66-45.71zm2.86-.74 14.18 4.39 26.4 48.21-33.53-34.9-2.32-3.06-4.73-14.64zm-72.13 45.04 18.03-12.48-3.11-12.83-48.41-32.9-7.36-5.04-2.03.92 42.88 62.33zm55.39-112.26L140.7 66.63l23.91 16.3 66.02-65.99zm-40.42 83.39-23.02-15.7 65.78-65.78-23.36 65.61-19.4 15.87z'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: var(--crane-size) var(--crane-size);
+    background-color: var(--background-color);
+    animation: float var(--animation-duration) var(--animation-timing) infinite
+      var(--animation-direction);
+    will-change: background-position;
+  }
+  .nav-hidden {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+}
+
+/* Any additional custom CSS can go here */

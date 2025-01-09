@@ -1,0 +1,29 @@
+{{/* Section Inserting The Neural Network */}}
+<div id="pixi-container" class="flex-grow w-full"></div>
+
+<!-- Remove the duplicate imports and use the correct path -->
+<script type="module">
+  // Import from the generated components.js file
+  import { components } from '/js/components.js';
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Get the initNeuralNetwork function from the components object
+    const { initNeuralNetwork } = components;
+    
+    if (initNeuralNetwork) {
+      initNeuralNetwork();
+    } else {
+      console.error('initNeuralNetwork function not found in components');
+    }
+  });
+</script>
+
+Refresh for a new <a href="/open-source/learn/what-is-a-neural-network/" class="underline">neural network</a>.
+
+{{/* Override for the broken scroll on touch screens */}}
+<style>
+  #pixi-container canvas {
+    touch-action: auto !important;
+  }
+</style>
+

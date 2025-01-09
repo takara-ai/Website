@@ -1,0 +1,16 @@
+#english-text,
+#toggle-switch {
+  display: none;
+}
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+#japanese-char {
+  animation: blink 0.1s step-end infinite; /* Rapid blinking effect */
+}

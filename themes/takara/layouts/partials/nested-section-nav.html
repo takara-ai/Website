@@ -1,0 +1,48 @@
+import React from 'react';
+import { ChevronRight } from 'lucide-react';
+
+const NestedSectionNav = () => {
+  return (
+    <div className="w-full max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 gap-6">
+        {/* Learn Section */}
+        <div className="border border-dashed border-red-700 rounded-lg p-6 hover:border-black transition-colors duration-200">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-2xl font-bold">Learn</h3>
+            <ChevronRight className="text-red-700" />
+          </div>
+          <div className="space-y-2">
+            <a href="/thinking/open-source/learn/make-an-origami-crane" 
+               className="block text-neutral-600 hover:text-black">
+              Make an Origami Crane
+            </a>
+            <a href="/thinking/open-source/learn/what-is-a-neural-network" 
+               className="block text-neutral-600 hover:text-black">
+              What is a Neural Network
+            </a>
+          </div>
+        </div>
+
+        {/* Gallery Section */}
+        <div className="border border-dashed border-red-700 rounded-lg p-6 hover:border-black transition-colors duration-200">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-2xl font-bold">Gallery</h3>
+            <ChevronRight className="text-red-700" />
+          </div>
+          <p className="text-neutral-600">Explore our collection of AI-generated art and projects</p>
+        </div>
+
+        {/* Prompt Engineering Section */}
+        <div className="border border-dashed border-red-700 rounded-lg p-6 hover:border-black transition-colors duration-200">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-2xl font-bold">Prompt Engineering</h3>
+            <ChevronRight className="text-red-700" />
+          </div>
+          <p className="text-neutral-600">Learn the art of crafting effective prompts for AI models</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default NestedSectionNav;

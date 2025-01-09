@@ -1,0 +1,17 @@
+.diagonal-slice {
+  position: relative;
+  overflow: hidden;
+}
+
+.diagonal-slice::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 105%;
+  height: 160%;
+  clip-path: polygon(100% 100%, 0 130%, 100% 0);
+  background-color: #d91009c;
+  z-index: -2;
+}
+/* Target the new id 'text-section' and create a pseudo-element for the 'Invert Your Thinking' text */

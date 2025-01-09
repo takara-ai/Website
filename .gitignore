@@ -17,3 +17,6 @@ env/resources/_gen/
 .env
 .venv
 data/__pycache__/dataset_processor.cpython-310.pyc
+
+# ignore the public folder
+public/

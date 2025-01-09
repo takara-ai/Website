@@ -1,0 +1,66 @@
+baseURL = 'https://takara.ai'
+languageCode = "en-gb"
+DefaultContentLanguage = "en-gb"
+title = 'takara.ai'
+minify = true
+enableRobotsTXT = true
+# enableGitInfo = true
+timeout = "60s"
+theme = "takara"
+
+# Enable Hugo Pipes for asset processing
+disableHugoGeneratorInject = true
+enableInlineShortcodes = true
+
+# stop pluralization of section menu items
+pluralizeListTitles = false
+
+[build]
+  writeStats = true
+
+[module]
+  [module.hugoVersion]
+    extended = true
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+
+[sitemap]
+  changefreq = 'daily'
+  filename = 'sitemap.xml'
+  priority = 0.5
+
+[params]
+  description = "Transforming Humanity"
+  images = ["/images/og-image.jpg"]  # Default Open Graph image
+  dateFormat = "January 2, 2006"
+  # Theme
+  themeColor = "#B91C1C"
+  
+  # Social media handles
+  twitter = "takaraAI"  # Replace with your actual Twitter handle
+  github = "takara-ai"  # Replace with your actual GitHub handle
+  huggingface = "https://huggingface.co/takara-ai" 
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    style = "monokai"
+    tabWidth = 4
+
+[languages]
+  [languages.en-gb]
+    languageName = "English (UK)"
+    languageCode = "en-gb"
+    weight = 1
+    [languages.en-gb.params]
+      description = "Transforming Humanity"    

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="{{ .Language.Lang }}">
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+
+  <body class="bg-white text-xs font-lato">
+    <nav>{{ partial "mobile-menu" . }}</nav>
+
+    <body class="bg-white text-xs font-lato">
+      {{/* partial "debug-layouts" . */}} 
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    <footer class="bg-black text-white border-dashed border-white border-t">
+      {{ partial "footer" . }}
+    </footer>
+    
+    {{ partial "consent/modal" . }}
+  </body>
+
+  {{ $js := resources.Get "js/global/index.js" | js.Build | resources.Minify | resources.Fingerprint }}
+  <script type="text/javascript" src="{{ $js.RelPermalink }}" defer></script>
+</html>

@@ -1,0 +1,48 @@
+{{ define "main" }}
+<div class="flex bg-white">
+ <div class="flex-grow my-16 p-4 sm:px-8 min-h-svh">
+   {{ partial "headerTitle" . }}
+   {{/*
+   {{ partial "debug-pages" . }}
+    */}}
+    <!-- Add content section -->
+    {{ if .Content }}
+    <div class="container mx-auto mt-0">
+      <div class="prose prose-sm lg:prose-lg xl:prose-xl prose-headings:text-center prose-p:text-justify max-w-none w-full p-4">
+        {{ .Content }}
+      </div>
+    </div>
+    {{ end }}
+
+   {{ $teamMembers := where .Site.RegularPages "File.Dir" "who we are/team/" }}
+   {{ $groupedTemp := $teamMembers.GroupByParam "department" }}
+   
+   {{ $sortedGroups := slice }}
+   {{ $foundersGroup := index (where $groupedTemp "Key" "==" "founders") 0 }}
+   {{ $otherGroups := where $groupedTemp "Key" "!=" "founders" }}
+   
+   {{ if $foundersGroup }}
+     {{ $sortedGroups = $sortedGroups | append $foundersGroup }}
+   {{ end }}
+   
+   {{ range sort $otherGroups "Key" }}
+     {{ $sortedGroups = $sortedGroups | append . }}
+   {{ end }}
+
+   {{ range $index, $group := $sortedGroups }}
+   <div class="py-6 sm:py-8 px-2 sm:px-4 bg-neutral-100 rounded-3xl {{ if ne $index 0 }}mt-6{{ end }}">
+     <h2 class="mb-12 sm:mb-16 text-right text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-thin text-neutral-600 border-neutral-600 border-b border-dashed">
+       {{ .Key | default "Team" | title }}
+     </h2>
+     <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
+       {{ range .Pages }}
+         {{ if not .Params.draft }}
+           {{ partial "team/team-meta" . }}
+         {{ end }}
+       {{ end }}
+     </div>
+   </div>
+   {{ end }}
+ </div>
+</div>
+{{ end }}
