@@ -1,5 +1,57 @@
 # Changelog
 
+## [1.5.0](https://github.com/takara-ai/Website/compare/v1.4.0...v1.5.0) (2025-01-10)
+
+
+### Features
+
+* add branding ([d74cc08](https://github.com/takara-ai/Website/commit/d74cc0825de82264bc2d6dec273c68267cfc404f))
+* add fuji ([7939792](https://github.com/takara-ai/Website/commit/79397921de366bcd3e5ea9449e86ce9f36edcf85))
+* blog classifier ([65d03bc](https://github.com/takara-ai/Website/commit/65d03bc899cf0fb9eb682bc7c4f87b46dfe54e15))
+* changed art gallery to represent art from the huggingface, added loading python script for the artwork ([635d1fc](https://github.com/takara-ai/Website/commit/635d1fc0082a54a916d3a2928c9027c2bb736ce1))
+* **homepage:** update background image ([baade6f](https://github.com/takara-ai/Website/commit/baade6fe6637f5949db1d8915768122e6ec3493e))
+* japanese shortcode ([53caaf5](https://github.com/takara-ai/Website/commit/53caaf5388f2fa766f5101914896b1c11060a028))
+* JSON-LD for prompt engineering ([64d6011](https://github.com/takara-ai/Website/commit/64d60110f5aeafd78780b4330cf379667554443e))
+* new learn section and neural network explanation ([137ae44](https://github.com/takara-ai/Website/commit/137ae44b6a1dee20bd0a79098dd4ceeebbadee37))
+* new sans-serif font added Lato ([9da5062](https://github.com/takara-ai/Website/commit/9da5062981bea4b5f594200042b8eaa384c6d313))
+* New Tracking With Google Analytics and GTM management with obfuscation, Modal and updated privacy policy ([1bc5343](https://github.com/takara-ai/Website/commit/1bc5343515baf1db166739ac88ae102abb7a4cd0))
+* prompt engineering classifier ([6b0be8b](https://github.com/takara-ai/Website/commit/6b0be8be581ff0efb40f535015e4e9fa109d3809))
+* **website:** migrate to Contentful, add theme directory, and restructure menu and content ([c162329](https://github.com/takara-ai/Website/commit/c162329c20d527ca6564fc4f0bf18e6920b53cdb))
+
+
+### Bug Fixes
+
+* add legacy icons back ([59d3c68](https://github.com/takara-ai/Website/commit/59d3c688ee2f22cb8f627d503f9b7701bd277a70))
+* added cachebusting to icon ([d9a2449](https://github.com/takara-ai/Website/commit/d9a24491e4108bb9dc32d23146767074783e1a00))
+* **branding:** integrate branding page with the content management system ([f014e6c](https://github.com/takara-ai/Website/commit/f014e6ca3bb801184175c38be3374fbbede5762c))
+* **branding:** move branding to the correct location ([b116695](https://github.com/takara-ai/Website/commit/b116695faef225233d69e4a58171ef26fe435f53))
+* broken link ([0fcc868](https://github.com/takara-ai/Website/commit/0fcc8682d912450da2b4eb78139683b018f76db9))
+* broken links ([919b1d6](https://github.com/takara-ai/Website/commit/919b1d63774f6eb158c701a4fd7849acea92ebcd))
+* bump hugo version to 0.134.3 ([14198f6](https://github.com/takara-ai/Website/commit/14198f6f296a4ae129c1a4cf2947ae573c9f78d9))
+* changed to padding to avoid weird darkmode behaviour ([5792aac](https://github.com/takara-ai/Website/commit/5792aac66d609e5494263199f5681aec963651e8))
+* commented out brackets ([e6016a0](https://github.com/takara-ai/Website/commit/e6016a0ba5292e72777497c49dcb64896245a3bd))
+* commented out citations ([386bf1b](https://github.com/takara-ai/Website/commit/386bf1b8fc238259bfa15aaee100dbccfb59c7a8))
+* **config:** add missing vite.config.js file ([b5361bc](https://github.com/takara-ai/Website/commit/b5361bc318a7bc591c7fe951dae223b7f0fad479))
+* dark mode inverting faces ([ce8d4cd](https://github.com/takara-ai/Website/commit/ce8d4cd8a8e81325803645eca18f25b50386ceed))
+* file name too long ([058f4d4](https://github.com/takara-ai/Website/commit/058f4d4859dcd56a16c27485e3b853f0bcafd5a6))
+* font path case changed to fix links ([da4cc59](https://github.com/takara-ai/Website/commit/da4cc5931b975ff95df212b586dfc3092a2fef1e))
+* footnotes overflowing container ([92e2029](https://github.com/takara-ai/Website/commit/92e20290dfb060eb3e97c02ac4637027b571d500))
+* images wrong way around ([d9cc2ff](https://github.com/takara-ai/Website/commit/d9cc2ff196ddfce07f7e512773ef35d20a1db5ea))
+* increased timeout from 30-&gt;60s ([d617829](https://github.com/takara-ai/Website/commit/d617829f6965588d20a0063e25efc0d8a2f48c3e))
+* link formatting ([6943716](https://github.com/takara-ai/Website/commit/69437168df473472dfb0a8052b310566ca345845))
+* link wrong for prompt engineering ([446e43c](https://github.com/takara-ai/Website/commit/446e43ce7aadd0dbb46d09815e986fe62eeaf751))
+* missing image ([f1ce4b4](https://github.com/takara-ai/Website/commit/f1ce4b48c4414906b7930646a086a0fc56f75b51))
+* mobile menu not working correctly ([df07477](https://github.com/takara-ai/Website/commit/df0747757abcc9e3d714d558aadfd2753dbd7808))
+* moved og-image back ([6ccc5da](https://github.com/takara-ai/Website/commit/6ccc5dab9fef1c21ef8ce662a54aadc8f2f4c631))
+* plainfied partials ([2f27e07](https://github.com/takara-ai/Website/commit/2f27e07c691cb6738e119e440e9519a0f32e2f69))
+* remove dark mode as it breaks the modal ([66d77ad](https://github.com/takara-ai/Website/commit/66d77ad27d2bad575e7d22871dcd4beddb6f6aec))
+* removed gitignore for JS files ([56d8036](https://github.com/takara-ai/Website/commit/56d803692d7fa989f00f98fd9767a62b1aced1dd))
+* **seo:** descriptions and broken links ([2db2a91](https://github.com/takara-ai/Website/commit/2db2a914f9818ac935f81ca7fe70c5b199703e95))
+* test image overflow ([18a5d1c](https://github.com/takara-ai/Website/commit/18a5d1c5afd0faf770c322a1f6c6ae9f1279fa44))
+* typo in colour ([2a83462](https://github.com/takara-ai/Website/commit/2a83462249175d845d7e0bce549d3b70b19c07c3))
+* untrack generated files ([2672ed3](https://github.com/takara-ai/Website/commit/2672ed346e28ae3b17547ae447aea42da350fece))
+* untracked uneccessary files ([905e6dd](https://github.com/takara-ai/Website/commit/905e6dd9d301e21bb1b97d7220803f1c8d101e22))
+
 ## 1.0.0 (2024-07-05)
 
 
