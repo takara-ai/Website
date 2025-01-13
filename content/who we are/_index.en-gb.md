@@ -2,8 +2,8 @@
 sys:
   id: "4QyuBVucHwPb0dmMIrmMV4"
   updatedAt: "2024-12-02T08:46:42.900Z"
-  createdAt: "2024-12-02T08:46:42.900Z"
-  revision: 1
+  createdAt: "2025-01-13T13:57:28.053Z"
+  revision: 2
   space: "hmvebmrbwhsg"
   contentType: "companyPage"
 date: "2024-12-02T08:46:42.900Z"
@@ -34,7 +34,7 @@ Recognising these challenges, takara.ai serves as a guiding compass for business
 
 ### Our Team: Devoted AI Innovators
 
-We employ top-tier AI and ML professionals dedicated to creating unparalleled solutions. Meet our team [here](/company/team/).
+We employ top-tier AI and ML professionals dedicated to creating unparalleled solutions. Meet our team [here](/who-we-are/team/).
 
 Join us at [takara.ai](/) as partners in unveiling the hidden treasures within your organisation, catalysing growth and success. Together, let&#39;s navigate the transformative journey of AI.
 

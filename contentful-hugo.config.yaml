@@ -4,8 +4,8 @@ locales: # fetches from default locale if left blank
     - en-GB
 
 contentful:
-    # space: 'space-id' # defaults to CONTENTFUL_SPACE env variable
-    # token: 'content-deliver-token' # defaults to  CONTENTFUL_TOKEN env variable
+    space: 'hmvebmrbwhsg' # defaults to CONTENTFUL_SPACE env variable
+    token: 'GXp6qYR_yY0X3fwzK7WGcQSJ5WsCX3ORsiyx_SrCH6I' # defaults to  CONTENTFUL_TOKEN env variable
     # previewToken: 'content-preview-token' # defaults to  CONTENTFUL_PREVIEW_TOKEN env variable
     # environment: 'master' # defaults to "master"
 
@@ -51,6 +51,13 @@ singleTypes:
       fileName: _index
       filters:
         fields.slug: alliances
+
+    - id: generalPage
+      directory: content/who we are/about us/branding
+      mainContent: body
+      fileName: _index
+      filters:
+        fields.slug: branding      
 
 repeatableTypes:
     # fetches all the entries of a content type and places them in a directory.
