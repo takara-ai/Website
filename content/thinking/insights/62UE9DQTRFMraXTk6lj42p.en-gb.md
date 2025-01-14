@@ -2,8 +2,8 @@
 sys:
   id: "62UE9DQTRFMraXTk6lj42p"
   updatedAt: "2025-01-14T13:41:22.908Z"
-  createdAt: "2025-01-14T13:45:50.729Z"
-  revision: 3
+  createdAt: "2025-01-14T15:31:33.638Z"
+  revision: 4
   space: "hmvebmrbwhsg"
   contentType: "blogPost"
 date: "2025-01-14T13:41:22.908Z"
@@ -16,6 +16,14 @@ author:
     contentType: "teamMember"
 publicationDate: "2025-01-14T00:00:00.000Z"
 summary: "The UK Government's AI Opportunities Action Plan outlines an ambitious vision to establish Britain as a global AI leader. As an AI company focused on responsible implementation, we strongly support this initiative and are actively contributing to its success through:\n\nAlignment with the government's \"Scan → Pilot → Scale\" approach through our own proven Explore → Prepare → Scale methodology\nPractical contributions via open-source projects like TensorKIKO and industry collaborations such as the Cohere AYA Expedition\nCommitment to developing AI talent and infrastructure in the UK\n\nWe welcome key elements of the plan, particularly the 20x expansion of computing resources through AIRR, the creation of AI Growth Zones, and the focus on public-private partnerships. We're dedicated to working with partners across the ecosystem to realise this vision and maintain the UK's position as a global AI innovator."
+featuredImage:
+  assetType: "image/png"
+  url: "//images.ctfassets.net/hmvebmrbwhsg/2CBhvVLlOfWSemmmQDqAF3/c16ee7985600d5ff7109b7d3163aaf55/Screenshot_2025-01-14_at_15.29.59.png"
+  title: "AI Action Plan Banner"
+  description: ""
+  size: 2504006
+  width: 1440
+  height: 1439
 ---
 
 The UK Government&#39;s AI Opportunities Action Plan marks a watershed moment for Britain&#39;s artificial intelligence sector. As a company dedicated to responsible AI implementation, we strongly endorse this bold vision for establishing the UK as a global AI powerhouse.
