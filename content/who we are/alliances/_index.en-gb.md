@@ -2,8 +2,8 @@
 sys:
   id: "6kcO8MHDcqUAzdkIqcilYC"
   updatedAt: "2025-01-07T16:33:46.586Z"
-  createdAt: "2025-01-08T07:42:40.894Z"
-  revision: 5
+  createdAt: "2025-01-13T16:55:52.933Z"
+  revision: 6
   space: "hmvebmrbwhsg"
   contentType: "generalPage"
 date: "2025-01-07T16:33:46.586Z"
@@ -16,9 +16,9 @@ summary: "At Takara, we forge strategic partnerships with industry leaders who s
 
 At Takara, we forge strategic partnerships with industry leaders who share our vision of transforming businesses through AI innovation. As an AI-first company, we carefully select partners who enhance our ability to deliver cutting-edge AI solutions and drive meaningful outcomes for our clients.
 
-## Amazon Web Services (AWS)
+## AWS
 
-As an AWS Partner, we maintain a deep and focused relationship with the leading cloud provider in AI and machine learning. Our all-in commitment to AWS reflects their unmatched capabilities in enabling enterprise-scale AI solutions:
+As an AWS Partner, we maintain a deep and focused relationship with the leading cloud provider in AI and machine learning. Our all-in commitment to AWS reflects their unmatched capabilities in enabling enterprise-scale AI solutions.
 
 ## Ingram Micro
 
