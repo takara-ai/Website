@@ -48,6 +48,7 @@ Our experiments show remarkable results. SwarmFormer-Base achieves **89% accurac
 What excites us most is what this means for AI accessibility. The models train quickly on consumer hardware and can run on a wide range of devices. This efficiency translates directly to reduced infrastructure costs - **up to 70% in our initial testing**.
 
 We&#39;re seeing promising applications across several areas:
+
 - Processing large document collections efficiently
 - Enabling sophisticated models on edge devices
 - Making advanced AI capabilities accessible to organisations of all sizes
@@ -57,15 +58,15 @@ The architecture&#39;s efficiency could make these applications accessible to un
 
 ## Breaking New Ground
 
-The efficiency gains from SwarmFormer&#39;s architecture have enabled some remarkable achievements. We&#39;ve successfully tested models with context windows spanning **tens of millions of tokens** - far beyond what&#39;s currently possible with traditional architectures. This opens up new possibilities for processing and understanding massive documents in their entirety.
+The efficiency gains from SwarmFormer's architecture have enabled some remarkable achievements. We've successfully tested models with context windows spanning **tens of millions of tokens** - far beyond what's currently possible with traditional architectures. This opens up **new possibilities for processing and understanding massive documents** in their entirety.
 
-In computer vision, our SwarmFormer-based models have already achieved state-of-the-art results on standard benchmarks while using significantly fewer parameters than existing approaches. Additionally, we&#39;re developing text-to-speech models that require just a fraction of the compute and memory resources compared to current solutions.
+In **computer vision**, our SwarmFormer-based models have already achieved **state-of-the-art results** on standard benchmarks while using significantly fewer parameters than existing approaches. Additionally, we're developing **breakthrough text-to-speech models** that require just a fraction of the compute and memory resources compared to current solutions.
 
-These early results are encouraging, but we see them as just the beginning. SwarmFormer&#39;s efficient architecture is proving to be remarkably versatile across different domains, and we&#39;re excited to explore what else is possible.
+These early results are encouraging, but we see them as just the beginning. SwarmFormer's **efficient and versatile architecture** is proving to be remarkably adaptable across different domains, and we're excited to explore what else is possible.
 
-We believe AI innovation should push the boundaries of what&#39;s possible while making the technology more accessible. SwarmFormer represents our first step toward that vision.
+We believe AI innovation should push the boundaries of what's possible while making the technology more accessible. SwarmFormer represents our first step toward that vision.
 
-For those interested in the technical details, our research paper "[SwarmFormer: Local-Global Hierarchical Attention via Clustered Token Representations](https://takara.ai/papers/SwarmFormer-Local-Global-Hierarchical-Attention-via-Swarming-Token-Representations.pdf)" provides complete implementation details and mathematical foundations. We welcome collaboration and look forward to seeing how the community builds upon these ideas.
+For those interested in the technical details, our research paper "[SwarmFormer: Local-Global Hierarchical Attention via Swarming Token Representations](https://takara.ai/papers/SwarmFormer-Local-Global-Hierarchical-Attention-via-Swarming-Token-Representations.pdf)" provides complete implementation details and mathematical foundations. We welcome collaboration and look forward to seeing how the community builds upon these ideas.
 
 Feel free to reach out to us at [research@takara.ai](mailto:research@takara.ai) for questions or potential collaborations.
 
@@ -84,4 +85,3 @@ If you use SwarmFormer in your research, please cite:
   url={https://takara.ai/papers/SwarmFormer-Local-Global-Hierarchical-Attention-via-Swarming-Token-Representations.pdf}
 }
 ```
-
