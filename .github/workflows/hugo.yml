@@ -31,6 +31,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "18.20.3"
+          cache: 'yarn'
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: |
+          yarn install --immutable --inline-builds
 
       - name: Setup Pages
         id: pages
@@ -41,9 +49,6 @@ jobs:
           wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.134.3/hugo_extended_0.134.3_linux-amd64.deb \
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb
 
-      - name: Install Node.js dependencies
-        run: yarn install
-
       - name: Build with Hugo
         run: yarn build
         env:
@@ -53,7 +58,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./env/public
+          path: ./public
 
   deploy:
     environment:

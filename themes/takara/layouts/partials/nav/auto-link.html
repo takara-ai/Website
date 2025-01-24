@@ -1,0 +1,25 @@
+{{ $excludedSections := slice "legal" "categories" "tags" }}
+
+{{ range .Site.Sections }}
+  {{ if not (in $excludedSections .Section) }}
+    <li class="py-2 border-b border-black border-dashed last:border-b-0">
+      <div class="flex items-center justify-between w-full cursor-pointer parent-section group">
+        <a href="{{ .RelPermalink }}" class="text-neutral-600 group-[.selected]:text-black hover:text-black transition-colors duration-200 text-lg flex-grow">{{ .Title }}</a>
+        {{ if .Pages }}
+          <svg class="w-5 h-5 text-neutral-600 group-[.selected]:text-black transition-colors duration-200 flex-shrink-0 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        {{ end }}
+      </div>
+      {{ if .Pages }}
+        <ul class="mt-2 ml-4 space-y-2 hidden submenu">
+          {{ range .Pages }}
+            <li>
+              <a href="{{ .RelPermalink }}" class="text-neutral-600 hover:text-black transition-colors duration-200">{{ .Title }}</a>
+            </li>
+          {{ end }}
+        </ul>
+      {{ end }}
+    </li>
+  {{ end }}
+{{ end }}

@@ -1,0 +1,62 @@
+{{- $respSizes := slice "300" "450" "600" "750" "900" "1050" "1200" "1350" "1500" "1800" "2100" "2400" -}}
+{{- $retinaSizes := slice "1x" "2x" "3x" -}}
+{{- $imgBase := "images/" -}}
+{{- $src := resources.Get (printf "%s%s" $imgBase (.Get "src")) -}}
+{{- $largestImg := ($src.Resize "2400x  jpg ").Permalink -}}
+{{- $alt := .Get "alt" -}}
+{{- $imgClass := "w-full h-auto animate-fade" -}}
+{{- $dataSzes := "(min-width: 1024px) 100vw, 50vw" -}}
+{{- $LQIP_img := $src.Resize "20x jpg" -}}
+{{- $LQIP_b64 := $LQIP_img.Content | base64Encode -}}
+{{- $CFPstyle := printf "%s%s%s" "background: url(data:image/jpeg;base64," $LQIP_b64 "); background-size: cover; background-repeat: no-repeat;" -}}
+{{- $actualImg := $src.Resize "600x jpg " -}}
+{{- $imgBd5 := md5 $src -}}
+{{- if eq .Site.Params.Host "CFP" -}}
+
+<style>
+    .imgB- {
+            {
+            $imgBd5
+        }
+    }
+
+        {
+            {
+                {
+                $CFPstyle | safeCSS
+            }
+        }
+    }
+</style>
+<div class="relative lg:w-1/2 imgB-{{ $imgBd5 }} bg-center">
+    {{- else -}}
+    <div class="relative bg-center" style="{{ $CFPstyle | safeCSS }}">
+        {{- end -}}
+        <picture>
+            <source type="image/webp" srcset="
+			{{- with $respSizes -}}
+				{{- range $i, $e := . -}}
+					{{- if ge $src.Width . -}}
+						{{- if $i }}, {{ end -}}{{- ($src.Resize (printf "%sx%s Q80 " . " webp") ).RelPermalink }} {{ . }}w
+					{{- end -}}
+				{{- end -}}
+			{{- end -}}" sizes="{{ $dataSzes }}" />
+            <source type="image/jpeg" srcset="
+			{{- with $respSizes -}}
+				{{- range $i, $e := . -}}
+					{{- if ge $src.Width . -}}
+						{{- if $i }}, {{ end -}}{{- ($src.Resize (printf "%sx%s " . " jpg") ).RelPermalink }} {{ . }}w
+					{{- end -}}
+				{{- end -}}
+			{{- end -}}" \ sizes="{{ $dataSzes }}" />
+            <img class="{{ $imgClass }}" 
+    src="{{ $actualImg.RelPermalink }}" 
+    width="{{ $src.Width }}" 
+    height="{{ $src.Height }}" 
+    alt="{{ $alt }}" 
+    loading="lazy"
+    data-pin-description="{{ $alt }}"
+    data-pin-url="{{ .Page.Permalink }}"
+    data-pin-media="{{ $largestImg }}" />
+        </picture>
+    </div>

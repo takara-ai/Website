@@ -1,0 +1,44 @@
+{{ $resource := .resource }}
+{{ $index := .index }}
+{{ $alt := $resource.Name }}
+{{ $isFeatured := eq (mod $index 7) 0 }}
+
+{{ $quality := 80 }}
+{{ $RESAMPLER := "MitchellNetravali" }}
+{{ $encoderHint := "picture" }}
+{{ $sizes := slice 
+    (dict "width" (cond $isFeatured 1000 500) "media" "(min-width: 1024px)")
+    (dict "width" (cond $isFeatured 700 350) "media" "(min-width: 768px)")
+    (dict "width" (cond $isFeatured 700 350) "media" "")
+}}
+
+{{ $width := $resource.Width }}
+{{ $height := $resource.Height }}
+{{ $aspectRatio := div (float $width) (float $height) }}
+
+<div 
+  class="{{ if $isFeatured }}col-span-2 row-span-2{{ end }} relative overflow-hidden"
+  style="padding-bottom: {{ mul (div 1 $aspectRatio) 100 }}%;"
+>
+  <picture>
+    {{ range $size := $sizes }}
+      {{ $resized := $resource.Resize (printf "%dx webp q%d %s %s" $size.width $quality $RESAMPLER $encoderHint) }}
+      <source
+        {{ with $size.media }}media="{{ . }}"{{ end }}
+        srcset="{{ $resized.RelPermalink }}"
+        type="image/webp"
+      >
+    {{ end }}
+    {{ $mobileImage := (index $sizes 2) }}
+    {{ $resized := $resource.Resize (printf "%dx webp q%d %s %s" $mobileImage.width $quality $RESAMPLER $encoderHint) }}
+    <img
+      src="{{ $resized.RelPermalink }}"
+      alt="{{ $alt }}"
+      width="{{ $mobileImage.width }}"
+      height="{{ (math.Round (div (mul $mobileImage.width $height) $width)) }}"
+      class="absolute inset-0 w-full h-full object-cover rounded-lg transition-all duration-300 ease-in-out hover:brightness-75"
+      loading="lazy"
+      decoding="async"
+    >
+  </picture>
+</div>

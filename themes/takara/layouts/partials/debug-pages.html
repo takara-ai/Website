@@ -1,0 +1,27 @@
+    <!-- Extended debug info -->
+    <div class="mb-8 p-4 bg-gray-100">
+        <p>Current Page:</p>
+        <p>Type: {{ .Type }}</p>
+        <p>Kind: {{ .Kind }}</p>
+        <p>Section Content Available: {{ with .Content }}yes{{ else }}no{{ end }}</p>
+        
+        <div class="mt-4">
+          <p>Looking for index page:</p>
+          {{ range .Pages }}
+            {{ if .File }}
+              {{ if strings.HasPrefix .File.BaseFileName "_index" }}
+                <div class="mt-2 p-2 bg-white">
+                  <p>Found index page:</p>
+                  <p>Title: {{ .Title }}</p>
+                  <p>Summary: {{ .Summary }}</p>
+                  <p>Raw Content Length: {{ len .RawContent }}</p>
+                  <p>Plain Content Length: {{ len .PlainWords }}</p>
+                  <p>File Path: {{ .File.Path }}</p>
+                  <p>File Lang: {{ .Lang }}</p>
+                  <p>Layout: {{ .Layout }}</p>
+                </div>
+              {{ end }}
+            {{ end }}
+          {{ end }}
+        </div>
+      </div>

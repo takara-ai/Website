@@ -1,0 +1,22 @@
+{{- $counter := 1 -}}
+<nav class="p-2 pt-0 ml-0 pl-0">
+  <ol class="list-none flex flex-wrap ml-0 pl-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {{- range .Ancestors.Reverse -}}
+      <li class="flex items-center pl-0 ml-0" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="{{ .RelPermalink }}" class="hover:text-gray-900" itemprop="item">
+          <span itemprop="name">{{ .Title }}</span>
+        </a>
+        <meta itemprop="position" content="{{ $counter }}">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 5l7 7-7 7"></path>
+        </svg>
+      </li>
+      {{- $counter = add $counter 1 -}}
+    {{- end -}}
+    <li class="flex items-center" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name">{{ .Title }}</span>
+      <meta itemprop="position" content="{{ $counter }}">
+    </li>
+  </ol>
+</nav>
+

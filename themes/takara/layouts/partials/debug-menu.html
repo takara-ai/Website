@@ -1,0 +1,10 @@
+{{ range .Site.Sections }}
+    <div style="display: none;">
+        <p>Section: {{ .Title }}</p>
+        <p>Kind: {{ .Kind }}</p>
+        <p>Type: {{ .Type }}</p>
+        {{ range .Pages }}
+            <p>Page: {{ .Title }} (Kind: {{ .Kind }}, Type: {{ .Type }})</p>
+        {{ end }}
+    </div>
+{{ end }}

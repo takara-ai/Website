@@ -1,0 +1,10 @@
+<header class="w-full bg-red-300">
+    <h1 class="text-center">{{ site.Title }}</h1>
+</header>
+{{ .Site.Params.subtitle }} 
+{{ .Site.Params.author.name }} 
+
+{{ $layout := .Site.Params.layouts.rfc_1123 }}
+{{ .Site.Lastmod.Format $layout }} 
+
+{{ partial "menu.html" (dict "menuID" "main" "page" .) }}

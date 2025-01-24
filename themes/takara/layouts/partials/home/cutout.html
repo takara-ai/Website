@@ -1,0 +1,31 @@
+<section class="flex flex-col border-b border-dashed border-black">
+  <div class="w-full mb-8">
+    <h1 class="font-black text-3xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl mt-20 px-2 sm:px-4 w-fit h-fit">
+      Transforming Humanity
+    </h1>
+    <h1 class="text-red-700 font-japanese font-bold text-3xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl px-2 sm:px-4 w-fit h-fit">
+      人類を変革する
+    </h1>
+  </div>
+
+  {{/* add the neural network */}}
+  {{/* partial "home/neuralNetwork" . */}}
+
+  <div class="container mx-auto">
+    <div class="prose prose-sm lg:prose-lg xl:prose-xl prose-h2:text-center prose-h3:text-center prose-h4:text-center prose-p:text-justify max-w-none w-full min-h-0">
+      <section>{{ .Content }}</section>
+      {{ partial "lastMod" . }}
+        {{ with .Params.backgroundImage }}
+        <div class="w-full mt-4">
+          <img 
+            src="{{ . }}" 
+            class="w-full aspect-[21/9] object-cover"
+            alt="Background"
+          />
+        </div>
+      {{ end }}
+    </div>
+
+
+  </div>
+</section>

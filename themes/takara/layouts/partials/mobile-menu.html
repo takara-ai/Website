@@ -1,0 +1,69 @@
+<!-- Menu wrapper -->
+<div class="top-0 left-0 w-full z-20 absolute" id="nav-wrapper">
+    <nav class="relative px-1 md:px-4 flex justify-between items-center py-1" aria-label="Main navigation">
+      <!-- Logo -->
+      {{ partial "nav/crane-top-link" . }}
+      
+      <!-- Mobile menu button -->
+      {{ partial "nav/mobile-menu-button" . }}
+  
+      <!-- Desktop menu -->
+      <ul class="hidden lg:flex lg:w-auto lg:space-x-8 flex-grow justify-end items-center" id="top-menu" role="menubar">
+        {{ $excludedSections := slice "legal" "categories" "tags" }}
+        {{ range .Site.Sections }}
+          {{ if not (in $excludedSections .Section) }}
+            <li>
+              <a href="{{ .RelPermalink }}" 
+                class="text-neutral-600 hover:text-black focus:outline-none focus:underline text-lg py-2"
+                role="menuitem" 
+                aria-haspopup="true" 
+                aria-expanded="false">
+                  {{ .Title }}
+              </a>
+
+              <div class="hidden" role="menu" aria-label="{{ .Title }} submenu">
+                  {{ range .Pages }}
+                    {{ if .Params.menu }}
+                      <a href="{{ .RelPermalink }}" class="block" role="menuitem">
+                          {{ .Title }}
+                      </a>
+                    {{ end }}  
+                  {{ end }}
+              </div>
+          </li>
+          {{ end }}
+        {{ end }}
+      </ul>
+    </nav>
+    
+    <!-- Expandable submenu -->
+    <div class="absolute right-0 w-full bg-white shadow-lg transition-all duration-200 ease-in-out overflow-hidden h-0" id="submenu" aria-hidden="true">
+      <div class="px-4 py-6 opacity-0 transition-opacity duration-200 ease-in-out" id="submenu-content">
+        <div class="grid grid-cols-4 gap-4 text-right" id="submenu-grid">
+          <!-- Content will be dynamically populated here -->
+        </div>
+      </div>
+    </div>
+    
+    <!-- Dashed border -->
+    <div class="border-b border-black border-dashed w-full transition-all duration-100 ease-in-out" id="dashed-border"></div>
+  </div>
+  <div class="navbar-menu relative z-50 hidden">
+    <div class="navbar-backdrop fixed inset-0 bg-gray-800 bg-opacity-25"></div>
+    <nav class="fixed top-0 left-0 bottom-0 flex flex-col w-svw py-6 px-6 bg-white border-r overflow-y-auto">
+      <div class="flex items-center mb-8">
+        <div class="mr-auto">{{ partial "nav/crane-svg.html" . }}</div>
+        <button class="navbar-close">
+          <svg class="h-6 w-6 text-neutral-600 cursor-pointer hover:text-black transition-colors duration-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div>
+        <ul class="space-y-0">
+          {{ partial "nav/auto-link" . }}
+        </ul>
+      </div>
+    </nav>
+  </div>
+  </div>

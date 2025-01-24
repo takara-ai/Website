@@ -1,0 +1,77 @@
+{{ define "main" }} {{ partial "home/cutout" .}}
+
+<section class="flex w-full min-h-svh border-b border-black border-dashed">
+  <div
+    class="bg-black text-white sm:p-4 p-2 flex flex-col w-1/3 flex-grow justify-center border-r border-white border-dashed"
+  >
+    <h1 class="text-base sm:text-2xl md:text-5xl">
+      Understanding when to use AI should be simpler than learning Japanese.
+    </h1>
+
+    <div class="flex mt-8">
+      <label
+        class="relative inline-flex items-center sm:mb-5 mb-10 cursor-pointer"
+      >
+        <input
+          type="checkbox"
+          id="language-toggle"
+          class="sr-only peer"
+          aria-label="Toggle language"
+        />
+        <div
+          class="w-14 h-7 bg-gray-400 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-teal-300 rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-teal-500"
+        ></div>
+      </label>
+    </div>
+  </div>
+
+  <div
+    class="flex flex-grow items-center justify-center text-base sm:text-3xl text-center"
+  >
+    <div class="">
+      <p id="japanese-text" class="text-gray-800 px-2 sm:px-4 font-mono">
+        人工知能（AI）は、成長と効率性の前例のない機会を提供することにより、ビジネス界を革命的に変えています。機械学習やデータ分析などのAI技術により、企業は自社の運営、顧客行動、市場動向に関するより深い洞察を得ることができます。これにより、意思決定の改善、顧客体験の向上、プロセスの効率化が実現します。さらに、AI駆動の自動化により手作業が減少し、従業員はより戦略的な活動に集中できるようになります。その結果、AIを取り入れる企業は競争環境で先を行くことができます。
+      </p>
+      <div id="english-text" class="text-gray-800">
+        <p class="rounded-md px-2 sm:px-4">
+          At
+          <span class="font-semibold sm:bold">takara.ai</span>, we make AI
+          implementation effortless. We handle everything, from selecting the
+          best models and tools to crafting customized solutions that offer
+          enhanced business data insights while cutting costs.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="min-h-svh flex">
+  <div class="w-full flex items-center">
+    <div class="flex-1 flex flex-col items-center justify-center">
+      <span
+        id="japanese-char"
+        class="text-7xl md:text-9xl font-bold blur-sm text-red-700"
+      ></span>
+      <p
+        id="english-char"
+        class="mt-8 text-center p-4 text-base sm:text-3xl container"
+      >
+        Running a business and staying updated with the fast-paced world of AI
+        technology can be challenging. That's why you can trust us to simplify
+        AI integration, providing you with top-notch solutions effortlessly.
+      </p>
+    </div>
+  </div>
+</section>
+{{/*  {{ partial "home/mission" . }} {{ partial "home/contact" . }}   */}}
+{{/* CSS Injection */}} {{ $css := resources.Get "css/pages/index.css" | resources.Minify |
+resources.Fingerprint | resources.PostProcess}}
+<link
+  rel="stylesheet"
+  href="{{ $css.RelPermalink }}"
+  integrity="{{ $css.Data.Integrity }}"
+/>
+  {{/* JS Injection */}}
+  {{ $js := resources.Get "js/pages/index.js" | js.Build | resources.Minify | resources.Fingerprint }}
+  <script type="text/javascript" src="{{ $js.RelPermalink }}" defer></script>
+
+{{ end }}

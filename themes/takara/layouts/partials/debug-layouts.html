@@ -1,0 +1,39 @@
+{{/* layouts/partials/debug.html */}}
+{{ $isDebug := not hugo.IsProduction }}
+<style>
+    .hugo-debug {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      background: red !important;
+      color: white;
+      padding: 20px;
+      font-size: 14px;
+      opacity: 1;
+      z-index: 9999;
+      border: 3px solid black;
+    }
+  </style>
+  
+  <div class="hugo-debug">
+    <h3>Debug Info:</h3>
+    <pre>
+  Layout: {{ .Layout }} {{ if not .Layout }}(using default based on Kind){{ end }}
+  Kind: {{ .Kind }}
+  Type: {{ .Type }}
+  Section: {{ .Section }}
+  Path: {{ with .File }}{{ .Path }}{{ else }}No path{{ end }}
+  Template Hierarchy:
+  {{ if eq .Kind "page" }}
+    1. layouts/{{ .Type }}/single.html
+    2. layouts/_default/single.html
+  {{ else if eq .Kind "home" }}
+    1. layouts/index.html
+    2. layouts/home.html
+    3. layouts/_default/home.html
+  {{ else if eq .Kind "section" }}
+    1. layouts/{{ .Type }}/list.html
+    2. layouts/_default/list.html
+  {{ end }}
+    </pre>
+  </div>
