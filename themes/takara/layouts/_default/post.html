@@ -6,7 +6,7 @@
       
       <!-- Featured Image -->
       {{ with .Params.featuredImage }}
-      <div class="mb-8">
+      <div class="mb-8 flex justify-center">
         {{ if .url }}
         <img
           src="{{ .url }}"
@@ -15,7 +15,7 @@
           width="{{ .width }}"
           height="{{ .height }}"
           decoding="async"
-          class="h-auto w-full object-cover aspect-square rounded-3xl transition-all duration-300 ease-in-out hover:brightness-75"
+          class="h-auto max-w-md object-cover aspect-square rounded-3xl transition-all duration-300 ease-in-out hover:brightness-75"
         >
         {{ end }}
       </div>
