@@ -68,6 +68,11 @@ We believe AI innovation should push the boundaries of what's possible while mak
 
 For those interested in the technical details, our research paper "[SwarmFormer: Local-Global Hierarchical Attention via Swarming Token Representations](https://takara.ai/papers/SwarmFormer-Local-Global-Hierarchical-Attention-via-Swarming-Token-Representations.pdf)" provides complete implementation details and mathematical foundations. We welcome collaboration and look forward to seeing how the community builds upon these ideas.
 
+We also provide the model checkpoints and inference code so you can try it out and see how it works.
+
+- Github: [Code](https://github.com/takara-ai/SwarmFormer)
+- HuggingFace: [Models](https://huggingface.co/collections/takara-ai/swarmformer-678f8d9baec74b46f9aa3024)
+
 Feel free to reach out to us at [research@takara.ai](mailto:research@takara.ai) for questions or potential collaborations.
 
 ---
