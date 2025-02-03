@@ -2,12 +2,13 @@
 sys:
   id: "40KaTtBbBJfSdVTvYLHmFr"
   updatedAt: "2025-02-03T12:35:58.207Z"
-  createdAt: "2025-02-03T12:49:19.898Z"
-  revision: 2
+  createdAt: "2025-02-03T14:13:17.566Z"
+  revision: 3
   space: "hmvebmrbwhsg"
   contentType: "caseStudy"
 date: "2025-02-03T12:35:58.207Z"
 title: "Predictive Game Development using AI"
+slug: "cs-predictive-game-development"
 layout: "caseStudy"
 menu: false
 group: true
