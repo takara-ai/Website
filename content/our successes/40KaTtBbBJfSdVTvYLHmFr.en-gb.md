@@ -2,17 +2,26 @@
 sys:
   id: "40KaTtBbBJfSdVTvYLHmFr"
   updatedAt: "2025-02-03T12:35:58.207Z"
-  createdAt: "2025-02-03T14:13:17.566Z"
-  revision: 3
+  createdAt: "2025-02-03T15:52:26.492Z"
+  revision: 6
   space: "hmvebmrbwhsg"
   contentType: "caseStudy"
 date: "2025-02-03T12:35:58.207Z"
-title: "Predictive Game Development using AI"
-slug: "cs-predictive-game-development"
+title: "Predictive Game Development using AI - Proof of Concept"
+slug: "cs-predictive-game-development-poc"
 layout: "caseStudy"
 menu: false
 group: true
 clientName: "Leading Online Gaming Company"
+clientDescription:
+  - data: {}
+    content:
+      - data: {}
+        marks: []
+        value: "A major player in the iGaming industry, the client develops online slot games and casino software with a focus on the European market. They've built their reputation through high-quality graphics, animations, and mobile-optimised gaming content. With multiple jurisdictional licenses and a portfolio of popular titles, they prioritise both entertainment value and technical reliability in their game development."
+        nodeType: "text"
+    nodeType: "paragraph"
+clientDescription_plaintext: "A major player in the iGaming industry, the client develops online slot games and casino software with a focus on the European market. They've built their reputation through high-quality graphics, animations, and mobile-optimised gaming content. With multiple jurisdictional licenses and a portfolio of popular titles, they prioritise both entertainment value and technical reliability in their game development."
 industry: "commercial"
 challenge:
   - data: {}
@@ -91,5 +100,5 @@ featuredImage:
   height: 506
 ---
 
-A major player in the iGaming industry, the client develops online slot games and casino software with a focus on the European market. They&#39;ve built their reputation through high-quality graphics, animations, and mobile-optimized gaming content. With multiple jurisdictional licenses and a portfolio of popular titles, they prioritise both entertainment value and technical reliability in their game development.
+Takara helped a leading iGaming company leverage Generative AI for High-Level Design (HLD) documentation, reducing POC time by 50%. Using AWS Bedrock and Nova LLM, the AI-powered solution streamlined game design, validated AI adoption, and secured production approval in just four weeks.
 
