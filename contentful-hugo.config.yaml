@@ -69,7 +69,7 @@ repeatableTypes:
 
     - id: service
       directory: content/what we do
-      mainContent: fullDescription
+      mainContent: body
 
     - id: blogPost
       directory: content/thinking/insights
