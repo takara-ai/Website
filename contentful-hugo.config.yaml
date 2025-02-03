@@ -74,3 +74,7 @@ repeatableTypes:
     - id: blogPost
       directory: content/thinking/insights
       mainContent: body  
+
+    - id: caseStudy
+      directory: content/our successes
+      mainContent: body
