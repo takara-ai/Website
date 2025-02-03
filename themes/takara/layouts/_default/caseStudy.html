@@ -1,0 +1,70 @@
+{{ define "main" }}
+<div class="relative bg-white">
+  <article id="main-content" class="pt-20 p-4 sm:px-8">
+    <header>
+      {{ partial "headerTitle" . }}
+      
+      <!-- Featured Image -->
+      {{ with .Params.featuredImage }}
+      <div class="mx-auto max-w-4xl mb-8">
+        {{ if .url }}
+        <img
+          src="{{ .url }}"
+          alt="{{ $.Title }}"
+          loading="lazy"
+          width="{{ .width }}"
+          height="{{ .height }}"
+          decoding="async"
+          class="h-auto w-full object-cover aspect-square rounded-3xl transition-all duration-300 ease-in-out hover:brightness-75"
+        >
+        {{ end }}
+      </div>
+      {{ end }}
+
+      <!-- Case Study Meta -->
+      <div class="flex items-center justify-between mb-8 text-sm text-neutral-600">
+        {{/* Add closing tag here */}}
+      </div>
+    </header>
+
+      <!-- Case Study Content -->
+      <div class="prose prose-lg lg:prose-xl mx-auto">
+        {{ .Content }}
+
+
+      <div class="bg-white p-6 rounded-lg shadow">
+        <div class="mb-6">
+          <h3 class="text-xl font-bold mb-2">Challenge</h3>
+          <p>{{ .Params.challenge_plaintext }}</p>
+        </div>
+      
+        <div class="mb-6">
+          <h3 class="text-xl font-bold mb-2">Solution</h3>
+          <p>{{ .Params.solution_plaintext }}</p>
+        </div>
+      
+        <div>
+          <h3 class="text-xl font-bold mb-2">Results</h3>
+          <ul class="list-disc pl-5">
+          {{ with .Params.results }}
+            {{ range . }}
+              {{ range .content }}
+                {{ range .content }}
+                  {{ with .content }}
+                    {{ range . }}
+                      <li>{{ .value }}</li>
+                    {{ end }}
+                  {{ end }}
+                {{ end }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    {{ partial "lastMod" . }}
+  </article>
+</div>
+{{ end }}
