@@ -1,0 +1,39 @@
+{{ define "main" }}
+
+<div class="relative bg-white">
+  <article id="main-content" class="pt-20 p-4 sm:px-8">
+    <header> 
+      {{ partial "headerTitle" . }} 
+      {{/* partial "debug-pages" . */}}
+
+        <!-- Featured Image -->
+        {{ with .Params.mainImage }}
+        <div class="mx-auto max-w-4xl mb-8">
+          {{ if .url }}
+          <figure>
+            <img
+              src="{{ .url }}"
+              alt="{{ $.Title }}"
+              loading="lazy"
+              width="{{ .width }}"
+              height="{{ .height }}"
+              decoding="async"
+              class="h-auto w-full object-cover aspect-square rounded-3xl transition-all duration-300 ease-in-out hover:brightness-75"
+            >
+            {{ with .description }}
+              <figcaption class="mt-2 text-sm text-gray-500 text-center">{{ . }}</figcaption>
+            {{ end }}
+          </figure>
+          {{ end }}
+        </div>
+        {{ end }}
+      
+    </header>
+
+    <div class="prose-sm lg:prose xl:prose-xl mx-auto p-4 min-h-svh bg-inherit">
+      <section>{{ .Content }}</section>
+      {{ partial "lastMod" . }}
+    </div>
+  </article>
+</div>
+{{ end }}
