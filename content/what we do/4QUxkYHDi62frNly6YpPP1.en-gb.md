@@ -2,8 +2,8 @@
 sys:
   id: "4QUxkYHDi62frNly6YpPP1"
   updatedAt: "2025-02-05T14:06:29.141Z"
-  createdAt: "2025-02-05T14:10:10.704Z"
-  revision: 2
+  createdAt: "2025-02-06T08:13:36.521Z"
+  revision: 4
   space: "hmvebmrbwhsg"
   contentType: "service"
 date: "2025-02-05T14:06:29.141Z"
@@ -27,7 +27,7 @@ This dynamic half-day workshop is tailored for organisations taking their first 
 
 # Outcomes
 
-This Explore AI Workshop is designed to provide participants with a foundational understanding of AI concepts, real-world applications, and potential business value. By the end of the session, attendees will likely have increased their AI literacy, gained awareness of various AI use cases, identified potential AI applications for their organization, and developed a preliminary understanding of AI&#39;s business value. This introductory experience aims to foster enthusiasm for AI while also helping participants recognise both the opportunities and challenges associated with AI implementation in their specific organisational context.
+This Explore AI Workshop is designed to provide participants with a foundational understanding of AI concepts, real-world applications, and potential business value. By the end of the session, attendees will likely have increased their AI literacy, gained awareness of various AI use cases, identified potential AI applications for their organisation, and developed a preliminary understanding of AI&#39;s business value. This introductory experience aims to foster enthusiasm for AI while also helping participants recognise both the opportunities and challenges associated with AI implementation in their specific organisational context.
 
 # High Level Outline
 
@@ -40,5 +40,5 @@ This Explore AI Workshop is designed to provide participants with a foundational
 
 # Audience
 
-Perfect for business leaders and decision-makers who are AI-novices but experts in their own operations. By leveraging your deep understanding of your business processes, you&#39;ll uncover unique AI opportunities specific to your organization. Come as you are – your industry expertise is the only prerequisite for unlocking AI&#39;s potential in your business landscape.
+Perfect for business leaders and decision-makers who are AI-novices but experts in their own operations. By leveraging your deep understanding of your business processes, you&#39;ll uncover unique AI opportunities specific to your organisation. Come as you are – your industry expertise is the only prerequisite for unlocking AI&#39;s potential in your business landscape.
 
