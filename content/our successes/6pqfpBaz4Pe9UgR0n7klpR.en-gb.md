@@ -2,8 +2,8 @@
 sys:
   id: "6pqfpBaz4Pe9UgR0n7klpR"
   updatedAt: "2025-02-03T15:14:14.653Z"
-  createdAt: "2025-02-03T15:46:19.201Z"
-  revision: 5
+  createdAt: "2025-02-05T14:00:39.334Z"
+  revision: 6
   space: "hmvebmrbwhsg"
   contentType: "caseStudy"
 date: "2025-02-03T15:14:14.653Z"
@@ -186,11 +186,11 @@ results:
     nodeType: "paragraph"
 results_plaintext: "90% faster HLD creation: Reduced high-level design time from days to minutes while maintaining creative quality 3x higher design output through standardized frameworks, without additional headcount Enhanced market fit using data-driven design for demographic and regional preferences Implemented QA processes ensuring consistent, high-quality documentation across projects "
 featuredImage:
-  assetType: "image/png"
-  url: "//images.ctfassets.net/hmvebmrbwhsg/1s9PPmqzZ3U3JulLHEXvDO/c33d5ce0324379934bfe1933c5a1d310/the-green-knight-featured-image.png"
+  assetType: "image/jpeg"
+  url: "//images.ctfassets.net/hmvebmrbwhsg/gEFf8VRUMxmpqDFBfsVyG/852653a16af933acdf84ceaf45dd9432/the-green-knight-featured-image.jpg"
   title: "game-play-green"
   description: ""
-  size: 1118185
+  size: 226342
   width: 1012
   height: 979
 ---

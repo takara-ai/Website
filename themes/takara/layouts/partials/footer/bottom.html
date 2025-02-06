@@ -16,15 +16,16 @@
     </h1>
   </section>
 */}}
-<section id="disclaimer" class=" px-1 md:px-4 py-4 flex flex-col sm:flex-row sm:justify-between items-center space-y-3 sm:space-y-0 bg-white relative z-20">
+<section id="disclaimer" class="border-t border-dashed border-black px-1 md:px-4 py-4 flex sm:justify-between items-center space-x-3 sm:space-x-0 bg-white relative z-20">
     <div>{{ partial "nav/crane-svg" . }}</div>
     <div
-      class="flex flex-wrap justify-center gap-3 sm:gap-6 text-sm lg:text-base text-neutral-600"
+      class="flex space-x-3 sm:space-x-6 text-sm lg:text-base text-neutral-600"
     >
       <p class="text-inherit">
         &copy;<span class="font-semibold">takara.ai</span> {{ now.Format "2006"
         }}
       </p>
+      <a class="text-white bg-red-600 hover:bg-red-700 px-3 py-1 rounded-md" href="/contact/">Contact Us</a>
       <a class="text-inherit hover:text-black" href="/legal/privacy-policy/">Privacy</a>
       <a class="text-inherit hover:text-black" href="/legal/ethics/">Ethics</a>
       <a class="text-inherit hover:text-black" href="/who-we-are/about-us/branding/">Branding</a>      
