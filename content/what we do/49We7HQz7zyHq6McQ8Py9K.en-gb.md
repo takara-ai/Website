@@ -2,8 +2,8 @@
 sys:
   id: "49We7HQz7zyHq6McQ8Py9K"
   updatedAt: "2025-02-28T16:17:42.367Z"
-  createdAt: "2025-02-28T16:19:39.867Z"
-  revision: 2
+  createdAt: "2025-02-28T16:43:59.772Z"
+  revision: 3
   space: "hmvebmrbwhsg"
   contentType: "service"
 date: "2025-02-28T16:17:42.367Z"
@@ -15,12 +15,12 @@ group: true
 summary: "Our Pioneer engagement isn’t just about proving AI works — it’s about unlocking its full potential for your unique business challenges. With deep expertise in AI and real-world industry applications, we move beyond theory to deliver measurable, impactful results. We help you turn AI possibilities into real business value—faster and smarter.\n"
 mainImage:
   assetType: "image/jpeg"
-  url: "//images.ctfassets.net/hmvebmrbwhsg/2C33cIkQkn9sVuCj44RmEu/32aaf14266fd48be8b15131b77d31453/sora-sagano-8sOZJ8JF0S8-unsplash.jpg"
-  title: "Meguro River, Matsuno, Japan"
-  description: "Photo by Sora Sagano on Unsplash\n"
-  size: 6650930
-  width: 5296
-  height: 3531
+  url: "//images.ctfassets.net/hmvebmrbwhsg/5Ml4AgzHNwUdXwrkhOjkGy/0f5dc8c276d23e6f8bcad68e087a9abe/lin-mei-NYyCqdBOKwc-unsplash.jpg"
+  title: "Fushimi Inari Shrine path"
+  description: "Photo by <a href=\"https://unsplash.com/@mytinyatlas?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash\">Lin Mei</a> on <a href=\"https://unsplash.com/photos/gray-pathway-between-red-and-black-wooden-pillar-NYyCqdBOKwc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash\">Unsplash</a>\n      "
+  size: 1539621
+  width: 3936
+  height: 2624
 ---
 
 Many companies kick off exciting AI project - Proof of Concept (PoCs) or Pilots - only to hit roadblocks when it’s time to make AI a real part of their business. Why? Because scaling AI isn’t just about the tech - it’s about security, reliability, and responsible AI practices.
