@@ -2,8 +2,8 @@
 sys:
   id: "49We7HQz7zyHq6McQ8Py9K"
   updatedAt: "2025-02-28T16:17:42.367Z"
-  createdAt: "2025-02-28T16:43:59.772Z"
-  revision: 3
+  createdAt: "2025-02-28T16:49:49.870Z"
+  revision: 4
   space: "hmvebmrbwhsg"
   contentType: "service"
 date: "2025-02-28T16:17:42.367Z"
@@ -17,7 +17,7 @@ mainImage:
   assetType: "image/jpeg"
   url: "//images.ctfassets.net/hmvebmrbwhsg/5Ml4AgzHNwUdXwrkhOjkGy/0f5dc8c276d23e6f8bcad68e087a9abe/lin-mei-NYyCqdBOKwc-unsplash.jpg"
   title: "Fushimi Inari Shrine path"
-  description: "Photo by <a href=\"https://unsplash.com/@mytinyatlas?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash\">Lin Mei</a> on <a href=\"https://unsplash.com/photos/gray-pathway-between-red-and-black-wooden-pillar-NYyCqdBOKwc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash\">Unsplash</a>\n      "
+  description: "Photo by Lin Mei on  Unsplash\n      "
   size: 1539621
   width: 3936
   height: 2624
@@ -45,7 +45,7 @@ AI isn’t just an experiment—it’s a game-changer for your business. We don�
 
 # Advantages
 
-- **S****peed & Efficiency**: Our streamlined approach gets your AI into production faster, reducing time-to-value.
+- **Speed** **& Efficiency**: Our streamlined approach gets your AI into production faster, reducing time-to-value.
 - **Clarity & Direction**: We eliminate uncertainty with clear roadmaps, measurable milestones, and defined success metrics.
 - **Tailored Solutions**: No one-size-fits-all — our AI strategies are customised to fit your unique business needs and infrastructure.
 - **Risk Mitigation**: We ensure security, compliance, and responsible AI practices from day one, so you can scale with confidence.
