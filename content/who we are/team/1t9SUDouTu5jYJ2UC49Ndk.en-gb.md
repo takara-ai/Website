@@ -18,7 +18,7 @@ funBio: "Chris Stevens, a Marlow resident living near the local Rebellion brewer
 image:
   assetType: "image/png"
   url: "//images.ctfassets.net/hmvebmrbwhsg/4ikNEnMnjNwI4peCDcGXgA/3ca0c9264bbe1fec6a22dda2fdb2f736/sam-chris-bw.png"
-  title: "default-image"
+  title: "chris-stevens"
   description: ""
   size: 126146
   width: 398
