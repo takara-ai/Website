@@ -16,6 +16,7 @@
       <section>{{ .Content }}</section>
       {{ partial "lastMod" . }}
         {{ with .Params.backgroundImage }}
+        {{/* removing the hero image for now as not working 
         <div class="w-full mt-4">
           <img 
             src="{{ . }}" 
@@ -23,6 +24,7 @@
             alt="Background"
           />
         </div>
+        */}}
       {{ end }}
     </div>
 
