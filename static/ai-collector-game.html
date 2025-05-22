@@ -1,0 +1,3434 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>AI Architecture Collector</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 20px;
+        background: #1a1a1a;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        max-height: 100vh;
+        font-family: "Courier New", monospace;
+        image-rendering: pixelated;
+        overflow: hidden; /* Prevent scrolling */
+      }
+
+      #gameContainer {
+        background: #2c3e50;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+      }
+
+      #gameCanvas {
+        border: 4px solid #000;
+        display: block;
+        image-rendering: pixelated;
+      }
+
+      #ui {
+        margin-top: 10px;
+        color: white;
+        text-align: center;
+      }
+
+      .stats {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 10px;
+        padding: 10px;
+        background: #1a1a1a;
+        border-radius: 5px;
+      }
+
+      #dialogue {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.95);
+        color: white;
+        padding: 15px;
+        border-radius: 5px;
+        max-width: 400px;
+        display: none;
+        border: 2px solid #fff;
+      }
+
+      .game-title {
+        text-align: center;
+        margin-bottom: 10px;
+        color: #ecf0f1;
+        font-size: 28px;
+        font-weight: bold;
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+        letter-spacing: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="gameContainer">
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 10px;
+          gap: 15px;
+        "
+      >
+        <div class="game-title" style="color: #dc143c; margin: 0">
+          TAKARA.AI RESEARCH LAB
+        </div>
+        <img
+          src="https://takara.ai/images/logo-24/TakaraAi.svg"
+          width="60"
+          alt="Takara.ai Logo"
+          style="filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5))"
+        />
+      </div>
+      <canvas id="gameCanvas" width="640" height="480"></canvas>
+      <div id="ui">
+        <div class="stats">
+          <div>🤖 AI: <span id="aiCount">0</span>/∞</div>
+          <div>📍 Room: <span id="roomId">0,0</span></div>
+          <div>🌍 Biome: <span id="biome">LAB</span></div>
+          <div>👥 NPCs Met: <span id="npcCount">0</span></div>
+        </div>
+        <div
+          id="questDisplay"
+          style="
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(220, 20, 60, 0.1);
+            border-radius: 5px;
+            border: 1px solid #dc143c;
+          "
+        >
+          <div style="color: #dc143c; font-weight: bold; margin-bottom: 5px">
+            Current Quest:
+          </div>
+          <div
+            id="questTitle"
+            style="color: #ecf0f1; font-size: 14px; margin-bottom: 3px"
+          >
+            Welcome to Takara.ai
+          </div>
+          <div id="questDesc" style="color: #bdc3c7; font-size: 12px">
+            Find your first AI architecture!
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; color: #ecf0f1; margin-top: 10px">
+        ⌨️ WASD/Arrows to move • ⚡ SPACE to interact • 🔍 Explore Takara.ai
+        Research Lab!
+      </div>
+    </div>
+    <div id="dialogue"></div>
+
+    <script>
+      const canvas = document.getElementById("gameCanvas");
+      const ctx = canvas.getContext("2d");
+      ctx.imageSmoothingEnabled = false;
+
+      // Constants - Pokemon-style tile system
+      const TILE_SIZE = 32;
+      const VIEW_TILES = 20;
+      const VIEW_DIST = 8;
+      const ROOM_SIZE = 15;
+
+      // Tile types for collision and interaction
+      const TILE_TYPES = {
+        FLOOR: 0,
+        WALL: 1,
+        GLASS: 2,
+        STAIRS: 3,
+        LAB_ENTRANCE: 4,
+        DATACENTER_ENTRANCE: 5,
+        MAIN_ENTRANCE: 6,
+      };
+
+      // Collision data - which tiles can be walked on
+      const WALKABLE_TILES = new Set([
+        TILE_TYPES.FLOOR,
+        TILE_TYPES.STAIRS,
+        TILE_TYPES.LAB_ENTRANCE,
+        TILE_TYPES.DATACENTER_ENTRANCE,
+        TILE_TYPES.MAIN_ENTRANCE,
+      ]);
+
+      // Takara.ai Lab Elements
+      const LAB_COLORS = {
+        takaraRed: "#DC143C",
+        labWall: "#34495e",
+        labFloor: "#ecf0f1",
+        equipment: "#2c3e50",
+        // Biome colors
+        outside: { floor: "#2d5016", wall: "#8B4513", sky: "#87CEEB" },
+        underground: { floor: "#1a1a1a", wall: "#2c2c2c", server: "#0066cc" },
+        office: { floor: "#f8f9fa", wall: "#e9ecef", accent: "#DC143C" },
+      };
+
+      // Biome system - simplified to 3 levels
+      const BIOMES = {
+        OUTSIDE: { minY: 1, maxY: 999, fogRadius: 12 },
+        LAB: { minY: 0, maxY: 0, fogRadius: 8 },
+        DATACENTER: { minY: -999, maxY: -1, fogRadius: 6 },
+      };
+
+      function getBiome(roomY) {
+        if (roomY >= BIOMES.OUTSIDE.minY) return "OUTSIDE";
+        if (roomY >= BIOMES.LAB.minY) return "LAB";
+        return "DATACENTER";
+      }
+
+      // Environment objects (non-interactive, part of scenery)
+      const ENVIRONMENT = {
+        OUTSIDE: [
+          {
+            name: "Tree Cluster",
+            color: "#228B22",
+            symbol: "♠",
+            size: "large",
+          },
+          { name: "Bush", color: "#32CD32", symbol: "●", size: "small" },
+          { name: "Path Marker", color: "#8B4513", symbol: "▪", size: "small" },
+        ],
+
+        LAB: [
+          { name: "Computer", color: "#3498db", symbol: "▣", size: "medium" },
+          { name: "Equipment", color: "#95a5a6", symbol: "▤", size: "medium" },
+          { name: "Monitor", color: "#2c3e50", symbol: "□", size: "small" },
+        ],
+        DATACENTER: [
+          { name: "Server Bank", color: "#0066cc", symbol: "▓", size: "large" },
+          { name: "Cable Tray", color: "#696969", symbol: "═", size: "medium" },
+          {
+            name: "Cooling Vent",
+            color: "#4169E1",
+            symbol: "▒",
+            size: "small",
+          },
+        ],
+      };
+
+      // Interactive furniture (can be examined)
+      const LAB_FURNITURE = {
+        OUTSIDE: [
+          { name: "Entrance Sign", color: "#DC143C", symbol: "⚡" },
+          { name: "Information Kiosk", color: "#3498db", symbol: "ℹ" },
+        ],
+
+        LAB: [
+          { name: "Research Terminal", color: "#DC143C", symbol: "⚡" },
+          { name: "Exit to Surface", color: "#2ecc71", symbol: "↑" },
+          { name: "Stairs Down", color: "#8B4513", symbol: "▼" },
+        ],
+        DATACENTER: [
+          { name: "Main Terminal", color: "#FF4500", symbol: "⚡" },
+          { name: "Exit to Surface", color: "#2ecc71", symbol: "↑" },
+          { name: "Stairs Up", color: "#8B4513", symbol: "▲" },
+        ],
+      };
+
+      // AI Architectures with rarity system
+      const AI_TYPES = [
+        // Common (60% spawn rate)
+        {
+          name: "Perceptron",
+          color: "#95a5a6",
+          desc: "The foundation of neural networks",
+          rarity: "common",
+          year: 1957,
+        },
+        {
+          name: "MLP",
+          color: "#7f8c8d",
+          desc: "Multi-layer learning",
+          rarity: "common",
+          year: 1986,
+        },
+        {
+          name: "CNN",
+          color: "#2ecc71",
+          desc: "Sees patterns in images",
+          rarity: "common",
+          year: 1989,
+        },
+        {
+          name: "RNN",
+          color: "#e74c3c",
+          desc: "Remembers sequential data",
+          rarity: "common",
+          year: 1990,
+        },
+
+        // Uncommon (25% spawn rate)
+        {
+          name: "LSTM",
+          color: "#f39c12",
+          desc: "Long-term memory master",
+          rarity: "uncommon",
+          year: 1997,
+        },
+        {
+          name: "ResNet",
+          color: "#c0392b",
+          desc: "Skip connections revolution",
+          rarity: "uncommon",
+          year: 2015,
+        },
+        {
+          name: "YOLO",
+          color: "#16a085",
+          desc: "Real-time object detection",
+          rarity: "uncommon",
+          year: 2016,
+        },
+        {
+          name: "U-Net",
+          color: "#8e44ad",
+          desc: "Medical image segmentation",
+          rarity: "uncommon",
+          year: 2015,
+        },
+
+        // Rare (10% spawn rate)
+        {
+          name: "Transformer",
+          color: "#3498db",
+          desc: "Attention is all you need!",
+          rarity: "rare",
+          year: 2017,
+        },
+        {
+          name: "BERT",
+          color: "#1abc9c",
+          desc: "Bidirectional understanding",
+          rarity: "rare",
+          year: 2018,
+        },
+        {
+          name: "GPT",
+          color: "#e67e22",
+          desc: "Generative language model",
+          rarity: "rare",
+          year: 2018,
+        },
+        {
+          name: "GAN",
+          color: "#9b59b6",
+          desc: "Adversarial creativity",
+          rarity: "rare",
+          year: 2014,
+        },
+
+        // Epic (4% spawn rate)
+        {
+          name: "GPT-3",
+          color: "#f1c40f",
+          desc: "175B parameter giant",
+          rarity: "epic",
+          year: 2020,
+        },
+        {
+          name: "CLIP",
+          color: "#e91e63",
+          desc: "Vision-language understanding",
+          rarity: "epic",
+          year: 2021,
+        },
+        {
+          name: "DALL-E",
+          color: "#ff5722",
+          desc: "Text-to-image generation",
+          rarity: "epic",
+          year: 2021,
+        },
+
+        // Legendary (1% spawn rate)
+        {
+          name: "GPT-4",
+          color: "#ffd700",
+          desc: "Multimodal AI breakthrough",
+          rarity: "legendary",
+          year: 2023,
+        },
+        {
+          name: "AlphaGo",
+          color: "#4caf50",
+          desc: "Game-changing AI",
+          rarity: "legendary",
+          year: 2016,
+        },
+      ];
+
+      // Rarity spawn rates
+      const RARITY_RATES = {
+        common: 0.55,
+        uncommon: 0.25,
+        rare: 0.12,
+        epic: 0.06,
+        legendary: 0.02,
+      };
+
+      // NPCs
+      const NPC_TYPES = [
+        {
+          name: "Dr. Takara Mono",
+          dialogue: [
+            "Hmph! You're the new researcher? About time someone showed up.",
+            "This facility contains the most important AI architectures in history.",
+            "Your mission: collect these architectures and learn from the masters.",
+            "Don't waste my time - get to work! The lab entrance is behind me.",
+            "Each AI architecture you find will teach you something valuable.",
+            "The deeper you go, the rarer the discoveries become.",
+          ],
+          isStoryNPC: true,
+        },
+        {
+          name: "Geoffrey Hinton",
+          dialogue: [
+            "I'm the Godfather of Deep Learning!",
+            "Backpropagation changed everything!",
+            "Neural networks were once considered dead ends.",
+            "Persistence and belief in the impossible led to breakthroughs.",
+          ],
+        },
+        {
+          name: "Yann LeCun",
+          dialogue: [
+            "CNNs are inspired by the visual cortex!",
+            "I pioneered convolutional networks.",
+            "Computer vision was transformed by hierarchical learning.",
+            "The key is learning good representations automatically.",
+          ],
+        },
+        {
+          name: "Yoshua Bengio",
+          dialogue: [
+            "The key is learning representations.",
+            "Keep collecting architectures!",
+            "Deep learning is about discovering abstractions.",
+            "Unsupervised learning holds great promise.",
+          ],
+        },
+        {
+          name: "Andrew Ng",
+          dialogue: [
+            "AI is the new electricity!",
+            "It's about solving real problems.",
+            "Machine learning should be democratized.",
+            "Focus on applications that help humanity.",
+          ],
+        },
+        {
+          name: "Fei-Fei Li",
+          dialogue: [
+            "Human-centered AI is crucial.",
+            "Visual intelligence is just the beginning!",
+            "AI should augment human capabilities.",
+            "Diversity in AI research is essential.",
+          ],
+        },
+      ];
+
+      // Storyline and quest system
+      const STORY_QUESTS = [
+        {
+          id: "welcome",
+          title: "Welcome to Takara.ai",
+          description:
+            "Dr. Takara has invited you to explore the research facility. Find your first AI architecture!",
+          target: { type: "collect_ai", count: 1 },
+          reward: "Access to deeper facility levels",
+          completed: false,
+        },
+        {
+          id: "meet_pioneers",
+          title: "Meet the AI Pioneers",
+          description:
+            "Speak with 3 legendary AI researchers to learn about the field's history.",
+          target: { type: "meet_npcs", count: 3 },
+          reward: "Advanced AI detection equipment",
+          completed: false,
+        },
+        {
+          id: "rare_collector",
+          title: "Rare Architecture Hunter",
+          description:
+            "Collect 5 different AI architectures to prove your dedication.",
+          target: { type: "collect_ai", count: 5 },
+          reward: "Access to experimental AI lab",
+          completed: false,
+        },
+        {
+          id: "deep_learning",
+          title: "Deep Learning Explorer",
+          description:
+            "Venture into the datacenter and collect a rare or better AI architecture.",
+          target: {
+            type: "collect_rare_ai",
+            rarity: ["rare", "epic", "legendary"],
+          },
+          reward: "Dr. Takara's personal research notes",
+          completed: false,
+        },
+        {
+          id: "master_collector",
+          title: "AI Architecture Master",
+          description:
+            "Collect 15 different AI architectures to become a true expert.",
+          target: { type: "collect_ai", count: 15 },
+          reward: "Honorary Takara.ai Research Badge",
+          completed: false,
+        },
+      ];
+
+      // Game state with storyline
+      const game = {
+        player: {
+          x: 0,
+          y: 0,
+          facing: "down",
+          animFrame: 0,
+          roomX: 0,
+          roomY: 0,
+        },
+        collectedAI: new Set(),
+        metNPCs: new Set(),
+        visitedRooms: new Set(["0,1"]),
+        rooms: new Map(),
+        particles: [],
+
+        // Story progression
+        currentQuest: 0,
+        completedQuests: new Set(),
+        storyFlags: new Set(),
+
+        // Game stats
+        totalAICollected: 0,
+        rareAICollected: 0,
+        gameStartTime: Date.now(),
+      };
+
+      // Room generation with deterministic seeding
+      function hashCode(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+          hash = (hash << 5) - hash + str.charCodeAt(i);
+          hash = hash & hash;
+        }
+        return Math.abs(hash);
+      }
+
+      function seededRandom(seed) {
+        const x = Math.sin(seed) * 10000;
+        return x - Math.floor(x);
+      }
+
+      function hexToRgb(hex) {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result
+          ? {
+              r: parseInt(result[1], 16),
+              g: parseInt(result[2], 16),
+              b: parseInt(result[3], 16),
+            }
+          : { r: 255, g: 255, b: 255 };
+      }
+
+      class Room {
+        constructor(roomX, roomY) {
+          this.roomX = roomX;
+          this.roomY = roomY;
+          this.biome = getBiome(roomY);
+          this.seed = hashCode(`${roomX},${roomY}`);
+          this.tiles = [];
+          this.entities = [];
+          this.generate();
+        }
+
+        generate() {
+          // Initialize tiles
+          for (let y = 0; y < ROOM_SIZE; y++) {
+            this.tiles[y] = [];
+            for (let x = 0; x < ROOM_SIZE; x++) {
+              this.tiles[y][x] = 0;
+            }
+          }
+
+          // Generate room structure based on biome and type
+          this.generateBiomeStructure();
+
+          // Add doorways - ensure they're always clear
+          const doorX = Math.floor(ROOM_SIZE / 2);
+          const doorY = Math.floor(ROOM_SIZE / 2);
+
+          this.tiles[0][doorX] = 0; // North
+          this.tiles[ROOM_SIZE - 1][doorX] = 0; // South
+          this.tiles[doorY][0] = 0; // West
+          this.tiles[doorY][ROOM_SIZE - 1] = 0; // East
+
+          // Clear paths to doors to prevent getting stuck
+          this.tiles[1][doorX] = 0; // North path
+          this.tiles[ROOM_SIZE - 2][doorX] = 0; // South path
+          this.tiles[doorY][1] = 0; // West path
+          this.tiles[doorY][ROOM_SIZE - 2] = 0; // East path
+
+          // Spawn entities
+          this.spawnEntities();
+        }
+
+        generateBiomeStructure() {
+          // Clear all tiles first
+          for (let y = 0; y < ROOM_SIZE; y++) {
+            for (let x = 0; x < ROOM_SIZE; x++) {
+              this.tiles[y][x] = 0;
+            }
+          }
+
+          const roomType = Math.floor(seededRandom(this.seed) * 4);
+
+          switch (this.biome) {
+            case "OUTSIDE":
+              this.generateOutdoorArea(roomType);
+              break;
+            case "LAB":
+              this.generateLabComplex(roomType);
+              break;
+            case "DATACENTER":
+              this.generateDatacenterFacility(roomType);
+              break;
+          }
+
+          // Add multi-tile structures
+          this.addComplexStructures();
+        }
+
+        generateOutdoorArea(type) {
+          // Special starting area at 0,0
+          if (this.roomX === 0 && this.roomY === 1) {
+            this.createStartingArea();
+            return;
+          }
+
+          switch (type) {
+            case 0:
+              this.createForestArea();
+              break;
+            case 1:
+              this.createTakaraCompound();
+              break;
+            case 2:
+              this.createJapaneseGarden();
+              break;
+            default:
+              this.createResearchCampus();
+          }
+        }
+
+        createForestArea() {
+          // Create natural forest with clearings and paths
+          const numGroves = 2 + Math.floor(seededRandom(this.seed + 50) * 3);
+
+          for (let g = 0; g < numGroves; g++) {
+            const centerX =
+              2 +
+              Math.floor(seededRandom(this.seed + 100 + g) * (ROOM_SIZE - 4));
+            const centerY =
+              2 +
+              Math.floor(seededRandom(this.seed + 200 + g) * (ROOM_SIZE - 4));
+            const groveSize =
+              2 + Math.floor(seededRandom(this.seed + 300 + g) * 3);
+
+            // Create organic tree cluster
+            for (let dx = -groveSize; dx <= groveSize; dx++) {
+              for (let dy = -groveSize; dy <= groveSize; dy++) {
+                const x = centerX + dx;
+                const y = centerY + dy;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (
+                  x >= 0 &&
+                  x < ROOM_SIZE &&
+                  y >= 0 &&
+                  y < ROOM_SIZE &&
+                  distance <= groveSize &&
+                  seededRandom(this.seed + x * 17 + y * 23) >
+                    0.4 - (distance / groveSize) * 0.3
+                ) {
+                  this.tiles[y][x] = 1; // Tree
+                }
+              }
+            }
+          }
+
+          // Create winding paths
+          this.createNaturalPath();
+        }
+
+        createTakaraCompound() {
+          // Create impressive Takara.ai corporate compound
+          // Main building (large central structure)
+          const buildingX = 4;
+          const buildingY = 2;
+          const buildingW = 7;
+          const buildingH = 6;
+
+          // Building perimeter
+          for (let x = buildingX; x < buildingX + buildingW; x++) {
+            for (let y = buildingY; y < buildingY + buildingH; y++) {
+              if (
+                x === buildingX ||
+                x === buildingX + buildingW - 1 ||
+                y === buildingY ||
+                y === buildingY + buildingH - 1
+              ) {
+                this.tiles[y][x] = 1; // Wall
+              }
+            }
+          }
+
+          // Glass entrance with automatic doors
+          const entranceX = buildingX + Math.floor(buildingW / 2);
+          this.tiles[buildingY + buildingH - 1][entranceX - 1] = 2; // Glass
+          this.tiles[buildingY + buildingH - 1][entranceX] = 0; // Door
+          this.tiles[buildingY + buildingH - 1][entranceX + 1] = 2; // Glass
+
+          // Corporate plaza in front
+          for (let x = buildingX + 1; x < buildingX + buildingW - 1; x++) {
+            for (
+              let y = buildingY + buildingH;
+              y < buildingY + buildingH + 3;
+              y++
+            ) {
+              if (y < ROOM_SIZE) {
+                // Leave as open plaza (floor tiles)
+              }
+            }
+          }
+
+          // Decorative elements
+          this.createCorporateLandscaping(
+            buildingX,
+            buildingY,
+            buildingW,
+            buildingH
+          );
+        }
+
+        createJapaneseGarden() {
+          // Beautiful Japanese-inspired garden with zen elements
+          // Central meditation area
+          const centerX = Math.floor(ROOM_SIZE / 2);
+          const centerY = Math.floor(ROOM_SIZE / 2);
+
+          // Rock garden (zen stones)
+          for (let dx = -2; dx <= 2; dx++) {
+            for (let dy = -2; dy <= 2; dy++) {
+              const x = centerX + dx;
+              const y = centerY + dy;
+              if (x >= 0 && x < ROOM_SIZE && y >= 0 && y < ROOM_SIZE) {
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (
+                  distance <= 2 &&
+                  seededRandom(this.seed + x * 13 + y * 17) > 0.7
+                ) {
+                  this.tiles[y][x] = 1; // Zen stones
+                }
+              }
+            }
+          }
+
+          // Carefully placed trees (bonsai-style arrangement)
+          const treePositions = [
+            { x: 3, y: 3 },
+            { x: 11, y: 3 },
+            { x: 3, y: 11 },
+            { x: 11, y: 11 },
+            { x: 7, y: 2 },
+            { x: 7, y: 12 },
+            { x: 2, y: 7 },
+            { x: 12, y: 7 },
+          ];
+
+          treePositions.forEach((pos) => {
+            if (pos.x < ROOM_SIZE && pos.y < ROOM_SIZE) {
+              this.tiles[pos.y][pos.x] = 1;
+            }
+          });
+
+          // Winding path through garden
+          this.createZenPath();
+        }
+
+        createResearchCampus() {
+          // Modern research campus with multiple buildings
+          // Building cluster 1 (top-left)
+          this.createCampusBuilding(1, 1, 4, 3);
+
+          // Building cluster 2 (top-right)
+          this.createCampusBuilding(9, 1, 4, 3);
+
+          // Building cluster 3 (bottom-left)
+          this.createCampusBuilding(1, 10, 4, 3);
+
+          // Building cluster 4 (bottom-right)
+          this.createCampusBuilding(9, 10, 4, 3);
+
+          // Central courtyard with pathways
+          this.createCampusCourtyard();
+
+          // Research equipment scattered around
+          this.addOutdoorResearchEquipment();
+        }
+
+        generateOfficeBuilding(type) {
+          switch (type) {
+            case 0:
+              this.createOpenOffice();
+              break;
+            case 1:
+              this.createOfficeHallway();
+              break;
+            case 2:
+              this.createConferenceArea();
+              break;
+            default:
+              this.createExecutiveOffices();
+          }
+        }
+
+        createOpenOffice() {
+          // Create large open office with cubicle clusters and walkways
+          // Main walkway through center
+          const mainHallY = Math.floor(ROOM_SIZE / 2);
+
+          // Create cubicle clusters
+          const clusters = [
+            { x: 2, y: 2, width: 4, height: 3 },
+            { x: 8, y: 2, width: 4, height: 3 },
+            { x: 2, y: 9, width: 4, height: 3 },
+            { x: 8, y: 9, width: 4, height: 3 },
+          ];
+
+          clusters.forEach((cluster) => {
+            this.createCubicleCluster(
+              cluster.x,
+              cluster.y,
+              cluster.width,
+              cluster.height
+            );
+          });
+
+          // Add glass partitions
+          this.tiles[6][1] = 2; // Glass wall marker
+          this.tiles[6][13] = 2;
+
+          // Reception area
+          this.tiles[1][6] = 1;
+          this.tiles[1][7] = 1;
+          this.tiles[1][8] = 1;
+        }
+
+        createOfficeHallway() {
+          // Create hallway with offices on both sides
+          // Main hallway
+          for (let y = 0; y < ROOM_SIZE; y++) {
+            this.tiles[y][6] = 0; // Clear hallway
+            this.tiles[y][7] = 0;
+            this.tiles[y][8] = 0;
+          }
+
+          // Left side offices
+          this.createOfficeRoom(1, 2, 4, 4);
+          this.createOfficeRoom(1, 8, 4, 4);
+
+          // Right side offices
+          this.createOfficeRoom(10, 2, 4, 4);
+          this.createOfficeRoom(10, 8, 4, 4);
+
+          // Doors
+          this.tiles[4][5] = 0; // Left office door
+          this.tiles[10][5] = 0;
+          this.tiles[4][9] = 0; // Right office door
+          this.tiles[10][9] = 0;
+        }
+
+        createConferenceArea() {
+          // Large conference room with glass walls
+          const roomX = 3;
+          const roomY = 3;
+          const roomW = 8;
+          const roomH = 6;
+
+          // Outer walls
+          for (let x = roomX; x < roomX + roomW; x++) {
+            this.tiles[roomY][x] = 2; // Glass wall
+            this.tiles[roomY + roomH - 1][x] = 2;
+          }
+
+          for (let y = roomY; y < roomY + roomH; y++) {
+            this.tiles[y][roomX] = 2;
+            this.tiles[y][roomX + roomW - 1] = 2;
+          }
+
+          // Conference table (3x5)
+          for (let x = roomX + 2; x < roomX + 5; x++) {
+            for (let y = roomY + 2; y < roomY + 4; y++) {
+              this.tiles[y][x] = 1;
+            }
+          }
+
+          // Door
+          this.tiles[roomY + roomH - 1][roomX + Math.floor(roomW / 2)] = 0;
+        }
+
+        createExecutiveOffices() {
+          // Corner offices with secretary areas
+          // Executive office 1 (top-left)
+          this.createOfficeRoom(1, 1, 5, 5);
+          this.tiles[3][5] = 0; // Door
+
+          // Executive office 2 (top-right)
+          this.createOfficeRoom(9, 1, 5, 5);
+          this.tiles[3][9] = 0; // Door
+
+          // Secretary/assistant area (center)
+          this.tiles[6][6] = 1; // Desk
+          this.tiles[6][7] = 1;
+          this.tiles[7][6] = 1;
+          this.tiles[7][7] = 1;
+
+          // Waiting area (bottom)
+          for (let x = 4; x < 11; x++) {
+            for (let y = 10; y < 13; y++) {
+              if ((x + y) % 3 === 0) {
+                this.tiles[y][x] = 1; // Chairs
+              }
+            }
+          }
+        }
+
+        generateLabComplex(type) {
+          switch (type) {
+            case 0:
+              this.createResearchLab();
+              break;
+            case 1:
+              this.createCleanRoom();
+              break;
+            case 2:
+              this.createLabHallway();
+              break;
+            default:
+              this.createExperimentChamber();
+          }
+        }
+
+        createResearchLab() {
+          // Large research lab with equipment stations
+          // Perimeter walls with glass sections
+          for (let x = 0; x < ROOM_SIZE; x++) {
+            this.tiles[0][x] = 1;
+            this.tiles[ROOM_SIZE - 1][x] = 1;
+          }
+          for (let y = 0; y < ROOM_SIZE; y++) {
+            this.tiles[y][0] = 1;
+            this.tiles[y][ROOM_SIZE - 1] = 1;
+          }
+
+          // Glass observation windows
+          this.tiles[0][5] = 2;
+          this.tiles[0][6] = 2;
+          this.tiles[0][7] = 2;
+          this.tiles[0][8] = 2;
+          this.tiles[0][9] = 2;
+
+          // Equipment stations
+          this.createEquipmentStation(2, 2, 3, 2);
+          this.createEquipmentStation(7, 2, 3, 2);
+          this.createEquipmentStation(2, 6, 3, 2);
+          this.createEquipmentStation(7, 6, 3, 2);
+
+          // Central workbench
+          this.tiles[5][6] = 1;
+          this.tiles[5][7] = 1;
+          this.tiles[6][6] = 1;
+          this.tiles[6][7] = 1;
+
+          // Safety shower (corner)
+          this.tiles[11][2] = 1;
+          this.tiles[12][2] = 1;
+        }
+
+        createCleanRoom() {
+          // Sterile environment with airlocks
+          // Double walls for airlock
+          for (let x = 1; x < ROOM_SIZE - 1; x++) {
+            this.tiles[1][x] = 1;
+            this.tiles[2][x] = 1;
+            this.tiles[ROOM_SIZE - 2][x] = 1;
+            this.tiles[ROOM_SIZE - 3][x] = 1;
+          }
+
+          for (let y = 1; y < ROOM_SIZE - 1; y++) {
+            this.tiles[y][1] = 1;
+            this.tiles[y][2] = 1;
+            this.tiles[y][ROOM_SIZE - 2] = 1;
+            this.tiles[y][ROOM_SIZE - 3] = 1;
+          }
+
+          // Airlock entrance
+          this.tiles[1][7] = 0;
+          this.tiles[2][7] = 0;
+
+          // Clean room equipment (minimal)
+          this.tiles[5][5] = 1;
+          this.tiles[9][9] = 1;
+
+          // Air filtration units
+          this.tiles[4][4] = 1;
+          this.tiles[10][4] = 1;
+          this.tiles[4][10] = 1;
+          this.tiles[10][10] = 1;
+        }
+
+        createLabHallway() {
+          // Main lab corridor with side rooms
+          // Central corridor
+          for (let y = 0; y < ROOM_SIZE; y++) {
+            this.tiles[y][6] = 0;
+            this.tiles[y][7] = 0;
+            this.tiles[y][8] = 0;
+          }
+
+          // Side lab rooms
+          this.createLabRoom(1, 1, 4, 5);
+          this.createLabRoom(10, 1, 4, 5);
+          this.createLabRoom(1, 8, 4, 5);
+          this.createLabRoom(10, 8, 4, 5);
+
+          // Lab doors
+          this.tiles[3][5] = 0;
+          this.tiles[3][9] = 0;
+          this.tiles[10][5] = 0;
+          this.tiles[10][9] = 0;
+
+          // Emergency equipment
+          this.tiles[0][6] = 1; // Fire extinguisher
+          this.tiles[0][8] = 1; // Emergency shower
+        }
+
+        createExperimentChamber() {
+          // Specialized experiment chamber
+          // Reinforced walls
+          for (let x = 0; x < ROOM_SIZE; x++) {
+            this.tiles[0][x] = 1;
+            this.tiles[1][x] = 1;
+            this.tiles[ROOM_SIZE - 1][x] = 1;
+            this.tiles[ROOM_SIZE - 2][x] = 1;
+          }
+
+          for (let y = 0; y < ROOM_SIZE; y++) {
+            this.tiles[y][0] = 1;
+            this.tiles[y][1] = 1;
+            this.tiles[y][ROOM_SIZE - 1] = 1;
+            this.tiles[y][ROOM_SIZE - 2] = 1;
+          }
+
+          // Observation window
+          this.tiles[1][6] = 2;
+          this.tiles[1][7] = 2;
+          this.tiles[1][8] = 2;
+
+          // Central experiment platform
+          for (let x = 5; x < 10; x++) {
+            for (let y = 5; y < 10; y++) {
+              this.tiles[y][x] = 1;
+            }
+          }
+
+          // Control panels around perimeter
+          this.tiles[3][3] = 1;
+          this.tiles[3][11] = 1;
+          this.tiles[11][3] = 1;
+          this.tiles[11][11] = 1;
+        }
+
+        generateDatacenterFacility(type) {
+          switch (type) {
+            case 0:
+              this.createServerFarm();
+              break;
+            case 1:
+              this.createNetworkingHub();
+              break;
+            case 2:
+              this.createCoolingCenter();
+              break;
+            default:
+              this.createMainframe();
+          }
+        }
+
+        createServerFarm() {
+          // Massive server farm with cooling aisles
+          // Hot aisle / cold aisle design
+          for (let row = 0; row < 3; row++) {
+            const startY = 2 + row * 4;
+
+            // Server racks (back-to-back)
+            for (let x = 1; x < ROOM_SIZE - 1; x += 2) {
+              this.tiles[startY][x] = 1;
+              this.tiles[startY + 1][x] = 1;
+            }
+
+            // Leave cooling aisles clear
+            // Cold aisle at startY - 1
+            // Hot aisle at startY + 2
+          }
+
+          // Power distribution units
+          this.tiles[1][1] = 1;
+          this.tiles[1][ROOM_SIZE - 2] = 1;
+          this.tiles[ROOM_SIZE - 2][1] = 1;
+          this.tiles[ROOM_SIZE - 2][ROOM_SIZE - 2] = 1;
+
+          // Cable management overhead
+          for (let x = 3; x < ROOM_SIZE - 3; x += 4) {
+            this.tiles[0][x] = 1;
+            this.tiles[ROOM_SIZE - 1][x] = 1;
+          }
+        }
+
+        createNetworkingHub() {
+          // Central networking equipment
+          // Core switch room
+          const centerX = Math.floor(ROOM_SIZE / 2);
+          const centerY = Math.floor(ROOM_SIZE / 2);
+
+          // Central networking rack
+          for (let dx = -1; dx <= 1; dx++) {
+            for (let dy = -1; dy <= 1; dy++) {
+              this.tiles[centerY + dy][centerX + dx] = 1;
+            }
+          }
+
+          // Patch panels around perimeter
+          for (let x = 2; x < ROOM_SIZE - 2; x += 3) {
+            this.tiles[2][x] = 1;
+            this.tiles[ROOM_SIZE - 3][x] = 1;
+          }
+
+          for (let y = 2; y < ROOM_SIZE - 2; y += 3) {
+            this.tiles[y][2] = 1;
+            this.tiles[y][ROOM_SIZE - 3] = 1;
+          }
+
+          // Cable trays
+          this.tiles[1][centerX] = 1;
+          this.tiles[ROOM_SIZE - 2][centerX] = 1;
+          this.tiles[centerY][1] = 1;
+          this.tiles[centerY][ROOM_SIZE - 2] = 1;
+        }
+
+        createCoolingCenter() {
+          // Cooling and power infrastructure
+          // HVAC units (large)
+          this.createHVACUnit(2, 2, 4, 3);
+          this.createHVACUnit(9, 2, 4, 3);
+          this.createHVACUnit(2, 9, 4, 3);
+          this.createHVACUnit(9, 9, 4, 3);
+
+          // Central air handling
+          for (let x = 6; x < 9; x++) {
+            for (let y = 6; y < 9; y++) {
+              this.tiles[y][x] = 1;
+            }
+          }
+
+          // Chilled water pipes
+          this.tiles[0][7] = 1;
+          this.tiles[ROOM_SIZE - 1][7] = 1;
+          this.tiles[7][0] = 1;
+          this.tiles[7][ROOM_SIZE - 1] = 1;
+        }
+
+        createMainframe() {
+          // Legacy mainframe computer room
+          // Raised floor perimeter
+          for (let x = 0; x < ROOM_SIZE; x++) {
+            this.tiles[0][x] = 1;
+            this.tiles[ROOM_SIZE - 1][x] = 1;
+          }
+          for (let y = 0; y < ROOM_SIZE; y++) {
+            this.tiles[y][0] = 1;
+            this.tiles[y][ROOM_SIZE - 1] = 1;
+          }
+
+          // Central mainframe (large)
+          for (let x = 5; x < 10; x++) {
+            for (let y = 5; y < 10; y++) {
+              this.tiles[y][x] = 1;
+            }
+          }
+
+          // Operator consoles
+          this.tiles[3][3] = 1;
+          this.tiles[3][11] = 1;
+          this.tiles[11][3] = 1;
+          this.tiles[11][11] = 1;
+
+          // Tape drives
+          this.tiles[2][6] = 1;
+          this.tiles[2][7] = 1;
+          this.tiles[2][8] = 1;
+        }
+
+        // Helper functions for complex structures
+        addComplexStructures() {
+          // Add multi-tile stairs
+          this.addMultiTileStairs();
+
+          // Ensure door connectivity
+          this.ensureDoorConnectivity();
+        }
+
+        addMultiTileStairs() {
+          // Only add stairs in underground areas (LAB and DATACENTER)
+          if (this.biome === "LAB" || this.biome === "DATACENTER") {
+            if (seededRandom(this.seed + 1500) > 0.6) {
+              // Find suitable location for 3x3 staircase
+              let placed = false;
+              for (let attempts = 0; attempts < 20 && !placed; attempts++) {
+                const x =
+                  2 +
+                  Math.floor(
+                    seededRandom(this.seed + 1700 + attempts) * (ROOM_SIZE - 5)
+                  );
+                const y =
+                  2 +
+                  Math.floor(
+                    seededRandom(this.seed + 1800 + attempts) * (ROOM_SIZE - 5)
+                  );
+
+                // Check if area is clear
+                let canPlace = true;
+                for (let dx = 0; dx < 3; dx++) {
+                  for (let dy = 0; dy < 3; dy++) {
+                    if (this.tiles[y + dy][x + dx] !== 0) {
+                      canPlace = false;
+                      break;
+                    }
+                  }
+                  if (!canPlace) break;
+                }
+
+                if (canPlace) {
+                  this.createStaircase(x, y);
+                  placed = true;
+                }
+              }
+            }
+          } else if (this.biome === "OUTSIDE") {
+            // Add building entrances instead of stairs
+            this.addBuildingEntrances();
+          }
+        }
+
+        createStaircase(x, y) {
+          // Create 3x3 staircase - universal stairs that go between levels
+          for (let dx = 0; dx < 3; dx++) {
+            for (let dy = 0; dy < 3; dy++) {
+              this.tiles[y + dy][x + dx] = TILE_TYPES.STAIRS; // Universal stair tiles
+            }
+          }
+        }
+
+        createNaturalPath() {
+          // Create winding path through forest
+          const pathPoints = [];
+          const numPoints = 4 + Math.floor(seededRandom(this.seed + 2000) * 3);
+
+          for (let i = 0; i < numPoints; i++) {
+            pathPoints.push({
+              x: Math.floor(seededRandom(this.seed + 2100 + i) * ROOM_SIZE),
+              y: Math.floor(seededRandom(this.seed + 2200 + i) * ROOM_SIZE),
+            });
+          }
+
+          // Connect path points
+          for (let i = 0; i < pathPoints.length - 1; i++) {
+            this.createPathBetween(pathPoints[i], pathPoints[i + 1]);
+          }
+        }
+
+        createPathBetween(start, end) {
+          let x = start.x;
+          let y = start.y;
+
+          while (x !== end.x || y !== end.y) {
+            this.tiles[y][x] = 0; // Clear path
+
+            if (x < end.x) x++;
+            else if (x > end.x) x--;
+
+            if (y < end.y) y++;
+            else if (y > end.y) y--;
+          }
+        }
+
+        addLandscaping(buildingX, buildingY, width, height) {
+          // Add decorative elements around building
+          for (let i = 0; i < 8; i++) {
+            const x = Math.floor(
+              seededRandom(this.seed + 2300 + i) * ROOM_SIZE
+            );
+            const y = Math.floor(
+              seededRandom(this.seed + 2400 + i) * ROOM_SIZE
+            );
+
+            // Don't place on building
+            if (
+              x < buildingX ||
+              x >= buildingX + width ||
+              y < buildingY ||
+              y >= buildingY + height
+            ) {
+              if (seededRandom(this.seed + 2500 + i) > 0.6) {
+                this.tiles[y][x] = 1; // Decorative tree/bush
+              }
+            }
+          }
+        }
+
+        createCorporateLandscaping(buildingX, buildingY, width, height) {
+          // Modern corporate landscaping with geometric patterns
+          // Decorative planters
+          if (buildingY > 0) {
+            this.tiles[buildingY - 1][buildingX + 1] = 1;
+            this.tiles[buildingY - 1][buildingX + width - 2] = 1;
+          }
+
+          // Corporate signage area
+          if (buildingY + height + 1 < ROOM_SIZE) {
+            this.tiles[buildingY + height + 1][
+              buildingX + Math.floor(width / 2)
+            ] = 1;
+          }
+
+          // Symmetrical tree placement
+          if (buildingY + height + 2 < ROOM_SIZE) {
+            this.tiles[buildingY + height + 2][buildingX + 2] = 1;
+            this.tiles[buildingY + height + 2][buildingX + width - 3] = 1;
+          }
+        }
+
+        createZenPath() {
+          // Curved path through garden
+          const pathPoints = [
+            { x: 1, y: 7 },
+            { x: 4, y: 5 },
+            { x: 7, y: 7 },
+            { x: 10, y: 9 },
+            { x: 13, y: 7 },
+          ];
+
+          for (let i = 0; i < pathPoints.length - 1; i++) {
+            this.createSmoothPath(pathPoints[i], pathPoints[i + 1]);
+          }
+        }
+
+        createSmoothPath(start, end) {
+          // Create smooth curved path between points
+          const steps = Math.max(
+            Math.abs(end.x - start.x),
+            Math.abs(end.y - start.y)
+          );
+          for (let i = 0; i <= steps; i++) {
+            const t = i / steps;
+            const x = Math.round(start.x + (end.x - start.x) * t);
+            const y = Math.round(start.y + (end.y - start.y) * t);
+            if (x >= 0 && x < ROOM_SIZE && y >= 0 && y < ROOM_SIZE) {
+              this.tiles[y][x] = 0; // Clear path
+            }
+          }
+        }
+
+        createCampusBuilding(x, y, width, height) {
+          // Modern research building
+          for (let dx = 0; dx < width; dx++) {
+            for (let dy = 0; dy < height; dy++) {
+              if (
+                dx === 0 ||
+                dx === width - 1 ||
+                dy === 0 ||
+                dy === height - 1
+              ) {
+                if (x + dx < ROOM_SIZE && y + dy < ROOM_SIZE) {
+                  this.tiles[y + dy][x + dx] = 1;
+                }
+              }
+            }
+          }
+
+          // Glass entrance
+          const entranceX = x + Math.floor(width / 2);
+          if (entranceX < ROOM_SIZE && y + height - 1 < ROOM_SIZE) {
+            this.tiles[y + height - 1][entranceX] = 2;
+          }
+        }
+
+        createCampusCourtyard() {
+          // Central courtyard with modern design
+          const centerX = Math.floor(ROOM_SIZE / 2);
+          const centerY = Math.floor(ROOM_SIZE / 2);
+
+          // Modern sculpture/fountain (represented as decorative tile)
+          this.tiles[centerY][centerX] = 1;
+
+          // Geometric pathways
+          for (let i = 0; i < ROOM_SIZE; i++) {
+            if (i !== centerX) {
+              this.tiles[centerY][i] = 0; // Horizontal path
+            }
+            if (i !== centerY) {
+              this.tiles[i][centerX] = 0; // Vertical path
+            }
+          }
+        }
+
+        createStartingArea() {
+          // Beautiful starting area with Dr. Takara's office
+
+          // Central office building (Dr. Takara's office)
+          const officeX = 5;
+          const officeY = 2;
+          const officeW = 5;
+          const officeH = 4;
+
+          // Office building walls
+          for (let x = officeX; x < officeX + officeW; x++) {
+            for (let y = officeY; y < officeY + officeH; y++) {
+              if (
+                x === officeX ||
+                x === officeX + officeW - 1 ||
+                y === officeY ||
+                y === officeY + officeH - 1
+              ) {
+                this.tiles[y][x] = TILE_TYPES.WALL;
+              }
+            }
+          }
+
+          // Glass entrance
+          this.tiles[officeY + officeH - 1][officeX + 2] = TILE_TYPES.GLASS;
+
+          // Lab entrance behind the office
+          this.tiles[officeY + officeH + 2][officeX + 2] =
+            TILE_TYPES.LAB_ENTRANCE;
+
+          // Clear path from office to lab entrance
+          this.tiles[officeY + officeH][officeX + 2] = TILE_TYPES.FLOOR;
+          this.tiles[officeY + officeH + 1][officeX + 2] = TILE_TYPES.FLOOR;
+
+          // Decorative garden elements
+          // Cherry blossom trees (Japanese style)
+          const treePositions = [
+            { x: 2, y: 2 },
+            { x: 12, y: 2 },
+            { x: 2, y: 12 },
+            { x: 12, y: 12 },
+            { x: 1, y: 7 },
+            { x: 13, y: 7 },
+            { x: 7, y: 1 },
+            { x: 7, y: 13 },
+          ];
+
+          treePositions.forEach((pos) => {
+            if (pos.x < ROOM_SIZE && pos.y < ROOM_SIZE) {
+              this.tiles[pos.y][pos.x] = TILE_TYPES.WALL; // Trees
+            }
+          });
+
+          // Stone pathways
+          for (let x = 3; x < 12; x++) {
+            if (x !== officeX + 2) {
+              this.tiles[officeY + officeH + 2][x] = TILE_TYPES.FLOOR;
+            }
+          }
+
+          // Zen rock garden
+          this.tiles[3][3] = TILE_TYPES.WALL;
+          this.tiles[11][3] = TILE_TYPES.WALL;
+          this.tiles[3][11] = TILE_TYPES.WALL;
+          this.tiles[11][11] = TILE_TYPES.WALL;
+
+          // Welcome sign
+          this.tiles[1][7] = TILE_TYPES.WALL;
+        }
+
+        addOutdoorResearchEquipment() {
+          // Weather monitoring stations and outdoor equipment
+          const equipmentPositions = [
+            { x: 6, y: 3 },
+            { x: 8, y: 3 },
+            { x: 6, y: 11 },
+            { x: 8, y: 11 },
+          ];
+
+          equipmentPositions.forEach((pos) => {
+            if (
+              pos.x < ROOM_SIZE &&
+              pos.y < ROOM_SIZE &&
+              this.tiles[pos.y][pos.x] === 0
+            ) {
+              this.tiles[pos.y][pos.x] = 1;
+            }
+          });
+        }
+
+        addBuildingEntrances() {
+          // Add discrete building entrances that lead to underground levels
+          const entranceType = Math.floor(seededRandom(this.seed + 3000) * 3);
+
+          switch (entranceType) {
+            case 0:
+              this.createLabEntrance();
+              break;
+            case 1:
+              this.createDatacenterEntrance();
+              break;
+            default:
+              this.createMainEntrance();
+          }
+        }
+
+        createLabEntrance() {
+          // Modern lab building entrance
+          const entranceX = Math.floor(ROOM_SIZE / 2);
+          const entranceY = 2;
+
+          // Building structure around entrance
+          for (let dx = -2; dx <= 2; dx++) {
+            for (let dy = 0; dy <= 3; dy++) {
+              const x = entranceX + dx;
+              const y = entranceY + dy;
+              if (x >= 0 && x < ROOM_SIZE && y >= 0 && y < ROOM_SIZE) {
+                if (dx === -2 || dx === 2 || dy === 0) {
+                  this.tiles[y][x] = 1; // Building walls
+                } else if (dy === 3 && dx === 0) {
+                  this.tiles[y][x] = TILE_TYPES.LAB_ENTRANCE; // Lab entrance marker
+                } else if (dy === 3 && Math.abs(dx) === 1) {
+                  this.tiles[y][x] = TILE_TYPES.GLASS; // Glass doors
+                }
+              }
+            }
+          }
+
+          // Clear path to entrance
+          for (let y = entranceY + 4; y < ROOM_SIZE; y++) {
+            this.tiles[y][entranceX] = 0;
+          }
+        }
+
+        createDatacenterEntrance() {
+          // Secure datacenter facility entrance
+          const entranceX = Math.floor(ROOM_SIZE / 2);
+          const entranceY = ROOM_SIZE - 6;
+
+          // Security building
+          for (let dx = -3; dx <= 3; dx++) {
+            for (let dy = 0; dy <= 4; dy++) {
+              const x = entranceX + dx;
+              const y = entranceY + dy;
+              if (x >= 0 && x < ROOM_SIZE && y >= 0 && y < ROOM_SIZE) {
+                if (dx === -3 || dx === 3 || dy === 0 || dy === 4) {
+                  this.tiles[y][x] = 1; // Security walls
+                } else if (dy === 4 && dx === 0) {
+                  this.tiles[y][x] = TILE_TYPES.DATACENTER_ENTRANCE; // Datacenter entrance marker
+                } else if (dy === 4 && Math.abs(dx) === 1) {
+                  this.tiles[y][x] = 1; // Security barriers
+                }
+              }
+            }
+          }
+
+          // Clear approach path
+          for (let y = 0; y < entranceY; y++) {
+            this.tiles[y][entranceX] = 0;
+          }
+        }
+
+        createMainEntrance() {
+          // Grand main entrance that can access both levels
+          const entranceX = Math.floor(ROOM_SIZE / 2);
+          const entranceY = Math.floor(ROOM_SIZE / 2) - 2;
+
+          // Large entrance building
+          for (let dx = -3; dx <= 3; dx++) {
+            for (let dy = -2; dy <= 2; dy++) {
+              const x = entranceX + dx;
+              const y = entranceY + dy;
+              if (x >= 0 && x < ROOM_SIZE && y >= 0 && y < ROOM_SIZE) {
+                if (Math.abs(dx) === 3 || Math.abs(dy) === 2) {
+                  this.tiles[y][x] = 1; // Main building walls
+                } else if (dy === 2 && dx === 0) {
+                  this.tiles[y][x] = TILE_TYPES.MAIN_ENTRANCE; // Main entrance marker
+                } else if (dy === 2 && Math.abs(dx) === 1) {
+                  this.tiles[y][x] = TILE_TYPES.GLASS; // Glass entrance
+                }
+              }
+            }
+          }
+
+          // Clear pathways in all directions
+          for (let i = 0; i < ROOM_SIZE; i++) {
+            if (i !== entranceY + 2) {
+              this.tiles[i][entranceX] = 0; // Vertical path
+            }
+            if (i !== entranceX) {
+              this.tiles[entranceY + 2][i] = 0; // Horizontal path
+            }
+          }
+        }
+
+        createCubicleCluster(x, y, width, height) {
+          // Create cubicle layout with partitions
+          for (let dx = 0; dx < width; dx++) {
+            for (let dy = 0; dy < height; dy++) {
+              if (dx % 2 === 0 || dy % 2 === 0) {
+                this.tiles[y + dy][x + dx] = 1; // Partition or desk
+              }
+            }
+          }
+        }
+
+        createOfficeRoom(x, y, width, height) {
+          // Create enclosed office room
+          for (let dx = 0; dx < width; dx++) {
+            this.tiles[y][x + dx] = 1; // Top wall
+            this.tiles[y + height - 1][x + dx] = 1; // Bottom wall
+          }
+
+          for (let dy = 0; dy < height; dy++) {
+            this.tiles[y + dy][x] = 1; // Left wall
+            this.tiles[y + dy][x + width - 1] = 1; // Right wall
+          }
+
+          // Add desk in corner
+          this.tiles[y + 1][x + 1] = 1;
+          this.tiles[y + 1][x + 2] = 1;
+        }
+
+        createEquipmentStation(x, y, width, height) {
+          // Create lab equipment cluster
+          for (let dx = 0; dx < width; dx++) {
+            for (let dy = 0; dy < height; dy++) {
+              this.tiles[y + dy][x + dx] = 1;
+            }
+          }
+        }
+
+        createLabRoom(x, y, width, height) {
+          // Create lab room with equipment
+          this.createOfficeRoom(x, y, width, height);
+
+          // Add lab equipment inside
+          if (width > 2 && height > 2) {
+            this.tiles[y + 1][x + width - 2] = 1; // Equipment
+            this.tiles[y + height - 2][x + 1] = 1; // More equipment
+          }
+        }
+
+        createHVACUnit(x, y, width, height) {
+          // Create HVAC unit
+          for (let dx = 0; dx < width; dx++) {
+            for (let dy = 0; dy < height; dy++) {
+              this.tiles[y + dy][x + dx] = 1;
+            }
+          }
+        }
+
+        ensureDoorConnectivity() {
+          // Ensure all doors have clear paths
+          const doorX = Math.floor(ROOM_SIZE / 2);
+          const doorY = Math.floor(ROOM_SIZE / 2);
+
+          // Clear door areas
+          this.tiles[0][doorX] = 0; // North
+          this.tiles[ROOM_SIZE - 1][doorX] = 0; // South
+          this.tiles[doorY][0] = 0; // West
+          this.tiles[doorY][ROOM_SIZE - 1] = 0; // East
+
+          // Clear wider paths to doors (3-tile wide corridors)
+          for (let i = -1; i <= 1; i++) {
+            // North-South corridor
+            if (doorX + i >= 0 && doorX + i < ROOM_SIZE) {
+              this.tiles[1][doorX + i] = 0;
+              this.tiles[ROOM_SIZE - 2][doorX + i] = 0;
+              this.tiles[2][doorX + i] = 0;
+              this.tiles[ROOM_SIZE - 3][doorX + i] = 0;
+            }
+
+            // East-West corridor
+            if (doorY + i >= 0 && doorY + i < ROOM_SIZE) {
+              this.tiles[doorY + i][1] = 0;
+              this.tiles[doorY + i][ROOM_SIZE - 2] = 0;
+              this.tiles[doorY + i][2] = 0;
+              this.tiles[doorY + i][ROOM_SIZE - 3] = 0;
+            }
+          }
+
+          // Ensure center area is always clear (for stairs/entrances)
+          for (let dx = -1; dx <= 1; dx++) {
+            for (let dy = -1; dy <= 1; dy++) {
+              const x = doorX + dx;
+              const y = doorY + dy;
+              if (x >= 0 && x < ROOM_SIZE && y >= 0 && y < ROOM_SIZE) {
+                this.tiles[y][x] = 0;
+              }
+            }
+          }
+        }
+
+        spawnEntities() {
+          // Balanced AI spawn rate
+          const numAI = Math.floor(seededRandom(this.seed + 1000) * 3) + 1;
+          const hasNPC = seededRandom(this.seed + 2000) > 0.4; // More NPCs
+          const numFurniture =
+            Math.floor(seededRandom(this.seed + 9000) * 2) + 1;
+          const numEnvironment =
+            Math.floor(seededRandom(this.seed + 8000) * 5) + 3;
+
+          // Spawn AI architectures with rarity system
+          for (let i = 0; i < numAI; i++) {
+            const ai = this.selectAIByRarity(this.seed + 3000 + i);
+            let x,
+              y,
+              attempts = 0;
+
+            do {
+              x = Math.floor(
+                seededRandom(this.seed + 4000 + i + attempts) * ROOM_SIZE
+              );
+              y = Math.floor(
+                seededRandom(this.seed + 5000 + i + attempts) * ROOM_SIZE
+              );
+              attempts++;
+            } while (!this.isValidSpawnPosition(x, y) && attempts < 50);
+
+            // Only spawn if we found a valid position
+            if (attempts < 50) {
+              this.entities.push({
+                type: "ai",
+                x,
+                y,
+                data: ai,
+                id: `${this.roomX},${this.roomY},${i}`,
+              });
+            }
+          }
+
+          // Spawn NPC
+          if (hasNPC) {
+            let npc;
+
+            // Special case: Dr. Takara in starting area
+            if (this.roomX === 0 && this.roomY === 1) {
+              npc = NPC_TYPES.find((n) => n.name === "Dr. Takara Mono");
+            } else {
+              // Regular NPCs (exclude Dr. Takara from random spawns)
+              const regularNPCs = NPC_TYPES.filter((n) => !n.isStoryNPC);
+              npc =
+                regularNPCs[
+                  Math.floor(
+                    seededRandom(this.seed + 6000) * regularNPCs.length
+                  )
+                ];
+            }
+
+            let x,
+              y,
+              attempts = 0;
+            do {
+              x = Math.floor(
+                seededRandom(this.seed + 7000 + attempts) * ROOM_SIZE
+              );
+              y = Math.floor(
+                seededRandom(this.seed + 8000 + attempts) * ROOM_SIZE
+              );
+              attempts++;
+            } while (!this.isValidSpawnPosition(x, y) && attempts < 50);
+
+            // Only spawn if we found a valid position
+            if (attempts < 50) {
+              // Special positioning for Dr. Takara
+              if (npc.name === "Dr. Takara Mono") {
+                x = 7; // In front of his office
+                y = 7;
+              }
+
+              this.entities.push({
+                type: "npc",
+                x,
+                y,
+                data: npc,
+                dialogueIndex: 0,
+              });
+            }
+          }
+
+          // Spawn biome-specific furniture
+          const biomeFurniture = LAB_FURNITURE[this.biome] || LAB_FURNITURE.LAB;
+          for (let i = 0; i < numFurniture; i++) {
+            const furniture =
+              biomeFurniture[
+                Math.floor(
+                  seededRandom(this.seed + 10000 + i) * biomeFurniture.length
+                )
+              ];
+            let x,
+              y,
+              attempts = 0;
+            do {
+              x = Math.floor(
+                seededRandom(this.seed + 11000 + i + attempts) * ROOM_SIZE
+              );
+              y = Math.floor(
+                seededRandom(this.seed + 12000 + i + attempts) * ROOM_SIZE
+              );
+              attempts++;
+            } while (!this.isValidSpawnPosition(x, y) && attempts < 50);
+
+            if (attempts < 50) {
+              this.entities.push({
+                type: "furniture",
+                x,
+                y,
+                data: furniture,
+                id: `furniture_${this.roomX},${this.roomY},${i}`,
+              });
+            }
+          }
+
+          // Spawn environment objects
+          const biomeEnvironment = ENVIRONMENT[this.biome] || ENVIRONMENT.LAB;
+          for (let i = 0; i < numEnvironment; i++) {
+            const envObj =
+              biomeEnvironment[
+                Math.floor(
+                  seededRandom(this.seed + 13000 + i) * biomeEnvironment.length
+                )
+              ];
+            let x,
+              y,
+              attempts = 0;
+            do {
+              x = Math.floor(
+                seededRandom(this.seed + 14000 + i + attempts) * ROOM_SIZE
+              );
+              y = Math.floor(
+                seededRandom(this.seed + 15000 + i + attempts) * ROOM_SIZE
+              );
+              attempts++;
+            } while (!this.isValidSpawnPosition(x, y) && attempts < 50);
+
+            if (attempts < 50) {
+              this.entities.push({
+                type: "environment",
+                x,
+                y,
+                data: envObj,
+                id: `env_${this.roomX},${this.roomY},${i}`,
+              });
+            }
+          }
+        }
+
+        // AI rarity selection system
+        selectAIByRarity(seed) {
+          const roll = seededRandom(seed);
+          let cumulativeRate = 0;
+
+          for (const rarity of [
+            "legendary",
+            "epic",
+            "rare",
+            "uncommon",
+            "common",
+          ]) {
+            cumulativeRate += RARITY_RATES[rarity];
+            if (roll <= cumulativeRate) {
+              const aiOfRarity = AI_TYPES.filter((ai) => ai.rarity === rarity);
+              return aiOfRarity[
+                Math.floor(seededRandom(seed + 100) * aiOfRarity.length)
+              ];
+            }
+          }
+
+          // Fallback to common
+          const commonAI = AI_TYPES.filter((ai) => ai.rarity === "common");
+          return commonAI[
+            Math.floor(seededRandom(seed + 200) * commonAI.length)
+          ];
+        }
+
+        // Improved spawn position validation
+        isValidSpawnPosition(x, y) {
+          // Check if tile is walkable
+          if (!WALKABLE_TILES.has(this.tiles[y][x])) {
+            return false;
+          }
+
+          // Check if position conflicts with existing entities
+          for (const entity of this.entities) {
+            if (entity.x === x && entity.y === y) {
+              return false;
+            }
+          }
+
+          // Don't spawn too close to doors
+          const doorX = Math.floor(ROOM_SIZE / 2);
+          const doorY = Math.floor(ROOM_SIZE / 2);
+          if (Math.abs(x - doorX) <= 1 && (y === 0 || y === ROOM_SIZE - 1))
+            return false;
+          if (Math.abs(y - doorY) <= 1 && (x === 0 || x === ROOM_SIZE - 1))
+            return false;
+
+          return true;
+        }
+      }
+
+      // Get or create room
+      function getRoom(roomX, roomY) {
+        const key = `${roomX},${roomY}`;
+        if (!game.rooms.has(key)) {
+          game.rooms.set(key, new Room(roomX, roomY));
+        }
+        return game.rooms.get(key);
+      }
+
+      // Input with arrow key scroll prevention
+      const keys = {};
+      document.addEventListener("keydown", (e) => {
+        keys[e.key.toLowerCase()] = true;
+        if (e.key === " ") interact();
+
+        // Prevent arrow keys from scrolling the page
+        if (
+          ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)
+        ) {
+          e.preventDefault();
+        }
+      });
+      document.addEventListener("keyup", (e) => {
+        keys[e.key.toLowerCase()] = false;
+
+        // Prevent arrow keys from scrolling the page
+        if (
+          ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)
+        ) {
+          e.preventDefault();
+        }
+      });
+
+      // Interaction
+      function interact() {
+        const room = getRoom(game.player.roomX, game.player.roomY);
+        const px = Math.round(game.player.x);
+        const py = Math.round(game.player.y);
+
+        room.entities.forEach((entity) => {
+          const dist = Math.abs(entity.x - px) + Math.abs(entity.y - py);
+          if (dist <= 1) {
+            if (entity.type === "ai" && !game.collectedAI.has(entity.id)) {
+              game.collectedAI.add(entity.id);
+              game.totalAICollected++;
+
+              // Track rare AI
+              if (["rare", "epic", "legendary"].includes(entity.data.rarity)) {
+                game.rareAICollected++;
+              }
+
+              // Show rarity in dialogue with emoji
+              const rarityEmoji = {
+                common: "⚪",
+                uncommon: "🟢",
+                rare: "🔵",
+                epic: "🟣",
+                legendary: "🟡",
+              };
+              const rarityText = entity.data.rarity.toUpperCase();
+              const yearText = entity.data.year ? ` (${entity.data.year})` : "";
+              showDialogue(
+                `${rarityEmoji[entity.data.rarity]} [${rarityText}] ${
+                  entity.data.name
+                }${yearText} - ${entity.data.desc}`
+              );
+
+              // Enhanced particles based on rarity
+              const particleCount =
+                entity.data.rarity === "legendary"
+                  ? 16
+                  : entity.data.rarity === "epic"
+                  ? 12
+                  : 8;
+              for (let i = 0; i < particleCount; i++) {
+                game.particles.push({
+                  x: entity.x * TILE_SIZE + TILE_SIZE / 2,
+                  y: entity.y * TILE_SIZE + TILE_SIZE / 2,
+                  vx: (Math.random() - 0.5) * 4,
+                  vy: (Math.random() - 0.5) * 4,
+                  life: entity.data.rarity === "legendary" ? 30 : 20,
+                  color: entity.data.color,
+                });
+              }
+
+              updateUI();
+              checkQuestProgress();
+            } else if (entity.type === "npc") {
+              const dialogue = entity.data.dialogue[entity.dialogueIndex];
+              showDialogue(`${entity.data.name}: "${dialogue}"`);
+              entity.dialogueIndex =
+                (entity.dialogueIndex + 1) % entity.data.dialogue.length;
+
+              if (!game.metNPCs.has(entity.data.name)) {
+                game.metNPCs.add(entity.data.name);
+
+                // Special case: First meeting with Dr. Takara starts the quest
+                if (entity.data.name === "Dr. Takara Mono") {
+                  setTimeout(() => {
+                    const firstQuest = STORY_QUESTS[0];
+                    showDialogue(
+                      `Quest Started: ${firstQuest.title} - ${firstQuest.description}`
+                    );
+                  }, 3000);
+                }
+
+                updateUI();
+                checkQuestProgress();
+              }
+            } else if (entity.type === "furniture") {
+              if (entity.data.name.includes("Stairs")) {
+                const direction = entity.data.name.includes("Up") ? 1 : -1;
+                game.player.roomY += direction;
+                game.player.x = Math.floor(ROOM_SIZE / 2);
+                game.player.y = Math.floor(ROOM_SIZE / 2);
+                game.visitedRooms.add(
+                  `${game.player.roomX},${game.player.roomY}`
+                );
+                updateUI();
+                showDialogue(
+                  `${direction > 0 ? "Going up" : "Going down"} to ${getBiome(
+                    game.player.roomY
+                  )} level`
+                );
+              } else if (entity.data.name.includes("Exit to Surface")) {
+                game.player.roomY = 1; // Return to surface
+                game.player.x = Math.floor(ROOM_SIZE / 2);
+                game.player.y = Math.floor(ROOM_SIZE / 2);
+                game.visitedRooms.add(
+                  `${game.player.roomX},${game.player.roomY}`
+                );
+                updateUI();
+                showDialogue("Returning to surface via secure elevator");
+              } else if (entity.data.name.includes("Information Kiosk")) {
+                showDialogue(
+                  "Takara.ai Research Campus - Use building entrances to access underground facilities"
+                );
+              } else {
+                showDialogue(
+                  `Takara.ai ${entity.data.name} - Advanced research equipment`
+                );
+              }
+            }
+          }
+        });
+      }
+
+      let dialogueTimeout;
+      function showDialogue(text) {
+        const el = document.getElementById("dialogue");
+
+        // Clear any existing timeout to prevent overlapping
+        if (dialogueTimeout) {
+          clearTimeout(dialogueTimeout);
+        }
+
+        el.textContent = text;
+        el.style.display = "block";
+
+        // Dynamic timing based on text length (minimum 4s, +100ms per character over 50)
+        const baseTime = 4000;
+        const extraTime = Math.max(0, text.length - 50) * 100;
+        const totalTime = baseTime + extraTime;
+
+        dialogueTimeout = setTimeout(() => {
+          el.style.display = "none";
+          dialogueTimeout = null;
+        }, totalTime);
+      }
+
+      // Quest and storyline management
+      function checkQuestProgress() {
+        const currentQuest = STORY_QUESTS[game.currentQuest];
+        if (!currentQuest || currentQuest.completed) return;
+
+        let completed = false;
+
+        switch (currentQuest.target.type) {
+          case "collect_ai":
+            completed = game.collectedAI.size >= currentQuest.target.count;
+            break;
+          case "meet_npcs":
+            completed = game.metNPCs.size >= currentQuest.target.count;
+            break;
+          case "collect_rare_ai":
+            completed = game.rareAICollected > 0;
+            break;
+        }
+
+        if (completed && !currentQuest.completed) {
+          currentQuest.completed = true;
+          game.completedQuests.add(currentQuest.id);
+          showDialogue(
+            `Quest Complete: ${currentQuest.title}! Reward: ${currentQuest.reward}`
+          );
+
+          // Move to next quest
+          if (game.currentQuest < STORY_QUESTS.length - 1) {
+            game.currentQuest++;
+            setTimeout(() => {
+              const nextQuest = STORY_QUESTS[game.currentQuest];
+              showDialogue(
+                `New Quest: ${nextQuest.title} - ${nextQuest.description}`
+              );
+            }, 3000);
+          } else {
+            setTimeout(() => {
+              showDialogue(
+                "Congratulations! You've completed all quests and become a true AI Architecture Master!"
+              );
+            }, 3000);
+          }
+        }
+      }
+
+      function updateUI() {
+        document.getElementById("aiCount").textContent = game.collectedAI.size;
+        document.getElementById(
+          "roomId"
+        ).textContent = `${game.player.roomX},${game.player.roomY}`;
+        document.getElementById("biome").textContent = getBiome(
+          game.player.roomY
+        );
+        document.getElementById("npcCount").textContent = game.metNPCs.size;
+
+        // Update quest display
+        updateQuestDisplay();
+      }
+
+      function updateQuestDisplay() {
+        const currentQuest = STORY_QUESTS[game.currentQuest];
+        if (currentQuest && !currentQuest.completed) {
+          document.getElementById("questTitle").textContent =
+            currentQuest.title;
+          document.getElementById("questDesc").textContent =
+            currentQuest.description;
+        } else if (game.currentQuest >= STORY_QUESTS.length) {
+          document.getElementById("questTitle").textContent =
+            "All Quests Complete!";
+          document.getElementById("questDesc").textContent =
+            "You are now an AI Architecture Master!";
+        }
+      }
+
+      // Update
+      function update() {
+        const player = game.player;
+        const speed = 0.15;
+        let dx = 0,
+          dy = 0;
+
+        if (keys["arrowup"] || keys["w"]) {
+          dy = -speed;
+          player.facing = "up";
+        } else if (keys["arrowdown"] || keys["s"]) {
+          dy = speed;
+          player.facing = "down";
+        } else if (keys["arrowleft"] || keys["a"]) {
+          dx = -speed;
+          player.facing = "left";
+        } else if (keys["arrowright"] || keys["d"]) {
+          dx = speed;
+          player.facing = "right";
+        }
+
+        if (dx || dy) {
+          const room = getRoom(player.roomX, player.roomY);
+          const newX = player.x + dx;
+          const newY = player.y + dy;
+
+          // Room transitions
+          if (newX < 0) {
+            player.roomX--;
+            player.x = ROOM_SIZE - 3; // Place player safely away from edge
+            player.y = Math.floor(ROOM_SIZE / 2); // Center on door
+            game.visitedRooms.add(`${player.roomX},${player.roomY}`);
+            updateUI();
+          } else if (newX >= ROOM_SIZE) {
+            player.roomX++;
+            player.x = 2; // Place player safely away from edge
+            player.y = Math.floor(ROOM_SIZE / 2); // Center on door
+            game.visitedRooms.add(`${player.roomX},${player.roomY}`);
+            updateUI();
+          } else if (newY < 0) {
+            player.roomY--;
+            player.y = ROOM_SIZE - 3; // Place player safely away from edge
+            player.x = Math.floor(ROOM_SIZE / 2); // Center on door
+            game.visitedRooms.add(`${player.roomX},${player.roomY}`);
+            updateUI();
+          } else if (newY >= ROOM_SIZE) {
+            player.roomY++;
+            player.y = 2; // Place player safely away from edge
+            player.x = Math.floor(ROOM_SIZE / 2); // Center on door
+            game.visitedRooms.add(`${player.roomX},${player.roomY}`);
+            updateUI();
+          } else {
+            // Normal movement - check if tile is walkable (Pokemon-style collision)
+            const tileType = room.tiles[Math.floor(newY)][Math.floor(newX)];
+            if (WALKABLE_TILES.has(tileType)) {
+              player.x = newX;
+              player.y = newY;
+
+              // Handle different transition types
+              if (tileType === TILE_TYPES.STAIRS) {
+                // Stair interaction - only in underground areas
+                const centerX = Math.floor(newX);
+                const centerY = Math.floor(newY);
+                if (
+                  Math.abs(newX - (centerX + 0.5)) < 0.3 &&
+                  Math.abs(newY - (centerY + 0.5)) < 0.3
+                ) {
+                  // Smart stair direction based on current biome
+                  let direction;
+                  const currentBiome = getBiome(player.roomY);
+                  if (currentBiome === "LAB") {
+                    // Can go up to outside or down to datacenter
+                    direction = seededRandom(Date.now()) > 0.5 ? 1 : -1;
+                  } else {
+                    // DATACENTER
+                    direction = 1; // Go up to lab
+                  }
+
+                  player.roomY += direction;
+                  player.x = Math.floor(ROOM_SIZE / 2);
+                  player.y = Math.floor(ROOM_SIZE / 2);
+                  game.visitedRooms.add(`${player.roomX},${player.roomY}`);
+                  updateUI();
+                  showDialogue(
+                    `Moving to ${getBiome(
+                      player.roomY
+                    )} level via internal stairway`
+                  );
+                }
+              } else if (tileType === TILE_TYPES.LAB_ENTRANCE) {
+                // Lab entrance - go to lab level
+                player.roomY = 0; // Lab level
+                player.x = Math.floor(ROOM_SIZE / 2);
+                player.y = Math.floor(ROOM_SIZE / 2);
+                game.visitedRooms.add(`${player.roomX},${player.roomY}`);
+                updateUI();
+                showDialogue("Entering Takara.ai Research Laboratory");
+              } else if (tileType === TILE_TYPES.DATACENTER_ENTRANCE) {
+                // Datacenter entrance - go to datacenter level
+                player.roomY = -1; // Datacenter level
+                player.x = Math.floor(ROOM_SIZE / 2);
+                player.y = Math.floor(ROOM_SIZE / 2);
+                game.visitedRooms.add(`${player.roomX},${player.roomY}`);
+                updateUI();
+                showDialogue("Accessing Takara.ai Secure Datacenter");
+              } else if (tileType === TILE_TYPES.MAIN_ENTRANCE) {
+                // Main entrance - choose destination
+                const destination = seededRandom(Date.now()) > 0.5 ? 0 : -1;
+                player.roomY = destination;
+                player.x = Math.floor(ROOM_SIZE / 2);
+                player.y = Math.floor(ROOM_SIZE / 2);
+                game.visitedRooms.add(`${player.roomX},${player.roomY}`);
+                updateUI();
+                showDialogue(
+                  destination === 0
+                    ? "Welcome to Takara.ai Research Laboratory"
+                    : "Authorized access to Secure Datacenter"
+                );
+              }
+            }
+          }
+
+          player.animFrame += 0.2;
+        }
+
+        // Update particles
+        game.particles = game.particles.filter((p) => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.5;
+          p.life--;
+          return p.life > 0;
+        });
+      }
+
+      // Pokemon-style tile drawing system
+      function drawFloorTile(x, y, biome, tileX, tileY, seed) {
+        const variation = Math.floor(
+          seededRandom(seed + tileX * 100 + tileY) * 4
+        );
+
+        switch (biome) {
+          case "OUTSIDE":
+            drawGrassTile(x, y, variation);
+            break;
+          case "OFFICE":
+            drawOfficeTile(x, y, variation);
+            break;
+          case "DATACENTER":
+            drawDatacenterTile(x, y, variation);
+            break;
+          default:
+            drawLabTile(x, y, variation);
+        }
+      }
+
+      function drawWallTile(x, y, biome, tileX, tileY, room) {
+        // Check surrounding tiles for wall connections
+        const connections = {
+          top: tileY > 0 && room.tiles[tileY - 1][tileX] === 1,
+          bottom: tileY < ROOM_SIZE - 1 && room.tiles[tileY + 1][tileX] === 1,
+          left: tileX > 0 && room.tiles[tileY][tileX - 1] === 1,
+          right: tileX < ROOM_SIZE - 1 && room.tiles[tileY][tileX + 1] === 1,
+        };
+
+        switch (biome) {
+          case "OUTSIDE":
+            drawTreeWall(x, y, connections);
+            break;
+          case "OFFICE":
+            drawOfficeWall(x, y, connections);
+            break;
+          case "DATACENTER":
+            drawServerWall(x, y, connections);
+            break;
+          default:
+            drawLabWall(x, y, connections);
+        }
+      }
+
+      function drawGrassTile(x, y, variation) {
+        // Base grass
+        ctx.fillStyle = "#4a7c59";
+        ctx.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+
+        // Grass details
+        ctx.fillStyle = "#5d8a6b";
+        switch (variation) {
+          case 0:
+            // Small grass tufts
+            for (let i = 0; i < 6; i++) {
+              const gx = x + (i % 3) * 10 + 6;
+              const gy = y + Math.floor(i / 3) * 16 + 8;
+              ctx.fillRect(gx, gy, 2, 4);
+            }
+            break;
+          case 1:
+            // Diagonal pattern
+            ctx.fillRect(x + 4, y + 4, 8, 2);
+            ctx.fillRect(x + 16, y + 16, 8, 2);
+            ctx.fillRect(x + 8, y + 24, 8, 2);
+            break;
+          case 2:
+            // Flower spots
+            ctx.fillStyle = "#7fb069";
+            ctx.fillRect(x + 8, y + 8, 4, 4);
+            ctx.fillRect(x + 20, y + 20, 4, 4);
+            ctx.fillStyle = "#ff6b6b";
+            ctx.fillRect(x + 9, y + 9, 2, 2);
+            ctx.fillRect(x + 21, y + 21, 2, 2);
+            break;
+          default:
+            // Clean grass
+            break;
+        }
+      }
+
+      function drawOfficeTile(x, y, variation) {
+        // Base carpet
+        ctx.fillStyle = "#e8e8e8";
+        ctx.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+
+        // Carpet pattern
+        ctx.fillStyle = "#d0d0d0";
+        switch (variation) {
+          case 0:
+            // Grid pattern
+            ctx.fillRect(x, y + 15, TILE_SIZE, 2);
+            ctx.fillRect(x + 15, y, 2, TILE_SIZE);
+            break;
+          case 1:
+            // Diamond pattern
+            ctx.beginPath();
+            ctx.moveTo(x + 16, y + 8);
+            ctx.lineTo(x + 24, y + 16);
+            ctx.lineTo(x + 16, y + 24);
+            ctx.lineTo(x + 8, y + 16);
+            ctx.closePath();
+            ctx.fill();
+            break;
+          default:
+            // Subtle texture
+            for (let i = 0; i < 4; i++) {
+              ctx.fillRect(x + i * 8 + 2, y + 2, 1, 1);
+              ctx.fillRect(x + i * 8 + 6, y + 18, 1, 1);
+            }
+        }
+      }
+
+      function drawLabTile(x, y, variation) {
+        // Base lab floor
+        ctx.fillStyle = "#f0f0f0";
+        ctx.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+
+        // Lab floor details
+        ctx.fillStyle = "#e0e0e0";
+        ctx.strokeStyle = "#d0d0d0";
+        ctx.lineWidth = 1;
+
+        // Tile borders
+        ctx.strokeRect(x, y, TILE_SIZE, TILE_SIZE);
+
+        if (variation === 1) {
+          // Ventilation grate
+          for (let i = 0; i < 3; i++) {
+            ctx.fillRect(x + 6 + i * 6, y + 8, 4, 2);
+            ctx.fillRect(x + 6 + i * 6, y + 16, 4, 2);
+            ctx.fillRect(x + 6 + i * 6, y + 24, 4, 2);
+          }
+        }
+      }
+
+      function drawDatacenterTile(x, y, variation) {
+        // Base metal floor
+        ctx.fillStyle = "#2c2c2c";
+        ctx.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+
+        // Metal grating
+        ctx.fillStyle = "#404040";
+        for (let i = 0; i < 4; i++) {
+          ctx.fillRect(x + i * 8, y + 4, 6, 2);
+          ctx.fillRect(x + i * 8, y + 12, 6, 2);
+          ctx.fillRect(x + i * 8, y + 20, 6, 2);
+          ctx.fillRect(x + i * 8, y + 28, 6, 2);
+        }
+
+        if (variation === 2) {
+          // Cable channels
+          ctx.fillStyle = "#1a1a1a";
+          ctx.fillRect(x + 12, y, 8, TILE_SIZE);
+        }
+      }
+
+      function drawTreeWall(x, y, connections) {
+        // Tree trunk base
+        ctx.fillStyle = "#8b4513";
+        ctx.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+
+        // Tree bark texture
+        ctx.fillStyle = "#654321";
+        for (let i = 0; i < 3; i++) {
+          ctx.fillRect(x + 4 + i * 8, y + 2, 2, 6);
+          ctx.fillRect(x + 2 + i * 8, y + 12, 3, 4);
+          ctx.fillRect(x + 6 + i * 8, y + 22, 2, 8);
+        }
+
+        // Canopy parts based on connections
+        ctx.fillStyle = "#228b22";
+        if (!connections.top) {
+          // Top canopy
+          ctx.fillRect(x, y - 8, TILE_SIZE, 12);
+        }
+        if (!connections.left) {
+          // Left canopy
+          ctx.fillRect(x - 8, y, 12, TILE_SIZE);
+        }
+        if (!connections.right) {
+          // Right canopy
+          ctx.fillRect(x + TILE_SIZE - 4, y, 12, TILE_SIZE);
+        }
+      }
+
+      function drawOfficeWall(x, y, connections) {
+        // Base wall
+        ctx.fillStyle = "#f5f5f5";
+        ctx.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+
+        // Wall panels
+        ctx.fillStyle = "#e8e8e8";
+        ctx.fillRect(x + 2, y + 2, TILE_SIZE - 4, TILE_SIZE - 4);
+
+        // Borders based on connections
+        ctx.fillStyle = "#d0d0d0";
+        if (!connections.top) ctx.fillRect(x, y, TILE_SIZE, 4);
+        if (!connections.bottom)
+          ctx.fillRect(x, y + TILE_SIZE - 4, TILE_SIZE, 4);
+        if (!connections.left) ctx.fillRect(x, y, 4, TILE_SIZE);
+        if (!connections.right)
+          ctx.fillRect(x + TILE_SIZE - 4, y, 4, TILE_SIZE);
+
+        // Decorative elements
+        if (!connections.top && !connections.left) {
+          // Corner decoration
+          ctx.fillStyle = "#c0c0c0";
+          ctx.fillRect(x + 4, y + 4, 8, 8);
+        }
+      }
+
+      function drawLabWall(x, y, connections) {
+        // Base lab wall
+        ctx.fillStyle = "#34495e";
+        ctx.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+
+        // Panel lines
+        ctx.fillStyle = "#2c3e50";
+        ctx.fillRect(x + 8, y, 2, TILE_SIZE);
+        ctx.fillRect(x + 22, y, 2, TILE_SIZE);
+        ctx.fillRect(x, y + 8, TILE_SIZE, 2);
+        ctx.fillRect(x, y + 22, TILE_SIZE, 2);
+
+        // Connection shadows
+        ctx.fillStyle = "#1a252f";
+        if (connections.top) ctx.fillRect(x, y, TILE_SIZE, 2);
+        if (connections.left) ctx.fillRect(x, y, 2, TILE_SIZE);
+      }
+
+      function drawServerWall(x, y, connections) {
+        // Server rack
+        ctx.fillStyle = "#1a1a1a";
+        ctx.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+
+        // Server units
+        for (let i = 0; i < 4; i++) {
+          ctx.fillStyle = i % 2 === 0 ? "#2c2c2c" : "#1a1a1a";
+          ctx.fillRect(x + 2, y + i * 8, TILE_SIZE - 4, 6);
+
+          // LED indicators
+          ctx.fillStyle = "#00ff00";
+          ctx.fillRect(x + TILE_SIZE - 6, y + i * 8 + 2, 2, 2);
+          ctx.fillStyle = "#ff4444";
+          ctx.fillRect(x + TILE_SIZE - 6, y + i * 8 + 5, 2, 1);
+        }
+
+        // Cables
+        if (connections.bottom) {
+          ctx.fillStyle = "#666";
+          ctx.fillRect(x + 4, y + TILE_SIZE - 2, 4, 2);
+          ctx.fillRect(x + 12, y + TILE_SIZE - 2, 4, 2);
+        }
+      }
+
+      function drawFurnitureTile(x, y, name) {
+        if (name.includes("Stairs")) {
+          // Stairs tile
+          const direction = name.includes("Up") ? "up" : "down";
+          ctx.fillStyle = "#8B4513";
+
+          if (direction === "up") {
+            // Ascending stairs
+            for (let i = 0; i < 4; i++) {
+              ctx.fillRect(x + i * 8, y + 24 - i * 6, 8, 6);
+            }
+            // Up arrow
+            ctx.fillStyle = "#FFD700";
+            ctx.beginPath();
+            ctx.moveTo(x + 16, y + 4);
+            ctx.lineTo(x + 8, y + 12);
+            ctx.lineTo(x + 24, y + 12);
+            ctx.closePath();
+            ctx.fill();
+          } else {
+            // Descending stairs
+            for (let i = 0; i < 4; i++) {
+              ctx.fillRect(x + i * 8, y + i * 6, 8, 6);
+            }
+            // Down arrow
+            ctx.fillStyle = "#FFD700";
+            ctx.beginPath();
+            ctx.moveTo(x + 16, y + 28);
+            ctx.lineTo(x + 8, y + 20);
+            ctx.lineTo(x + 24, y + 20);
+            ctx.closePath();
+            ctx.fill();
+          }
+        } else if (name.includes("Terminal") || name.includes("Display")) {
+          // Terminal tile
+          ctx.fillStyle = "#2c3e50";
+          ctx.fillRect(x + 4, y + 8, 24, 16);
+          // Screen
+          ctx.fillStyle = "#000";
+          ctx.fillRect(x + 6, y + 10, 20, 12);
+          // Takara.ai logo
+          ctx.fillStyle = "#DC143C";
+          ctx.font = "12px monospace";
+          ctx.textAlign = "center";
+          ctx.fillText("鶴", x + 16, y + 18);
+          // Glow effect
+          ctx.shadowColor = "#DC143C";
+          ctx.shadowBlur = 4;
+          ctx.strokeStyle = "#DC143C";
+          ctx.strokeRect(x + 6, y + 10, 20, 12);
+          ctx.shadowBlur = 0;
+        } else if (name.includes("Coffee")) {
+          // Coffee station tile
+          ctx.fillStyle = "#654321";
+          ctx.fillRect(x + 6, y + 6, 20, 20);
+          ctx.fillStyle = "#8B4513";
+          ctx.fillRect(x + 8, y + 8, 16, 16);
+          // Coffee pot
+          ctx.fillStyle = "#2F4F4F";
+          ctx.fillRect(x + 12, y + 10, 8, 10);
+          ctx.fillStyle = "#D2691E";
+          ctx.fillRect(x + 14, y + 12, 4, 6);
+        } else {
+          // Default interactive furniture
+          ctx.fillStyle = "#DC143C";
+          ctx.fillRect(x + 8, y + 8, 16, 16);
+          ctx.fillStyle = "#fff";
+          ctx.fillRect(x + 12, y + 12, 8, 8);
+        }
+      }
+
+      function drawGlassWall(x, y, biome) {
+        // Glass wall with transparency effect
+        ctx.fillStyle = "#e6f3ff";
+        ctx.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+
+        // Glass frame
+        ctx.strokeStyle = "#b3d9ff";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(x + 2, y + 2, TILE_SIZE - 4, TILE_SIZE - 4);
+
+        // Glass panels
+        ctx.strokeStyle = "#cce7ff";
+        ctx.lineWidth = 1;
+        ctx.strokeRect(x + 6, y + 6, TILE_SIZE - 12, TILE_SIZE - 12);
+
+        // Reflection effect
+        ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
+        ctx.fillRect(x + 4, y + 4, 8, TILE_SIZE - 8);
+      }
+
+      function drawStairsTile(x, y) {
+        // Multi-tile staircase - beautiful stone steps
+        ctx.fillStyle = "#8B4513";
+        ctx.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+
+        // Stone steps with depth
+        const numSteps = 4;
+        const stepHeight = TILE_SIZE / numSteps;
+
+        for (let i = 0; i < numSteps; i++) {
+          const stepY = y + i * stepHeight;
+
+          // Step surface
+          ctx.fillStyle = i % 2 === 0 ? "#A0522D" : "#8B4513";
+          ctx.fillRect(x + 2, stepY, TILE_SIZE - 4, stepHeight - 1);
+
+          // Step edge highlight
+          ctx.fillStyle = "#D2B48C";
+          ctx.fillRect(x + 2, stepY, TILE_SIZE - 4, 1);
+
+          // Step shadow
+          ctx.fillStyle = "#654321";
+          ctx.fillRect(x + 2, stepY + stepHeight - 2, TILE_SIZE - 4, 1);
+        }
+
+        // Ornate center design
+        ctx.fillStyle = "#FFD700";
+        ctx.font = "20px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("⚡", x + TILE_SIZE / 2, y + TILE_SIZE / 2 + 8);
+
+        // Handrails with decorative elements
+        ctx.strokeStyle = "#654321";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(x + 4, y + 4);
+        ctx.lineTo(x + 4, y + TILE_SIZE - 4);
+        ctx.moveTo(x + TILE_SIZE - 4, y + 4);
+        ctx.lineTo(x + TILE_SIZE - 4, y + TILE_SIZE - 4);
+        ctx.stroke();
+
+        // Decorative rail caps
+        ctx.fillStyle = "#FFD700";
+        ctx.fillRect(x + 2, y + 2, 4, 4);
+        ctx.fillRect(x + TILE_SIZE - 6, y + 2, 4, 4);
+      }
+
+      function drawLabEntrance(x, y) {
+        // Modern lab entrance with clean design
+        ctx.fillStyle = "#f0f0f0";
+        ctx.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+
+        // Entrance frame
+        ctx.fillStyle = "#34495e";
+        ctx.fillRect(x + 4, y + 4, TILE_SIZE - 8, TILE_SIZE - 8);
+
+        // Glass center
+        ctx.fillStyle = "#e6f3ff";
+        ctx.fillRect(x + 8, y + 8, TILE_SIZE - 16, TILE_SIZE - 16);
+
+        // Lab symbol
+        ctx.fillStyle = "#DC143C";
+        ctx.font = "16px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("🔬", x + TILE_SIZE / 2, y + TILE_SIZE / 2 + 6);
+
+        // Entry indicator
+        ctx.fillStyle = "#2ecc71";
+        ctx.fillRect(x + 2, y + TILE_SIZE - 4, TILE_SIZE - 4, 2);
+      }
+
+      function drawDatacenterEntrance(x, y) {
+        // Secure datacenter entrance
+        ctx.fillStyle = "#2c2c2c";
+        ctx.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+
+        // Security frame
+        ctx.fillStyle = "#1a1a1a";
+        ctx.fillRect(x + 2, y + 2, TILE_SIZE - 4, TILE_SIZE - 4);
+
+        // Security scanner
+        ctx.fillStyle = "#ff4444";
+        ctx.fillRect(x + 6, y + 6, TILE_SIZE - 12, TILE_SIZE - 12);
+
+        // Security symbol
+        ctx.fillStyle = "#FFD700";
+        ctx.font = "16px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("🔒", x + TILE_SIZE / 2, y + TILE_SIZE / 2 + 6);
+
+        // Security lights
+        ctx.fillStyle = "#ff0000";
+        ctx.fillRect(x + 4, y + 2, 2, 2);
+        ctx.fillRect(x + TILE_SIZE - 6, y + 2, 2, 2);
+      }
+
+      function drawMainEntrance(x, y) {
+        // Simple entrance - just draw as floor tile
+        drawFloorTile(x, y, "OUTSIDE", 0, 0, 12345);
+      }
+
+      // Draw sprites for different objects
+      function drawTree(x, y, size = 1) {
+        ctx.save();
+        ctx.translate(x, y);
+        const s = size * 8;
+        // Tree trunk
+        ctx.fillStyle = "#8B4513";
+        ctx.fillRect(-s / 4, s / 2, s / 2, s);
+        // Tree canopy
+        ctx.fillStyle = "#228B22";
+        ctx.beginPath();
+        ctx.arc(0, 0, s, 0, Math.PI * 2);
+        ctx.fill();
+        // Darker green details
+        ctx.fillStyle = "#1F5F1F";
+        ctx.beginPath();
+        ctx.arc(-s / 3, -s / 3, s / 2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(s / 3, s / 4, s / 3, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function drawDesk(x, y) {
+        ctx.save();
+        ctx.translate(x, y);
+        // Desk surface
+        ctx.fillStyle = "#8B4513";
+        ctx.fillRect(-12, -8, 24, 16);
+        // Desk legs
+        ctx.fillStyle = "#654321";
+        ctx.fillRect(-10, 6, 3, 6);
+        ctx.fillRect(7, 6, 3, 6);
+        ctx.fillRect(-10, -12, 3, 6);
+        ctx.fillRect(7, -12, 3, 6);
+        // Computer monitor
+        ctx.fillStyle = "#2c3e50";
+        ctx.fillRect(-6, -10, 12, 8);
+        ctx.fillStyle = "#3498db";
+        ctx.fillRect(-5, -9, 10, 6);
+        ctx.restore();
+      }
+
+      function drawServerRack(x, y) {
+        ctx.save();
+        ctx.translate(x, y);
+        // Main rack
+        ctx.fillStyle = "#2c3e50";
+        ctx.fillRect(-8, -12, 16, 24);
+        // Server units
+        for (let i = 0; i < 6; i++) {
+          ctx.fillStyle = i % 2 === 0 ? "#34495e" : "#2c3e50";
+          ctx.fillRect(-7, -10 + i * 3, 14, 2);
+          // LED lights
+          ctx.fillStyle = "#00ff00";
+          ctx.fillRect(4, -9 + i * 3, 2, 1);
+        }
+        ctx.restore();
+      }
+
+      function drawStairs(x, y, direction) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.fillStyle = "#8B4513";
+
+        if (direction === "up") {
+          // Ascending stairs
+          for (let i = 0; i < 4; i++) {
+            ctx.fillRect(-8 + i * 4, 8 - i * 4, 4, 4);
+          }
+          // Arrow indicator
+          ctx.fillStyle = "#FFD700";
+          ctx.beginPath();
+          ctx.moveTo(0, -8);
+          ctx.lineTo(-4, -4);
+          ctx.lineTo(4, -4);
+          ctx.closePath();
+          ctx.fill();
+        } else {
+          // Descending stairs
+          for (let i = 0; i < 4; i++) {
+            ctx.fillRect(-8 + i * 4, -8 + i * 4, 4, 4);
+          }
+          // Arrow indicator
+          ctx.fillStyle = "#FFD700";
+          ctx.beginPath();
+          ctx.moveTo(0, 8);
+          ctx.lineTo(-4, 4);
+          ctx.lineTo(4, 4);
+          ctx.closePath();
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      function drawTerminal(x, y) {
+        ctx.save();
+        ctx.translate(x, y);
+        // Terminal base
+        ctx.fillStyle = "#2c3e50";
+        ctx.fillRect(-8, -6, 16, 12);
+        // Screen
+        ctx.fillStyle = "#000";
+        ctx.fillRect(-6, -4, 12, 8);
+        // Takara.ai logo
+        ctx.fillStyle = "#DC143C";
+        ctx.font = "8px monospace";
+        ctx.textAlign = "center";
+        ctx.fillText("鶴", 0, 0);
+        // Screen glow
+        ctx.shadowColor = "#DC143C";
+        ctx.shadowBlur = 3;
+        ctx.strokeStyle = "#DC143C";
+        ctx.strokeRect(-6, -4, 12, 8);
+        ctx.restore();
+      }
+
+      function drawBush(x, y) {
+        ctx.save();
+        ctx.translate(x, y);
+        // Bush clusters
+        ctx.fillStyle = "#32CD32";
+        ctx.beginPath();
+        ctx.arc(-3, 0, 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(3, 0, 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(0, -2, 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function drawFilingCabinet(x, y) {
+        ctx.save();
+        ctx.translate(x, y);
+        // Cabinet body
+        ctx.fillStyle = "#696969";
+        ctx.fillRect(-6, -8, 12, 16);
+        // Drawers
+        ctx.fillStyle = "#808080";
+        ctx.fillRect(-5, -6, 10, 3);
+        ctx.fillRect(-5, -2, 10, 3);
+        ctx.fillRect(-5, 2, 10, 3);
+        // Handles
+        ctx.fillStyle = "#C0C0C0";
+        ctx.fillRect(3, -5, 1, 1);
+        ctx.fillRect(3, -1, 1, 1);
+        ctx.fillRect(3, 3, 1, 1);
+        ctx.restore();
+      }
+
+      // Draw Jordan (main character)
+      function drawJordan(x, y, facing, frame) {
+        const s = 2; // pixel size
+        ctx.save();
+        ctx.translate(x, y);
+
+        // Head
+        ctx.fillStyle = "#fdbcb4";
+        ctx.fillRect(-4 * s, -6 * s, 8 * s, 6 * s);
+
+        // Blonde hair - visible under cap
+        ctx.fillStyle = "#f4e04d";
+        ctx.fillRect(-4 * s, -5 * s, 8 * s, 2 * s); // Hair sides showing under cap
+        ctx.fillRect(-3 * s, -3 * s, 6 * s, s); // Hair in front
+
+        // Black baseball cap (backwards)
+        ctx.fillStyle = "#000";
+        ctx.fillRect(-5 * s, -7 * s, 10 * s, 3 * s); // Main cap
+        // Backwards brim
+        ctx.fillRect(-6 * s, -6 * s, 12 * s, 2 * s); // Brim at back
+
+        // Clear glasses frames
+        ctx.strokeStyle = "#888";
+        ctx.lineWidth = 1;
+        ctx.strokeRect(-4 * s, -4 * s, 3 * s, 2 * s);
+        ctx.strokeRect(s, -4 * s, 3 * s, 2 * s);
+        // Bridge
+        ctx.fillStyle = "#888";
+        ctx.fillRect(-s, -4 * s, 2 * s, s);
+
+        // Blue eyes
+        ctx.fillStyle = "#3498db";
+        if (facing !== "up") {
+          ctx.fillRect(-3 * s, -3 * s, s, s);
+          ctx.fillRect(2 * s, -3 * s, s, s);
+        }
+
+        // Casual clothing - hoodie
+        ctx.fillStyle = "#34495e"; // Dark gray hoodie
+        ctx.fillRect(-4 * s, 0, 8 * s, 8 * s);
+
+        // Hoodie details
+        ctx.fillStyle = "#2c3e50";
+        ctx.fillRect(-s, 0, 2 * s, 6 * s); // Zipper
+        ctx.fillRect(-3 * s, s, 6 * s, s); // Hood line
+
+        // Jeans
+        ctx.fillStyle = "#2980b9"; // Blue jeans
+        ctx.fillRect(-3 * s, 8 * s, 6 * s, 4 * s);
+
+        // Arms & legs with animation
+        const wave = Math.sin(frame) * 2;
+        ctx.fillStyle = "#fdbcb4";
+        ctx.fillRect(-6 * s, 2 * s + wave, 2 * s, 4 * s);
+        ctx.fillRect(4 * s, 2 * s - wave, 2 * s, 4 * s);
+
+        // Sneakers
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(-3 * s, 12 * s, 2 * s, 2 * s + wave);
+        ctx.fillRect(s, 12 * s, 2 * s, 2 * s - wave);
+
+        ctx.restore();
+      }
+
+      // Draw NPCs with unique appearances
+      function drawNPC(x, y, facing, frame, npcData) {
+        const s = 2; // pixel size
+        ctx.save();
+        ctx.translate(x, y);
+
+        // Different appearance based on NPC
+        switch (npcData.name) {
+          case "Dr. Takara Mono":
+            drawTakaraMono(s, facing);
+            break;
+          case "Geoffrey Hinton":
+            drawGeoffreyHinton(s, facing);
+            break;
+          case "Yann LeCun":
+            drawYannLeCun(s, facing);
+            break;
+          case "Yoshua Bengio":
+            drawYoshuaBengio(s, facing);
+            break;
+          case "Andrew Ng":
+            drawAndrewNg(s, facing);
+            break;
+          case "Fei-Fei Li":
+            drawFeiFeiLi(s, facing);
+            break;
+          default:
+            drawGenericNPC(s, facing);
+        }
+
+        ctx.restore();
+      }
+
+      function drawGeoffreyHinton(s, facing) {
+        // Older gentleman with gray hair and beard
+        // Head
+        ctx.fillStyle = "#fdbcb4";
+        ctx.fillRect(-4 * s, -6 * s, 8 * s, 6 * s);
+
+        // Gray hair and beard
+        ctx.fillStyle = "#c0c0c0";
+        ctx.fillRect(-5 * s, -7 * s, 10 * s, 3 * s); // Hair
+        ctx.fillRect(-4 * s, -2 * s, 8 * s, 3 * s); // Beard
+
+        // Eyes
+        ctx.fillStyle = "#654321";
+        if (facing !== "up") {
+          ctx.fillRect(-3 * s, -4 * s, s, s);
+          ctx.fillRect(2 * s, -4 * s, s, s);
+        }
+
+        // Academic suit
+        ctx.fillStyle = "#2c3e50";
+        ctx.fillRect(-4 * s, 0, 8 * s, 8 * s);
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(-s, 0, 2 * s, 4 * s); // White shirt
+
+        // Arms and legs
+        ctx.fillStyle = "#fdbcb4";
+        ctx.fillRect(-6 * s, 2 * s, 2 * s, 4 * s);
+        ctx.fillRect(4 * s, 2 * s, 2 * s, 4 * s);
+        ctx.fillStyle = "#2c3e50";
+        ctx.fillRect(-3 * s, 8 * s, 2 * s, 4 * s);
+        ctx.fillRect(s, 8 * s, 2 * s, 4 * s);
+      }
+
+      function drawYannLeCun(s, facing) {
+        // Distinguished with dark hair
+        // Head
+        ctx.fillStyle = "#fdbcb4";
+        ctx.fillRect(-4 * s, -6 * s, 8 * s, 6 * s);
+
+        // Dark hair
+        ctx.fillStyle = "#2c3e50";
+        ctx.fillRect(-5 * s, -7 * s, 10 * s, 3 * s);
+
+        // Eyes
+        ctx.fillStyle = "#2c3e50";
+        if (facing !== "up") {
+          ctx.fillRect(-3 * s, -4 * s, s, s);
+          ctx.fillRect(2 * s, -4 * s, s, s);
+        }
+
+        // Casual academic look
+        ctx.fillStyle = "#3498db"; // Blue shirt
+        ctx.fillRect(-4 * s, 0, 8 * s, 8 * s);
+
+        // Dark pants
+        ctx.fillStyle = "#2c3e50";
+        ctx.fillRect(-3 * s, 8 * s, 6 * s, 4 * s);
+
+        // Arms
+        ctx.fillStyle = "#fdbcb4";
+        ctx.fillRect(-6 * s, 2 * s, 2 * s, 4 * s);
+        ctx.fillRect(4 * s, 2 * s, 2 * s, 4 * s);
+      }
+
+      function drawYoshuaBengio(s, facing) {
+        // Friendly academic with glasses
+        // Head
+        ctx.fillStyle = "#fdbcb4";
+        ctx.fillRect(-4 * s, -6 * s, 8 * s, 6 * s);
+
+        // Brown hair
+        ctx.fillStyle = "#8B4513";
+        ctx.fillRect(-5 * s, -7 * s, 10 * s, 3 * s);
+
+        // Glasses
+        ctx.strokeStyle = "#000";
+        ctx.lineWidth = 1;
+        ctx.strokeRect(-4 * s, -4 * s, 3 * s, 2 * s);
+        ctx.strokeRect(s, -4 * s, 3 * s, 2 * s);
+
+        // Eyes
+        ctx.fillStyle = "#654321";
+        if (facing !== "up") {
+          ctx.fillRect(-3 * s, -4 * s, s, s);
+          ctx.fillRect(2 * s, -4 * s, s, s);
+        }
+
+        // Green sweater
+        ctx.fillStyle = "#27ae60";
+        ctx.fillRect(-4 * s, 0, 8 * s, 8 * s);
+
+        // Khaki pants
+        ctx.fillStyle = "#d4af37";
+        ctx.fillRect(-3 * s, 8 * s, 6 * s, 4 * s);
+
+        // Arms
+        ctx.fillStyle = "#fdbcb4";
+        ctx.fillRect(-6 * s, 2 * s, 2 * s, 4 * s);
+        ctx.fillRect(4 * s, 2 * s, 2 * s, 4 * s);
+      }
+
+      function drawAndrewNg(s, facing) {
+        // Professional tech look
+        // Head
+        ctx.fillStyle = "#deb887";
+        ctx.fillRect(-4 * s, -6 * s, 8 * s, 6 * s);
+
+        // Black hair
+        ctx.fillStyle = "#000";
+        ctx.fillRect(-5 * s, -7 * s, 10 * s, 3 * s);
+
+        // Eyes
+        ctx.fillStyle = "#2c3e50";
+        if (facing !== "up") {
+          ctx.fillRect(-3 * s, -4 * s, s, s);
+          ctx.fillRect(2 * s, -4 * s, s, s);
+        }
+
+        // Tech company polo
+        ctx.fillStyle = "#e74c3c"; // Red polo
+        ctx.fillRect(-4 * s, 0, 8 * s, 8 * s);
+
+        // Dark jeans
+        ctx.fillStyle = "#2c3e50";
+        ctx.fillRect(-3 * s, 8 * s, 6 * s, 4 * s);
+
+        // Arms
+        ctx.fillStyle = "#deb887";
+        ctx.fillRect(-6 * s, 2 * s, 2 * s, 4 * s);
+        ctx.fillRect(4 * s, 2 * s, 2 * s, 4 * s);
+      }
+
+      function drawFeiFeiLi(s, facing) {
+        // Professional woman
+        // Head
+        ctx.fillStyle = "#deb887";
+        ctx.fillRect(-4 * s, -6 * s, 8 * s, 6 * s);
+
+        // Black hair (longer style)
+        ctx.fillStyle = "#000";
+        ctx.fillRect(-5 * s, -7 * s, 10 * s, 4 * s);
+        ctx.fillRect(-4 * s, -4 * s, 8 * s, 2 * s); // Hair sides
+
+        // Eyes
+        ctx.fillStyle = "#2c3e50";
+        if (facing !== "up") {
+          ctx.fillRect(-3 * s, -4 * s, s, s);
+          ctx.fillRect(2 * s, -4 * s, s, s);
+        }
+
+        // Professional blazer
+        ctx.fillStyle = "#8e44ad"; // Purple blazer
+        ctx.fillRect(-4 * s, 0, 8 * s, 8 * s);
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(-s, 0, 2 * s, 4 * s); // White blouse
+
+        // Professional pants
+        ctx.fillStyle = "#2c3e50";
+        ctx.fillRect(-3 * s, 8 * s, 6 * s, 4 * s);
+
+        // Arms
+        ctx.fillStyle = "#deb887";
+        ctx.fillRect(-6 * s, 2 * s, 2 * s, 4 * s);
+        ctx.fillRect(4 * s, 2 * s, 2 * s, 4 * s);
+      }
+
+      function drawTakaraMono(s, facing) {
+        // Old grumpy Dr. Takara Mono
+        // Head
+        ctx.fillStyle = "#fdbcb4";
+        ctx.fillRect(-4 * s, -6 * s, 8 * s, 6 * s);
+
+        // Balding gray hair
+        ctx.fillStyle = "#c0c0c0";
+        ctx.fillRect(-4 * s, -7 * s, 2 * s, 2 * s); // Left side
+        ctx.fillRect(2 * s, -7 * s, 2 * s, 2 * s); // Right side
+        ctx.fillRect(-2 * s, -7 * s, 4 * s, s); // Top fringe
+
+        // Thick glasses
+        ctx.fillStyle = "#000";
+        ctx.fillRect(-4 * s, -4 * s, 3 * s, 3 * s);
+        ctx.fillRect(s, -4 * s, 3 * s, 3 * s);
+        ctx.fillRect(-s, -4 * s, 2 * s, s);
+
+        // Stern eyes behind glasses
+        ctx.fillStyle = "#654321";
+        if (facing !== "up") {
+          ctx.fillRect(-3 * s, -3 * s, s, s);
+          ctx.fillRect(2 * s, -3 * s, s, s);
+        }
+
+        // Frown lines
+        ctx.fillStyle = "#d4af37";
+        ctx.fillRect(-3 * s, -2 * s, s, s);
+        ctx.fillRect(2 * s, -2 * s, s, s);
+
+        // Traditional Japanese coat (dark blue)
+        ctx.fillStyle = "#2c3e50";
+        ctx.fillRect(-4 * s, 0, 8 * s, 8 * s);
+
+        // Red Takara.ai emblem
+        ctx.fillStyle = "#DC143C";
+        ctx.fillRect(-s, s, 2 * s, 2 * s);
+
+        // Dark formal pants
+        ctx.fillStyle = "#1a1a1a";
+        ctx.fillRect(-3 * s, 8 * s, 6 * s, 4 * s);
+
+        // Arms (crossed when facing down - grumpy pose)
+        ctx.fillStyle = "#fdbcb4";
+        if (facing === "down") {
+          ctx.fillRect(-2 * s, 3 * s, 4 * s, 2 * s); // Crossed arms
+        } else {
+          ctx.fillRect(-6 * s, 2 * s, 2 * s, 4 * s);
+          ctx.fillRect(4 * s, 2 * s, 2 * s, 4 * s);
+        }
+      }
+
+      function drawGenericNPC(s, facing) {
+        // Generic researcher
+        // Head
+        ctx.fillStyle = "#fdbcb4";
+        ctx.fillRect(-4 * s, -6 * s, 8 * s, 6 * s);
+
+        // Brown hair
+        ctx.fillStyle = "#8B4513";
+        ctx.fillRect(-5 * s, -7 * s, 10 * s, 3 * s);
+
+        // Eyes
+        ctx.fillStyle = "#654321";
+        if (facing !== "up") {
+          ctx.fillRect(-3 * s, -4 * s, s, s);
+          ctx.fillRect(2 * s, -4 * s, s, s);
+        }
+
+        // Lab coat
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(-4 * s, 0, 8 * s, 8 * s);
+
+        // Dark pants
+        ctx.fillStyle = "#2c3e50";
+        ctx.fillRect(-3 * s, 8 * s, 6 * s, 4 * s);
+
+        // Arms
+        ctx.fillStyle = "#fdbcb4";
+        ctx.fillRect(-6 * s, 2 * s, 2 * s, 4 * s);
+        ctx.fillRect(4 * s, 2 * s, 2 * s, 4 * s);
+      }
+
+      // Render
+      function render() {
+        ctx.fillStyle = "#000";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const room = getRoom(game.player.roomX, game.player.roomY);
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+
+        // Draw detailed tile-based world like Pokemon
+        const biome = room.biome;
+        const viewRadius = BIOMES[biome].fogRadius;
+
+        for (let y = 0; y < ROOM_SIZE; y++) {
+          for (let x = 0; x < ROOM_SIZE; x++) {
+            const screenX = (x - game.player.x) * TILE_SIZE + centerX;
+            const screenY = (y - game.player.y) * TILE_SIZE + centerY;
+            const dist = Math.sqrt(
+              (x - game.player.x) ** 2 + (y - game.player.y) ** 2
+            );
+
+            if (dist < viewRadius) {
+              const brightness =
+                biome === "OUTSIDE" ? 1 : 1 - (dist / viewRadius) * 0.7;
+              ctx.globalAlpha = brightness;
+
+              const tileType = room.tiles[y][x];
+
+              if (tileType === TILE_TYPES.FLOOR) {
+                drawFloorTile(screenX, screenY, biome, x, y, room.seed);
+              } else if (tileType === TILE_TYPES.WALL) {
+                drawWallTile(screenX, screenY, biome, x, y, room);
+              } else if (tileType === TILE_TYPES.GLASS) {
+                drawGlassWall(screenX, screenY, biome);
+              } else if (tileType === TILE_TYPES.STAIRS) {
+                drawStairsTile(screenX, screenY);
+              } else if (tileType === TILE_TYPES.LAB_ENTRANCE) {
+                drawLabEntrance(screenX, screenY);
+              } else if (tileType === TILE_TYPES.DATACENTER_ENTRANCE) {
+                drawDatacenterEntrance(screenX, screenY);
+              } else if (tileType === TILE_TYPES.MAIN_ENTRANCE) {
+                drawMainEntrance(screenX, screenY);
+              }
+
+              ctx.globalAlpha = 1;
+            }
+          }
+        }
+
+        // Draw entities
+        room.entities.forEach((entity) => {
+          const dist = Math.sqrt(
+            (entity.x - game.player.x) ** 2 + (entity.y - game.player.y) ** 2
+          );
+          if (dist < viewRadius) {
+            const screenX =
+              (entity.x - game.player.x) * TILE_SIZE + centerX + TILE_SIZE / 2;
+            const screenY =
+              (entity.y - game.player.y) * TILE_SIZE + centerY + TILE_SIZE / 2;
+            const brightness =
+              biome === "OUTSIDE" ? 1 : 1 - (dist / viewRadius) * 0.7;
+
+            ctx.globalAlpha = brightness;
+
+            if (entity.type === "ai" && !game.collectedAI.has(entity.id)) {
+              // AI architecture sprite with rarity effects
+              const bounce = Math.sin(Date.now() / 300) * 3;
+              const rarity = entity.data.rarity;
+
+              ctx.save();
+              ctx.translate(screenX, screenY + bounce);
+
+              // Rarity glow effects
+              if (rarity === "legendary") {
+                ctx.shadowColor = "#ffd700";
+                ctx.shadowBlur = 15;
+              } else if (rarity === "epic") {
+                ctx.shadowColor = "#ff6b6b";
+                ctx.shadowBlur = 10;
+              } else if (rarity === "rare") {
+                ctx.shadowColor = "#74b9ff";
+                ctx.shadowBlur = 8;
+              } else if (rarity === "uncommon") {
+                ctx.shadowColor = "#00b894";
+                ctx.shadowBlur = 5;
+              }
+
+              // Main AI sprite
+              ctx.fillStyle = entity.data.color;
+              ctx.fillRect(-12, -12, 24, 24);
+
+              // Rarity border
+              ctx.strokeStyle =
+                rarity === "legendary"
+                  ? "#ffd700"
+                  : rarity === "epic"
+                  ? "#ff6b6b"
+                  : rarity === "rare"
+                  ? "#74b9ff"
+                  : rarity === "uncommon"
+                  ? "#00b894"
+                  : "#95a5a6";
+              ctx.lineWidth = rarity === "legendary" ? 3 : 2;
+              ctx.strokeRect(-12, -12, 24, 24);
+
+              // Circuit pattern
+              ctx.fillStyle = "#fff";
+              ctx.fillRect(-8, -8, 4, 4);
+              ctx.fillRect(4, -8, 4, 4);
+              ctx.fillRect(-8, 4, 4, 4);
+              ctx.fillRect(4, 4, 4, 4);
+              ctx.fillRect(-2, -2, 4, 4);
+
+              // Reset shadow
+              ctx.shadowBlur = 0;
+              ctx.restore();
+            } else if (entity.type === "npc") {
+              // Draw NPC with unique appearance
+              drawNPC(screenX, screenY, "down", 0, entity.data);
+              ctx.font = "10px monospace";
+              ctx.fillStyle = "#fff";
+              ctx.textAlign = "center";
+              ctx.fillText(
+                entity.data.name.split(" ")[1],
+                screenX,
+                screenY - 20
+              );
+            } else if (entity.type === "furniture") {
+              // Draw interactive furniture as tile overlays
+              drawFurnitureTile(
+                screenX - TILE_SIZE / 2,
+                screenY - TILE_SIZE / 2,
+                entity.data.name
+              );
+            } else if (entity.type === "environment") {
+              // Environment objects are now part of the tile system - skip individual rendering
+              // They're drawn as part of the floor/wall tiles
+            }
+
+            ctx.globalAlpha = 1;
+          }
+        });
+
+        // Draw particles
+        game.particles.forEach((p) => {
+          const screenX = p.x - game.player.x * TILE_SIZE + centerX;
+          const screenY = p.y - game.player.y * TILE_SIZE + centerY;
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = p.life / 20;
+          ctx.fillRect(screenX - 2, screenY - 2, 4, 4);
+        });
+        ctx.globalAlpha = 1;
+
+        // Draw player (Jordan)
+        drawJordan(centerX, centerY, game.player.facing, game.player.animFrame);
+
+        // Biome-specific vignette effect
+        if (biome !== "OUTSIDE") {
+          const gradient = ctx.createRadialGradient(
+            centerX,
+            centerY,
+            0,
+            centerX,
+            centerY,
+            viewRadius * TILE_SIZE
+          );
+          gradient.addColorStop(0.7, "rgba(0,0,0,0)");
+          gradient.addColorStop(
+            1,
+            biome === "DATACENTER" ? "rgba(0,0,0,0.95)" : "rgba(0,0,0,0.9)"
+          );
+          ctx.fillStyle = gradient;
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+
+      // Game loop
+      function gameLoop() {
+        update();
+        render();
+        requestAnimationFrame(gameLoop);
+      }
+
+      // Initialize - start outside at the entrance
+      game.player.x = 7;
+      game.player.y = 10;
+      game.player.roomX = 0;
+      game.player.roomY = 1; // Start outside
+      updateUI();
+
+      // Start the storyline
+      showDialogue(
+        "Welcome to Takara.ai Research Campus! Speak with Dr. Takara Mono to begin your mission."
+      );
+      gameLoop();
+    </script>
+  </body>
+</html>
