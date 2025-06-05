@@ -2,12 +2,12 @@
 sys:
   id: "38KGl3XhKyAPnQoYcwpR4D"
   updatedAt: "2025-02-13T16:35:57.173Z"
-  createdAt: "2025-02-13T16:35:57.173Z"
-  revision: 1
+  createdAt: "2025-06-04T18:55:26.907Z"
+  revision: 2
   space: "hmvebmrbwhsg"
   contentType: "homepage"
 date: "2025-02-13T16:35:57.173Z"
-title: "Our Thinking"
+title: "Home Page"
 summary: "Our thinking"
 slug: "homepage"
 backgroundImage:
