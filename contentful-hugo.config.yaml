@@ -33,13 +33,6 @@ singleTypes:
       mainContent: body
       fileName: _index
 
-    - id: teamPage
-      directory: content/who we are/values
-      mainContent: body
-      fileName: _index
-      filters:
-        fields.slug: values       
-
     - id: successPage
       directory: content/our successes
       mainContent: body
