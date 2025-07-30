@@ -27,6 +27,15 @@ singleTypes:
       directory: content/what we do
       mainContent: body
       fileName: _index
+      filters:
+        fields.slug: services
+
+    - id: servicesPage
+      directory: content/what we do/ds1
+      mainContent: body
+      fileName: _index
+      filters:
+        fields.slug: ds1
 
     - id: teamPage
       directory: content/who we are/team
