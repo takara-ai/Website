@@ -2,8 +2,8 @@
 sys:
   id: "BXyTH26o6EdPb2I57XkzS"
   updatedAt: "2025-07-28T10:58:59.294Z"
-  createdAt: "2025-07-30T08:08:57.661Z"
-  revision: 9
+  createdAt: "2025-08-01T06:51:43.789Z"
+  revision: 14
   space: "hmvebmrbwhsg"
   contentType: "servicesPage"
 date: "2025-07-28T10:58:59.294Z"
@@ -14,19 +14,25 @@ group: false
 summary: "This is DS1"
 ---
 
-## Revolutionizing AI Accessibility with Lightning-Fast Vector Embeddings
+## DS1 - Embeddings at the speed of thought - Globally Distributed, Ultra-Fast AI Embeddings for Real-Time Business Value.
 ---
-### **Overview**
+DS1 is the future of AI-powered search, personalisation, and fraud prevention: global, ultra-fast and cost-effective—right at the edge.
 
-DS1 is a next-generation **static embedding** API—delivering unmatched speed, cost efficiency, and flexibility for AI-powered applications. Built for developers and organisations eager to implement semantic search, recommendations, and NLP features without prohibitive compute costs, DS1 makes high-performance AI accessible to everyone by harnessing the speed and simplicity of static embeddings.
+{{< contentful-hugo/embedded-asset title="DS1 Image" description="When milliseconds matter, DS1 wins" url="//images.ctfassets.net/hmvebmrbwhsg/4vcANK9Z5THcB8jN9ywQh3/992bee74f3e6a74d753b2955334d765c/ds1-image.png" filename="ds1-image.png" assetType="image/png" size="1322247" width="1024" height="1024" parentContentType="servicesPage" >}}
 
-{{< contentful-hugo/embedded-asset title="DS1 Image" description="An abstract image representing DS1" url="//images.ctfassets.net/hmvebmrbwhsg/4vcANK9Z5THcB8jN9ywQh3/992bee74f3e6a74d753b2955334d765c/ds1-image.png" filename="ds1-image.png" assetType="image/png" size="1322247" width="1024" height="1024" parentContentType="servicesPage" >}}
+When milliseconds matter, DS1 wins.
+
+### **The Challenge**
+
+Mainstream embedding APIs are too slow, expensive, and lack data residency for regulated, latency-critical industries—especially when every millisecond counts for fraud detection, recommendations, search, or live analytics.
 
 
-### **Key Features**
 
-- **Ultra-Fast Performance**: Generate vector embeddings up to 15x faster than transformer-based models
-- **Resource Efficient**: Achieve 85% of transformer-level semantic accuracy with a fraction of the computational resources
+- **Speed That Delights:** Milliseconds matter—DS1’s <20ms latency is unrivalled, enhancing user interactions.
+- **Radical Cost Efficiency:** Reduce embedding-related infrastructure costs by over 50% compared to transformer models.
+- **Flexible Data Control:** Keep data where you need it—with both cloud and on-premise deployments.
+- **Always Improving:** Our model-agnostic approach ensures ongoing access to the best in static embedding technology, future-proofing your AI stack.
+
 - **Model Agnostic**: Our innovative architecture allows us to continuously integrate the best static models as they emerge
 - **Deployment Flexibility**: Available as SaaS or for on-premise/VPC deployment to meet security and compliance requirements
 - **Developer-Friendly**: Simple integration with standard OpenAI-compatible API calls—swap it in with minimal code changes
@@ -48,14 +54,6 @@ Automatically cluster, categorize, and organise unstructured data (documents, me
 For environments with strict data governance, DS1’s on-premise option powers AI-driven analysis and discovery - without your data ever leaving secure infrastructure.
 
 ---
-### **Why DS1?**
-
-- **Speed That Delights:** Milliseconds matter—DS1’s latency is unrivalled, enhancing user interactions.
-- **Radical Cost Efficiency:** Reduce embedding-related infrastructure costs by up to 80% compared to transformer models.  
-- **Flexible Data Control:** Keep data where you need it—with both cloud and on-premise deployments.
-- **Always Improving:** Our model-agnostic approach ensures ongoing access to the best in static embedding technology, future-proofing your AI stack.
-
----
 ### **Technical Specifications**
 - **Input Formats**: Text (UTF-8)
 - **Vector Dimensions**: 64 dimensions
@@ -67,6 +65,7 @@ For environments with strict data governance, DS1’s on-premise option powers A
 
 Be among the first to experience DS1&#39;s revolutionary performance. Early access participants will receive:
 
+- One Page Overview
 - Exclusive pricing
 - Priority technical support
 - Input on feature development
